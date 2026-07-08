@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="obsidian">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS — Game Hub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='hub.css') }}">
+</head>
+<body>
+
+  <!-- Ambient animated particle field -->
+  <canvas id="particle-field"></canvas>
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">◆</span>
+      <span class="brand-name">NEXUS</span>
+    </div>
+
+    <div class="search-wrap">
+      <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="search-input" placeholder="Search your library..." autocomplete="off">
+    </div>
+
+    <div class="profile-chip">
+      <span class="profile-avatar">ZR</span>
+      <span class="profile-name">Zoro</span>
+    </div>
+  </header>
+
+  <!-- ============ APP SHELL: SIDEBAR + MAIN ============ -->
+  <div class="app-shell">
+
+    <!-- ---------- LEFT SIDEBAR ---------- -->
+    <aside class="sidebar">
+      <nav class="side-nav">
+        <button class="side-link active" data-nav="home">
+          <span class="side-icon">🏠</span><span class="side-label">Home</span>
+        </button>
+        <button class="side-link" data-nav="library">
+          <span class="side-icon">🎮</span><span class="side-label">Library</span>
+        </button>
+        <button class="side-link" data-nav="achievements">
+          <span class="side-icon">🏆</span><span class="side-label">Achievements</span>
+        </button>
+        <button class="side-link" data-nav="statistics">
+          <span class="side-icon">📊</span><span class="side-label">Statistics</span>
+        </button>
+        <button class="side-link" data-nav="themes" data-modal="themes-modal">
+          <span class="side-icon">🎨</span><span class="side-label">Themes</span>
+        </button>
+        <button class="side-link" data-nav="settings" data-modal="settings-modal">
+          <span class="side-icon">⚙</span><span class="side-label">Settings</span>
+        </button>
+        <button class="side-link" data-nav="profile">
+          <span class="side-icon">👤</span><span class="side-label">Profile</span>
+        </button>
+      </nav>
+
+      <!-- Small player card -->
+      <div class="player-card">
+        <div class="player-avatar">ZR</div>
+        <div class="player-info">
+          <div class="player-name-row">
+            <span class="player-name">Zoro</span>
+            <span class="player-level">Lv. 12</span>
+          </div>
+          <div class="xp-bar" title="640 / 1000 XP">
+            <div class="xp-fill" style="width: 64%;"></div>
+          </div>
+          <span class="player-coins">🪙 2,450</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ---------- MAIN CONTENT ---------- -->
+    <main class="main-content">
+
+      <!-- ============ HERO / FEATURED GAME BANNER ============ -->
+      <section class="hero" id="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+          <span class="hero-eyebrow">Featured Game</span>
+          <h1 class="hero-title">Guess The Number</h1>
+          <p class="hero-description">
+            A vault-cracking classic. Pick a difficulty, narrow the range with every
+            guess, and beat your streak before you run out of attempts.
+          </p>
+          <div class="hero-tags">
+            <span class="tag">Puzzle</span>
+            <span class="tag">Single Player</span>
+            <span class="tag">Quick Play</span>
+          </div>
+          <div class="hero-actions">
+           <a href="{{ url_for('menu') }}" class="btn btn-primary"></a>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              Play Now
+            </a>
+            <button class="btn btn-ghost">View Details</button>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-art-shape"></div>
+          <span class="hero-art-emoji">🎯</span>
+        </div>
+      </section>
+
+      <!-- ============ LIBRARY / GAME GRID ============ -->
+      <section class="library">
+        <div class="library-header">
+          <h2>Your Library</h2>
+          <div class="filter-chips">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="installed">Installed</button>
+            <button class="chip" data-filter="coming-soon">Coming Soon</button>
+          </div>
+        </div>
+
+        <div class="game-grid" id="game-grid">
+
+          <article class="game-card" data-status="installed" data-title="Guess The Number">
+            <div class="card-icon" style="--icon-a:#c9a24b; --icon-b:#7a5b1e;">🎯</div>
+            <div class="card-body">
+              <div class="card-top">
+                <h3 class="card-title">Guess The Number</h3>
+                <span class="status-badge installed">Installed</span>
+              </div>
+              <p class="card-desc">Crack the hidden number before your attempts run out. Three difficulties, hints included.</p>
+            </div>
+            <a href="{{ url_for('menu') }}" class="card-play">Play</a>
+          </article>
+
+          <article class="game-card" data-status="coming-soon" data-title="Tic Tac Toe">
+            <div class="card-icon" style="--icon-a:#22d3ee; --icon-b:#0e7490;">⭕</div>
+            <div class="card-body">
+              <div class="card-top">
+                <h3 class="card-title">Tic Tac Toe</h3>
+                <span class="status-badge coming-soon">Coming Soon</span>
+              </div>
+              <p class="card-desc">The classic grid duel, rebuilt with a clean interface and local two-player mode.</p>
+            </div>
+            <button class="card-play" disabled>Notify Me</button>
+          </article>
+
+          <article class="game-card" data-status="coming-soon" data-title="Snake">
+            <div class="card-icon" style="--icon-a:#6ee7b7; --icon-b:#065f46;">🐍</div>
+            <div class="card-body">
+              <div class="card-top">
+                <h3 class="card-title">Snake</h3>
+                <span class="status-badge coming-soon">Coming Soon</span>
+              </div>
+              <p class="card-desc">Grow long, don't double back. A faithful arcade remake with a leaderboard.</p>
+            </div>
+            <button class="card-play" disabled>Notify Me</button>
+          </article>
+
+          <article class="game-card" data-status="coming-soon" data-title="Memory Match">
+            <div class="card-icon" style="--icon-a:#a78bfa; --icon-b:#4c1d95;">🧠</div>
+            <div class="card-body">
+              <div class="card-top">
+                <h3 class="card-title">Memory Match</h3>
+                <span class="status-badge coming-soon">Coming Soon</span>
+              </div>
+              <p class="card-desc">Flip, remember, match. A card-pairing brain trainer with timed runs.</p>
+            </div>
+            <button class="card-play" disabled>Notify Me</button>
+          </article>
+
+          <article class="game-card" data-status="coming-soon" data-title="Hangman">
+            <div class="card-icon" style="--icon-a:#f472b6; --icon-b:#831843;">🪢</div>
+            <div class="card-body">
+              <div class="card-top">
+                <h3 class="card-title">Hangman</h3>
+                <span class="status-badge coming-soon">Coming Soon</span>
+              </div>
+              <p class="card-desc">Guess the word one letter at a time before the rope runs out.</p>
+            </div>
+            <button class="card-play" disabled>Notify Me</button>
+          </article>
+
+        </div>
+
+        <p class="empty-state" id="empty-state" hidden>No games match your search.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ============ BOTTOM NAVIGATION (mobile) ============ -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-nav="home">
+      <span class="side-icon">🏠</span><span>Home</span>
+    </button>
+    <button class="nav-item" data-nav="library">
+      <span class="side-icon">🎮</span><span>Library</span>
+    </button>
+    <button class="nav-item" data-nav="achievements">
+      <span class="side-icon">🏆</span><span>Achievements</span>
+    </button>
+    <button class="nav-item" data-nav="statistics">
+      <span class="side-icon">📊</span><span>Stats</span>
+    </button>
+    <button class="nav-item" data-nav="themes" data-modal="themes-modal">
+      <span class="side-icon">🎨</span><span>Themes</span>
+    </button>
+    <button class="nav-item" data-nav="settings" data-modal="settings-modal">
+      <span class="side-icon">⚙</span><span>Settings</span>
+    </button>
+    <button class="nav-item" data-nav="profile">
+      <span class="side-icon">👤</span><span>Profile</span>
+    </button>
+  </nav>
+
+  <!-- ============ THEME MODAL ============ -->
+  <div class="modal-overlay" id="themes-modal" hidden>
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Choose Theme</h3>
+        <button class="modal-close" data-close-modal aria-label="Close">✕</button>
+      </div>
+      <div class="theme-grid">
+        <button class="theme-swatch" data-theme="obsidian">
+          <span class="swatch-preview swatch-obsidian"></span>
+          <span>Obsidian</span>
+        </button>
+        <button class="theme-swatch" data-theme="monochrome">
+          <span class="swatch-preview swatch-monochrome"></span>
+          <span>Monochrome</span>
+        </button>
+        <button class="theme-swatch" data-theme="heatwave">
+          <span class="swatch-preview swatch-heatwave"></span>
+          <span>Heatwave</span>
+        </button>
+        <button class="theme-swatch" data-theme="midnight">
+          <span class="swatch-preview swatch-midnight"></span>
+          <span>Midnight</span>
+        </button>
+        <button class="theme-swatch" data-theme="crimson">
+          <span class="swatch-preview swatch-crimson"></span>
+          <span>Crimson</span>
+        </button>
+        <button class="theme-swatch" data-theme="forest">
+          <span class="swatch-preview swatch-forest"></span>
+          <span>Forest</span>
+        </button>
+        <button class="theme-swatch" data-theme="royal">
+          <span class="swatch-preview swatch-royal"></span>
+          <span>Royal</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SETTINGS MODAL ============ -->
+  <div class="modal-overlay" id="settings-modal" hidden>
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Settings</h3>
+        <button class="modal-close" data-close-modal aria-label="Close">✕</button>
+      </div>
+      <div class="settings-list">
+
+        <div class="settings-row">
+          <div class="settings-row-label">
+            <span>Music Volume</span>
+            <span class="settings-value" id="music-volume-value">70%</span>
+          </div>
+          <input type="range" id="music-volume" min="0" max="100" value="70">
+        </div>
+
+        <div class="settings-row">
+          <div class="settings-row-label">
+            <span>SFX Volume</span>
+            <span class="settings-value" id="sfx-volume-value">80%</span>
+          </div>
+          <input type="range" id="sfx-volume" min="0" max="100" value="80">
+        </div>
+
+        <div class="settings-row toggle-row">
+          <span>Animations</span>
+          <label class="switch">
+            <input type="checkbox" id="animations-toggle" checked>
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script src="{{ url_for('static', filename='hub.js') }}"></script>
+</body>
+</html>

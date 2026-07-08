@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Number</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>🎯 Guess The Number</h1>
+    <div class="game-info">
+        <div class="badge">
+            🎮 {{ difficulty_label }}
+        </div>
+        <div class="badge">
+            🔥 Streak: {{ streak }}
+        </div>
+    </div>
+    <h3>
+        Guess a number between
+        <span>{{ min_number }}</span>
+        and
+        <span>{{ max_number }}</span>
+    </h3>
+    <div class="hearts">
+        {% for i in range(attempts_left) %}
+            ❤️
+        {% endfor %}
+        {% for i in range(max_attempts-attempts_left) %}
+            🤍
+        {% endfor %}
+    </div>
+    <p>
+        Attempts Left:
+        <b>{{ attempts_left }}</b>
+        /
+        {{ max_attempts }}
+    </p>
+    <p>
+        💡 Hints Remaining:
+        <b>{{ hints_remaining }}</b>
+    </p>
+    {% if message %}
+    <div class="message">
+        {{ message }}
+    </div>
+    {% endif %}
+    <form method="POST">
+        <input
+            type="number"
+            name="guess"
+            placeholder="Enter your guess..."
+            min="{{ min_number }}"
+            max="{{ max_number }}"
+            required
+            autofocus>
+        <button
+            type="submit"
+            name="action"
+            value="guess"
+            onclick="playSound('click')">
+            🎯 Guess
+        </button>
+    </form>
+    <br>
+    {% if hints_remaining > 0 %}
+    <form method="POST">
+        <button
+            type="submit"
+            name="action"
+            value="hint"
+            onclick="playSound('click')">
+            💡 Use Hint
+        </button>
+    </form>
+    {% endif %}
+    <hr>
+    <h2>📜 Previous Guesses</h2>
+    <div class="guess-history">
+        {% if guesses %}
+            {% for guess in guesses %}
+            <div class="guess-card">
+                <strong>{{ guess.value }}</strong>
+                {% if guess.result == "higher" %}
+                    <span class="higher">
+                        ⬆ Try Higher
+                    </span>
+                {% elif guess.result == "lower" %}
+                    <span class="lower">
+                        ⬇ Try Lower
+                    </span>
+                {% else %}
+                    <span class="correct">
+                        ✅ Correct
+                    </span>
+                {% endif %}
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No guesses yet.</p>
+        {% endif %}
+    </div>
+    <br>
+    <a class="menu-btn" href="{{ url_for('menu') }}" onclick="playSound('click')">
+        🏠 Main Menu
+    </a>
+</div>
+
+<!-- Sound System -->
+<script>
+    function playSound(type) {
+        let soundFile = '';
+        switch(type) {
+            case 'click':
+                soundFile = "{{ url_for('static', filename='sound/click.mp3') }}";
+                break;
+            case 'win':
+                soundFile = "{{ url_for('static', filename='sound/win.mp3') }}";
+                break;
+            case 'heart_lost':
+                soundFile = "{{ url_for('static', filename='sound/heart_lost.mp3') }}";
+                break;
+            case 'game_over':
+                soundFile = "{{ url_for('static', filename='sound/game_over.mp3') }}";
+                break;
+        }
+        
+        if (soundFile) {
+            const audio = new Audio(soundFile);
+            audio.volume = 0.6;
+            audio.play().catch(err => {
+                console.log("Sound play blocked:", err);
+            });
+        }
+    }
+</script>
+
+</body>
+</html>

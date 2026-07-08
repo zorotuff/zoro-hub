@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Statistics</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📊 Statistics</h1>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h2>{{ stats.games_played }}</h2>
+            <p>Games Played</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ stats.games_won }}</h2>
+            <p>Games Won</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ stats.games_lost }}</h2>
+            <p>Games Lost</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ win_rate }}%</h2>
+            <p>Win Rate</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ stats.total_score }}</h2>
+            <p>Total Score</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ current_streak }}</h2>
+            <p>Current Streak</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ stats.best_streak }}</h2>
+            <p>Best Streak</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ stats.hints_used_total }}</h2>
+            <p>Hints Used</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ high_score }}</h2>
+            <p>High Score</p>
+        </div>
+
+    </div>
+
+    <br>
+
+    <a class="menu-btn" href="{{ url_for('menu') }}">
+        🏠 Back to Menu
+    </a>
+
+</div>
+
+</body>
+
+</html>

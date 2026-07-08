@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>You Win!</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎉 You Win!</h1>
+
+    <p class="win-text">
+        Congratulations! You guessed the secret number!
+    </p>
+
+    <div class="result-card">
+
+        <h2>⭐ Score</h2>
+        <h1>{{ score }}</h1>
+
+    </div>
+
+    <div class="result-card">
+
+        <h3>🏆 High Score</h3>
+        <p>{{ high_score }}</p>
+
+    </div>
+
+    <div class="result-card">
+
+        <h3>🔥 Win Streak</h3>
+        <p>{{ streak }}</p>
+
+    </div>
+
+    <div class="result-card">
+
+        <h3>🎮 Difficulty</h3>
+        <p>{{ difficulty_label }}</p>
+
+    </div>
+
+    <div class="result-card">
+
+        <h3>🎯 Attempts Used</h3>
+        <p>{{ attempts_used }}</p>
+
+    </div>
+
+    {% if new_record %}
+
+    <div class="new-record">
+
+        🥳 NEW HIGH SCORE!
+
+    </div>
+
+    {% endif %}
+
+    <h2>📜 Guess History</h2>
+
+    <div class="guess-history">
+
+        {% for guess in guesses %}
+
+        <div class="guess-card">
+
+            <strong>{{ guess.value }}</strong>
+
+            {% if guess.result == "higher" %}
+                ⬆ Higher
+            {% elif guess.result == "lower" %}
+                ⬇ Lower
+            {% else %}
+                ✅ Correct
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <br>
+
+    <a class="menu-btn" href="{{ url_for('menu') }}">
+        🎮 Play Again
+    </a>
+
+</div>
+
+</body>
+
+</html>

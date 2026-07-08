@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Number</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <div style="margin-bottom:25px;">
+        <a href="{{ url_for('home') }}" class="back-btn">
+            ← Back to Zoro Hub
+        </a>
+    </div>
+
+    <h1>🎮 Guess The Number</h1>
+
+    <p class="subtitle">
+        Can you guess the secret number before you run out of hearts?
+    </p>
+
+    <div class="top-info">
+
+        <div class="info-card">
+            <h3>🏆 High Score</h3>
+            <p>{{ high_score }}</p>
+        </div>
+
+        <div class="info-card">
+            <h3>🔥 Current Streak</h3>
+            <p>{{ streak }}</p>
+        </div>
+
+    </div>
+
+    <form method="POST">
+
+        <div class="difficulty-grid">
+
+            {% for key, diff in difficulties.items() %}
+
+            <button
+                type="submit"
+                name="difficulty"
+                value="{{ key }}"
+                class="difficulty-card {{ key }}">
+
+                <h2>{{ diff.emoji }} {{ diff.label }}</h2>
+
+                <p>🎯 Numbers: {{ diff.min_number }} - {{ diff.max_number }}</p>
+
+                <p>❤️ {{ diff.max_attempts }} Attempts</p>
+
+                <p>⭐ {{ diff.score_multiplier }}x Score</p>
+
+            </button>
+
+            {% endfor %}
+
+        </div>
+
+    </form>
+
+    <div class="menu-buttons">
+
+        <a href="{{ url_for('stats') }}">
+            📊 Statistics
+        </a>
+
+        <a href="{{ url_for('highscore') }}">
+            🏆 High Score
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
