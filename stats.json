@@ -1,8 +1,8 @@
 {
-  "games_played": 3,
-  "games_won": 2,
+  "games_played": 4,
+  "games_won": 3,
   "games_lost": 1,
-  "total_score": 100,
+  "total_score": 140,
   "best_streak": 2,
   "hints_used_total": 2
 }

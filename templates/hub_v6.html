@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Zoro Hub V6</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/hub_v6.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/themes.css') }}">
+
+</head>
+
+<body data-theme="{{ profile.theme }}">
+
+<div id="background"></div>
+
+<div id="mouseGlow"></div>
+
+<div class="hub">
+
+<!-- =======================
+        TOPBAR
+======================= -->
+
+<header class="topbar">
+
+<div class="logo">
+
+🎮 ZORO HUB
+
+</div>
+
+<nav>
+
+<button onclick="location.href='{{ url_for('hub') }}'">
+    Home
+</button>
+
+<button onclick="location.href='{{ url_for('games') }}'">
+    Arcade
+</button>
+
+<button onclick="location.href='{{ url_for('personalize') }}'">
+    Personalize
+</button>
+
+<button onclick="location.href='{{ url_for('achievements') }}'">
+    Achievements
+</button>
+
+<button onclick="location.href='{{ url_for('settings') }}'">
+    Settings
+</button>
+
+</nav>
+
+</header>
+
+<!-- =======================
+        HERO
+======================= -->
+
+<section class="hero">
+
+    <div class="hero-profile">
+
+        <div
+    id="avatarFrame"
+    class="avatar-frame border-{{ profile.avatar_border|default('none') }}">
+
+    <img
+        id="profileAvatar"
+        src="{{ avatar_src }}"
+        class="profile-avatar">
+
+</div>
+
+        <div class="hero-info">
+
+            <h1>{{ profile.username }}</h1>
+
+            <span class="rank-badge">
+                🟢 Rookie
+            </span>
+
+            <p class="hero-bio">
+                {{ profile.biography }}
+            </p>
+
+            <div class="hero-meta">
+
+                <div>
+                    <span>UID</span>
+                    <strong>{{ profile.uid }}</strong>
+                </div>
+
+                <div>
+                    <span>Joined</span>
+                    <strong>{{ profile.joined_date }}</strong>
+                </div>
+
+                <div>
+                    <span>Country</span>
+                    <strong>{{ profile.country }}</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="hero-stats">
+
+        <div class="level-card">
+
+            <div class="level-header">
+
+                <h3>Level {{ profile.level }}</h3>
+
+                <span>{{ profile.xp }}/{{ profile.next_level_xp }} XP</span>
+
+            </div>
+
+            <div class="xp-bar">
+
+                <div
+                    class="xp-fill"
+                    style="width: {{ profile.xp_percent }}%;">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="quick-stats">
+
+            <div class="stat-box">
+                <span>Achievements</span>
+                <strong>{{ profile.achievements|length }}</strong>
+            </div>
+
+            <div class="stat-box">
+                <span>Games</span>
+                <strong>{{ profile.games_played }}</strong>
+            </div>
+
+            <div class="stat-box">
+                <span>Best Streak</span>
+                <strong>{{ profile.best_streak }}</strong>
+            </div>
+
+            <div class="stat-box">
+                <span>Win Rate</span>
+                <strong>{{ profile.win_rate }}%</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================
+        LAUNCHERS
+======================= -->
+
+<section class="launcher-grid">
+
+<!-- Minecraft -->
+
+<div class="launcher-card">
+
+<img
+src="{{ url_for('static',filename='img/avatars/minecraft.png') }}">
+
+<h2>
+
+Minecraft
+
+</h2>
+
+<p>
+
+Java/pocket Edition
+
+</p>
+
+<button
+    data-game="minecraft"
+    onclick="launchGame('minecraft')">
+    Install
+</button>
+Launch
+</button>
+
+</div>
+
+<!-- Roblox -->
+
+<div class="launcher-card">
+
+<img
+src="{{ url_for('static',filename='img/avatars/roblox.png') }}">
+
+<h2>
+
+Roblox
+
+</h2>
+
+<p>
+
+Play Instantly
+
+</p>
+
+<button
+    data-game="roblox"
+    onclick="launchGame('roblox')">
+    Install
+</button>
+Launch
+</button>
+
+</div>
+
+<!-- Browser -->
+
+<div class="launcher-card">
+
+<img
+src="{{ url_for('static',filename='img/avatars/browser.png') }}">
+
+<h2>
+
+Browser
+
+</h2>
+
+<p>
+
+Surf Internet
+
+</p>
+
+<button>
+
+Open
+
+</button>
+
+</div>
+
+<!-- Apps -->
+
+<div class="launcher-card">
+
+<img
+src="{{ url_for('static',filename='img/avatars/apps.png') }}">
+
+<h2>
+
+Applications
+
+</h2>
+
+<p>
+
+Open Installed Apps
+
+</p>
+
+<button>
+
+Open
+
+</button>
+
+</div>
+
+</section>
+
+<!-- =======================
+        THEMES
+======================= -->
+
+<section class="themes">
+
+<h2>
+
+Themes
+
+</h2>
+
+<div class="theme-scroll">
+
+<div class="theme-card">
+
+<div class="theme-preview default-preview"></div>
+
+<span class="theme-rarity common">
+
+Common
+
+</span>
+
+<h3>
+
+Default
+
+</h3>
+
+<p>
+
+Always Available
+
+</p>
+
+<button>
+
+Equipped
+
+</button>
+
+</div>
+
+<div class="theme-card">
+
+<div class="theme-preview obsidian-preview"></div>
+
+<span class="theme-rarity uncommon">
+
+Uncommon
+
+</span>
+
+<h3>
+
+Obsidian
+
+</h3>
+
+<p>
+
+Unlock at Level 10
+
+</p>
+
+<button>
+
+Locked
+
+</button>
+
+</div>
+
+<div class="theme-card">
+
+<div class="theme-preview aurora-preview"></div>
+
+<span class="theme-rarity rare">
+
+Rare
+
+</span>
+
+<h3>
+
+Aurora
+
+</h3>
+
+<p>
+
+Unlock at Level 30
+
+</p>
+
+<button>
+
+Locked
+
+</button>
+
+</div>
+
+<div class="theme-card">
+
+<div class="theme-preview eclipse-preview"></div>
+
+<span class="theme-rarity mythical">
+
+Mythical
+
+</span>
+
+<h3>
+
+Eclipse
+
+</h3>
+
+<p>
+
+Unlock at Level 60
+
+</p>
+
+<button>
+
+Locked
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+Zoro Hub V6
+
+</footer>
+
+<!-- =====================================================
+                BOTTOM DASHBOARD
+====================================================== -->
+
+<section class="bottom-dashboard">
+
+    <!-- Quick Actions -->
+
+    <div class="dashboard-card">
+
+        <h2>
+
+            ⚡ Quick Actions
+
+        </h2>
+
+        <div class="quick-grid">
+
+            <button class="quick-btn">
+
+                📂
+                <span>Downloads</span>
+
+            </button>
+
+            <button class="quick-btn">
+
+                🗑️
+                <span>Recycle Bin</span>
+
+            </button>
+
+            <button class="quick-btn">
+
+                ⚙️
+                <span>Settings</span>
+
+            </button>
+
+            <button class="quick-btn">
+
+                🌐
+                <span>Browser</span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- System -->
+
+    <div class="dashboard-card">
+
+        <h2>
+
+            💻 System
+
+        </h2>
+
+        <div class="system-info">
+
+            <div>
+
+                <span>CPU</span>
+
+                <strong>
+
+                    {{ system.cpu }}
+
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>RAM</span>
+
+                <strong>
+
+                    {{ system.ram }}
+
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>Storage</span>
+
+                <strong>
+
+                    {{ system.storage }}
+
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>GPU</span>
+
+                <strong>
+
+                    {{ system.gpu }}
+
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Coming Soon -->
+
+    <div class="dashboard-card">
+
+        <h2>
+
+            🚀 Coming Soon
+
+        </h2>
+
+        <ul class="coming-list">
+
+            <li>
+
+                Aurora Theme
+
+            </li>
+
+            <li>
+
+                Eclipse Theme
+
+            </li>
+
+            <li>
+
+                Cloud Save
+
+            </li>
+
+            <li>
+
+                Discord Rich Presence
+
+            </li>
+
+            <li>
+
+                Friends System
+
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+</div>
+
+<!-- =====================================================
+                    DAILY MISSIONS
+====================================================== -->
+
+<section class="missions-section">
+
+    <div class="section-title">
+
+        <h2>
+
+            🎯 Daily Missions
+
+        </h2>
+
+        <span>
+
+            Refreshes every 24 Hours
+
+        </span>
+
+    </div>
+
+    <div class="missions-grid">
+
+        <div class="mission-card">
+
+            <div class="mission-icon">
+
+                🎮
+
+            </div>
+
+            <div class="mission-info">
+
+                <h3>
+
+                    Launch Minecraft
+
+                </h3>
+
+                <p>
+
+                    +50 XP
+
+                </p>
+
+            </div>
+
+            <div class="mission-progress">
+
+                0 / 1
+
+            </div>
+
+        </div>
+
+        <div class="mission-card">
+
+            <div class="mission-icon">
+
+                🏆
+
+            </div>
+
+            <div class="mission-info">
+
+                <h3>
+
+                    Win Guess The Number
+
+                </h3>
+
+                <p>
+
+                    +80 XP
+
+                </p>
+
+            </div>
+
+            <div class="mission-progress">
+
+                0 / 1
+
+            </div>
+
+        </div>
+
+        <div class="mission-card">
+
+            <div class="mission-icon">
+
+                🔥
+
+            </div>
+
+            <div class="mission-info">
+
+                <h3>
+
+                    Open Zoro Hub
+
+                </h3>
+
+                <p>
+
+                    +20 XP
+
+                </p>
+
+            </div>
+
+            <div class="mission-progress">
+
+                Completed
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+                    ACHIEVEMENTS
+====================================================== -->
+
+<section class="achievement-section">
+
+    <div class="section-title">
+
+        <h2>
+
+            🏆 Achievements
+
+        </h2>
+
+        <span>
+
+            1 / 25 Unlocked
+
+        </span>
+
+    </div>
+
+    <div class="achievement-grid">
+
+        <div class="achievement-card unlocked">
+
+            <div class="achievement-icon">
+
+                🌟
+
+            </div>
+
+            <h3>
+
+                Welcome!
+
+            </h3>
+
+            <p>
+
+                Open Zoro Hub for the first time.
+
+            </p>
+
+        </div>
+
+        <div class="achievement-card locked">
+
+            <div class="achievement-icon">
+
+                ⚔️
+
+            </div>
+
+            <h3>
+
+                Gamer
+
+            </h3>
+
+            <p>
+
+                Play 50 Games.
+
+            </p>
+
+        </div>
+
+        <div class="achievement-card locked">
+
+            <div class="achievement-icon">
+
+                👑
+
+            </div>
+
+            <h3>
+
+                Elite
+
+            </h3>
+
+            <p>
+
+                Reach Level 25.
+
+            </p>
+
+        </div>
+
+        <div class="achievement-card locked">
+
+            <div class="achievement-icon">
+
+                🌌
+
+            </div>
+
+            <h3>
+
+                Aurora Master
+
+            </h3>
+
+            <p>
+
+                Unlock Aurora Theme.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+                    NEWS & RECENT
+====================================================== -->
+
+<section class="dashboard-row">
+
+    <!-- ================= NEWS ================= -->
+
+    <div class="news-panel">
+
+        <div class="section-title">
+
+            <h2>
+
+                📢 News
+
+            </h2>
+
+            <span>
+
+                Latest Updates
+
+            </span>
+
+        </div>
+
+        <div class="news-card">
+
+            <div class="news-badge">
+
+                NEW
+
+            </div>
+
+            <h3>
+
+                Aurora Theme Coming Soon
+
+            </h3>
+
+            <p>
+
+                Reach Level 30 to unlock the beautiful animated Aurora theme.
+
+            </p>
+
+        </div>
+
+        <div class="news-card">
+
+            <div class="news-badge">
+
+                UPDATE
+
+            </div>
+
+            <h3>
+
+                Launcher V6
+
+            </h3>
+
+            <p>
+
+                Complete redesign with XP progression, achievements and unlockable themes.
+
+            </p>
+
+        </div>
+
+        <div class="news-card">
+
+            <div class="news-badge">
+
+                EVENT
+
+            </div>
+
+            <h3>
+
+                Weekend XP Boost
+
+            </h3>
+
+            <p>
+
+                Earn 2× XP every Saturday and Sunday.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    
+
+<script
+src="{{ url_for('static', filename='js/hub_v6.js') }}">
+</script>
+
+<script
+src="{{ url_for('static', filename='js/themes.js') }}">
+</script>
+
+<!-- ==========================================================
+                    INSTALL MODAL
+========================================================== -->
+
+<div id="installModal" class="install-modal">
+
+    <div class="install-box">
+
+        <div class="install-icon" id="installIcon">
+            🎮
+        </div>
+
+        <h2 id="installTitle">
+            Minecraft
+        </h2>
+
+        <p id="installDesc">
+
+            This game isn't installed yet.
+
+            Install it now?
+
+        </p>
+
+        <div class="install-buttons">
+
+            <button
+                class="cancel-install"
+                onclick="closeInstallModal()">
+
+                Cancel
+
+            </button>
+
+            <button
+                class="confirm-install"
+                id="installConfirm">
+
+                Install
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+        MYTHIC UNLOCK POPUP
+========================================== -->
+
+{% if unlock_popup %}
+
+<div id="unlockPopup" class="unlock-overlay">
+
+    <div class="unlock-card">
+
+        <div class="unlock-rarity">
+
+            🌌 MYTHIC UNLOCK
+
+        </div>
+
+        <div class="unlock-icon">
+
+            ✦
+
+        </div>
+
+        <h2>
+
+            {{ unlock_popup.name }}
+
+        </h2>
+
+        <p>
+
+            Congratulations!
+
+            You've reached <b>Level 25</b>.
+
+        </p>
+
+        <p class="unlock-desc">
+
+            You have unlocked the exclusive
+            <b>Galaxy Border</b>.
+
+        </p>
+
+        <button id="equipGalaxyBtn">
+
+            Equip Now
+
+        </button>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zoro Hub • Login</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="login-card">
+
+    <div class="logo">
+        🎮
+    </div>
+
+    <h1>ZORO HUB</h1>
+
+    <p>Premium Launcher Experience</p>
+
+    {% if error %}
+    <div class="error-box">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <div class="tabs">
+
+        <button
+            type="button"
+            class="tab active"
+            id="loginTab">
+
+            Login
+
+        </button>
+
+        <button
+            type="button"
+            class="tab"
+            id="registerTab">
+
+            Register
+
+        </button>
+
+    </div>
+
+    <!-- LOGIN -->
+
+    <form
+        id="loginForm"
+        method="POST">
+
+        <input
+            type="hidden"
+            name="action"
+            value="login">
+
+        <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            autocomplete="off"
+            required>
+
+        <button
+            class="main-btn"
+            type="submit">
+
+            Login
+
+        </button>
+
+    </form>
+
+    <!-- REGISTER -->
+
+    <form
+        id="registerForm"
+        method="POST"
+        style="display:none;">
+
+        <input
+            type="hidden"
+            name="action"
+            value="register">
+
+        <input
+            type="text"
+            name="username"
+            placeholder="Choose Username"
+            autocomplete="off"
+            required>
+
+        <button
+            class="main-btn"
+            type="submit">
+
+            Create Account
+
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+
+const loginTab = document.getElementById("loginTab");
+const registerTab = document.getElementById("registerTab");
+
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
+
+loginTab.onclick = () => {
+
+    loginTab.classList.add("active");
+    registerTab.classList.remove("active");
+
+    loginForm.style.display = "block";
+    registerForm.style.display = "none";
+
+};
+
+registerTab.onclick = () => {
+
+    registerTab.classList.add("active");
+    loginTab.classList.remove("active");
+
+    registerForm.style.display = "block";
+    loginForm.style.display = "none";
+
+};
+
+</script>
+
+</body>
+
+</html>

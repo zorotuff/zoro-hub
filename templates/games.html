@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+Zoro Arcade
+
+</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/games.css') }}">
+
+</head>
+
+<body>
+
+
+
+<!-- ======================================
+        PREMIUM BACKGROUND
+====================================== -->
+
+<div class="launcher-bg">
+
+    <div class="blob blob-gold"></div>
+
+    <div class="blob blob-cyan"></div>
+
+    <div class="grid-overlay"></div>
+
+    <div class="particles">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+    </div>
+
+    <div class="vignette"></div>
+
+</div>
+
+<!-- ======================================
+        TOP BAR
+====================================== -->
+
+<header class="topbar">
+
+<div class="logo">
+
+🎮
+
+<span>
+
+ZORO ARCADE
+
+</span>
+
+</div>
+
+<nav class="nav">
+
+<a href="{{ url_for('hub') }}">
+
+Home
+
+</a>
+
+<a href="#featured">
+
+Featured
+
+</a>
+
+<a href="#library">
+
+Library
+
+</a>
+
+<a href="{{ url_for('achievements') }}">
+
+Achievements
+
+</a>
+
+</nav>
+
+<div class="profile-mini">
+
+<img
+
+src="{{ avatar_src }}"
+
+class="mini-avatar">
+
+<div>
+
+<h3>
+
+{{ profile.username }}
+
+</h3>
+
+<p>
+
+Lvl {{ profile.level }}
+
+</p>
+
+</div>
+
+</div>
+
+</header>
+
+<!-- ======================================
+        HERO
+====================================== -->
+
+<section class="hero">
+
+<div class="hero-text">
+
+<div class="hero-badge">
+
+✨ PERSONAL GAME LAUNCHER
+
+</div>
+
+<h1>
+
+Play,
+
+Earn,
+
+Become Mythic.
+
+</h1>
+
+<p>
+
+Every game inside Zoro Hub rewards XP.
+
+Unlock animated borders, avatars,
+
+achievements and exclusive cosmetics.
+
+</p>
+
+<div class="hero-buttons">
+
+<a
+
+href="#featured"
+
+class="btn-primary">
+
+Play Now
+
+</a>
+
+<a
+
+href="#library"
+
+class="btn-secondary">
+
+Browse Games
+
+</a>
+
+</div>
+
+</div>
+
+<div class="hero-image">
+
+<div class="floating-orb orb1"></div>
+
+<div class="floating-orb orb2"></div>
+
+<div class="floating-orb orb3"></div>
+
+<div class="hero-card">
+
+🎮
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ======================================
+        SEARCH
+====================================== -->
+
+
+
+<!-- ======================================
+        FEATURED STARTS HERE
+====================================== -->
+
+<section
+
+id="featured"
+
+class="featured">
+
+<div class="section-title">
+
+<h2>
+
+Featured Game
+
+</h2>
+
+<p>
+
+Recommended for you
+
+</p>
+
+</div>
+
+<!-- ======================================
+        FEATURED CAROUSEL
+====================================== -->
+
+<div class="featured-wrapper">
+
+<button
+id="prevFeatured"
+class="slider-btn">
+
+❮
+
+</button>
+
+<div
+id="featuredContainer"
+class="featured-container">
+
+<!-- ==========================
+        SLIDE 1
+========================== -->
+
+<div class="featured-slide active">
+
+<div class="featured-left">
+
+<div class="game-badge">
+
+PUZZLE
+
+</div>
+
+<h1>
+
+🎲 Guess The Number
+
+</h1>
+
+<p>
+
+Find the hidden number before your attempts run out.
+
+Earn XP, build streaks and unlock exclusive rewards.
+
+</p>
+
+<div class="featured-tags">
+
+<span>⭐ Easy</span>
+
+<span>🎁 +50 XP</span>
+
+<span>🏆 Streak System</span>
+
+</div>
+
+<a
+
+href="{{ url_for('play') }}"
+
+class="play-featured">
+
+▶ PLAY NOW
+
+</a>
+
+</div>
+
+<div class="featured-right">
+
+<div class="featured-art">
+
+🎲
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+        SLIDE 2
+========================== -->
+
+<div class="featured-slide">
+
+<div class="featured-left">
+
+<div class="game-badge">
+
+STRATEGY
+
+</div>
+
+<h1>
+
+⭕ Tic Tac Toe
+
+</h1>
+
+<p>
+
+Challenge your friends or test yourself against the AI.
+
+Think before every move.
+
+</p>
+
+<div class="featured-tags">
+
+<span>🤖 AI</span>
+
+<span>🎁 +35 XP</span>
+
+<span>♟ Strategy</span>
+
+</div>
+
+<a
+
+href="{{ url_for('tic_tac_toe') }}"
+
+class="play-featured">
+
+▶ PLAY NOW
+
+</a>
+
+</div>
+
+<div class="featured-right">
+
+<div class="featured-art">
+
+⭕❌
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+        SLIDE 3
+========================== -->
+
+<div class="featured-slide">
+
+<div class="featured-left">
+
+<div class="game-badge">
+
+parkour
+
+</div>
+
+<h1>
+
+🐱 Kitty Dash
+
+</h1>
+
+<p>
+
+just dodge the objects.
+
+</p>
+
+<div class="featured-tags">
+
+<span>parkour</span>
+
+<span>🎁 +120 XP</span>
+
+<span>wholesome kitty</span>
+
+</div>
+
+<a
+
+href="{{ url_for('kitty_dash') }}"
+
+class="play-featured">
+
+▶ PLAY NOW
+
+</a>
+
+</div>
+
+<div class="featured-right">
+
+<div class="featured-art">
+
+🐱
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+        SLIDE 4
+========================== -->
+
+<div class="featured-slide">
+
+<div class="featured-left">
+
+<div class="game-badge">
+
+COMING SOON
+
+</div>
+
+<h1>
+
+🚀 Space Shooter
+
+</h1>
+
+<p>
+
+Destroy enemy fleets while surviving endless waves.
+
+</p>
+
+<div class="featured-tags">
+
+<span>🚧 Soon</span>
+
+</div>
+
+<a
+
+href="#"
+
+class="play-featured disabled">
+
+COMING SOON
+
+</a>
+
+</div>
+
+<div class="featured-right">
+
+<div class="featured-art">
+
+🚀
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<button
+id="nextFeatured"
+class="slider-btn">
+
+❯
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ======================================
+        LIBRARY
+====================================== -->
+
+<section
+id="library"
+class="library">
+
+<div class="section-title">
+
+<h2>
+
+Game Library
+
+</h2>
+
+<p>
+
+Your complete collection
+
+</p>
+
+</div>
+
+<div class="library-grid">
+
+<!-- ======================================
+        GUESS THE NUMBER
+====================================== -->
+
+<div class="game-card">
+
+<div class="status installed">
+
+INSTALLED
+
+</div>
+
+<div class="game-icon">
+
+🎲
+
+</div>
+
+<h3>
+
+Guess The Number
+
+</h3>
+
+<p>
+
+Find the hidden number before your attempts run out.
+
+</p>
+
+<div class="game-meta">
+
+<span>
+
+Puzzle
+
+</span>
+
+<span>
+
++50 XP
+
+</span>
+
+</div>
+
+<a
+
+href="{{ url_for('play') }}"
+
+class="game-btn">
+
+PLAY
+
+</a>
+
+</div>
+
+<!-- ======================================
+        TIC TAC TOE
+====================================== -->
+
+<div class="game-card">
+
+<div class="status installed">
+
+INSTALLED
+
+</div>
+
+<div class="game-icon">
+
+⭕❌
+
+</div>
+
+<h3>
+
+Tic Tac Toe
+
+</h3>
+
+<p>
+
+Battle your friends or challenge the AI.
+
+</p>
+
+<div class="game-meta">
+
+<span>
+
+Strategy
+
+</span>
+
+<span>
+
++35 XP
+
+</span>
+
+</div>
+
+<a
+
+href="{{ url_for('tic_tac_toe') }}"
+
+class="game-btn">
+
+PLAY
+
+</a>
+
+</div>
+
+<!-- ======================================
+        KITTY DASH
+====================================== -->
+
+<div class="game-card">
+
+<div class="status installed">
+
+INSTALLED
+
+</div>
+
+<div class="game-icon">
+
+🐱
+
+</div>
+
+<h3>
+
+kitty dash
+
+</h3>
+
+<p>
+
+Run endlessly while collecting coins.
+
+</p>
+
+<div class="game-meta">
+
+<span>
+
+action-platformer
+
+</span>
+
+<span>
+
++120 XP
+
+</span>
+
+</div>
+
+<a
+
+href="{{ url_for('kitty_dash') }}"
+
+class="game-btn">
+
+PLAY
+
+</a>
+
+</div>
+
+<!-- ======================================
+        SPACE SHOOTER
+====================================== -->
+
+<div class="game-card">
+
+<div class="status soon">
+
+COMING SOON
+
+</div>
+
+<div class="game-icon">
+
+🚀
+
+</div>
+
+<h3>
+
+Space Shooter
+
+</h3>
+
+<p>
+
+Destroy enemy ships while surviving endless waves.
+
+</p>
+
+<div class="game-meta">
+
+<span>
+
+Arcade
+
+</span>
+
+<span>
+
++120 XP
+
+</span>
+
+</div>
+
+<button class="game-btn disabled">
+
+COMING SOON
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<a href="{{ url_for('hub') }}">
+
+Back to Hub
+
+</a>
+
+<a href="{{ url_for('settings') }}">
+
+Settings
+
+</a>
+
+<a href="{{ url_for('achievements') }}">
+
+Achievements
+
+</a>
+
+</div>
+
+</footer>
+
+<!-- ======================================
+        JAVASCRIPT
+====================================== -->
+
+<script src="{{ url_for('static', filename='js/background.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/games.js') }}"></script>
+
+</body>
+
+</html>

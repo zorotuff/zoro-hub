@@ -1,0 +1,240 @@
+/* ======================================================
+                    ZORO HUB FINAL
+                    LAYOUT ENGINE
+====================================================== */
+
+/* ===========================
+        MAIN APP
+=========================== */
+
+#app{
+
+display:flex;
+
+width:100%;
+
+min-height:100vh;
+
+}
+
+/* ===========================
+        SIDEBAR
+=========================== */
+
+#sidebar{
+
+width:280px;
+
+height:100vh;
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+z-index:100;
+
+}
+
+/* ===========================
+        MAIN CONTENT
+=========================== */
+
+#content{
+
+margin-left:270px;
+
+min-height:100vh;
+
+padding:0;
+
+overflow-x:hidden;
+
+}
+
+/* ===========================
+        SECTIONS
+=========================== */
+
+section{
+
+width:100%;
+
+position:relative;
+
+}
+
+/* ===========================
+        HERO
+=========================== */
+
+#hero{
+
+min-height:320px;
+
+display:flex;
+
+align-items:center;
+
+}
+
+/* ===========================
+        LAUNCHER
+=========================== */
+
+#launcher{
+
+min-height:540px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+/* ===========================
+        SETTINGS
+=========================== */
+
+#settingsPanel{
+
+position:fixed;
+
+top:0;
+
+right:0;
+
+width:420px;
+
+height:100vh;
+
+z-index:500;
+
+pointer-events:none;
+
+}
+
+/* ===========================
+      NOTIFICATIONS
+=========================== */
+
+#notificationContainer{
+
+position:fixed;
+
+top:25px;
+
+right:25px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+z-index:1000;
+
+pointer-events:none;
+
+}
+
+/* ===========================
+      PAGE SPACING
+=========================== */
+
+.page-gap{
+
+margin-top:40px;
+
+}
+
+/* ===========================
+      CONTAINER
+=========================== */
+
+.container{
+
+width:100%;
+
+max-width:1500px;
+
+margin:auto;
+
+}
+
+/* ===========================
+      FLEX HELPERS
+=========================== */
+
+.flex{
+
+display:flex;
+
+}
+
+.column{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.center{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+.space-between{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+/* ===========================
+      GRID
+=========================== */
+
+.grid{
+
+display:grid;
+
+gap:25px;
+
+}
+
+.grid-2{
+
+grid-template-columns:
+
+repeat(2,1fr);
+
+}
+
+.grid-3{
+
+grid-template-columns:
+
+repeat(3,1fr);
+
+}
+
+.grid-4{
+
+grid-template-columns:
+
+repeat(4,1fr);
+
+}

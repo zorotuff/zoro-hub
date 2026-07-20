@@ -1,0 +1,102 @@
+/* ==========================================================
+                    AURORA THEME
+        Premium Animated Neon Glass
+========================================================== */
+
+body[data-theme="aurora"]{
+
+    --bg:#08161A;
+    --bg2:#0E1F25;
+
+    --card:rgba(18,32,38,.74);
+    --card-hover:rgba(24,42,50,.90);
+
+    --border:rgba(120,255,220,.12);
+
+    --text:#F8FFFF;
+    --text2:#AEE8DE;
+
+    --accent:#41F6B6;
+    --accent2:#6AF3FF;
+
+    --shadow:
+        0 25px 60px rgba(0,0,0,.45);
+
+    --glow:
+        0 0 30px rgba(70,255,220,.25);
+
+    color:var(--text);
+
+    background:
+        linear-gradient(
+            180deg,
+            #071317,
+            #0B1E24,
+            #08161A
+        );
+}
+
+/* ---------------- Glass ---------------- */
+
+body[data-theme="aurora"] .glass-card{
+
+    background:
+        linear-gradient(
+            160deg,
+            rgba(18,35,40,.76),
+            rgba(12,22,26,.84)
+        );
+
+    backdrop-filter:blur(22px);
+
+    border:1px solid rgba(90,255,220,.08);
+
+    box-shadow:0 25px 60px rgba(0,0,0,.35);
+
+}
+
+/* ---------------- Hero ---------------- */
+
+body[data-theme="aurora"] .hero-card{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22,45,48,.92),
+            rgba(14,26,30,.95)
+        );
+
+}
+
+/* ---------------- Buttons ---------------- */
+
+body[data-theme="aurora"] .theme-btn,
+body[data-theme="aurora"] .launcher-play{
+
+    background:
+        linear-gradient(
+            135deg,
+            #29E0A7,
+            #4BD7FF
+        );
+
+    color:#041514;
+
+    font-weight:700;
+
+}
+
+/* ---------------- Active Nav ---------------- */
+
+body[data-theme="aurora"] .nav-btn.active{
+
+    background:
+        linear-gradient(
+            135deg,
+            #2BE0B1,
+            #61E4FF
+        );
+
+    color:#051412;
+
+}

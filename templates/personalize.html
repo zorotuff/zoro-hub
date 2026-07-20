@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Personalize</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/hub_v6.css') }}">
+
+</head>
+
+<script>
+
+// ==============================
+// Avatar Preview
+// ==============================
+
+document.querySelectorAll(".avatar-card").forEach(card=>{
+
+card.addEventListener("click",()=>{
+
+document.querySelectorAll(".avatar-card").forEach(c=>c.classList.remove("active"));
+
+card.classList.add("active");
+
+const avatar=card.dataset.avatar;
+
+document.getElementById("previewAvatar").src=
+`/static/img/avatars/${avatar}.png`;
+
+});
+
+});
+
+// ==============================
+// Banner Preview
+// ==============================
+
+document.querySelectorAll(".banner-card").forEach(card=>{
+
+card.addEventListener("click",()=>{
+
+document.querySelectorAll(".banner-card").forEach(c=>c.classList.remove("active"));
+
+card.classList.add("active");
+
+const banner=card.dataset.banner;
+
+document.getElementById("previewBanner").src=
+`/static/img/banners/${banner}.png`;
+
+});
+
+});
+
+// ==============================
+// Theme Selection
+// ==============================
+
+document.querySelectorAll(".theme-card").forEach(card=>{
+
+card.addEventListener("click",()=>{
+
+document.querySelectorAll(".theme-card").forEach(c=>c.classList.remove("active"));
+
+card.classList.add("active");
+
+});
+
+});
+
+// ==============================
+// Avatar Border
+// ==============================
+
+document.querySelectorAll(".border-card").forEach(card=>{
+
+card.addEventListener("click",()=>{
+
+document.querySelectorAll(".border-card").forEach(c=>c.classList.remove("active"));
+
+card.classList.add("active");
+
+});
+
+});
+
+</script>
+
+<body>
+
+<div class="hub">
+
+    <!-- ==========================
+            PAGE TITLE
+    =========================== -->
+
+    <div class="page-header">
+
+        <h1>🎨 Personalize</h1>
+
+        <p>
+            Customize your launcher exactly how you like.
+        </p>
+
+    </div>
+
+    <!-- ==========================
+            PROFILE PREVIEW
+    =========================== -->
+
+    <section class="preview-card">
+
+        <div class="preview-banner">
+
+            <img
+                src="{{ banner_src }}"
+                id="previewBanner">
+
+        </div>
+
+        <div class="preview-content">
+
+            <div
+    id="previewFrame"
+    class="avatar-frame border-{{ profile.avatar_border|default('none') }}">
+
+    <img
+        id="previewAvatar"
+        src="{{ avatar_src }}"
+        class="profile-avatar">
+
+</div>
+
+            <h2 id="previewUsername">
+
+                {{ profile.username }}
+
+            </h2>
+
+            <span class="preview-rank">
+
+                🟢 Rookie
+
+            </span>
+
+            <p>
+
+                {{ profile.biography }}
+
+            </p>
+
+            <div class="preview-stats">
+
+                <div>
+
+                    <span>Level</span>
+
+                    <strong>
+
+                        {{ profile.level }}
+
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span>Achievements</span>
+
+                    <strong>
+
+                        {{ profile.achievements|length }}
+
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span>Games</span>
+
+                    <strong>
+
+                        {{ profile.games_played }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+<!-- ==========================
+        AVATAR SECTION
+========================== -->
+
+<section class="personalize-section">
+
+    <div class="section-title">
+
+        <h2>Profile Avatar</h2>
+
+        <p>
+            Choose a premium avatar for your profile.
+        </p>
+
+    </div>
+
+    <div class="avatar-grid">
+
+        {% set avatars = [
+
+        "Obsidian",
+        "Noir",
+        "Cipher",
+        "Monarch",
+        "Zenith",
+        "Vertex",
+        "Genesis",
+        "Nova"
+
+        ] %}
+
+        {% for avatar in avatars %}
+
+        <div
+            class="avatar-card"
+            data-avatar="{{ avatar|lower }}">
+
+            <div class="avatar-image">
+
+                <img
+                src="{{ url_for('static', filename='img/avatars/' ~ avatar|lower ~ '.png') }}"
+                alt="{{ avatar }}">
+
+            </div>
+
+            <span>
+
+                {{ avatar }}
+
+            </span>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- ==========================
+        BANNER SECTION
+========================== -->
+
+<section class="personalize-section">
+
+    <div class="section-title">
+
+        <h2>Profile Banner</h2>
+
+        <p>
+            Select a banner for your profile.
+        </p>
+
+    </div>
+
+    <div class="banner-grid">
+
+        {% set banners = [
+
+        "Midnight",
+        "Aurora",
+        "Nebula",
+        "Carbon",
+        "Horizon",
+        "Vertex"
+
+        ] %}
+
+        {% for banner in banners %}
+
+        <div
+            class="banner-card"
+            data-banner="{{ banner|lower }}">
+
+            <div class="banner-preview">
+
+                <img
+                src="{{ url_for('static', filename='img/banners/' ~ banner|lower ~ '.png') }}"
+                alt="{{ banner }}">
+
+            </div>
+
+            <span>
+
+                {{ banner }}
+
+            </span>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- ==========================
+        BORDER SECTION
+========================== -->
+
+<section class="personalize-section">
+
+    <div class="section-title">
+
+        <h2>Avatar Border</h2>
+
+        <p>
+            Give your profile a premium touch.
+        </p>
+
+    </div>
+
+    <div class="border-grid">
+
+       <div class="border-card" data-border="none">
+
+    None
+
+    <span class="rarity common">
+
+        COMMON
+
+    </span>
+
+</div>
+
+<div class="border-card" data-border="neon">
+
+    Neon
+
+    <span class="rarity uncommon">
+
+        UNCOMMON
+
+    </span>
+
+</div>
+
+<div class="border-card" data-border="gold">
+
+    Gold
+
+    <span class="rarity uncommon">
+
+        UNCOMMON
+
+    </span>
+
+</div>
+
+<div class="border-card" data-border="emerald">
+
+    Emerald
+
+    <span class="rarity rare">
+
+        RARE
+
+    </span>
+
+</div>
+
+<div class="border-card" data-border="shadow">
+
+    Shadow
+
+    <span class="rarity rare">
+
+        RARE
+
+    </span>
+
+</div>
+
+<div class="border-card" data-border="frozen">
+
+    Frozen
+
+    <span class="rarity legendary">
+
+        LEGENDARY
+
+    </span>
+
+</div>
+
+<div class="border-card" data-border="crimson">
+
+    Crimson
+
+    <span class="rarity legendary">
+
+        LEGENDARY
+
+    </span>
+
+</div>
+
+{% if "galaxy_border" in profile.profile_unlocks %}
+
+<div
+class="border-card mythic"
+data-border="galaxy">
+
+    Galaxy
+
+    <span class="rarity mythic">
+
+        MYTHIC
+
+    </span>
+
+</div>
+
+{% else %}
+
+<div class="border-card locked mythic-locked">
+
+    🔒 Galaxy
+
+    <span class="unlock-text">
+
+        Unlock at Level 25
+
+    </span>
+
+    <span class="rarity mythic">
+
+        MYTHIC
+
+    </span>
+
+</div>
+
+{% endif %}
+
+    </div>
+
+</section>
+
+<script
+ src="{{ url_for('static', filename='js/personalize.js') }}">
+</script>
+
+<!-- ==========================
+        SAVE
+========================== -->
+
+<div class="save-area">
+
+    <button
+        id="saveBtn"
+        class="save-button">
+
+        💾 Save Changes
+
+    </button>
+
+</div>

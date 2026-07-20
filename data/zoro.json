@@ -1,0 +1,27 @@
+{
+    "username": "zoro",
+    "uid": "NX-5AD954AA",
+    "coins": 0,
+    "level": 10,
+    "avatar": "shadow-assassin",
+    "avatar_type": "builtin",
+    "avatar_border": "none",
+    "profile_banner": "default",
+    "profile_theme": "obsidian",
+    "biography": "Welcome to my soul society.",
+    "country": "Global Space",
+    "joined_date": "July 2026",
+    "account_creation_date": "2026-07-18 14:38",
+    "last_online": "Just Now",
+    "online_status": "online",
+    "games_played": 10,
+    "games_won": 9,
+    "games_lost": 1,
+    "current_streak": 4,
+    "best_streak": 4,
+    "favorite_game": "kitty dash",
+    "achievements": [],
+    "badges": [
+        "owner"
+    ]
+}

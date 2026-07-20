@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tic Tac Toe — Zoro Hub</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ttt_background.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ttt.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ttt_animation.css') }}">
+</head>
+<body>
+
+<canvas id="tttBackgroundCanvas"></canvas>
+
+<div class="ttt-page">
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="ttt-topbar">
+    <a href="/" class="ttt-back-link" id="topBackLink">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+      <span>Zoro Hub</span>
+    </a>
+
+    <div class="ttt-topbar-title">Tic&nbsp;Tac&nbsp;Toe</div>
+
+    <div class="ttt-topbar-stats" id="topbarStats">
+      <div class="ttt-stat-chip">
+        <span class="ttt-stat-icon">🪙</span>
+        <span id="statCoins">--</span>
+      </div>
+      <div class="ttt-stat-chip">
+        <span class="ttt-stat-icon">⭐</span>
+        <span id="statXp">--</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ SCREEN 1: MODE SELECT ============ -->
+  <section class="ttt-screen is-active" id="screen-mode">
+    <h1 class="ttt-screen-title fade-in-up">Choose Your Mode</h1>
+    <p class="ttt-screen-subtitle fade-in-up">Pick how you want to play</p>
+
+    <div class="ttt-mode-grid fade-in-up">
+      <button class="ttt-mode-card ripple-btn" id="modeSingleplayer" type="button" data-mode="single">
+        <div class="ttt-mode-glow"></div>
+        <div class="ttt-mode-icon">🎮</div>
+        <h3>Singleplayer</h3>
+        <p>Battle a smart AI across three difficulty levels</p>
+      </button>
+
+      <button class="ttt-mode-card is-locked ripple-btn" id="modeMultiplayer" type="button" data-mode="multi">
+        <div class="ttt-mode-glow"></div>
+        <div class="ttt-mode-icon">🌐</div>
+        <h3>Multiplayer</h3>
+        <p>Challenge a friend in real time</p>
+        <span class="ttt-badge">Coming Soon</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN 2: DIFFICULTY + WHO STARTS ============ -->
+  <section class="ttt-screen" id="screen-difficulty">
+    <h1 class="ttt-screen-title">Match Setup</h1>
+    <p class="ttt-screen-subtitle">Choose a difficulty and who makes the first move</p>
+
+    <div class="ttt-setup-block">
+      <h2 class="ttt-setup-label">Difficulty</h2>
+      <div class="ttt-difficulty-grid">
+        <button class="ttt-difficulty-card ripple-btn" data-difficulty="easy" type="button">
+          <span class="ttt-difficulty-icon">🟢</span>
+          <span>Easy</span>
+        </button>
+        <button class="ttt-difficulty-card ripple-btn" data-difficulty="medium" type="button">
+          <span class="ttt-difficulty-icon">🟡</span>
+          <span>Medium</span>
+        </button>
+        <button class="ttt-difficulty-card ripple-btn" data-difficulty="hard" type="button">
+          <span class="ttt-difficulty-icon">🔴</span>
+          <span>Hard</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="ttt-setup-block">
+      <h2 class="ttt-setup-label">Who Starts</h2>
+      <div class="ttt-starter-grid">
+        <button class="ttt-starter-card ripple-btn" data-starter="player" type="button">
+          <span class="ttt-starter-icon">🧑</span>
+          <span>Player</span>
+        </button>
+        <button class="ttt-starter-card ripple-btn" data-starter="ai" type="button">
+          <span class="ttt-starter-icon">🤖</span>
+          <span>AI</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="ttt-setup-actions">
+      <button class="ttt-btn ttt-btn-ghost ripple-btn" id="difficultyBackBtn" type="button">Back</button>
+      <button class="ttt-btn ttt-btn-primary ripple-btn" id="startGameBtn" type="button" disabled>Start Game</button>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN 3: GAME ============ -->
+  <section class="ttt-screen" id="screen-game">
+
+    <div class="ttt-game-header">
+      <div class="ttt-turn-indicator" id="turnIndicator">
+        <span class="ttt-turn-dot"></span>
+        <span id="turnIndicatorText">Your Turn</span>
+      </div>
+      <div class="ttt-game-meta">
+        <span class="ttt-meta-chip" id="metaDifficulty">Easy</span>
+      </div>
+    </div>
+
+    <div class="ttt-board-wrap">
+      <div class="ttt-board" id="tttBoard">
+        <button class="ttt-cell ripple-btn" data-index="0" type="button"><div class="ttt-mark"></div></button>
+        <button class="ttt-cell ripple-btn" data-index="1" type="button"><div class="ttt-mark"></div></button>
+        <button class="ttt-cell ripple-btn" data-index="2" type="button"><div class="ttt-mark"></div></button>
+        <button class="ttt-cell ripple-btn" data-index="3" type="button"><div class="ttt-mark"></div></button>
+        <button class="ttt-cell ripple-btn" data-index="4" type="button"><div class="ttt-mark"></div></button>
+        <button class="ttt-cell ripple-btn" data-index="5" type="button"><div class="ttt-mark"></div></button>
+        <button class="ttt-cell ripple-btn" data-index="6" type="button"><div class="ttt-mark"></div></button>
+        <button class="ttt-cell ripple-btn" data-index="7" type="button"><div class="ttt-mark"></div></button>
+        <button class="ttt-cell ripple-btn" data-index="8" type="button"><div class="ttt-mark"></div></button>
+
+        <svg class="ttt-winline-svg" id="winLineSvg" viewBox="0 0 300 300" preserveAspectRatio="none">
+          <line id="winLine" x1="0" y1="0" x2="0" y2="0"></line>
+        </svg>
+      </div>
+    </div>
+
+    <div class="ttt-game-actions">
+      <button class="ttt-btn ttt-btn-ghost ripple-btn" id="gameBackBtn" type="button">Back to Menu</button>
+      <button class="ttt-btn ttt-btn-secondary ripple-btn" id="restartBtn" type="button">Restart</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ RESULT MODAL ============ -->
+<div class="ttt-modal-overlay" id="resultModalOverlay">
+  <div class="ttt-modal" id="resultModal">
+    <div class="ttt-modal-icon" id="resultIcon">🏆</div>
+    <h2 class="ttt-modal-title" id="resultTitle">You Win!</h2>
+    <p class="ttt-modal-message" id="resultMessage">Victory secured against the AI.</p>
+
+    <div class="ttt-modal-rewards" id="resultRewards">
+      <div class="ttt-reward-chip">
+        <span class="ttt-stat-icon">🪙</span>
+        <span id="rewardCoins">+0</span>
+      </div>
+      <div class="ttt-reward-chip">
+        <span class="ttt-stat-icon">⭐</span>
+        <span id="rewardXp">+0</span>
+      </div>
+    </div>
+
+    <div class="ttt-modal-actions">
+      <button class="ttt-btn ttt-btn-ghost ripple-btn" id="modalBackBtn" type="button">Back to Menu</button>
+      <button class="ttt-btn ttt-btn-primary ripple-btn" id="modalPlayAgainBtn" type="button">Play Again</button>
+    </div>
+  </div>
+</div>
+
+<canvas id="confettiCanvas"></canvas>
+
+<div class="ttt-toast" id="tttToast"></div>
+
+<script src="{{ url_for('static', filename='js/ttt_background.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ttt.js') }}"></script>
+</body>
+</html>

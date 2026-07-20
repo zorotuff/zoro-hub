@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kitty Dash</title>
+
+<link
+rel="stylesheet"
+href="{{ url_for('static', filename='css/kitty_dash.css') }}">
+
+</head>
+
+<body>
+
+<div class="game">
+
+<!-- ===========================
+            HUD
+=========================== -->
+
+<div class="hud">
+
+<div class="score">
+
+Distance
+
+<span id="distance">
+
+0
+
+</span>
+
+m
+
+</div>
+
+<div class="coins">
+
+Coins
+
+<span id="coins">
+
+0
+
+</span>
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-fill"
+id="progressFill">
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===========================
+            GAME
+=========================== -->
+
+<div class="world" id="world">
+
+<div class="ground"></div>
+
+<div
+class="player"
+id="player">
+
+🐈‍⬛
+
+</div>
+
+<div
+id="obstacles">
+
+</div>
+
+<div
+id="coinContainer">
+
+</div>
+
+</div>
+
+<!-- ===========================
+        GAME OVER
+=========================== -->
+
+<div
+class="game-over hidden"
+id="gameOver">
+
+<h1>
+
+Game Over
+
+</h1>
+
+<p>
+
+Distance
+
+<span id="finalDistance">
+
+0
+
+</span>
+
+m
+
+</p>
+
+<p>
+
+Coins
+
+<span id="finalCoins">
+
+0
+
+</span>
+
+</p>
+
+<div class="buttons">
+
+<button
+onclick="restartGame()">
+
+Retry
+
+</button>
+
+<a
+href="{{ url_for('games') }}">
+
+Return to Arcade
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script
+src="{{ url_for('static', filename='js/kitty_dash.js') }}">
+
+</script>
+
+</body>
+
+</html>

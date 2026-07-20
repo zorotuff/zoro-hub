@@ -1,419 +1,1102 @@
-"""
-Guess The Number - Flask Web Game
------------------------------------
-A clean, single-file Flask application implementing:
-  - Difficulty levels (Easy / Medium / Hard)
-  - Hearts / limited attempts
-  - Hint system
-  - Previous guess history
-  - Scoring + win streak tracking
-  - Persistent High Score (highscore.txt)
-  - Persistent Statistics (stats.json)
-  - Win / Lose pages
-
-The module is organized as:
-  1. Configuration & constants
-  2. Persistence helpers (highscore + stats files)
-  3. Game-state helpers (session management)
-  4. Scoring helpers
-  5. Routes
-"""
-
-import json
 import os
+import json
 import random
-from flask import Flask, render_template, request, redirect, url_for, session
+from datetime import datetime, timedelta
+
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    session,
+    jsonify,
+)
+
+from profiles import (
+    DATA_DIR,
+    ensure_dirs,
+    ensure_builtin_avatars,
+
+    get_profile,
+    create_profile,
+    save_profile,
+    update_profile,
+
+    get_profile_path,
+    username_exists,
+    is_valid_username,
+
+    avatar_url,
+    banner_url,
+
+    save_custom_avatar,
+    save_custom_banner,
+    set_builtin_avatar,
+
+    win_rate,
+)
 
 app = Flask(__name__)
-app.secret_key = "change-this-to-a-random-secret-in-production"  # required for sessions
 
-# ---------------------------------------------------------------------------
-# 1. Configuration & constants
-# ---------------------------------------------------------------------------
+app.secret_key = "zoro_hub_secret"
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-HIGHSCORE_FILE = os.path.join(BASE_DIR, "highscore.txt")
-STATS_FILE = os.path.join(BASE_DIR, "stats.json")
+app.permanent_session_lifetime = timedelta(days=30)
 
-DIFFICULTY_SETTINGS = {
-    "easy": {
-        "label": "Easy",
-        "min_number": 1,
-        "max_number": 50,
-        "max_attempts": 10,
-        "max_hints": 3,
-        "score_multiplier": 1,
-    },
-    "medium": {
-        "label": "Medium",
-        "min_number": 1,
-        "max_number": 100,
-        "max_attempts": 7,
-        "max_hints": 2,
-        "score_multiplier": 2,
-    },
-    "hard": {
-        "label": "Hard",
-        "min_number": 1,
-        "max_number": 200,
-        "max_attempts": 5,
-        "max_hints": 1,
-        "score_multiplier": 3,
-    },
-}
+ensure_dirs()
+ensure_builtin_avatars()
+
+# ==========================================
+# GAME CONSTANTS
+# ==========================================
+
+MIN_NUMBER = 1
+MAX_NUMBER = 200
 
 DEFAULT_DIFFICULTY = "medium"
 
+DIFFICULTY_SETTINGS = {
 
-# ---------------------------------------------------------------------------
-# 2. Persistence helpers
-# ---------------------------------------------------------------------------
+    "easy": {
+        "attempts": 15,
+        "xp_reward": 25,
+        "coin_reward": 10,
+    },
 
-def load_highscore():
-    """Read the all-time high score from highscore.txt. Returns 0 if missing/invalid."""
-    if not os.path.exists(HIGHSCORE_FILE):
-        return 0
-    try:
-        with open(HIGHSCORE_FILE, "r") as f:
-            content = f.read().strip()
-            return int(content) if content else 0
-    except (ValueError, IOError):
-        return 0
+    "medium": {
+        "attempts": 10,
+        "xp_reward": 50,
+        "coin_reward": 20,
+    },
+
+    "hard": {
+        "attempts": 7,
+        "xp_reward": 100,
+        "coin_reward": 40,
+    },
+
+}
+
+# ==========================================
+# HUB THEMES
+# ==========================================
+
+THEMES = {
+
+    "obsidian": {
+        "name": "Obsidian",
+        "rarity": "Uncommon",
+        "unlock_level": 1,
+    },
+
+    "aurora": {
+        "name": "Aurora",
+        "rarity": "Rare",
+        "unlock_level": 5,
+    },
+
+    "nova": {
+        "name": "Nova",
+        "rarity": "Legendary",
+        "unlock_level": 10,
+    },
+
+    "eclipse": {
+        "name": "Eclipse",
+        "rarity": "Mythic",
+        "unlock_level": 20,
+    },
+
+}
+
+# ==========================================
+# LEVEL SYSTEM
+# ==========================================
+
+LEVEL_XP = [
+
+    0,
+    100,
+    250,
+    450,
+    700,
+    1000,
+    1400,
+    1900,
+    2500,
+    3200,
+    4000,
+
+]
+
+# ==========================================
+# HELPER FUNCTIONS
+# ==========================================
+
+def current_config():
+
+    difficulty = session.get(
+        "difficulty",
+        DEFAULT_DIFFICULTY
+    )
+
+    if difficulty not in DIFFICULTY_SETTINGS:
+
+        difficulty = DEFAULT_DIFFICULTY
+
+    return DIFFICULTY_SETTINGS[difficulty]
 
 
-def save_highscore(score):
-    """Persist a new high score to highscore.txt."""
-    with open(HIGHSCORE_FILE, "w") as f:
-        f.write(str(score))
+def get_user_profile():
+
+    username = session.get("username")
+
+    if not username:
+
+        return None
+
+    profile = get_profile(username)
+
+    if profile is None:
+
+        profile = create_profile(username)
+
+    return profile
 
 
-def update_highscore_if_needed(score):
-    """Compare score against stored high score; save + return True if it's a new record."""
-    current_high = load_highscore()
-    if score > current_high:
-        save_highscore(score)
-        return True, score
-    return False, current_high
+def save_user_profile(profile):
+
+    username = session.get("username")
+
+    if username:
+
+        save_profile(username, profile)
 
 
-def load_stats():
-    """Load cumulative game statistics from stats.json (auto-created on first write)."""
-    default_stats = {
-        "games_played": 0,
-        "games_won": 0,
-        "games_lost": 0,
-        "total_score": 0,
-        "best_streak": 0,
-        "hints_used_total": 0,
+def calculate_level(xp):
+
+    level = 1
+
+    for requirement in LEVEL_XP:
+
+        if xp >= requirement:
+
+            level += 1
+
+    return max(1, level - 1)
+
+
+def next_level_xp(level):
+
+    if level >= len(LEVEL_XP):
+
+        return LEVEL_XP[-1]
+
+    return LEVEL_XP[level]
+
+
+def xp_percent(profile):
+
+    level = profile.get("level", 1)
+
+    xp = profile.get("xp", 0)
+
+    current = LEVEL_XP[level - 1]
+
+    target = next_level_xp(level)
+
+    if target == current:
+
+        return 100
+
+    return int(
+        ((xp - current) / (target - current)) * 100
+    )
+
+
+def add_xp(profile, amount):
+
+    old_level = profile.get("level", 1)
+
+    profile["xp"] = profile.get("xp", 0) + amount
+
+    profile["level"] = calculate_level(profile["xp"])
+
+    # ==========================================
+    # MYTHIC UNLOCK - GALAXY BORDER
+    # ==========================================
+
+    profile.setdefault("profile_unlocks", [])
+
+    if (
+        old_level < 25
+        and profile["level"] >= 25
+        and "galaxy_border" not in profile["profile_unlocks"]
+    ):
+
+        profile["profile_unlocks"].append("galaxy_border")
+
+        session["new_unlock"] = {
+            "type": "border",
+            "name": "Galaxy Border",
+            "rarity": "mythic"
+        }
+
+    return profile
+
+
+def has_theme(profile, theme):
+
+    level = profile.get("level", 1)
+
+    required = THEMES[theme]["unlock_level"]
+
+    return level >= required
+
+
+def equipped_theme(profile):
+
+    theme = profile.get(
+        "profile_theme",
+        "obsidian"
+    )
+
+    if theme not in THEMES:
+
+        theme = "obsidian"
+
+    return theme
+
+
+def update_last_online(profile):
+
+    profile["last_online"] = datetime.now().strftime(
+        "%Y-%m-%d %H:%M"
+    )
+
+    return profile
+
+# ==========================================
+# LOGIN / REGISTER
+# ==========================================
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+
+    if "username" in session:
+        return redirect(url_for("hub"))
+
+    if request.method == "POST":
+
+        action = request.form.get("action")
+
+        username = request.form.get(
+            "username",
+            ""
+        ).strip()
+
+        if not is_valid_username(username):
+
+            return render_template(
+                "login.html",
+                error="Invalid username."
+            )
+
+        # ------------------------
+        # REGISTER
+        # ------------------------
+
+        if action == "register":
+
+            if username_exists(username):
+
+                return render_template(
+                    "login.html",
+                    error="Username already exists."
+                )
+
+            profile = create_profile(username)
+
+            session["username"] = username
+            session.permanent = True
+
+            return redirect(url_for("hub"))
+
+        # ------------------------
+        # LOGIN
+        # ------------------------
+
+        if action == "login":
+
+            if not username_exists(username):
+
+                return render_template(
+                    "login.html",
+                    error="Account not found."
+                )
+
+            session["username"] = username
+            session.permanent = True
+
+            return redirect(url_for("hub"))
+
+    return render_template(
+        "login.html",
+        error=None
+    )
+
+
+@app.route("/logout")
+def logout():
+
+    session.clear()
+
+    return redirect(url_for("index"))
+
+# ==========================================
+# HUB ROUTES
+# ==========================================
+
+@app.route("/hub")
+def hub():
+
+    if "username" not in session:
+        return redirect(url_for("index"))
+
+    profile = get_user_profile()
+
+    if profile is None:
+        return redirect(url_for("logout"))
+
+    profile = update_last_online(profile)
+
+    save_user_profile(profile)
+
+    profile["xp_percent"] = xp_percent(profile)
+
+    profile["next_level_xp"] = next_level_xp(
+        profile.get("level", 1)
+    )
+
+    system = {
+        "cpu": "Intel Core i5-4310M",
+        "gpu": "Intel HD Graphics 4600",
+        "ram": "16 GB",
+        "storage": "100 GB Free"
     }
-    if not os.path.exists(STATS_FILE):
-        return default_stats
-    try:
-        with open(STATS_FILE, "r") as f:
-            data = json.load(f)
-            default_stats.update(data)
-            return default_stats
-    except (json.JSONDecodeError, IOError):
-        return default_stats
+
+    unlock_popup = session.pop("new_unlock", None)
+
+    return render_template(
+
+    "hub_v6.html",
+
+    profile=profile,
+
+    themes=THEMES,
+
+    avatar_src=avatar_url(profile),
+
+    banner_src=banner_url(profile),
+
+    system=system,
+
+    unlock_popup=unlock_popup,
+
+)
 
 
-def save_stats(stats):
-    with open(STATS_FILE, "w") as f:
-        json.dump(stats, f, indent=2)
+@app.route("/hubv4")
+def hub_v4():
+
+    if "username" not in session:
+        return redirect(url_for("index"))
+
+    profile = get_user_profile()
+
+    if profile is None:
+        return redirect(url_for("logout"))
+
+    return render_template(
+
+        "hub_v4.html",
+
+        profile=profile,
+
+        avatar_src=avatar_url(profile),
+
+        banner_src=banner_url(profile),
+
+    )
 
 
-def update_stats(won, score, streak, hints_used):
-    """Update and persist cumulative statistics after a game ends."""
-    stats = load_stats()
-    stats["games_played"] += 1
-    stats["games_won"] += 1 if won else 0
-    stats["games_lost"] += 0 if won else 1
-    stats["total_score"] += score
-    stats["best_streak"] = max(stats["best_streak"], streak)
-    stats["hints_used_total"] += hints_used
-    save_stats(stats)
-    return stats
+@app.route("/hubv6")
+def hub_v6():
 
+    return redirect(url_for("hub"))
 
-# ---------------------------------------------------------------------------
-# 3. Game-state helpers (Flask session)
-# ---------------------------------------------------------------------------
+# ==========================================
+# GUESS THE NUMBER
+# ==========================================
 
-def start_new_game(difficulty):
-    """Initialize a fresh game in the session for the given difficulty."""
-    config = DIFFICULTY_SETTINGS.get(difficulty, DIFFICULTY_SETTINGS[DEFAULT_DIFFICULTY])
-    secret_number = random.randint(config["min_number"], config["max_number"])
+@app.route("/play")
+def play():
 
-    # Preserve win streak across games; reset everything else.
-    streak = session.get("streak", 0)
+    if "username" not in session:
+        return redirect(url_for("index"))
 
-    session["difficulty"] = difficulty
-    session["secret_number"] = secret_number
-    session["min_number"] = config["min_number"]
-    session["max_number"] = config["max_number"]
-    session["max_attempts"] = config["max_attempts"]
-    session["attempts_left"] = config["max_attempts"]
-    session["max_hints"] = config["max_hints"]
-    session["hints_used"] = 0
-    session["guesses"] = []
-    session["streak"] = streak
+    profile = get_user_profile()
+
+    config = current_config()
+
+    session["secret_number"] = random.randint(
+        MIN_NUMBER,
+        MAX_NUMBER
+    )
+
+    session["attempts_left"] = config["attempts"]
+
+    session["guess_history"] = []
+
     session["game_over"] = False
 
+    session["won"] = False
 
-def has_active_game():
-    """Check whether a game is currently in progress in the session."""
-    return "secret_number" in session and not session.get("game_over", True)
-
-
-def get_game_state():
-    """Return a dict of the current game state, safe to pass into templates."""
-    return {
-        "difficulty": session.get("difficulty"),
-        "difficulty_label": DIFFICULTY_SETTINGS.get(
-            session.get("difficulty", DEFAULT_DIFFICULTY), {}
-        ).get("label"),
-        "min_number": session.get("min_number"),
-        "max_number": session.get("max_number"),
-        "max_attempts": session.get("max_attempts"),
-        "attempts_left": session.get("attempts_left"),
-        "max_hints": session.get("max_hints"),
-        "hints_used": session.get("hints_used"),
-        "hints_remaining": session.get("max_hints", 0) - session.get("hints_used", 0),
-        "guesses": session.get("guesses", []),
-        "streak": session.get("streak", 0),
-    }
+    return redirect(url_for("game"))
 
 
-def record_guess(guess, result):
-    """Append a guess + its result ('higher' / 'lower' / 'correct') to the session history."""
-    guesses = session.get("guesses", [])
-    guesses.append({"value": guess, "result": result})
-    session["guesses"] = guesses
+@app.route("/game")
+def game():
 
+    if "username" not in session:
+        return redirect(url_for("index"))
 
-# ---------------------------------------------------------------------------
-# 4. Scoring helpers
-# ---------------------------------------------------------------------------
+    profile = get_user_profile()
 
-def calculate_score(difficulty, max_attempts, attempts_left, hints_used):
-    """
-    Score formula:
-      - Reward remaining attempts (fewer guesses used = higher score)
-      - Scale by difficulty multiplier
-      - Penalize hint usage
-    """
-    config = DIFFICULTY_SETTINGS.get(difficulty, DIFFICULTY_SETTINGS[DEFAULT_DIFFICULTY])
-    multiplier = config["score_multiplier"]
+    config = current_config()
 
-    base_score = attempts_left * 10 * multiplier
-    hint_penalty = hints_used * 15
-    score = max(0, base_score - hint_penalty)
-    return score
+    return render_template(
 
+        "game.html",
 
-def get_hint(secret_number, min_number, max_number, guesses):
-    """
-    Generate a simple hint based on how many hints have already been used:
-      1st hint -> odd/even
-      2nd hint -> which half of the range the number is in
-      3rd+ hint -> distance band (how close recent guesses have been)
-    """
-    hints_used = session.get("hints_used", 0)
+        profile=profile,
 
-    if hints_used == 0:
-        parity = "even" if secret_number % 2 == 0 else "odd"
-        return f"The number is {parity}."
-    elif hints_used == 1:
-        midpoint = (min_number + max_number) // 2
-        half = "lower half" if secret_number <= midpoint else "upper half"
-        return f"The number is in the {half} of the range ({min_number}-{max_number})."
-    else:
-        digit_sum = sum(int(d) for d in str(secret_number))
-        return f"The digits of the number add up to {digit_sum}."
+        attempts=session.get(
+            "attempts_left",
+            config["attempts"]
+        ),
 
+        history=session.get(
+            "guess_history",
+            []
+        ),
 
-# ---------------------------------------------------------------------------
-# 5. Routes
-# ---------------------------------------------------------------------------
+        game_over=session.get(
+            "game_over",
+            False
+        ),
 
-@app.route("/")
-def home():
-    return render_template("hub.html")
+        won=session.get(
+            "won",
+            False
+        ),
 
+        difficulty=session.get(
+            "difficulty",
+            DEFAULT_DIFFICULTY
+        ),
 
-@app.route("/menu", methods=["GET", "POST"])
-def menu():
-    """Show difficulty selection; on POST, start a new game and go to /game."""
-    if request.method == "POST":
-        difficulty = request.form.get("difficulty", DEFAULT_DIFFICULTY)
-        if difficulty not in DIFFICULTY_SETTINGS:
-            difficulty = DEFAULT_DIFFICULTY
-        start_new_game(difficulty)
+    )
+
+# ==========================================
+# TIC TAC TOE
+# ==========================================
+
+@app.route("/tic_tac_toe")
+def tic_tac_toe():
+
+    if "username" not in session:
+        return redirect(url_for("index"))
+
+    profile = get_user_profile()
+
+    if profile is None:
+        return redirect(url_for("logout"))
+
+    return render_template(
+
+        "tictactoe.html",
+
+        profile=profile,
+
+        avatar_src=avatar_url(profile),
+
+        banner_src=banner_url(profile)
+
+    )
+
+# =========================================
+#kitty game
+#==========================================
+
+@app.route("/kitty_dash")
+def kitty_dash():
+
+    if "username" not in session:
+        return redirect(url_for("index"))
+
+    return render_template("kitty_dash.html")
+
+# ==========================================
+# PROCESS GUESS
+# ==========================================
+
+@app.route("/guess", methods=["POST"])
+def guess():
+
+    if "username" not in session:
+        return redirect(url_for("index"))
+
+    profile = get_user_profile()
+
+    if session.get("game_over"):
         return redirect(url_for("game"))
 
-    high_score = load_highscore()
-    return render_template(
-        "menu.html",
-        difficulties=DIFFICULTY_SETTINGS,
-        high_score=high_score,
-        streak=session.get("streak", 0),
-    )
+    config = current_config()
 
+    try:
 
-@app.route("/game", methods=["GET", "POST"])
-def game():
-    """Main gameplay route: display the game, process guesses and hint requests."""
-    if not has_active_game():
-        return redirect(url_for("menu"))
+        guess = int(request.form.get("guess"))
 
-    message = None
+    except:
 
-    if request.method == "POST":
-        action = request.form.get("action", "guess")
+        return redirect(url_for("game"))
 
-        # --- Hint request -----------------------------------------------
-        if action == "hint":
-            if session["hints_used"] < session["max_hints"]:
-                hint_text = get_hint(
-                    session["secret_number"],
-                    session["min_number"],
-                    session["max_number"],
-                    session.get("guesses", []),
-                )
-                session["hints_used"] += 1
-                message = hint_text
-            else:
-                message = "No hints remaining!"
+    secret = session["secret_number"]
 
-        # --- Guess submission ---------------------------------------------
+    attempts = session["attempts_left"]
+
+    history = session.get("guess_history", [])
+
+    result = ""
+
+    if guess == secret:
+
+        result = "correct"
+
+        session["won"] = True
+
+        session["game_over"] = True
+
+        profile["games_played"] += 1
+
+        profile["games_won"] += 1
+
+        profile["current_streak"] += 1
+
+        if profile["current_streak"] > profile["best_streak"]:
+
+            profile["best_streak"] = profile["current_streak"]
+
+        add_xp(
+            profile,
+            config["xp_reward"]
+        )
+
+    else:
+
+        attempts -= 1
+
+        session["attempts_left"] = attempts
+
+        if guess < secret:
+
+            result = "low"
+
         else:
-            guess_raw = request.form.get("guess", "")
-            try:
-                guess = int(guess_raw)
-            except ValueError:
-                message = "Please enter a valid whole number."
-                return render_template(
-                    "game.html", **get_game_state(), message=message
-                )
 
-            if guess < session["min_number"] or guess > session["max_number"]:
-                message = (
-                    f"Guess must be between {session['min_number']} "
-                    f"and {session['max_number']}."
-                )
-                return render_template(
-                    "game.html", **get_game_state(), message=message
-                )
+            result = "high"
 
-            secret_number = session["secret_number"]
+        if attempts <= 0:
 
-            if guess == secret_number:
-                record_guess(guess, "correct")
-                session["attempts_left"] -= 0  # correct guess doesn't cost an attempt penalty
-                score = calculate_score(
-                    session["difficulty"],
-                    session["max_attempts"],
-                    session["attempts_left"],
-                    session["hints_used"],
-                )
-                session["streak"] = session.get("streak", 0) + 1
-                session["game_over"] = True
+            session["game_over"] = True
 
-                is_new_record, high_score = update_highscore_if_needed(score)
-                update_stats(
-                    won=True,
-                    score=score,
-                    streak=session["streak"],
-                    hints_used=session["hints_used"],
-                )
+            session["won"] = False
 
-                session["last_score"] = score
-                session["last_new_record"] = is_new_record
-                return redirect(url_for("win"))
+            profile["games_played"] += 1
 
-            # Wrong guess
-            result = "lower" if guess > secret_number else "higher"
-            record_guess(guess, result)
-            session["attempts_left"] -= 1
+            profile["games_lost"] += 1
 
-            if session["attempts_left"] <= 0:
-                session["streak"] = 0
-                session["game_over"] = True
-                update_stats(
-                    won=False,
-                    score=0,
-                    streak=0,
-                    hints_used=session["hints_used"],
-                )
-                return redirect(url_for("lose"))
+            profile["current_streak"] = 0
 
-            message = f"Try {result}!"
+    distance = abs(secret - guess)
 
-    return render_template("game.html", **get_game_state(), message=message)
+    hint = ""
+
+    if result != "correct":
+
+        if distance <= 3:
+
+            hint = "🔥 Extremely Close"
+
+        elif distance <= 10:
+
+            hint = "🟢 Very Close"
+
+        elif distance <= 20:
+
+            hint = "🟡 Close"
+
+        elif distance <= 40:
+
+            hint = "🟠 Far"
+
+        else:
+
+            hint = "🔴 Very Far"
+
+    history.append({
+
+        "guess": guess,
+
+        "result": result,
+
+        "hint": hint
+
+    })
+
+    session["guess_history"] = history
+
+    save_user_profile(profile)
+
+    return redirect(url_for("game"))
+
+# ==========================================
+# PROFILE / THEME API
+# ==========================================
+
+@app.route("/api/equip_theme", methods=["POST"])
+def equip_theme():
+
+    if "username" not in session:
+        return jsonify(success=False)
+
+    profile = get_user_profile()
+
+    data = request.get_json()
+
+    theme = data.get("theme", "obsidian")
+
+    if theme not in THEMES:
+
+        return jsonify(
+            success=False,
+            message="Invalid theme."
+        )
+
+    if not has_theme(profile, theme):
+
+        return jsonify(
+            success=False,
+            message="Theme locked."
+        )
+
+    profile["profile_theme"] = theme
+
+    save_user_profile(profile)
+
+    return jsonify(
+
+        success=True,
+
+        theme=theme
+
+    )
 
 
-@app.route("/win")
-def win():
-    """Show the win page for the most recently completed (won) game."""
+@app.route("/api/profile")
+def api_profile():
+
+    if "username" not in session:
+
+        return jsonify(success=False)
+
+    profile = get_user_profile()
+
+    profile["xp_percent"] = xp_percent(profile)
+
+    profile["next_level_xp"] = next_level_xp(
+        profile["level"]
+    )
+
+    return jsonify(
+
+        success=True,
+
+        profile=profile
+
+    )
+
+
+@app.route("/api/update_bio", methods=["POST"])
+def update_bio():
+
+    if "username" not in session:
+
+        return jsonify(success=False)
+
+    profile = get_user_profile()
+
+    data = request.get_json()
+
+    profile["biography"] = data.get(
+        "bio",
+        ""
+    )[:200]
+
+    save_user_profile(profile)
+
+    return jsonify(success=True)
+
+
+@app.route("/api/update_country", methods=["POST"])
+def update_country():
+
+    if "username" not in session:
+
+        return jsonify(success=False)
+
+    profile = get_user_profile()
+
+    data = request.get_json()
+
+    profile["country"] = data.get(
+        "country",
+        "Global Space"
+    )[:40]
+
+    save_user_profile(profile)
+
+    return jsonify(success=True)
+
+# ==========================================
+# AVATAR / BANNER
+# ==========================================
+
+@app.route("/api/set_builtin_avatar", methods=["POST"])
+def api_set_builtin_avatar():
+
+    if "username" not in session:
+        return jsonify(success=False)
+
+    avatar = request.form.get("avatar")
+
+    set_builtin_avatar(
+        session["username"],
+        avatar
+    )
+
+    return jsonify(success=True)
+
+
+@app.route("/api/upload_avatar", methods=["POST"])
+def api_upload_avatar():
+
+    if "username" not in session:
+        return jsonify(success=False)
+
+    if "avatar" not in request.files:
+        return jsonify(success=False)
+
+    file = request.files["avatar"]
+
+    save_custom_avatar(
+        session["username"],
+        file
+    )
+
+    return jsonify(success=True)
+
+
+@app.route("/api/upload_banner", methods=["POST"])
+def api_upload_banner():
+
+    if "username" not in session:
+        return jsonify(success=False)
+
+    if "banner" not in request.files:
+        return jsonify(success=False)
+
+    file = request.files["banner"]
+
+    save_custom_banner(
+        session["username"],
+        file
+    )
+
+    return jsonify(success=True)
+
+
+# ==========================================
+# LEADERBOARD
+# ==========================================
+
+@app.route("/leaderboard")
+def leaderboard():
+
+    ensure_dirs()
+
+    players = []
+
+    for file in os.listdir(DATA_DIR):
+
+        if not file.endswith(".json"):
+            continue
+
+        path = os.path.join(
+            DATA_DIR,
+            file
+        )
+
+        with open(path, "r", encoding="utf-8") as f:
+
+            profile = json.load(f)
+
+        players.append(profile)
+
+    players.sort(
+
+        key=lambda x: (
+            x.get("level", 1),
+            x.get("xp", 0)
+        ),
+
+        reverse=True
+
+    )
+
     return render_template(
-        "win.html",
-        score=session.get("last_score", 0),
-        new_record=session.get("last_new_record", False),
-        high_score=load_highscore(),
-        streak=session.get("streak", 0),
-        difficulty_label=DIFFICULTY_SETTINGS.get(
-            session.get("difficulty", DEFAULT_DIFFICULTY), {}
-        ).get("label"),
-        attempts_used=session.get("max_attempts", 0) - session.get("attempts_left", 0),
-        guesses=session.get("guesses", []),
+
+        "leaderboard.html",
+
+        players=players
+
     )
 
+# ==========================================
+# GAMES
+# ==========================================
 
-@app.route("/lose")
-def lose():
-    """Show the lose page for the most recently completed (lost) game."""
+@app.route("/games")
+def games():
+
+    if "username" not in session:
+        return redirect(url_for("index"))
+
+    profile = get_user_profile()
+
+    if profile is None:
+        return redirect(url_for("logout"))
+
     return render_template(
-        "lose.html",
-        secret_number=session.get("secret_number"),
-        high_score=load_highscore(),
-        difficulty_label=DIFFICULTY_SETTINGS.get(
-            session.get("difficulty", DEFAULT_DIFFICULTY), {}
-        ).get("label"),
-        guesses=session.get("guesses", []),
+        "games.html",
+        profile=profile,
+        avatar_src=avatar_url(profile),
+        banner_src=banner_url(profile),
     )
 
 
-@app.route("/stats")
-def stats():
-    """Show cumulative statistics across all games."""
-    data = load_stats()
-    win_rate = (
-        round((data["games_won"] / data["games_played"]) * 100, 1)
-        if data["games_played"] > 0
-        else 0
-    )
+# ==========================================
+# ACHIEVEMENTS
+# ==========================================
+
+@app.route("/achievements")
+def achievements():
+
+    if "username" not in session:
+        return redirect(url_for("index"))
+
+    profile = get_user_profile()
+
+    if profile is None:
+        return redirect(url_for("logout"))
+
     return render_template(
-        "stats.html",
-        stats=data,
-        win_rate=win_rate,
-        high_score=load_highscore(),
-        current_streak=session.get("streak", 0),
+        "achievements.html",
+        profile=profile,
+        avatar_src=avatar_url(profile),
+        banner_src=banner_url(profile),
     )
 
 
-@app.route("/highscore")
-def highscore():
-    """Show the high score page."""
-    return render_template("highscore.html", high_score=load_highscore())
+# ==========================================
+# SETTINGS
+# ==========================================
+
+@app.route("/settings")
+def settings():
+
+    if "username" not in session:
+        return redirect(url_for("index"))
+
+    profile = get_user_profile()
+
+    if profile is None:
+        return redirect(url_for("logout"))
+
+    return render_template(
+        "settings.html",
+        profile=profile,
+        avatar_src=avatar_url(profile),
+        banner_src=banner_url(profile),
+    )
+
+@app.route("/save_personalize", methods=["POST"])
+def save_personalize():
+
+    if "username" not in session:
+        return jsonify({"success": False})
+
+    profile = get_user_profile()
+
+    if profile is None:
+        return jsonify({"success": False})
+
+    data = request.get_json()
+
+    avatar = data.get("avatar")
+    banner = data.get("banner")
+    border = data.get("border")
+
+    if avatar:
+        profile["avatar"] = avatar
+
+    if banner:
+        profile["profile_banner"] = banner
+
+    if border:
+        profile["avatar_border"] = border
+
+    save_user_profile(profile)
+
+    return jsonify({
+        "success": True
+    })
+
+@app.route("/equip_border", methods=["POST"])
+def equip_border():
+
+    if "username" not in session:
+        return jsonify(success=False)
+
+    profile = get_user_profile()
+
+    if profile is None:
+        return jsonify(success=False)
+
+    data = request.get_json()
+
+    border = data.get("border")
+
+    if border == "galaxy":
+
+        profile.setdefault("profile_unlocks", [])
+
+        if "galaxy_border" not in profile["profile_unlocks"]:
+
+            return jsonify(success=False)
+
+    profile["avatar_border"] = border
+
+    save_user_profile(profile)
+
+    return jsonify(success=True)
+
+# ==========================================
+# SYSTEM INFO
+# ==========================================
+
+@app.route("/api/system")
+def api_system():
+
+    return jsonify({
+
+        "cpu": "Intel Core i2-4310M",
+
+        "gpu": "Intel 144p potato Graphics 460",
+
+        "ram": "-12 GB",
+
+        "storage": "10 GB Free"
+
+    })
 
 
-@app.route("/reset", methods=["POST"])
-def reset():
-    """Abandon the current game and return to the menu (does not affect stats/high score)."""
-    session.pop("secret_number", None)
-    session["game_over"] = True
-    return redirect(url_for("home"))
+# ==========================================
+# ERROR PAGES
+# ==========================================
 
+@app.errorhandler(404)
+def page_not_found(e):
+
+    return render_template(
+        "404.html"
+    ), 404
+
+
+@app.errorhandler(500)
+def server_error(e):
+
+    return render_template(
+        "500.html"
+    ), 500
+
+@app.route("/personalize")
+def personalize():
+
+    if "username" not in session:
+        return redirect(url_for("index"))
+
+    profile = get_user_profile()
+
+    if profile is None:
+        return redirect(url_for("logout"))
+
+    return render_template(
+
+        "personalize.html",
+
+        profile=profile,
+
+        avatar_src=avatar_url(profile),
+
+        banner_src=banner_url(profile),
+
+    )
+
+def avatar_url(profile):
+
+    avatar = profile.get("avatar", "default")
+
+    return f"/static/img/avatars/{avatar}.png"
+
+    
+
+
+def banner_url(profile):
+
+    banner = profile.get("profile_banner", "default")
+
+    return f"/static/img/banners/{banner}.png"
+
+# ==========================================
+# RUN APP
+# ==========================================
 
 if __name__ == "__main__":
-    app.run(debug=True)
+
+    app.run(
+
+        debug=True
+
+    )

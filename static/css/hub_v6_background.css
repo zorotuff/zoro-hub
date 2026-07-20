@@ -1,0 +1,836 @@
+/* ===========================================================
+                ZORO HUB V5 BACKGROUND SYSTEM
+=========================================================== */
+
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:auto;
+    overflow-x:hidden;
+}
+
+body{
+    min-height:100vh;
+}
+
+/* Main background */
+
+body{
+
+    background:#070C14;
+
+    position:relative;
+
+    color:white;
+
+}
+
+/* Fixed animated background */
+
+#background,
+.background,
+.bg-wrapper{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-100;
+
+    overflow:hidden;
+
+}
+
+/* Deep gradient */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    radial-gradient(circle at 20% 20%,rgba(50,110,255,.20),transparent 40%),
+    radial-gradient(circle at 80% 15%,rgba(40,140,255,.15),transparent 35%),
+    radial-gradient(circle at 60% 80%,rgba(20,80,255,.10),transparent 50%),
+    linear-gradient(180deg,#08101C,#060A11);
+
+    z-index:-99;
+
+}
+
+/* Floating fog */
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    inset:-30%;
+
+    background:
+
+    radial-gradient(circle,
+    rgba(70,130,255,.12),
+    transparent 65%);
+
+    filter:blur(140px);
+
+    animation:fogMove 30s linear infinite;
+
+    z-index:-98;
+
+}
+
+@keyframes fogMove{
+
+0%{
+transform:translate(-8%,-8%);
+}
+
+50%{
+transform:translate(8%,6%);
+}
+
+100%{
+transform:translate(-8%,-8%);
+}
+
+}
+
+/* Stars */
+
+.star{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    background:#6FAEFF;
+
+    animation:twinkle 4s infinite ease-in-out;
+
+}
+
+@keyframes twinkle{
+
+0%,100%{
+
+opacity:.2;
+
+transform:scale(1);
+
+}
+
+50%{
+
+opacity:1;
+
+transform:scale(1.4);
+
+}
+
+}
+
+/* Moving particles */
+
+.particle{
+
+    position:absolute;
+
+    width:4px;
+
+    height:4px;
+
+    border-radius:50%;
+
+    background:#4E9EFF;
+
+    opacity:.45;
+
+    animation:floatParticle linear infinite;
+
+}
+
+@keyframes floatParticle{
+
+0%{
+
+transform:translateY(0);
+
+opacity:0;
+
+}
+
+10%{
+
+opacity:.5;
+
+}
+
+100%{
+
+transform:translateY(-120vh);
+
+opacity:0;
+
+}
+
+}
+
+/* Aurora */
+
+.aurora{
+
+    position:absolute;
+
+    width:900px;
+
+    height:900px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(circle,
+    rgba(60,120,255,.14),
+    transparent 70%);
+
+    filter:blur(120px);
+
+    animation:auroraMove 20s ease-in-out infinite alternate;
+
+}
+
+@keyframes auroraMove{
+
+0%{
+
+transform:
+translate(-120px,-80px);
+
+}
+
+100%{
+
+transform:
+translate(200px,120px);
+
+}
+
+}
+
+/* Content always above */
+
+.hub-container{
+
+position:relative;
+
+z-index:5;
+
+min-height:100vh;
+
+padding-top:24px;
+
+padding-bottom:40px;
+
+}
+
+#background{
+
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    z-index:-5;
+
+}
+
+#bgCanvas{
+
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+
+}
+
+.overlay{
+
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+
+}
+
+/* ==========================================================
+                TITANIUM BACKGROUND
+========================================================== */
+
+body[data-theme="titanium"]{
+
+background:
+
+radial-gradient(circle at 20% 15%, rgba(255,255,255,.95), transparent 35%),
+
+radial-gradient(circle at 80% 30%, rgba(235,240,245,.9), transparent 40%),
+
+linear-gradient(
+180deg,
+#F8FAFC,
+#EEF2F7,
+#E4EAF1
+);
+
+}
+
+body[data-theme="titanium"]::before{
+
+content:"";
+
+position:fixed;
+inset:0;
+
+pointer-events:none;
+
+opacity:.05;
+
+background-image:
+
+radial-gradient(#666 1px, transparent 1px);
+
+background-size:22px 22px;
+
+}
+
+/* Remove Obsidian blue effects */
+
+
+/* Floating White Fog */
+
+body[data-theme="titanium"] .titanium-fog{
+
+position:fixed;
+
+width:900px;
+height:900px;
+
+border-radius:50%;
+
+background:
+
+radial-gradient(
+circle,
+rgba(255,255,255,.65),
+transparent 70%
+);
+
+filter:blur(140px);
+
+pointer-events:none;
+
+z-index:-5;
+
+animation:titaniumFloat 22s ease-in-out infinite;
+
+}
+
+.titanium-fog:nth-child(2){
+
+left:70%;
+top:10%;
+
+animation-delay:-8s;
+
+}
+
+.titanium-fog:nth-child(3){
+
+left:10%;
+top:70%;
+
+animation-delay:-15s;
+
+}
+
+@keyframes titaniumFloat{
+
+0%{
+
+transform:
+translate(-80px,-40px);
+
+}
+
+50%{
+
+transform:
+translate(80px,60px);
+
+}
+
+100%{
+
+transform:
+translate(-80px,-40px);
+
+}
+
+}
+
+/* Light Reflection */
+
+body[data-theme="titanium"] .hero-card::after{
+
+content:"";
+
+position:absolute;
+
+top:-150px;
+left:-250px;
+
+width:500px;
+height:500px;
+
+background:
+
+radial-gradient(
+
+circle,
+
+rgba(255,255,255,.45),
+
+transparent 70%
+
+);
+
+filter:blur(80px);
+
+animation:titaniumReflection 14s linear infinite;
+
+pointer-events:none;
+
+}
+
+@keyframes titaniumReflection{
+
+0%{
+
+transform:translateX(-250px);
+
+}
+
+100%{
+
+transform:translateX(650px);
+
+}
+
+}
+
+/* ==================================================
+        Titanium Floating Dust
+================================================== */
+
+body[data-theme="titanium"] .dust{
+
+position:fixed;
+
+width:5px;
+height:5px;
+
+border-radius:50%;
+
+background:
+
+rgba(240,244,248,.58);
+
+filter:blur(1px);
+
+pointer-events:none;
+
+animation:dustFloat linear infinite;
+
+z-index:-4;
+
+}
+
+@keyframes dustFloat{
+
+0%{
+
+transform:
+translateY(120vh);
+
+opacity:0;
+
+}
+
+15%{
+
+opacity:.8;
+
+}
+
+100%{
+
+transform:
+translateY(-20vh);
+
+opacity:0;
+
+}
+
+}
+
+.dust:nth-child(1){
+
+left:5%;
+
+animation-duration:18s;
+
+}
+
+.dust:nth-child(2){
+
+left:18%;
+
+animation-duration:25s;
+
+}
+
+.dust:nth-child(3){
+
+left:34%;
+
+animation-duration:21s;
+
+}
+
+.dust:nth-child(4){
+
+left:52%;
+
+animation-duration:17s;
+
+}
+
+.dust:nth-child(5){
+
+left:66%;
+
+animation-duration:26s;
+
+}
+
+.dust:nth-child(6){
+
+left:77%;
+
+animation-duration:22s;
+
+}
+
+.dust:nth-child(7){
+
+left:88%;
+
+animation-duration:19s;
+
+}
+
+.dust:nth-child(8){
+
+left:95%;
+
+animation-duration:24s;
+
+}
+
+body[data-theme="titanium"] .glass-card{
+
+overflow:hidden;
+
+position:relative;
+
+}
+
+body[data-theme="titanium"] .glass-card::after{
+
+content:"";
+
+position:absolute;
+
+top:-150%;
+
+left:-80%;
+
+width:70px;
+
+height:300%;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.45),
+
+transparent
+
+);
+
+transform:rotate(25deg);
+
+animation:glassReflection 8s linear infinite;
+
+pointer-events:none;
+
+}
+
+@keyframes glassReflection{
+
+0%{
+
+left:-90%;
+
+}
+
+100%{
+
+left:150%;
+
+}
+
+}
+
+body[data-theme="titanium"] .hero-card{
+
+box-shadow:
+
+0 35px 80px rgba(0,0,0,.08),
+
+0 0 40px rgba(255,255,255,.35);
+
+}
+
+body[data-theme="titanium"] .launcher-card{
+
+background:
+
+ rgba(240,244,248,.58);
+
+backdrop-filter:
+
+blur(30px);
+
+border:
+
+1px solid rgba(255,255,255,.7);
+
+}
+
+/* ==========================================================
+        TITANIUM 3D CARD HOVER
+========================================================== */
+
+body[data-theme="titanium"] .glass-card,
+body[data-theme="titanium"] .launcher-card,
+body[data-theme="titanium"] .hero-card{
+
+transform-style:preserve-3d;
+
+transition:
+
+transform .28s ease,
+
+box-shadow .28s ease,
+
+background .28s ease;
+
+will-change:transform;
+
+}
+
+/* Dynamic Mouse Lighting */
+
+body[data-theme="titanium"] .glass-card::before,
+body[data-theme="titanium"] .launcher-card::before,
+body[data-theme="titanium"] .hero-card::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+pointer-events:none;
+
+background:
+
+radial-gradient(
+
+circle at var(--mx,50%) var(--my,50%),
+
+rgba(255,255,255,.35),
+
+transparent 5%
+
+);
+
+opacity:0;
+
+transition:.25s;
+
+}
+
+body[data-theme="titanium"] .glass-card:hover::before,
+body[data-theme="titanium"] .launcher-card:hover::before,
+body[data-theme="titanium"] .hero-card:hover::before{
+
+opacity:1;
+
+}
+
+/*=========================================================
+        TITANIUM PREMIUM BACKGROUND
+=========================================================*/
+
+body[data-theme="titanium"]::before{
+
+content:"";
+
+position:fixed;
+
+inset:-20%;
+
+pointer-events:none;
+
+background:
+
+radial-gradient(circle at 15% 25%,
+rgba(255,255,255,.55),
+transparent 40%),
+
+radial-gradient(circle at 85% 20%,
+rgba(210,220,230,.45),
+transparent 35%),
+
+radial-gradient(circle at 50% 90%,
+rgba(255,255,255,.35),
+transparent 50%);
+
+filter:blur(110px);
+
+animation:titaniumFog 18s ease-in-out infinite;
+
+z-index:-10;
+
+}
+
+body[data-theme="titanium"]::after{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+background:
+
+linear-gradient(
+
+115deg,
+
+transparent 0%,
+
+rgba(255,255,255,.08) 18%,
+
+transparent 36%,
+
+rgba(255,255,255,.05) 52%,
+
+transparent 100%
+
+);
+
+animation:titaniumLight 14s linear infinite;
+
+z-index:-9;
+
+}
+
+@keyframes titaniumFog{
+
+0%{
+
+transform:
+translate(-6%,-6%) scale(1);
+
+}
+
+50%{
+
+transform:
+translate(8%,5%) scale(1.15);
+
+}
+
+100%{
+
+transform:
+translate(-6%,-6%) scale(1);
+
+}
+
+}
+
+@keyframes titaniumLight{
+
+0%{
+
+transform:
+translateX(-60%);
+
+}
+
+100%{
+
+transform:
+translateX(60%);
+
+}
+
+}
+
+/* Titanium Mouse Glow */
+
+#mouseGlow{
+
+position:fixed;
+width:350px;
+height:350px;
+
+border-radius:50%;
+
+pointer-events:none;
+
+z-index:9999;
+
+opacity:0;
+
+transition:
+opacity .25s ease;
+
+mix-blend-mode:multiply;
+
+}

@@ -1,0 +1,163 @@
+/* ============================================================
+   ZORO HUB — TIC TAC TOE ANIMATIONS
+   ============================================================ */
+
+/* ---------------- Screen entrance ---------------- */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ttt-screen-title.fade-in-up {
+  animation-delay: 0ms;
+}
+
+.ttt-screen-subtitle.fade-in-up {
+  animation-delay: 80ms;
+}
+
+.ttt-mode-grid.fade-in-up {
+  animation-delay: 160ms;
+}
+
+.ttt-screen.is-active .ttt-mode-card,
+.ttt-screen.is-active .ttt-difficulty-card,
+.ttt-screen.is-active .ttt-starter-card {
+  animation: fadeInUp 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ttt-screen.is-active .ttt-mode-card:nth-child(1) { animation-delay: 60ms; }
+.ttt-screen.is-active .ttt-mode-card:nth-child(2) { animation-delay: 140ms; }
+
+.ttt-screen.is-active .ttt-difficulty-card:nth-child(1) { animation-delay: 40ms; }
+.ttt-screen.is-active .ttt-difficulty-card:nth-child(2) { animation-delay: 100ms; }
+.ttt-screen.is-active .ttt-difficulty-card:nth-child(3) { animation-delay: 160ms; }
+
+.ttt-screen.is-active .ttt-starter-card:nth-child(1) { animation-delay: 40ms; }
+.ttt-screen.is-active .ttt-starter-card:nth-child(2) { animation-delay: 100ms; }
+
+/* ---------------- Board entrance ---------------- */
+
+@keyframes boardCellIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ttt-screen.is-active#screen-game .ttt-cell {
+  animation: boardCellIn 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ttt-cell:nth-child(1) { animation-delay: 20ms; }
+.ttt-cell:nth-child(2) { animation-delay: 50ms; }
+.ttt-cell:nth-child(3) { animation-delay: 80ms; }
+.ttt-cell:nth-child(4) { animation-delay: 110ms; }
+.ttt-cell:nth-child(5) { animation-delay: 140ms; }
+.ttt-cell:nth-child(6) { animation-delay: 170ms; }
+.ttt-cell:nth-child(7) { animation-delay: 200ms; }
+.ttt-cell:nth-child(8) { animation-delay: 230ms; }
+.ttt-cell:nth-child(9) { animation-delay: 260ms; }
+
+/* ---------------- X / O drawing ---------------- */
+
+.ttt-mark.mark-x path {
+  stroke-dasharray: 85;
+  stroke-dashoffset: 85;
+  animation: drawStroke 320ms ease forwards;
+}
+
+.ttt-mark.mark-o circle {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation: drawStroke 380ms ease forwards;
+}
+
+@keyframes drawStroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---------------- Winning line ---------------- */
+
+.ttt-winline-svg.is-drawn #winLine {
+  animation: drawWinLine 450ms ease forwards;
+}
+
+@keyframes drawWinLine {
+  from {
+    opacity: 1;
+    stroke-dashoffset: var(--winline-length, 300);
+  }
+  to {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---------------- Win cell pulse ---------------- */
+
+@keyframes winCellPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(34, 197, 94, 0.0);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(34, 197, 94, 0.55);
+  }
+}
+
+/* ---------------- Turn dot pulse ---------------- */
+
+@keyframes turnDotPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.6;
+  }
+}
+
+.ttt-turn-indicator.is-ai-turn .ttt-turn-dot {
+  animation: turnDotPulse 900ms ease-in-out infinite;
+}
+
+/* ---------------- Ripple ---------------- */
+
+.ripple-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.ttt-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0);
+  animation: rippleExpand 600ms ease-out;
+  pointer-events: none;
+}
+
+@keyframes rippleExpand {
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}

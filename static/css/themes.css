@@ -1,0 +1,27 @@
+/* ===========================================
+            ZORO HUB THEMES
+=========================================== */
+
+@import url("obsidian.css");
+@import url("titanium.css");
+@import url("aurora.css");
+@import url("nova.css");
+@import url("eclipse.css");
+
+/* fallback */
+
+:root{
+
+--transition-speed:.35s;
+
+}
+
+*{
+
+transition:
+background .35s,
+color .35s,
+border-color .35s,
+box-shadow .35s;
+
+}

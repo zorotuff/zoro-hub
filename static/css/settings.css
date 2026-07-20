@@ -1,0 +1,29 @@
+/* ZORO HUB V5 */
+
+.switch-btn{
+
+padding:12px 20px;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-weight:700;
+
+background:#3B82F6;
+
+color:white;
+
+transition:.25s;
+
+}
+
+.switch-btn:hover{
+
+transform:translateY(-2px);
+
+background:#2563EB;
+
+}

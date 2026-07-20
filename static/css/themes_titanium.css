@@ -1,0 +1,408 @@
+/* ==========================================================
+                    TITANIUM THEME V2
+========================================================== */
+
+body[data-theme="titanium"]{
+
+    --bg:#DCE2EA;
+    --bg2:#EEF2F7;
+
+    --card:rgba(255,255,255,.55);
+    --card-hover:rgba(255,255,255,.75);
+
+    --text:#222831;
+    --text2:#5B6470;
+
+    --accent:#8D99AE;
+    --accent2:#C7D0DB;
+
+    color:var(--text);
+}
+
+/* MAIN BACKGROUND */
+
+body[data-theme="titanium"]{
+
+    background:
+    radial-gradient(circle at top left,#f6f8fb 0%,transparent 40%),
+    radial-gradient(circle at bottom right,#d8e1ea 0%,transparent 45%),
+    linear-gradient(160deg,#d7dde5,#cfd8e3,#bcc8d6);
+
+}
+
+/* remove obsidian glow */
+
+body[data-theme="titanium"]::before,
+body[data-theme="titanium"]::after{
+
+display:none;
+
+}
+
+/* =======================
+        GLASS CARDS
+======================= */
+
+body[data-theme="titanium"] .glass-card,
+body[data-theme="titanium"] .hero-card,
+body[data-theme="titanium"] .launcher-card{
+
+background:
+linear-gradient(
+145deg,
+#eef2f6,
+#dfe6ee
+);
+
+border:1px solid rgba(255,255,255,.45);
+
+box-shadow:
+0 18px 45px rgba(0,0,0,.08);
+
+}
+
+/* Hover */
+
+body[data-theme="titanium"] .glass-card:hover,
+body[data-theme="titanium"] .hero-card:hover,
+body[data-theme="titanium"] .launcher-card:hover{
+
+transform:
+translateY(-8px);
+
+box-shadow:
+0 30px 70px rgba(0,0,0,.12);
+
+}
+
+/* =======================
+      NAVBAR
+======================= */
+
+body[data-theme="titanium"] .topbar{
+
+background:
+
+rgba(255,255,255,.28);
+
+backdrop-filter:blur(25px);
+
+border:
+
+1px solid rgba(255,255,255,.45);
+
+}
+
+/* Buttons */
+
+body[data-theme="titanium"] .nav-btn{
+
+background:
+rgba(255,255,255,.45);
+
+color:#303845;
+
+border:1px solid rgba(255,255,255,.5);
+
+}
+
+body[data-theme="titanium"] .nav-btn.active{
+
+background:
+linear-gradient(
+135deg,
+#ffffff,
+#e4eaf2
+);
+
+color:#20242C;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.08);
+
+}
+
+/* =======================
+      TEXT
+======================= */
+
+body[data-theme="titanium"] h1,
+body[data-theme="titanium"] h2,
+body[data-theme="titanium"] h3{
+
+color:#20242C;
+
+}
+
+body[data-theme="titanium"] p,
+body[data-theme="titanium"] span{
+
+color:#5B6470;
+
+}
+
+/* =======================
+      BUTTONS
+======================= */
+
+body[data-theme="titanium"] .theme-btn,
+body[data-theme="titanium"] .launcher-play{
+
+background:
+linear-gradient(
+135deg,
+#ffffff,
+#dfe6ef
+);
+
+color:#1f2937;
+
+border:none;
+
+font-weight:700;
+
+}
+
+body[data-theme="titanium"] .theme-btn:hover,
+body[data-theme="titanium"] .launcher-play:hover{
+
+transform:
+translateY(-4px);
+
+box-shadow:
+0 14px 35px rgba(0,0,0,.10);
+
+}
+
+/* Scrollbar */
+
+body[data-theme="titanium"]::-webkit-scrollbar-thumb{
+
+background:#B7C3CF;
+
+}
+
+/* ==========================================================
+        TITANIUM PART 3
+        Premium Animations + Hover Effects
+========================================================== */
+
+/* Smooth transitions */
+
+body[data-theme="titanium"] *{
+    transition:
+        background .35s ease,
+        color .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease,
+        transform .25s ease;
+}
+
+/* Cards */
+
+body[data-theme="titanium"] .glass-card,
+body[data-theme="titanium"] .hero-card,
+body[data-theme="titanium"] .launcher-card,
+body[data-theme="titanium"] .theme-card{
+
+    position:relative;
+    overflow:hidden;
+
+    transform-style:preserve-3d;
+
+    transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        background .28s ease;
+
+}
+
+/* Lift */
+
+body[data-theme="titanium"] .glass-card:hover,
+body[data-theme="titanium"] .hero-card:hover,
+body[data-theme="titanium"] .launcher-card:hover,
+body[data-theme="titanium"] .theme-card:hover{
+
+    transform:
+        translateY(-8px)
+        scale(1.01);
+
+    box-shadow:
+        0 35px 70px rgba(0,0,0,.10);
+
+}
+
+/* Metallic reflection */
+
+body[data-theme="titanium"] .glass-card::after,
+body[data-theme="titanium"] .hero-card::after,
+body[data-theme="titanium"] .launcher-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-180%;
+    left:-70%;
+
+    width:70px;
+    height:350%;
+
+    transform:rotate(25deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.45),
+            transparent
+        );
+
+    animation:titaniumReflection 9s linear infinite;
+
+    pointer-events:none;
+
+}
+
+@keyframes titaniumReflection{
+
+0%{
+left:-90%;
+}
+
+100%{
+left:170%;
+}
+
+}
+
+/* Navigation */
+
+body[data-theme="titanium"] .nav-btn:hover{
+
+    transform:translateY(-3px);
+
+    background:
+        rgba(255,255,255,.90);
+
+}
+
+/* Buttons */
+
+body[data-theme="titanium"] button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* Avatar */
+
+body[data-theme="titanium"] .mini-avatar{
+
+    transition:.35s;
+
+}
+
+body[data-theme="titanium"] .mini-avatar:hover{
+
+    transform:rotate(6deg) scale(1.08);
+
+}
+
+/* Stats cards */
+
+body[data-theme="titanium"] .stat-card{
+
+    background:
+
+linear-gradient(
+145deg,
+#f4f6f8,
+#d9e0e8
+);
+
+body[data-theme="titanium"] .stat-card:hover{
+
+    transform:
+        translateY(-8px)
+        scale(1.03);
+
+}
+
+/* Theme cards */
+
+body[data-theme="titanium"] .theme-card:hover{
+
+    border-color:
+        rgba(180,190,205,.7);
+
+}
+
+/* Launcher play button */
+
+body[data-theme="titanium"] .launcher-play{
+
+    background:
+        linear-gradient(
+            135deg,
+            #F8FAFC,
+            #DCE4EE
+        );
+
+    color:#111827;
+
+}
+
+body[data-theme="titanium"] .launcher-play:hover{
+
+    background:
+        linear-gradient(
+            135deg,
+            #FFFFFF,
+            #E9EEF5
+        );
+
+}
+
+/* Scrollbar */
+
+body[data-theme="titanium"]::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+body[data-theme="titanium"]::-webkit-scrollbar-thumb{
+
+    background:
+        linear-gradient(
+            #BFC8D5,
+            #D7DEE7
+        );
+
+    border-radius:30px;
+
+}
+
+.profile-mini{
+
+box-shadow:
+0 0 20px rgba(255,255,255,.55);
+
+}}
+
+body[data-theme="titanium"] #mouseGlow{
+
+opacity:1;
+
+background:
+radial-gradient(
+circle,
+rgba(40,45,55,.18),
+transparent 70%
+);
+
+filter:blur(90px);
+
+}
