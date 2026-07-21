@@ -1610,3 +1610,297 @@ box-shadow:
 0 35px 80px rgba(0,0,0,.65);
 
 }
+
+/* ==========================================
+            RESPONSIVE FOUNDATION
+========================================== */
+
+@media (max-width:1024px){
+
+.hero{
+
+flex-direction:column;
+
+text-align:center;
+
+gap:40px;
+
+}
+
+.hero-buttons{
+
+justify-content:center;
+
+}
+
+}
+
+@media (max-width:768px){
+
+body{
+
+overflow-x:hidden;
+
+}
+
+}
+
+/* ==========================================================
+                    TABLET
+========================================================== */
+
+@media (max-width:1024px){
+
+.topbar{
+
+padding:18px 30px;
+
+}
+
+.hero{
+
+flex-direction:column;
+
+text-align:center;
+
+gap:45px;
+
+padding:70px 40px;
+
+}
+
+.hero-buttons{
+
+justify-content:center;
+
+}
+
+.hero-preview{
+
+width:100%;
+
+display:flex;
+
+justify-content:center;
+
+}
+
+.games-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+gap:24px;
+
+}
+
+.featured-container{
+
+width:95%;
+
+}
+
+}
+
+/* ==========================================================
+                    MOBILE
+========================================================== */
+
+@media (max-width:768px){
+
+body{
+
+overflow-x:hidden;
+
+}
+
+/* NAVBAR */
+
+.topbar{
+
+flex-direction:column;
+
+gap:18px;
+
+padding:18px;
+
+}
+
+.topbar nav{
+
+display:flex;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+gap:14px;
+
+}
+
+.logo{
+
+font-size:26px;
+
+}
+
+/* HERO */
+
+.hero{
+
+padding:40px 20px;
+
+gap:35px;
+
+}
+
+.hero h1{
+
+font-size:42px;
+
+line-height:1.15;
+
+}
+
+.hero p{
+
+font-size:16px;
+
+line-height:1.7;
+
+}
+
+.hero-buttons{
+
+flex-direction:column;
+
+width:100%;
+
+align-items:center;
+
+gap:16px;
+
+}
+
+.hero-buttons a{
+
+width:100%;
+
+max-width:320px;
+
+text-align:center;
+
+}
+
+/* FEATURED */
+
+.featured-container{
+
+width:100%;
+
+padding:0 15px;
+
+}
+
+.featured-slide{
+
+flex-direction:column;
+
+gap:25px;
+
+padding:22px;
+
+}
+
+.featured-image{
+
+width:100%;
+
+height:220px;
+
+}
+
+/* GAMES */
+
+.games-grid{
+
+grid-template-columns:1fr;
+
+gap:20px;
+
+padding:0 18px;
+
+}
+
+.game-card{
+
+min-height:240px;
+
+}
+
+/* PROFILE */
+
+.profile-mini{
+
+display:none;
+
+}
+
+/* FOOTER */
+
+.footer{
+
+padding:25px;
+
+text-align:center;
+
+}
+
+}
+
+/* ==========================================================
+                SMALL PHONES
+========================================================== */
+
+@media (max-width:480px){
+
+.hero h1{
+
+font-size:34px;
+
+}
+
+.hero p{
+
+font-size:15px;
+
+}
+
+.logo{
+
+font-size:22px;
+
+}
+
+.btn-primary,
+
+.btn-secondary{
+
+font-size:16px;
+
+padding:15px 20px;
+
+}
+
+.featured-image{
+
+height:180px;
+
+}
+
+.game-card{
+
+min-height:210px;
+
+}
+
+}

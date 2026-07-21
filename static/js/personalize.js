@@ -1,211 +1,222 @@
-// =====================================
-// Selected Values
-// =====================================
+// ==========================================================
+// ZORO HUB PERSONALIZE
+// ==========================================================
 
-console.log("PERSONALIZE JS LOADED");
+// ---------- Preview ----------
 
-let selectedAvatar = null;
-let selectedBanner = null;
-let selectedBorder = null;
+const previewAvatar = document.getElementById("previewAvatar");
 
-// =====================================
-// Wait until page loads
-// =====================================
+const saveBtn = document.getElementById("saveBtn");
 
-document.addEventListener("DOMContentLoaded", () => {
+// ---------- Inventory ----------
 
-    const previewAvatar = document.getElementById("previewAvatar");
-    const previewBanner = document.getElementById("previewBanner");
-    const saveBtn = document.getElementById("saveBtn");
+const avatarInventory =
+document.getElementById("avatarInventory");
 
-    // ==========================
-    // Avatar
-    // ==========================
+const borderInventory =
+document.getElementById("borderInventory");
 
-    document.querySelectorAll(".avatar-card").forEach(card => {
+const bannerInventory =
+document.getElementById("bannerInventory");
 
-        card.addEventListener("click", () => {
+const themeInventory =
+document.getElementById("themeInventory");
 
-            document.querySelectorAll(".avatar-card")
-                .forEach(c => c.classList.remove("active"));
+// ==========================================================
+// CURRENT EQUIPPED
+// ==========================================================
 
-            card.classList.add("active");
+const current = {
 
-            selectedAvatar = card.dataset.avatar;
+avatar:null,
 
-            if (previewAvatar) {
+border:null,
 
-                previewAvatar.src =
-                    `/static/img/avatars/${selectedAvatar}.png?${Date.now()}`;
+banner:null,
 
-            }
+theme:null
 
-        });
+};
 
-    });
+// ==========================================================
+// BUILT-IN COSMETICS
+// ==========================================================
 
-    // ==========================
-    // Banner
-    // ==========================
+const avatars = [
 
-    document.querySelectorAll(".banner-card").forEach(card => {
+"avatar1.png",
+"avatar2.png",
+"avatar3.png",
+"avatar4.png",
+"avatar5.png",
+"avatar6.png"
 
-        card.addEventListener("click", () => {
+];
 
-            document.querySelectorAll(".banner-card")
-                .forEach(c => c.classList.remove("active"));
+const borders = [
 
-            card.classList.add("active");
+"default",
+"cyan",
+"gold",
+"mythic"
 
-            selectedBanner = card.dataset.banner;
+];
 
-            if (previewBanner) {
+const banners = [
 
-                previewBanner.src =
-                    `/static/img/banners/${selectedBanner}.png?${Date.now()}`;
+"banner1.jpg",
+"banner2.jpg",
+"banner3.jpg"
 
-            }
+];
 
-        });
+const themes = [
 
-    });
+"dark",
+"cyber",
+"midnight"
 
-    // ==========================
-    // Border
-    // ==========================
+];
 
-    document.querySelectorAll(".border-card").forEach(card => {
+// ==========================================================
+// CREATE INVENTORY CARD
+// ==========================================================
 
+function createAvatarCard(file){
+
+    const card = document.createElement("div");
+
+    card.className = "inventory-item";
+
+    card.dataset.avatar = file;
+
+    card.innerHTML = `
+        <img
+        src="/static/img/avatars/${file}"
+        alt="${file}">
+    `;
+
+    // Click event
     card.addEventListener("click", () => {
+        selectAvatar(card);
+    });
 
-        document.querySelectorAll(".border-card")
-            .forEach(c => c.classList.remove("active"));
+    avatarInventory.appendChild(card);
 
-        card.classList.add("active");
+}
 
-        selectedBorder = card.dataset.border;
+// ==========================================================
+// LOAD AVATARS
+// ==========================================================
 
-        const frame = document.getElementById("previewFrame");
+avatars.forEach(file=>{
 
-        if(frame){
+    createAvatarCard(file);
 
-            frame.className =
-                `avatar-frame border-${selectedBorder}`;
+});
+
+// ==========================================================
+// CLICK TO EQUIP AVATAR
+// ==========================================================
+
+function selectAvatar(card){
+
+    // Remove previous selection
+
+    document
+    .querySelectorAll("#avatarInventory .inventory-item")
+    .forEach(item=>{
+
+        item.classList.remove("active");
+
+    });
+
+    // Highlight selected
+
+    card.classList.add("active");
+
+    // Save selected filename
+
+    current.avatar = card.dataset.avatar;
+
+    // Update preview
+
+    previewAvatar.src = `/static/img/avatars/${current.avatar}`;
+
+}
+
+// ==========================================================
+// AUTO SELECT FIRST AVATAR
+// ==========================================================
+
+if(avatarInventory.firstElementChild){
+
+    selectAvatar(avatarInventory.firstElementChild);
+
+}
+
+// ==========================================================
+// SAVE TO FLASK
+// ==========================================================
+
+saveBtn.addEventListener("click", async ()=>{
+
+    if(!current.avatar){
+
+        alert("Select an avatar first!");
+
+        return;
+
+    }
+
+    saveBtn.disabled = true;
+
+    saveBtn.innerHTML = "Saving...";
+
+    try{
+
+        const response = await fetch("/api/save_avatar",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+
+                avatar:current.avatar
+
+            })
+
+        });
+
+        const result = await response.json();
+
+        if(result.success){
+
+            saveBtn.innerHTML = "✔ Saved";
+
+        }else{
+
+            saveBtn.innerHTML = "❌ Failed";
 
         }
 
-    });
+    }catch(err){
 
-});
+        console.error(err);
 
-    // ==========================
-    // Save
-    // ==========================
-
-    if (saveBtn) {
-
-        saveBtn.addEventListener("click", async () => {
-
-            saveBtn.disabled = true;
-            saveBtn.textContent = "Saving...";
-
-            try {
-
-                const response = await fetch("/save_personalize", {
-
-                    method: "POST",
-
-                    headers: {
-
-                        "Content-Type": "application/json"
-
-                    },
-
-                    body: JSON.stringify({
-
-                        avatar: selectedAvatar,
-                        banner: selectedBanner,
-                        border: selectedBorder
-
-                    })
-
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-
-                    showToast("Profile saved!");
-
-                    saveBtn.textContent = "Saved ✓";
-
-                } else {
-
-                    showToast("Save failed!", true);
-
-                    saveBtn.textContent = "Failed";
-
-                }
-
-            } catch (err) {
-
-                console.error(err);
-
-                showToast("Server Error!", true);
-
-                saveBtn.textContent = "Error";
-
-            }
-
-            setTimeout(() => {
-
-                saveBtn.disabled = false;
-                saveBtn.textContent = "💾 Save Changes";
-
-            }, 1500);
-
-        });
+        saveBtn.innerHTML = "❌ Error";
 
     }
 
+    setTimeout(()=>{
+
+        saveBtn.innerHTML = "💾 Save Changes";
+
+        saveBtn.disabled = false;
+
+    },1500);
+
 });
-
-// =====================================
-// Toast
-// =====================================
-
-function showToast(message, error = false) {
-
-    const toast = document.createElement("div");
-
-    toast.className = "hub-toast";
-
-    if (error) {
-
-        toast.classList.add("error");
-
-    }
-
-    toast.textContent = message;
-
-    document.body.appendChild(toast);
-
-    requestAnimationFrame(() => {
-
-        toast.classList.add("show");
-
-    });
-
-    setTimeout(() => {
-
-        toast.classList.remove("show");
-
-        setTimeout(() => {
-
-            toast.remove();
-
-        }, 300);
-
-    }, 2500);
-
-}

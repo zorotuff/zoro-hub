@@ -5,462 +5,226 @@
 
 <meta charset="UTF-8">
 
-<title>Personalize</title>
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet"
-href="{{ url_for('static', filename='css/hub_v6.css') }}">
+<title>
+
+Personalize • Zoro Hub
+
+</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="{{ url_for('static', filename='css/personalize.css') }}">
 
 </head>
 
-<script>
-
-// ==============================
-// Avatar Preview
-// ==============================
-
-document.querySelectorAll(".avatar-card").forEach(card=>{
-
-card.addEventListener("click",()=>{
-
-document.querySelectorAll(".avatar-card").forEach(c=>c.classList.remove("active"));
-
-card.classList.add("active");
-
-const avatar=card.dataset.avatar;
-
-document.getElementById("previewAvatar").src=
-`/static/img/avatars/${avatar}.png`;
-
-});
-
-});
-
-// ==============================
-// Banner Preview
-// ==============================
-
-document.querySelectorAll(".banner-card").forEach(card=>{
-
-card.addEventListener("click",()=>{
-
-document.querySelectorAll(".banner-card").forEach(c=>c.classList.remove("active"));
-
-card.classList.add("active");
-
-const banner=card.dataset.banner;
-
-document.getElementById("previewBanner").src=
-`/static/img/banners/${banner}.png`;
-
-});
-
-});
-
-// ==============================
-// Theme Selection
-// ==============================
-
-document.querySelectorAll(".theme-card").forEach(card=>{
-
-card.addEventListener("click",()=>{
-
-document.querySelectorAll(".theme-card").forEach(c=>c.classList.remove("active"));
-
-card.classList.add("active");
-
-});
-
-});
-
-// ==============================
-// Avatar Border
-// ==============================
-
-document.querySelectorAll(".border-card").forEach(card=>{
-
-card.addEventListener("click",()=>{
-
-document.querySelectorAll(".border-card").forEach(c=>c.classList.remove("active"));
-
-card.classList.add("active");
-
-});
-
-});
-
-</script>
-
 <body>
 
-<div class="hub">
+<div class="background">
 
-    <!-- ==========================
-            PAGE TITLE
-    =========================== -->
+<div class="gradient gradient-1"></div>
 
-    <div class="page-header">
+<div class="gradient gradient-2"></div>
 
-        <h1>🎨 Personalize</h1>
-
-        <p>
-            Customize your launcher exactly how you like.
-        </p>
-
-    </div>
-
-    <!-- ==========================
-            PROFILE PREVIEW
-    =========================== -->
-
-    <section class="preview-card">
-
-        <div class="preview-banner">
-
-            <img
-                src="{{ banner_src }}"
-                id="previewBanner">
-
-        </div>
-
-        <div class="preview-content">
-
-            <div
-    id="previewFrame"
-    class="avatar-frame border-{{ profile.avatar_border|default('none') }}">
-
-    <img
-        id="previewAvatar"
-        src="{{ avatar_src }}"
-        class="profile-avatar">
+<div class="noise"></div>
 
 </div>
 
-            <h2 id="previewUsername">
-
-                {{ profile.username }}
-
-            </h2>
-
-            <span class="preview-rank">
-
-                🟢 Rookie
-
-            </span>
-
-            <p>
-
-                {{ profile.biography }}
-
-            </p>
-
-            <div class="preview-stats">
-
-                <div>
-
-                    <span>Level</span>
-
-                    <strong>
-
-                        {{ profile.level }}
-
-                    </strong>
-
-                </div>
-
-                <div>
-
-                    <span>Achievements</span>
-
-                    <strong>
-
-                        {{ profile.achievements|length }}
-
-                    </strong>
-
-                </div>
-
-                <div>
-
-                    <span>Games</span>
-
-                    <strong>
-
-                        {{ profile.games_played }}
-
-                    </strong>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
+<div class="page">
 
 <!-- ==========================
-        AVATAR SECTION
+        NAVBAR
 ========================== -->
 
-<section class="personalize-section">
+<header class="navbar">
 
-    <div class="section-title">
+<a
+href="{{ url_for('hub') }}"
+class="back-btn">
 
-        <h2>Profile Avatar</h2>
+← Hub
 
-        <p>
-            Choose a premium avatar for your profile.
-        </p>
+</a>
 
-    </div>
+<h1>
 
-    <div class="avatar-grid">
+🎨 Personalize
 
-        {% set avatars = [
+</h1>
 
-        "Obsidian",
-        "Noir",
-        "Cipher",
-        "Monarch",
-        "Zenith",
-        "Vertex",
-        "Genesis",
-        "Nova"
-
-        ] %}
-
-        {% for avatar in avatars %}
-
-        <div
-            class="avatar-card"
-            data-avatar="{{ avatar|lower }}">
-
-            <div class="avatar-image">
-
-                <img
-                src="{{ url_for('static', filename='img/avatars/' ~ avatar|lower ~ '.png') }}"
-                alt="{{ avatar }}">
-
-            </div>
-
-            <span>
-
-                {{ avatar }}
-
-            </span>
-
-        </div>
-
-        {% endfor %}
-
-    </div>
-
-</section>
+</header>
 
 <!-- ==========================
-        BANNER SECTION
+        PROFILE PREVIEW
 ========================== -->
 
-<section class="personalize-section">
+<section class="preview-card">
 
-    <div class="section-title">
+<div class="avatar-frame">
 
-        <h2>Profile Banner</h2>
-
-        <p>
-            Select a banner for your profile.
-        </p>
-
-    </div>
-
-    <div class="banner-grid">
-
-        {% set banners = [
-
-        "Midnight",
-        "Aurora",
-        "Nebula",
-        "Carbon",
-        "Horizon",
-        "Vertex"
-
-        ] %}
-
-        {% for banner in banners %}
-
-        <div
-            class="banner-card"
-            data-banner="{{ banner|lower }}">
-
-            <div class="banner-preview">
-
-                <img
-                src="{{ url_for('static', filename='img/banners/' ~ banner|lower ~ '.png') }}"
-                alt="{{ banner }}">
-
-            </div>
-
-            <span>
-
-                {{ banner }}
-
-            </span>
-
-        </div>
-
-        {% endfor %}
-
-    </div>
-
-</section>
-
-
-<!-- ==========================
-        BORDER SECTION
-========================== -->
-
-<section class="personalize-section">
-
-    <div class="section-title">
-
-        <h2>Avatar Border</h2>
-
-        <p>
-            Give your profile a premium touch.
-        </p>
-
-    </div>
-
-    <div class="border-grid">
-
-       <div class="border-card" data-border="none">
-
-    None
-
-    <span class="rarity common">
-
-        COMMON
-
-    </span>
+<img
+id="previewAvatar"
+class="preview-avatar"
+src="{{ avatar_src }}"
+alt="Avatar">
 
 </div>
 
-<div class="border-card" data-border="neon">
+<div class="preview-info">
 
-    Neon
+<h2 id="previewName">
 
-    <span class="rarity uncommon">
+{{ profile.username }}
 
-        UNCOMMON
+</h2>
 
-    </span>
+<p>
 
-</div>
+Level {{ profile.level }}
 
-<div class="border-card" data-border="gold">
-
-    Gold
-
-    <span class="rarity uncommon">
-
-        UNCOMMON
-
-    </span>
-
-</div>
-
-<div class="border-card" data-border="emerald">
-
-    Emerald
-
-    <span class="rarity rare">
-
-        RARE
-
-    </span>
-
-</div>
-
-<div class="border-card" data-border="shadow">
-
-    Shadow
-
-    <span class="rarity rare">
-
-        RARE
-
-    </span>
-
-</div>
-
-<div class="border-card" data-border="frozen">
-
-    Frozen
-
-    <span class="rarity legendary">
-
-        LEGENDARY
-
-    </span>
-
-</div>
-
-<div class="border-card" data-border="crimson">
-
-    Crimson
-
-    <span class="rarity legendary">
-
-        LEGENDARY
-
-    </span>
-
-</div>
-
-{% if "galaxy_border" in profile.profile_unlocks %}
+</p>
 
 <div
-class="border-card mythic"
-data-border="galaxy">
+id="previewBadge"
+class="preview-badge">
 
-    Galaxy
-
-    <span class="rarity mythic">
-
-        MYTHIC
-
-    </span>
+{{ profile.badge if profile.badge else "No Badge" }}
 
 </div>
 
-{% else %}
-
-<div class="border-card locked mythic-locked">
-
-    🔒 Galaxy
-
-    <span class="unlock-text">
-
-        Unlock at Level 25
-
-    </span>
-
-    <span class="rarity mythic">
-
-        MYTHIC
-
-    </span>
-
 </div>
-
-{% endif %}
-
-    </div>
 
 </section>
 
-<script
- src="{{ url_for('static', filename='js/personalize.js') }}">
-</script>
+<!-- ==========================
+        AVATAR INVENTORY
+========================== -->
+
+<section class="option-card">
+
+<h3>
+
+🖼 Choose Avatar
+
+</h3>
+
+<div
+class="inventory-grid"
+id="avatarInventory">
+
+</div>
+
+</section>
+
+<!-- ==========================
+        CUSTOMIZATION GRID
+========================== -->
+
+<div class="option-card">
+
+<h3>
+
+ Banner
+
+</h3>
+
+<div class="option-list"
+
+id="bannerList">
+
+<!-- JS -->
+
+</div>
+
+</div>
+
+<div class="option-card">
+
+<h3>
+
+ Border
+
+</h3>
+
+<div class="option-list"
+
+id="borderList">
+
+<!-- JS -->
+
+</div>
+
+</div>
+
+<div class="option-card">
+
+<h3>
+
+ Theme
+
+</h3>
+
+<div class="option-list"
+
+id="themeList">
+
+<!-- JS -->
+
+</div>
+
+</div>
+
+<div class="option-card">
+
+<h3>
+
+ Username Color
+
+</h3>
+
+<div class="option-list"
+
+id="nameColorList">
+
+<!-- JS -->
+
+</div>
+
+</div>
+
+<div class="option-card">
+
+<h3>
+
+ Badge
+
+</h3>
+
+<div class="option-list"
+
+id="badgeList">
+
+<!-- JS -->
+
+</div>
+
+</div>
+
+</section>
 
 <!-- ==========================
         SAVE
@@ -468,12 +232,25 @@ data-border="galaxy">
 
 <div class="save-area">
 
-    <button
-        id="saveBtn"
-        class="save-button">
+<button
 
-        💾 Save Changes
+id="saveBtn"
 
-    </button>
+class="save-btn">
+
+💾 Save Changes
+
+</button>
 
 </div>
+
+</div>
+
+<script
+src="{{ url_for('static', filename='js/personalize.js') }}">
+
+</script>
+
+</body>
+
+</html>

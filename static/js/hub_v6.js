@@ -3,6 +3,44 @@
                     CORE SYSTEM
 ========================================================== */
 
+const arcadeBtn =
+document.getElementById("arcadeBtn");
+
+if(arcadeBtn){
+
+arcadeBtn.addEventListener("click",(e)=>{
+
+e.preventDefault();
+
+const rect=
+arcadeBtn.getBoundingClientRect();
+
+const ripple=
+document.createElement("span");
+
+ripple.className="ripple";
+
+ripple.style.left=
+(e.clientX-rect.left)+"px";
+
+ripple.style.top=
+(e.clientY-rect.top)+"px";
+
+arcadeBtn.appendChild(ripple);
+
+document.body.classList.add("page-leave");
+
+setTimeout(()=>{
+
+window.location=
+arcadeBtn.href;
+
+},420);
+
+});
+
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Zoro Hub V6 Loaded.");

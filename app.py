@@ -714,11 +714,10 @@ def equip_theme():
     )
 
 
-@app.route("/api/profile")
-def api_profile():
+@app.route("/profile")
+def profile():
 
     if "username" not in session:
-
         return jsonify(success=False)
 
     profile = get_user_profile()
@@ -951,37 +950,48 @@ def settings():
         banner_src=banner_url(profile),
     )
 
-@app.route("/save_personalize", methods=["POST"])
+@app.route("/api/save_personalize", methods=["POST"])
 def save_personalize():
 
     if "username" not in session:
-        return jsonify({"success": False})
+        return jsonify(success=False)
 
     profile = get_user_profile()
 
-    if profile is None:
-        return jsonify({"success": False})
+    data = request.get_json()
+
+    profile["avatar"] = data.get("avatar", profile.get("avatar", "😀"))
+    profile["banner"] = data.get("banner", profile.get("banner", "Midnight"))
+    profile["border"] = data.get("border", profile.get("border", "Default"))
+    profile["theme"] = data.get("theme", profile.get("theme", "Dark"))
+    profile["name_color"] = data.get("color", profile.get("name_color", "White"))
+    profile["badge"] = data.get("badge", profile.get("badge", "🏆 Mythic"))
+
+    save_user_profile(profile)
+
+    return jsonify(success=True)
+
+@app.route("/api/save_avatar", methods=["POST"])
+def save_avatar():
+
+    if "username" not in session:
+        return jsonify(success=False)
+
+    profile = get_user_profile()
 
     data = request.get_json()
 
     avatar = data.get("avatar")
-    banner = data.get("banner")
-    border = data.get("border")
 
     if avatar:
         profile["avatar"] = avatar
-
-    if banner:
-        profile["profile_banner"] = banner
-
-    if border:
-        profile["avatar_border"] = border
+        print("Saving avatar:", avatar)
+        print(profile)
+    
 
     save_user_profile(profile)
 
-    return jsonify({
-        "success": True
-    })
+    return jsonify(success=True)
 
 @app.route("/equip_border", methods=["POST"])
 def equip_border():
@@ -1076,7 +1086,11 @@ def personalize():
 
 def avatar_url(profile):
 
-    avatar = profile.get("avatar", "default")
+    avatar = profile.get("avatar", "avatar1.png")
+
+    if avatar.endswith(".png") or avatar.endswith(".jpg") or avatar.endswith(".jpeg"):
+
+        return f"/static/img/avatars/{avatar}"
 
     return f"/static/img/avatars/{avatar}.png"
 
