@@ -62,7 +62,7 @@ def chess():
         "chess.html",
         profile=profile
     )
-
+    
 from flask import request
 
 @app.route("/space_shooter")
