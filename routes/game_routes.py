@@ -63,6 +63,18 @@ def chess():
         profile=profile
     )
 
+@app.route("/space_shooter")
+def space_shooter():
+
+    if "username" not in session:
+        return redirect(url_for("index"))
+
+    profile = get_profile(session["username"])
+
+    return render_template(
+        "space_shooter.html",
+        profile=profile
+    )
 
 
 @app.route("/guess_the_number")
