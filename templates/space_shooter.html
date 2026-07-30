@@ -217,20 +217,10 @@
             transition: opacity 0.5s;
         }
 
-       /* ===== MOBILE PORTRAIT OVERRIDES ===== */
+       /* ===== MOBILE HUD TWEAKS ===== */
 @media (max-width: 900px) {
-  body {
-    touch-action: none;
-    -webkit-touch-callout: none;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-  .hud {
-    top: 6px;
-    left: 8px;
-    right: 8px;
-    font-size: 12px;
-  }
+  body, canvas { touch-action: none; -webkit-touch-callout: none; user-select: none; -webkit-user-select: none; }
+  .hud { top: 6px; left: 8px; right: 8px; font-size: 12px; }
   .hud-value { font-size: 15px; }
   .health-bar { width: 100px; height: 5px; }
   .weapon-indicator { bottom: 140px; gap: 5px; }
@@ -243,58 +233,6 @@
   .controls-info { display: none; }
   .game-over-stats { margin: 16px 0; }
   .stat-row { width: 220px; margin: 6px auto; font-size: 15px; }
-
-  .mobile-controls {
-    display: flex !important;
-    height: auto;
-    padding: 0 12px 16px;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-  .dpad {
-    position: static;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-  }
-  .dpad-mid { display: flex; gap: 4px; }
-  .actions {
-    position: static;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-  .ctrl-btn {
-    width: 54px;
-    height: 54px;
-    font-size: 20px;
-    border: 1.5px solid rgba(0, 255, 255, 0.45);
-    color: #00ffff;
-    background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 12px rgba(0, 255, 255, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    transition: transform 0.06s, background 0.1s;
-  }
-  .ctrl-btn:active {
-    transform: scale(0.88);
-    background: rgba(0, 255, 255, 0.3);
-  }
-  .ctrl-fire {
-    width: 68px;
-    height: 68px;
-    font-size: 24px;
-    background: rgba(255, 0, 80, 0.35);
-    border-color: rgba(255, 0, 80, 0.55);
-    color: #ff6699;
-    box-shadow: 0 0 18px rgba(255, 0, 80, 0.35);
-  }
-  .ctrl-fire:active { background: rgba(255, 0, 80, 0.55); }
 }
 
     </style>
@@ -365,21 +303,7 @@
         <button class="btn" id="restartBtn">Reinitialize</button>
     </div>
 
-    <!-- MOBILE CONTROLS -->
-<div class="mobile-controls" id="mobileControls">
-  <div class="dpad">
-    <button class="ctrl-btn" id="btnUp">▲</button>
-    <div class="dpad-mid">
-      <button class="ctrl-btn" id="btnLeft">◀</button>
-      <button class="ctrl-btn" id="btnDown">▼</button>
-      <button class="ctrl-btn" id="btnRight">▶</button>
-    </div>
-  </div>
-  <div class="actions">
-    <button class="ctrl-btn ctrl-fire" id="btnShoot">●</button>
-    <button class="ctrl-btn" id="btnWeapon">↻</button>
-  </div>
-</div>
+    
 
     <script>
 
@@ -1811,11 +1735,12 @@
                     ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
                     ctx.fill();
                 });
-                ctx.globalAlpha = 1;
-            }
-
-            ctx.restore();
+                            ctx.globalAlpha = 1;
         }
+
+        ctx.restore();
+        drawMobileControls();
+    }
 
         function gameLoop() {
             update();
@@ -1884,59 +1809,114 @@
 
         gameLoop();
 
-        /* ===== MOBILE CONTROLS ===== */
-(function() {
-  // Block zoom, scroll, double-tap zoom, and long-press menus
-  document.addEventListener('touchmove', e => { e.preventDefault(); }, { passive: false });
-  document.addEventListener('gesturestart', e => { e.preventDefault(); });
-  document.addEventListener('dblclick', e => { e.preventDefault(); });
-  document.addEventListener('contextmenu', e => { e.preventDefault(); });
+        /* ===== CANVAS DRAWN MOBILE CONTROLS ===== */
+const activeTouches = new Map(); // touchId -> { buttonId, actionDone }
 
-  const touchMap = {
-    'btnUp':    'arrowup',
-    'btnDown':  'arrowdown',
-    'btnLeft':  'arrowleft',
-    'btnRight': 'arrowright',
-    'btnShoot': ' '
-  };
+function getMobileButtons() {
+  const cy = canvas.height;
+  return [
+    { id: 'up',    key: 'arrowup',    x: 110, y: cy - 155, r: 32, label: '▲', rgb: '0,255,255' },
+    { id: 'down',  key: 'arrowdown',  x: 110, y: cy - 45,  r: 32, label: '▼', rgb: '0,255,255' },
+    { id: 'left',  key: 'arrowleft',  x: 55,  y: cy - 100, r: 32, label: '◀', rgb: '0,255,255' },
+    { id: 'right', key: 'arrowright', x: 165, y: cy - 100, r: 32, label: '▶', rgb: '0,255,255' },
+    { id: 'shoot', key: ' ',          x: canvas.width - 75, y: cy - 75,  r: 42, label: '●', rgb: '255,0,80' },
+    { id: 'weapon',key: null,         x: canvas.width - 75, y: cy - 160, r: 28, label: '↻', rgb: '255,200,0', action: 'weapon' }
+  ];
+}
 
-  Object.entries(touchMap).forEach(([id, key]) => {
-    const btn = document.getElementById(id);
-    if (!btn) return;
-
-    const onStart = (e) => { e.preventDefault(); keys[key] = true;  btn.style.transform = 'scale(0.88)'; };
-    const onEnd   = (e) => { e.preventDefault(); keys[key] = false; btn.style.transform = ''; };
-
-    btn.addEventListener('touchstart', onStart, { passive: false });
-    btn.addEventListener('touchend',   onEnd,   { passive: false });
-    btn.addEventListener('touchcancel',onEnd,   { passive: false });
-    // Mouse fallback so you can test with a mouse too
-    btn.addEventListener('mousedown',  onStart);
-    btn.addEventListener('mouseup',    onEnd);
-    btn.addEventListener('mouseleave', onEnd);
-  });
-
-  // Weapon switcher — cycles only through unlocked weapons
-  const wBtn = document.getElementById('btnWeapon');
-  if (wBtn) {
-    const cycleWeapon = (e) => {
-      e.preventDefault();
-      let next = player.weapon;
-      let guard = 0;
-      do {
-        next = (next + 1) % 5;
-        guard++;
-      } while (guard < 5 && highestWaveReached < weaponUnlocks[next]);
-      if (highestWaveReached >= weaponUnlocks[next]) {
-        player.weapon = next;
-        showUnlockNotification('Weapon ' + (next + 1));
-        updateWeaponUI();
-      }
-    };
-    wBtn.addEventListener('touchstart', cycleWeapon, { passive: false });
-    wBtn.addEventListener('mousedown',  cycleWeapon);
+function getButtonAt(x, y) {
+  for (const b of getMobileButtons()) {
+    const dx = x - b.x, dy = y - b.y;
+    if (dx * dx + dy * dy <= b.r * b.r) return b;
   }
-})();
+  return null;
+}
+
+function drawMobileControls() {
+  if (canvas.width > 900) return;
+  const pressedIds = new Set([...activeTouches.values()].map(t => t.buttonId));
+
+  for (const b of getMobileButtons()) {
+    const on = pressedIds.has(b.id);
+    ctx.save();
+    ctx.fillStyle = `rgba(${b.rgb},${on ? 0.45 : 0.18})`;
+    ctx.strokeStyle = `rgba(${b.rgb},${on ? 0.95 : 0.5})`;
+    ctx.lineWidth = 2;
+    ctx.shadowColor = `rgba(${b.rgb},0.6)`;
+    ctx.shadowBlur = on ? 22 : 10;
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.r * (on ? 0.9 : 1), 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = on ? '#fff' : `rgba(${b.rgb},0.95)`;
+    ctx.font = `bold ${Math.floor(b.r * 0.65)}px monospace`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(b.label, b.x, b.y + 1);
+    ctx.restore();
+  }
+}
+
+function cycleWeapon() {
+  let next = player.weapon, guard = 0;
+  do { next = (next + 1) % 5; guard++; }
+  while (guard < 5 && highestWaveReached < weaponUnlocks[next]);
+  if (highestWaveReached >= weaponUnlocks[next]) {
+    player.weapon = next;
+    showUnlockNotification('Weapon ' + (next + 1));
+    updateWeaponUI();
+  }
+}
+
+function handleTouch(e) {
+  e.preventDefault();
+  const rect = canvas.getBoundingClientRect();
+  const sx = canvas.width / rect.width;
+  const sy = canvas.height / rect.height;
+
+  for (let i = 0; i < e.changedTouches.length; i++) {
+    const t = e.changedTouches[i];
+    const x = (t.clientX - rect.left) * sx;
+    const y = (t.clientY - rect.top) * sy;
+    const prev = activeTouches.get(t.identifier);
+    const btn = getButtonAt(x, y);
+
+    if (prev && (!btn || btn.id !== prev.buttonId)) {
+      const old = getMobileButtons().find(b => b.id === prev.buttonId);
+      if (old && old.key) keys[old.key] = false;
+    }
+    if (btn && (!prev || prev.buttonId !== btn.id)) {
+      const rec = { buttonId: btn.id, actionDone: prev ? prev.actionDone : false };
+      activeTouches.set(t.identifier, rec);
+      if (btn.key) keys[btn.key] = true;
+      if (btn.action === 'weapon' && !rec.actionDone) {
+        rec.actionDone = true;
+        cycleWeapon();
+      }
+    }
+    if (!btn) activeTouches.delete(t.identifier);
+  }
+}
+
+function handleTouchEnd(e) {
+  e.preventDefault();
+  for (let i = 0; i < e.changedTouches.length; i++) {
+    const t = e.changedTouches[i];
+    const prev = activeTouches.get(t.identifier);
+    if (prev) {
+      const old = getMobileButtons().find(b => b.id === prev.buttonId);
+      if (old && old.key) keys[old.key] = false;
+      activeTouches.delete(t.identifier);
+    }
+  }
+}
+
+canvas.addEventListener('touchstart', handleTouch, { passive: false });
+canvas.addEventListener('touchmove',  handleTouch, { passive: false });
+canvas.addEventListener('touchend',   handleTouchEnd, { passive: false });
+canvas.addEventListener('touchcancel',handleTouchEnd, { passive: false });
+document.addEventListener('contextmenu', e => e.preventDefault());
 
     </script>
 </body>
