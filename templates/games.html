@@ -321,7 +321,7 @@ Earn XP, build streaks and unlock exclusive rewards.
 
 <a
 
-href="{{ url_for('play') }}"
+href="{{ url_for('gtn_difficulty') }}"
 
 class="play-featured">
 
@@ -609,7 +609,7 @@ Puzzle
 
 <a
 
-href="{{ url_for('play') }}"
+href="{{ url_for('gtn_difficulty') }}"
 
 class="game-btn">
 
@@ -741,51 +741,63 @@ PLAY
 
 <div class="game-card">
 
-<div class="status soon">
+    <div class="status installed">
+        INSTALLED
+    </div>
 
-COMING SOON
+    <div class="game-icon">
+        ♟
+    </div>
 
-</div>
+    <h3>Chess Master</h3>
 
-<div class="game-icon">
+    <p>
+        Challenge an intelligent AI or sharpen your tactical skills in a premium chess experience.
+    </p>
 
-🚀
+    <div class="game-meta">
+        <span>Strategy</span>
+        <span>+80 XP</span>
+        <span>AI</span>
+    </div>
 
-</div>
-
-<h3>
-
-Space Shooter
-
-</h3>
-
-<p>
-
-Destroy enemy ships while surviving endless waves.
-
-</p>
-
-<div class="game-meta">
-
-<span>
-
-Arcade
-
-</span>
-
-<span>
-
-+120 XP
-
-</span>
+    <a
+    href="{{ url_for('chess') }}"
+    class="game-btn">
+        PLAY
+    </a>
 
 </div>
 
-<button class="game-btn disabled">
+/*CHESS*/
 
-COMING SOON
+<div class="game-card">
 
-</button>
+    <div class="status installed">
+        INSTALLED
+    </div>
+
+    <div class="game-icon">
+        🚀
+    </div>
+
+    <h3>Space Shooter</h3>
+
+    <p>
+        Survive endless waves of enemies, dodge lasers and become the galaxy's ultimate pilot.
+    </p>
+
+    <div class="game-meta">
+        <span>Arcade</span>
+        <span>+120 XP</span>
+        <span>Action</span>
+    </div>
+
+    <a
+    href="{{ url_for('space_shooter') }}"
+    class="game-btn">
+        PLAY
+    </a>
 
 </div>
 

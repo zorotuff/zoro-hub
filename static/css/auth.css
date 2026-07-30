@@ -1,0 +1,402 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    background:#050816;
+    overflow:hidden;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+#bgCanvas{
+    position:fixed;
+    inset:0;
+    z-index:-3;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at top,#3d2a7d55,transparent 60%),
+    radial-gradient(circle at bottom,#008cff22,transparent 60%),
+    linear-gradient(180deg,#04050b,#090d1d);
+    z-index:-2;
+}
+
+.login-card{
+
+    width:430px;
+
+    backdrop-filter:blur(20px);
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:28px;
+
+    padding:45px;
+
+    box-shadow:
+
+    0 0 60px rgba(0,140,255,.25),
+
+    inset 0 0 20px rgba(255,255,255,.05);
+
+    animation:float 5s ease-in-out infinite;
+
+}
+
+.logo{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+.logo h1{
+
+    font-family:"Orbitron",sans-serif;
+
+    font-size:42px;
+
+    color:#52b6ff;
+
+    text-shadow:
+
+    0 0 20px #00aaff;
+
+}
+
+.logo p{
+
+    margin-top:10px;
+
+    color:#bbb;
+
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+input{
+
+    width:100%;
+
+    padding:15px 18px;
+
+    border-radius:14px;
+
+    border:none;
+
+    outline:none;
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+input::placeholder{
+
+    color:#9aa8c7;
+
+}
+
+input:focus{
+
+    box-shadow:0 0 20px #3cbcff;
+
+    background:rgba(255,255,255,.12);
+
+}
+
+.buttons{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.buttons button{
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    font-size:15px;
+
+    transition:.35s;
+
+}
+
+.buttons button:first-child{
+
+    background:linear-gradient(90deg,#2ea4ff,#5ad5ff);
+
+    color:white;
+
+}
+
+.buttons button:last-child{
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.15);
+
+}
+
+.buttons button:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 0 25px #2ea4ff;
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+100%{
+transform:translateY(0px);
+}
+}
+
+.input-group{
+
+    position:relative;
+
+}
+
+.input-group input{
+
+    width:100%;
+
+    padding:18px 16px;
+
+    border-radius:14px;
+
+    border:none;
+
+    outline:none;
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    font-size:16px;
+
+}
+
+.input-group label{
+
+    position:absolute;
+
+    left:16px;
+
+    top:18px;
+
+    color:#9aa8c7;
+
+    transition:.25s;
+
+    pointer-events:none;
+
+}
+
+.input-group input:focus+label,
+
+.input-group input:valid+label{
+
+    top:-10px;
+
+    left:12px;
+
+    font-size:13px;
+
+    padding:0 6px;
+
+    color:#52b6ff;
+
+    background:#111827;
+
+}
+
+.login-card{
+
+    opacity:0;
+
+    transform:translateY(40px) scale(.95);
+
+    animation:intro 1s ease forwards,
+              float 5s ease-in-out infinite 1s;
+
+}
+
+@keyframes intro{
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0) scale(1);
+
+    }
+
+}
+
+.logo h1{
+
+    animation:glow 2s ease-in-out infinite alternate;
+
+}
+
+@keyframes glow{
+
+from{
+
+text-shadow:
+
+0 0 10px #38bdf8,
+
+0 0 20px #38bdf8;
+
+}
+
+to{
+
+text-shadow:
+
+0 0 20px #38bdf8,
+
+0 0 50px #38bdf8,
+
+0 0 90px #38bdf8;
+
+}
+
+}
+
+.eye{
+
+    position:absolute;
+
+    right:16px;
+
+    top:18px;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    font-size:20px;
+
+    transition:.25s;
+
+}
+
+.eye:hover{
+
+    transform:scale(1.15);
+
+}
+
+/*MOBILE LAYOUT*/
+
+@media (max-width:768px){
+
+.login-card{
+
+    width:92%;
+
+    padding:28px;
+
+    border-radius:20px;
+
+}
+
+.logo h1{
+
+    font-size:30px;
+
+}
+
+.logo p{
+
+    font-size:14px;
+
+}
+
+input{
+
+    padding:14px;
+
+    font-size:15px;
+
+}
+
+.buttons button{
+
+    padding:14px;
+
+    font-size:14px;
+
+}
+
+.eye{
+
+    top:15px;
+
+}
+
+}
+
+@media (max-width:420px){
+
+.logo h1{
+
+    font-size:24px;
+
+}
+
+.login-card{
+
+    padding:22px;
+
+}
+
+}

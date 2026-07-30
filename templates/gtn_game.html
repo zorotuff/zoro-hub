@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Guess The Number</title>
+
+</head>
+
+<body>
+
+<h1>Guess The Number</h1>
+
+<p>Difficulty : {{ difficulty }}</p>
+
+<p>Attempts : {{ attempts }}</p>
+
+{% if message %}
+
+<h2>{{ message }}</h2>
+
+{% endif %}
+
+<form action="/gtn/guess" method="POST">
+
+    <input
+        type="number"
+        name="guess"
+        required>
+
+    <button>
+
+        Guess
+
+    </button>
+
+</form>
+
+{% if game_over %}
+
+<a href="/gtn">
+
+<button>
+
+Play Again
+
+</button>
+
+</a>
+
+{% endif %}
+
+</body>
+
+</html>

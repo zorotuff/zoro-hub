@@ -1,0 +1,32 @@
+{
+    "username": "zoro",
+    "uid": "NX-F5BB8F60",
+    "level": 1,
+    "xp": 20,
+    "coins": 0,
+    "profile_unlocks": [],
+    "games_played": 1,
+    "games_won": 1,
+    "games_lost": 0,
+    "current_streak": 1,
+    "best_streak": 1,
+    "favorite_game": "Guess The Number",
+    "biography": "soul society.\n\n",
+    "country": "Global Space",
+    "joined_date": "July 2026",
+    "account_creation_date": "2026-07-27 16:57",
+    "last_online": "2026-07-28 21:49",
+    "online_status": "offline",
+    "avatar": "avatar1.png",
+    "avatar_type": "builtin",
+    "avatar_border": "none",
+    "profile_banner": "default",
+    "profile_theme": "obsidian",
+    "hub_version": "v6",
+    "achievements": [
+        "First Victory"
+    ],
+    "badges": [
+        "Member"
+    ]
+}

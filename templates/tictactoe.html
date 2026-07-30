@@ -17,7 +17,7 @@
 
   <!-- ============ TOP BAR ============ -->
   <header class="ttt-topbar">
-    <a href="/" class="ttt-back-link" id="topBackLink">
+    <a href="{{ url_for('hub') }}" class="ttt-back-link" id="topBackLink">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 18 9 12 15 6"></polyline>
       </svg>
@@ -145,27 +145,43 @@
 
 <!-- ============ RESULT MODAL ============ -->
 <div class="ttt-modal-overlay" id="resultModalOverlay">
-  <div class="ttt-modal" id="resultModal">
-    <div class="ttt-modal-icon" id="resultIcon">🏆</div>
-    <h2 class="ttt-modal-title" id="resultTitle">You Win!</h2>
-    <p class="ttt-modal-message" id="resultMessage">Victory secured against the AI.</p>
+  <div class="ttt-modal">
 
-    <div class="ttt-modal-rewards" id="resultRewards">
-      <div class="ttt-reward-chip">
-        <span class="ttt-stat-icon">🪙</span>
-        <span id="rewardCoins">+0</span>
-      </div>
-      <div class="ttt-reward-chip">
-        <span class="ttt-stat-icon">⭐</span>
-        <span id="rewardXp">+0</span>
-      </div>
+    <div class="ttt-modal-icon" id="resultIcon">🏆</div>
+
+    <h2 class="ttt-modal-title" id="resultTitle">
+        YOU WIN!
+    </h2>
+
+    <p class="ttt-modal-message" id="resultMessage">
+        The AI has been defeated!
+    </p>
+
+    <div class="ttt-reward-chip">
+        ⭐
+        <span id="rewardXp">+20 XP</span>
     </div>
 
     <div class="ttt-modal-actions">
-      <button class="ttt-btn ttt-btn-ghost ripple-btn" id="modalBackBtn" type="button">Back to Menu</button>
-      <button class="ttt-btn ttt-btn-primary ripple-btn" id="modalPlayAgainBtn" type="button">Play Again</button>
+
+        <button
+            class="ttt-btn ttt-btn-ghost ripple-btn"
+            id="modalBackBtn">
+
+            Back to Menu
+
+        </button>
+
+        <button
+            class="ttt-btn ttt-btn-primary ripple-btn"
+            id="modalPlayAgainBtn">
+
+            Play Again
+
+        </button>
+
     </div>
-  </div>
+
 </div>
 
 <canvas id="confettiCanvas"></canvas>

@@ -1,0 +1,10 @@
+{
+    "chillzoro": {
+        "password": "scrypt:32768:8:1$WpgbooWK0arMPKZ7$bc527b0dca518cb11a2ecf0498e47476c76575573031d68c9f77d70a57b63ef928969ee67597a0eedff51c04096c6203a3ce52aec98210b9828008f1a2d909d5",
+        "admin": false
+    },
+    "zoro": {
+        "password": "scrypt:32768:8:1$bE5WxDvW8kPnLidx$f7e46996ca624993e384e47d30dfc5a497cb5d24dc3d47a1ba8d64328dfafbf7c71177bfe5923891c2e8678719f400287b7f0b8e16836fa74d6f96d44e2f216e",
+        "admin": false
+    }
+}

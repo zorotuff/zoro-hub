@@ -102,12 +102,6 @@ Arcade
 
 </a>
 
-<a href="{{ url_for('personalize') }}">
-
- Personalize
-
-</a>
-
 <a href="{{ url_for('achievements') }}">
 
  Achievements
@@ -120,6 +114,10 @@ Settings
 
 </a>
 
+<a href="{{ url_for('logout') }}" class="logout-btn">
+    🚪 Logout
+</a>
+
 </nav>
 
 </header>
@@ -129,12 +127,14 @@ Settings
 ====================================== -->
 
 <section
-class="hero"
+class="hero {{ profile.profile_theme }}"
 id="home">
 
 <div class="hero-card">
 
 <div class="hero-top">
+
+<div class="hero-avatar-frame {{ profile.avatar_border }}">
 
 <img
 
@@ -143,6 +143,8 @@ src="{{ avatar_src }}"
 class="hero-avatar"
 
 alt="avatar">
+
+</div>
 
 <div>
 
@@ -273,30 +275,6 @@ Achievements
 <p>
 
 Track your unlocked achievements.
-
-</p>
-
-</a>
-
-<a
-href="{{ url_for('personalize') }}"
-class="hub-card">
-
-<div class="card-icon">
-
-🎨
-
-</div>
-
-<h3>
-
-Personalize
-
-</h3>
-
-<p>
-
-Customize your avatar, profile theme, borders and cosmetics.
 
 </p>
 

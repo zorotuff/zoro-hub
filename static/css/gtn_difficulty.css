@@ -1,0 +1,894 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Segoe UI",sans-serif;
+    color:#fff;
+    background:#041b14;
+    overflow-x:hidden;
+    min-height:100vh;
+}
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at top,#0d5d3f 0%,#05281d 45%,#02110c 100%);
+    z-index:-10;
+}
+
+.aurora{
+    position:absolute;
+    width:900px;
+    height:900px;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:.35;
+    animation:float 14s ease-in-out infinite;
+}
+
+.aurora1{
+    background:#00ff99;
+    top:-250px;
+    left:-150px;
+}
+
+.aurora2{
+    background:#00d46a;
+    bottom:-300px;
+    right:-200px;
+    animation-delay:4s;
+}
+
+.aurora3{
+    background:#00ffcc;
+    top:35%;
+    left:45%;
+    animation-delay:8s;
+}
+
+@keyframes float{
+
+0%,100%{
+transform:translate(0,0) scale(1);
+}
+
+50%{
+transform:translate(70px,-50px) scale(1.1);
+}
+
+}
+
+.container{
+    width:min(1200px,92%);
+    margin:auto;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.hero{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.hero h1{
+    font-size:4rem;
+    font-weight:800;
+    letter-spacing:1px;
+    text-shadow:
+        0 0 18px rgba(0,255,170,.18);
+}
+
+.hero p{
+    margin-top:15px;
+    font-size:1.1rem;
+    color:#d5f6ea;
+}
+
+.difficulty-grid{
+    display:grid;
+    grid-template-columns:repeat(2,340px);
+    gap:30px;
+    justify-content:center;
+}
+
+.difficulty-card{
+    position:relative;
+    text-decoration:none;
+    color:white;
+    border-radius:24px;
+    padding:35px;
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+    145deg,
+    rgba(255,255,255,.08),
+    rgba(255,255,255,.03));
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    transition:
+    transform .35s,
+    border-color .35s,
+    box-shadow .35s;
+}
+
+.difficulty-card::before{
+
+content:"";
+
+position:absolute;
+
+left:-40%;
+
+top:-60%;
+
+width:180%;
+
+height:180%;
+
+background:
+linear-gradient(
+transparent,
+rgba(255,255,255,.07),
+transparent);
+
+transform:rotate(30deg);
+
+transition:.6s;
+
+}
+
+.difficulty-card:hover::before{
+
+left:120%;
+
+}
+
+.difficulty-card:hover{
+
+transform:
+translateY(-10px)
+scale(1.03);
+
+border-color:
+rgba(0,255,160,.55);
+
+box-shadow:
+
+0 18px 50px rgba(0,255,140,.18),
+
+0 0 45px rgba(0,255,120,.14);
+
+}
+
+.difficulty-name{
+
+font-size:2rem;
+
+font-weight:700;
+
+margin-bottom:30px;
+
+}
+
+.difficulty-info{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:14px;
+
+}
+
+.difficulty-info span{
+
+color:#bfe8d9;
+
+font-size:.95rem;
+
+}
+
+.difficulty-info strong{
+
+font-size:1rem;
+
+font-weight:600;
+
+}
+
+.asian{
+
+border-color:rgba(255,180,0,.22);
+
+}
+
+.asian:hover{
+
+border-color:#ffd166;
+
+box-shadow:
+
+0 20px 60px rgba(255,180,0,.18);
+
+}
+
+.back-button{
+
+display:inline-block;
+
+margin:55px auto 0;
+
+padding:15px 34px;
+
+border-radius:999px;
+
+text-decoration:none;
+
+font-weight:600;
+
+color:white;
+
+background:rgba(255,255,255,.06);
+
+border:1px solid rgba(255,255,255,.08);
+
+transition:.3s;
+
+}
+
+.back-button:hover{
+
+background:rgba(0,255,160,.12);
+
+border-color:#00ffaa;
+
+box-shadow:
+
+0 0 20px rgba(0,255,170,.15);
+
+}
+
+@media(max-width:900px){
+
+.hero h1{
+
+font-size:3rem;
+
+}
+
+.difficulty-grid{
+
+grid-template-columns:1fr;
+
+max-width:420px;
+
+margin:auto;
+
+}
+
+}
+
+@media(max-width:520px){
+
+.hero h1{
+
+font-size:2.4rem;
+
+}
+
+.difficulty-card{
+
+padding:28px;
+
+}
+
+.difficulty-name{
+
+font-size:1.7rem;
+
+}
+
+}
+
+/* ==========================================================
+   PART 2 - Premium Interactions & Selected Card
+   ========================================================== */
+
+/* Smooth transitions */
+.diff-card{
+    transition:
+        transform .28s cubic-bezier(.2,.8,.2,1),
+        box-shadow .28s,
+        border-color .28s,
+        background .28s;
+}
+
+/* Hover */
+.diff-card:hover{
+    transform:translateY(-10px) scale(1.02);
+    border-color:rgba(80,255,170,.45);
+    box-shadow:
+        0 25px 50px rgba(0,0,0,.35),
+        0 0 30px rgba(70,255,170,.12);
+}
+
+/* Click animation */
+.diff-card:active{
+    transform:scale(.98);
+}
+
+/* ===========================
+   SELECTED CARD
+   =========================== */
+
+.diff-card.selected{
+    border:2px solid #4dffae;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(50,255,170,.16),
+            rgba(0,255,140,.05)
+        );
+
+    box-shadow:
+        0 0 12px rgba(80,255,170,.35),
+        0 0 40px rgba(0,255,170,.18),
+        inset 0 0 25px rgba(255,255,255,.03);
+}
+
+.diff-card.selected h2{
+    color:#7dffc6;
+}
+
+.diff-card.selected .xp{
+    color:#7dffc6;
+}
+
+.diff-card.selected::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.04),
+            transparent 50%
+        );
+
+    pointer-events:none;
+}
+
+/* Tiny glowing dot */
+.diff-card.selected::before{
+    content:"";
+    position:absolute;
+
+    top:18px;
+    right:18px;
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:#4dffae;
+
+    box-shadow:
+        0 0 8px #4dffae,
+        0 0 18px #4dffae;
+}
+
+/* XP text */
+.xp{
+    color:#64ffb9;
+    font-weight:600;
+}
+
+/* Difficulty title animation */
+.diff-card h2{
+    transition:.25s;
+}
+
+.diff-card:hover h2{
+    letter-spacing:.6px;
+}
+
+/* Card shimmer */
+.diff-card{
+    overflow:hidden;
+}
+
+.diff-card span.shimmer{
+    position:absolute;
+    top:-120%;
+    left:-30%;
+
+    width:60%;
+    height:300%;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(255,255,255,.06),
+            transparent
+        );
+
+    transform:rotate(25deg);
+
+    pointer-events:none;
+
+    transition:1s;
+}
+
+.diff-card:hover span.shimmer{
+    left:120%;
+}
+
+/* ==========================================================
+   PART 3 - AAA Effects
+   ========================================================== */
+
+/* Card glow animation */
+
+@keyframes pulseGlow{
+
+0%{
+box-shadow:
+0 0 15px rgba(0,255,150,.12);
+}
+
+50%{
+box-shadow:
+0 0 35px rgba(0,255,170,.22),
+0 0 65px rgba(0,255,170,.10);
+}
+
+100%{
+box-shadow:
+0 0 15px rgba(0,255,150,.12);
+}
+
+}
+
+/* Default selected */
+
+.diff-card.selected{
+
+animation:pulseGlow 2.2s infinite;
+
+}
+
+/* Asian special */
+
+.asian.selected{
+
+border:2px solid #ffd54a;
+
+background:
+linear-gradient(
+145deg,
+rgba(255,210,80,.18),
+rgba(255,180,0,.05)
+);
+
+box-shadow:
+0 0 18px rgba(255,215,80,.35),
+0 0 55px rgba(255,200,50,.18);
+
+animation:pulseAsian 2.2s infinite;
+
+}
+
+@keyframes pulseAsian{
+
+0%{
+
+box-shadow:
+0 0 18px rgba(255,215,80,.25);
+
+}
+
+50%{
+
+box-shadow:
+0 0 45px rgba(255,210,70,.45),
+0 0 80px rgba(255,210,70,.18);
+
+}
+
+100%{
+
+box-shadow:
+0 0 18px rgba(255,215,80,.25);
+
+}
+
+}
+
+/* Glass reflection */
+
+.diff-card::after{
+
+content:"";
+
+position:absolute;
+
+top:-120%;
+
+left:-30%;
+
+width:70%;
+
+height:260%;
+
+background:
+
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.08),
+transparent
+);
+
+transform:rotate(22deg);
+
+pointer-events:none;
+
+transition:1s;
+
+}
+
+.diff-card:hover::after{
+
+left:140%;
+
+}
+
+/* Floating animation */
+
+@keyframes floatCard{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-4px);
+
+}
+
+}
+
+.diff-card{
+
+animation:floatCard 6s ease-in-out infinite;
+
+}
+
+.diff-card:nth-child(2){
+
+animation-delay:.4s;
+
+}
+
+.diff-card:nth-child(3){
+
+animation-delay:.8s;
+
+}
+
+.diff-card:nth-child(4){
+
+animation-delay:1.2s;
+
+}
+
+/* Better title */
+
+.diff-card h2{
+
+text-transform:uppercase;
+
+font-size:2rem;
+
+letter-spacing:1px;
+
+}
+
+/* XP */
+
+.diff-card strong{
+
+font-size:1rem;
+
+font-weight:700;
+
+}
+
+/* Fancy hover border */
+
+.diff-card:hover{
+
+border-width:2px;
+
+}
+
+/* Background blur */
+
+.container{
+
+backdrop-filter:blur(2px);
+
+}
+
+/* Fade in */
+
+.container{
+
+animation:fadePage .8s ease;
+
+}
+
+@keyframes fadePage{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}/* ==========================================================
+   PART 3 - AAA Effects
+   ========================================================== */
+
+/* Card glow animation */
+
+@keyframes pulseGlow{
+
+0%{
+box-shadow:
+0 0 15px rgba(0,255,150,.12);
+}
+
+50%{
+box-shadow:
+0 0 35px rgba(0,255,170,.22),
+0 0 65px rgba(0,255,170,.10);
+}
+
+100%{
+box-shadow:
+0 0 15px rgba(0,255,150,.12);
+}
+
+}
+
+/* Default selected */
+
+.diff-card.selected{
+
+animation:pulseGlow 2.2s infinite;
+
+}
+
+/* Asian special */
+
+.asian.selected{
+
+border:2px solid #ffd54a;
+
+background:
+linear-gradient(
+145deg,
+rgba(255,210,80,.18),
+rgba(255,180,0,.05)
+);
+
+box-shadow:
+0 0 18px rgba(255,215,80,.35),
+0 0 55px rgba(255,200,50,.18);
+
+animation:pulseAsian 2.2s infinite;
+
+}
+
+@keyframes pulseAsian{
+
+0%{
+
+box-shadow:
+0 0 18px rgba(255,215,80,.25);
+
+}
+
+50%{
+
+box-shadow:
+0 0 45px rgba(255,210,70,.45),
+0 0 80px rgba(255,210,70,.18);
+
+}
+
+100%{
+
+box-shadow:
+0 0 18px rgba(255,215,80,.25);
+
+}
+
+}
+
+/* Glass reflection */
+
+.diff-card::after{
+
+content:"";
+
+position:absolute;
+
+top:-120%;
+
+left:-30%;
+
+width:70%;
+
+height:260%;
+
+background:
+
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.08),
+transparent
+);
+
+transform:rotate(22deg);
+
+pointer-events:none;
+
+transition:1s;
+
+}
+
+.diff-card:hover::after{
+
+left:140%;
+
+}
+
+/* Floating animation */
+
+@keyframes floatCard{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-4px);
+
+}
+
+}
+
+.diff-card{
+
+animation:floatCard 6s ease-in-out infinite;
+
+}
+
+.diff-card:nth-child(2){
+
+animation-delay:.4s;
+
+}
+
+.diff-card:nth-child(3){
+
+animation-delay:.8s;
+
+}
+
+.diff-card:nth-child(4){
+
+animation-delay:1.2s;
+
+}
+
+/* Better title */
+
+.diff-card h2{
+
+text-transform:uppercase;
+
+font-size:2rem;
+
+letter-spacing:1px;
+
+}
+
+/* XP */
+
+.diff-card strong{
+
+font-size:1rem;
+
+font-weight:700;
+
+}
+
+/* Fancy hover border */
+
+.diff-card:hover{
+
+border-width:2px;
+
+}
+
+/* Background blur */
+
+.container{
+
+backdrop-filter:blur(2px);
+
+}
+
+/* Fade in */
+
+.container{
+
+animation:fadePage .8s ease;
+
+}
+
+@keyframes fadePage{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Profile</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/profile.css') }}">
+
+</head>
+
+<body>
+
+<div class="page">
+
+<div class="profile-card">
+
+<div class="top-section">
+
+<div id="avatarBorder" class="avatar-border">
+
+<img
+id="avatarPreview"
+src="{{ avatar_src }}"
+class="avatar">
+
+</div>
+
+<div class="top-info">
+
+<h1
+id="usernamePreview"
+style="color:{{ profile.get('name_color','#ffffff') }}">
+
+{{ profile.username }}
+
+</h1>
+
+<p>
+
+Level {{ profile.level }}
+
+</p>
+
+<div class="xp-bar">
+
+<div
+class="xp-fill"
+style="width:{{ xp_percent }}%">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<textarea
+id="bioInput"
+class="bio">
+
+{{ profile.biography }}
+
+</textarea>
+
+<div class="buttons">
+
+<button id="avatarBtn">Choose Avatar</button>
+
+<div id="avatarModal" class="avatar-modal" style="display:none;">
+
+    <div class="avatar-window">
+
+        <h2>Select Avatar</h2>
+
+        <div id="avatarGrid" class="avatar-grid">
+
+            <img src="/static/img/avatars/avatar1.png" data-avatar="avatar1.png">
+            <img src="/static/img/avatars/avatar2.png" data-avatar="avatar2.png">
+            <img src="/static/img/avatars/avatar3.png" data-avatar="avatar3.png">
+            <img src="/static/img/avatars/avatar4.png" data-avatar="avatar4.png">
+            <img src="/static/img/avatars/avatar5.png" data-avatar="avatar5.png">
+            <img src="/static/img/avatars/avatar6.png" data-avatar="avatar6.png">
+
+        </div>
+
+        <button id="closeAvatarModal">
+            Close
+        </button>
+
+    </div>
+
+</div>
+<button id="saveBtn">
+
+💾 Save
+
+</button>
+
+</div>
+
+</div>
+
+<div class="stats-card">
+
+<h2>
+
+Statistics
+
+</h2>
+
+<div class="stat">
+
+Games Played
+
+<span>
+
+{{ profile.games_played }}
+
+</span>
+
+</div>
+
+<div class="stat">
+
+Games Won
+
+<span>
+
+{{ profile.games_won }}
+
+</span>
+
+</div>
+
+<div class="stat">
+
+Games Lost
+
+<span>
+
+{{ profile.games_lost }}
+
+</span>
+
+</div>
+
+<div class="stat">
+
+Coins
+
+<span>
+
+{{ profile.coins }}
+
+</span>
+
+</div>
+
+<div class="stat">
+
+Country
+
+<span>
+
+{{ profile.country }}
+
+</span>
+
+</div>
+
+<div class="stat">
+
+Joined
+
+<span>
+
+{{ profile.joined_date }}
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="{{ url_for('static',filename='js/profile.js') }}"></script>
+
+</body>
+
+</html>

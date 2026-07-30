@@ -4,17 +4,13 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Guess The Number</title>
 
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
 href="{{ url_for('static', filename='game.css') }}">
@@ -23,21 +19,17 @@ href="{{ url_for('static', filename='game.css') }}">
 
 <body>
 
-<canvas id="bgCanvas"></canvas>
+<div class="background"></div>
 
-<div class="overlay"></div>
+<div class="page">
 
-<div class="game-wrapper">
+<header class="topbar">
 
-<header class="game-header">
+<a href="{{ url_for('hub') }}" class="backBtn">
 
-<a href="{{ url_for('hub') }}">
-
-← HUB
+← Hub
 
 </a>
-
-<div class="title-box">
 
 <h1>
 
@@ -45,232 +37,310 @@ href="{{ url_for('static', filename='game.css') }}">
 
 </h1>
 
-<div class="difficulty-selector">
+</header>
 
-    <a href="{{ url_for('set_difficulty', level='easy') }}"
-       class="difficulty-btn {% if difficulty_label=='Easy' %}active{% endif %}">
-       Easy
-    </a>
+<section class="topGrid">
 
-    <a href="{{ url_for('set_difficulty', level='medium') }}"
-       class="difficulty-btn {% if difficulty_label=='Medium' %}active{% endif %}">
-       Medium
-    </a>
+<div class="difficultyCard">
 
-    <a href="{{ url_for('set_difficulty', level='hard') }}"
-       class="difficulty-btn {% if difficulty_label=='Hard' %}active{% endif %}">
-       Hard
-    </a>
+<h2>
 
-    <a href="{{ url_for('set_difficulty', level='asian') }}"
-   class="difficulty-btn">
+Difficulty
 
-    Asian ☠️
+</h2>
 
+<div class="difficultyButtons">
+
+<a href="{{ url_for('set_difficulty', level='easy') }}"
+class="diffBtn {% if difficulty=='easy' %}active{% endif %}">
+Easy
+</a>
+
+<a href="{{ url_for('set_difficulty', level='medium') }}"
+class="diffBtn {% if difficulty=='medium' %}active{% endif %}">
+Medium
+</a>
+
+<a href="{{ url_for('set_difficulty', level='hard') }}"
+class="diffBtn {% if difficulty=='hard' %}active{% endif %}">
+Hard
+</a>
+
+<a href="{{ url_for('set_difficulty', level='asian') }}"
+class="diffBtn {% if difficulty=='asian' %}active{% endif %}">
+Asian ☠️
 </a>
 
 </div>
 
-<p>
-
-{{ difficulty_label }}
-
-</p>
-
 </div>
 
-<div class="attempt-box">
+<div class="attemptCard">
 
-<div class="attempt-title">
+<h2>
 
-ATTEMPTS
+Attempts
+
+</h2>
 
 <div class="progress">
 
 <div
-class="progress-fill"
-style="width: {{ attempts_left/max_attempts*100 }}%;"> </div>
-
+class="progressFill"
+style="width: {{ (attempts_left/max_attempts)*100 }}%;">
 </div>
 
 </div>
 
-<div class="heart-container">
+<div class="hearts">
 
-{% for i in range(attempts_left) %}
+{% for i in range(max_attempts) %}
 
-<span class="heart full">❤️</span>
+{% if i < attempts_left %}
+
+<span>❤️</span>
+
+{% else %}
+
+<span class="dead">🤍</span>
+
+{% endif %}
 
 {% endfor %}
 
-{% for i in range(max_attempts-attempts_left) %}
-
-<span class="heart empty">🤍</span>
-
-{% endfor %}
-
 </div>
 
 </div>
 
-</header>
+</section>
 
-<section class="hero-card">
+<section class="mainCard">
 
 <h2>
 
 Guess a number between
 
-<strong>{{ min_number }}</strong>
+<span class="cyan">{{ min_number }}</span>
 
 and
 
-<strong>{{ max_number }}</strong>
-
-({{ difficulty_label }})
-
+<span class="cyan">{{ max_number }}</span>
 
 </h2>
 
-<p>
+<p class="subtitle">
 
-Every guess brings you closer...
+Think carefully...
 
-or farther.
+One wrong guess could end your streak.
 
 </p>
 
-</section>
-
-<section class="guess-panel">
-
-<form action="{{ url_for('guess') }}" method="POST" id="guessForm">
-
-    <input
-        type="number"
-        name="guess"
-        required>
-
-    <button
-        type="submit"
-        id="guessButton"
-        class="guess-btn">
-        🎯 PLAY
-    </button>
-
-</form>
-
-</section>
-
-<section class="history">
-
-    <h2>Previous Guesses</h2>
-
-    <div class="history-grid">
-
-        {% if guesses %}
-
-            {% for guess in guesses %}
-
-            <div class="history-card">
-
-                <div class="guess-value">
-                    {{ guess.value }}
-                </div>
-
-                <div class="guess-result">
-
-                    {% if guess.result == "higher" %}
-                        ⬆ Try Higher
-
-                    {% elif guess.result == "lower" %}
-                        ⬇ Try Lower
-
-                    {% elif guess.result == "correct" %}
-                        ✅ Correct
-                    {% endif %}
-
-                </div>
-
-            </div>
-
-            {% endfor %}
-
-        {% else %}
-
-            <div class="empty-history">
-                No guesses yet...
-            </div>
-
-        {% endif %}
-
-    </div>
-
-</section>
-
-<footer class="bottom-info">
-
-<div>
-
-Difficulty
-
-<strong>
-
-{{ difficulty_label }}
-
-</strong>
-
-</div>
-
-<div>
-
-Range
-
-<strong>
-
-{{ min_number }} - {{ max_number }}
-
-</strong>
-
-</div>
-
-<div>
-
-Attempts Left
-
-<strong>
-
-{{ attempts_left }}
-
-</strong>
-
-</div>
-
-</footer>
-
-</div>
-
-{% if hints_remaining > 0 %}
-
 <form
+
 action="{{ url_for('guess') }}"
-method="POST">
+
+method="POST"
+
+class="guessForm">
+
+<input
+
+type="number"
+
+name="guess"
+
+required
+
+autocomplete="off"
+
+placeholder="Enter your guess...">
 
 <button
-type="submit"
-name="action"
-value="hint">
 
-💡 Hint ({{ hints_remaining }})
+type="submit">
+
+🎯 Guess
 
 </button>
 
+</form>
+
+<div class="hintArea">
+
+<form
+
+action="{{ url_for('use_hint') }}"
+
+method="POST">
+
+<button
+
+class="hintBtn"
+
+type="submit"
+
+{% if hints_remaining<=0 or game_over %}
+disabled
+{% endif %}>
+
+💡 Hint
+
+({{ hints_remaining }})
+
+</button>
 
 </form>
 
+{% if last_hint %}
+
+<div class="hintMessage">
+
+{{ last_hint }}
+
+</div>
+
 {% endif %}
 
-<script src="{{ url_for('static', filename='game.js') }}"></script>
+</div>
+
+</section>
+
+<section class="historyCard">
+
+<h2>
+
+Previous Guesses
+
+</h2>
+
+<div class="historyGrid">
+
+{% if history %}
+
+{% for item in history|reverse %}
+
+<div class="historyItem">
+
+<div class="historyGuess">
+
+{{ item.guess }}
+
+</div>
+
+<div class="historyResult">
+
+{% if item.result=="correct" %}
+
+✅ Correct
+
+{% elif item.result=="low" %}
+
+⬆ Higher
+
+{% else %}
+
+⬇ Lower
+
+{% endif %}
+
+</div>
+
+<div class="historyHint">
+
+{{ item.hint }}
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="empty">
+
+No guesses yet...
+
+</div>
+
+{% endif %}
+
+</div>
+
+</section>
+
+{% if game_over %}
+
+<div class="resultOverlay">
+
+    <div class="resultCard">
+
+        {% if won %}
+
+        <h1 class="win">
+
+            🎉 YOU WON!
+
+        </h1>
+
+        <p>
+
+            +{{ xp_reward }} XP Earned
+
+        </p>
+
+        {% else %}
+
+        <h1 class="lose">
+
+            💀 GAME OVER
+
+        </h1>
+
+        <p>
+
+            The number was
+
+            <strong>{{ secret_number }}</strong>
+
+        </p>
+
+        {% endif %}
+
+        <div class="resultButtons">
+
+            <a
+            href="{{ url_for('gtn_difficulty') }}"
+            class="playAgain">
+            🔄 Play Again
+            </a>
+
+            <a
+
+            href="{{ url_for('hub') }}"
+
+            class="hubBtn">
+
+            🏠 Back to Hub
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+</div>
+
+<script
+
+src="{{ url_for('static', filename='game.js') }}">
+
+</script>
 
 </body>
 

@@ -272,15 +272,25 @@ def win_rate(profile):
 # LEVEL HELPERS
 # ==========================================
 
-def add_xp(profile, amount):
+def add_xp(username, amount):
 
-    profile["xp"] = profile.get("xp", 0) + amount
+    profile = get_profile(username)
+
+    if profile is None:
+        return None
+
+    profile["xp"] += amount
 
     while profile["xp"] >= profile["level"] * 100:
 
         profile["xp"] -= profile["level"] * 100
 
         profile["level"] += 1
+
+    evaluate_achievements(profile)
+    evaluate_badges(profile)
+
+    save_profile(username, profile)
 
     return profile
 

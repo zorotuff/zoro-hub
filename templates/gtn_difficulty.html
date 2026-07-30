@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Guess The Number</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/gtn_difficulty.css') }}">
+
+</head>
+
+<body>
+
+    <div class="background">
+
+        <div class="aurora aurora1"></div>
+        <div class="aurora aurora2"></div>
+        <div class="aurora aurora3"></div>
+
+    </div>
+
+    <main class="container">
+
+        <header class="hero">
+
+            <h1>Guess The Number</h1>
+
+            <p>
+                Choose your difficulty and test your luck.
+            </p>
+
+        </header>
+
+        <section class="difficulty-grid">
+
+            <a class="difficulty-card"
+               href="{{ url_for('set_difficulty', level='easy') }}">
+               <span class="shimmer"></span>
+
+                <div class="difficulty-name">
+
+                    Easy
+
+                </div>
+
+                <div class="difficulty-info">
+
+                    <span>Range</span>
+                    <strong>1 – 50</strong>
+
+                </div>
+
+                <div class="difficulty-info">
+
+                    <span>Attempts</span>
+                    <strong>10</strong>
+
+                </div>
+
+                <div class="difficulty-info">
+
+                    <span>Reward</span>
+                    <strong>50 XP</strong>
+
+                </div>
+
+            </a>
+
+            <a class="difficulty-card"
+               href="{{ url_for('set_difficulty', level='medium') }}">
+               <span class="shimmer"></span>
+
+                <div class="difficulty-name">
+
+                    Medium
+
+                </div>
+
+                <div class="difficulty-info">
+
+                    <span>Range</span>
+                    <strong>1 – 100</strong>
+
+                </div>
+
+                <div class="difficulty-info">
+
+                    <span>Attempts</span>
+                    <strong>8</strong>
+
+                </div>
+
+                <div class="difficulty-info">
+
+                    <span>Reward</span>
+                    <strong>75 XP</strong>
+
+                </div>
+
+            </a>
+
+            <a class="difficulty-card"
+               href="{{ url_for('set_difficulty', level='hard') }}">
+               <span class="shimmer"></span>
+
+                <div class="difficulty-name">
+
+                    Hard
+
+                </div>
+
+                <div class="difficulty-info">
+
+                    <span>Range</span>
+                    <strong>1 – 200</strong>
+
+                </div>
+
+                <div class="difficulty-info">
+
+                    <span>Attempts</span>
+                    <strong>6</strong>
+
+                </div>
+
+                <div class="difficulty-info">
+
+                    <span>Reward</span>
+                    <strong>100 XP</strong>
+
+                </div>
+
+            </a>
+
+            <a class="difficulty-card asian"
+               href="{{ url_for('set_difficulty', level='asian') }}">
+
+                <div class="difficulty-name">
+
+                    Asian
+
+                </div>
+
+                <div class="difficulty-info">
+
+                    <span>Range</span>
+                    <strong>1 – 500</strong>
+
+                </div>
+
+                <div class="difficulty-info">
+
+                    <span>Attempts</span>
+                    <strong>5</strong>
+
+                </div>
+
+                <div class="difficulty-info">
+
+                    <span>Reward</span>
+                    <strong>250 XP</strong>
+
+                </div>
+
+            </a>
+
+        </section>
+
+        <footer>
+
+            <a class="back-button"
+
+               href="{{ url_for('games') }}">
+
+                ← Back To Arcade
+
+            </a>
+
+        </footer>
+
+    </main>
+
+    <script>
+document.querySelectorAll(".diff-card").forEach(card=>{
+
+    card.addEventListener("click",()=>{
+
+        document
+        .querySelectorAll(".diff-card")
+        .forEach(c=>c.classList.remove("selected"));
+
+        card.classList.add("selected");
+
+    });
+
+});
+</script>
+
+</body>
+
+</html>

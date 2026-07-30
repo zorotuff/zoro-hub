@@ -1,317 +1,181 @@
 "use strict";
 
-/* ==============================
-   ZORO HUB - GAME.JS
-   Part 1
-   Core + Animated Background
-============================== */
-document.body.classList.add("page-show");
+/* ==========================================
+        ZORO HUB - Guess The Number V2
+                PART 1
+========================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    initParticles();
+    initBackground();
+
     initMouseGlow();
-});
 
+    initCursorTrail();
 
-
-
-/* ==============================
-      PARTICLE BACKGROUND
-============================== */
-
-const canvas = document.getElementById("bgCanvas");
-
-if(canvas){
-
-const ctx = canvas.getContext("2d");
-
-let particles = [];
-const PARTICLE_COUNT = 90;
-
-function resizeCanvas(){
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-}
-
-resizeCanvas();
-
-window.addEventListener("resize", resizeCanvas);
-
-
-
-class Particle{
-
-    constructor(){
-
-        this.reset();
-
-    }
-
-    reset(){
-
-        this.x = Math.random()*canvas.width;
-        this.y = Math.random()*canvas.height;
-
-        this.radius = Math.random()*2.5+1;
-
-        this.speedX = (Math.random()-0.5)*0.5;
-        this.speedY = (Math.random()-0.5)*0.5;
-
-        this.alpha = Math.random()*0.5+0.2;
-
-    }
-
-    update(){
-
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        if(this.x<0) this.x=canvas.width;
-        if(this.x>canvas.width) this.x=0;
-
-        if(this.y<0) this.y=canvas.height;
-        if(this.y>canvas.height) this.y=0;
-
-    }
-
-    draw(){
-
-        ctx.beginPath();
-
-        ctx.arc(
-            this.x,
-            this.y,
-            this.radius,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fillStyle=`rgba(120,180,255,${this.alpha})`;
-
-        ctx.fill();
-
-    }
-
-}
-
-
-
-function initParticles(){
-
-    particles=[];
-
-    for(let i=0;i<PARTICLE_COUNT;i++){
-
-        particles.push(new Particle());
-
-    }
-
-    animateParticles();
-
-}
-
-
-
-function animateParticles(){
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    particles.forEach(p=>{
-
-        p.update();
-        p.draw();
-
-    });
-
-    connectParticles();
-
-    requestAnimationFrame(
-        animateParticles
-    );
-
-}
-
-
-
-/* ==============================
-     PARTICLE CONNECTIONS
-============================== */
-
-function connectParticles(){
-
-    for(let a=0;a<particles.length;a++){
-
-        for(let b=a+1;b<particles.length;b++){
-
-            const dx=particles[a].x-particles[b].x;
-            const dy=particles[a].y-particles[b].y;
-
-            const dist=Math.sqrt(dx*dx+dy*dy);
-
-            if(dist<130){
-
-                ctx.beginPath();
-
-                ctx.moveTo(
-                    particles[a].x,
-                    particles[a].y
-                );
-
-                ctx.lineTo(
-                    particles[b].x,
-                    particles[b].y
-                );
-
-                ctx.strokeStyle=`rgba(120,180,255,${
-                    (130-dist)/500
-                })`;
-
-                ctx.lineWidth=1;
-
-                ctx.stroke();
-
-            }
-
-        }
-
-    }
-
-}
-
-
-
-/* ==============================
-      MOUSE GLOW
-============================== */
-
-const mouse={
-
-    x:0,
-    y:0
-
-};
-
-window.addEventListener("mousemove",(e)=>{
-
-    mouse.x=e.clientX;
-    mouse.y=e.clientY;
+    initButtons();
 
 });
 
+/* ==========================================
+            PARTICLE BACKGROUND
+========================================== */
 
+function initBackground(){
+
+    const bg = document.querySelector(".background");
+
+    if(!bg) return;
+
+    for(let i=0;i<45;i++){
+
+        const p = document.createElement("div");
+
+        p.className = "bgParticle";
+
+        p.style.left = Math.random()*100 + "vw";
+
+        p.style.top = Math.random()*100 + "vh";
+
+        p.style.animationDuration =
+            (8 + Math.random()*12) + "s";
+
+        p.style.animationDelay =
+            Math.random()*5 + "s";
+
+        p.style.opacity =
+            0.15 + Math.random()*0.35;
+
+        p.style.transform =
+            `scale(${0.5+Math.random()*1.8})`;
+
+        bg.appendChild(p);
+
+    }
+
+}
+
+/* ==========================================
+                MOUSE GLOW
+========================================== */
 
 function initMouseGlow(){
 
-    function glow(){
+    const glow = document.createElement("div");
 
-        ctx.beginPath();
+    glow.className = "mouseGlow";
 
-        ctx.arc(
-            mouse.x,
-            mouse.y,
-            120,
-            0,
-            Math.PI*2
-        );
+    document.body.appendChild(glow);
 
-        const gradient=ctx.createRadialGradient(
+    document.addEventListener("mousemove",(e)=>{
 
-            mouse.x,
-            mouse.y,
-            0,
+        glow.style.left = e.clientX + "px";
 
-            mouse.x,
-            mouse.y,
-            120
+        glow.style.top = e.clientY + "px";
 
-        );
-
-        gradient.addColorStop(
-            0,
-            "rgba(0,180,255,.12)"
-        );
-
-        gradient.addColorStop(
-            1,
-            "rgba(0,180,255,0)"
-        );
-
-        ctx.fillStyle=gradient;
-
-        ctx.fill();
-
-        requestAnimationFrame(glow);
-
-    }
-
-    glow();
+    });
 
 }
 
-/* ==============================
-   ZORO HUB - GAME.JS
-   Part 2
-   UI Animations
-============================== */
+/* ==========================================
+                CURSOR TRAIL
+========================================== */
+
+function initCursorTrail(){
+
+    document.addEventListener("mousemove",(e)=>{
+
+        const dot = document.createElement("div");
+
+        dot.className = "cursorDot";
+
+        dot.style.left = e.clientX + "px";
+
+        dot.style.top = e.clientY + "px";
+
+        document.body.appendChild(dot);
+
+        setTimeout(()=>{
+
+            dot.remove();
+
+        },500);
+
+    });
+
+}
+
+/* ==========================================
+                BUTTON EFFECTS
+========================================== */
+
+function initButtons(){
+
+    document.querySelectorAll("button").forEach(btn=>{
+
+        btn.addEventListener("mousemove",(e)=>{
+
+            const rect = btn.getBoundingClientRect();
+
+            btn.style.setProperty(
+                "--mx",
+                `${e.clientX-rect.left}px`
+            );
+
+            btn.style.setProperty(
+                "--my",
+                `${e.clientY-rect.top}px`
+            );
+
+        });
+
+    });
+
+}
+
+/* ==========================================
+                PART 2
+========================================== */
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-    initPlayButton();
+    animateGuessButton();
 
-    initHistoryCards();
+    animateHintButton();
 
-    initHearts();
+    animateHearts();
 
-    initHintButton();
+    revealHistory();
 
 });
 
-/* ==============================
-        PLAY BUTTON
-============================== */
+/* ==========================================
+            GUESS BUTTON
+========================================== */
 
-function initPlayButton(){
+function animateGuessButton(){
 
-    const form=document.getElementById("guessForm");
-    const btn=document.getElementById("guessButton");
+    const form=document.querySelector(".guessForm");
 
-    if(!form||!btn)return;
+    const btn=form?.querySelector("button");
 
-    form.addEventListener("submit",(e)=>{
+    if(!form||!btn) return;
 
-        e.preventDefault();
+    form.addEventListener("submit",()=>{
 
         btn.disabled=true;
 
-        btn.classList.add("clicked");
-
-        btn.innerHTML="🎯 Guessing...";
+        btn.innerHTML="⏳ Guessing...";
 
         btn.animate([
 
-            {
-                transform:"scale(1)"
-            },
+            {transform:"scale(1)"},
 
-            {
-                transform:"scale(.92)"
-            },
+            {transform:"scale(.92)"},
 
-            {
-                transform:"scale(1.08)"
-            },
+            {transform:"scale(1.08)"},
 
-            {
-                transform:"scale(1)"
-            }
+            {transform:"scale(1)"}
 
         ],{
 
@@ -321,133 +185,33 @@ function initPlayButton(){
 
         });
 
-        setTimeout(()=>{
-
-            form.submit();
-
-        },450);
-
     });
 
 }
 
+/* ==========================================
+            HINT BUTTON
+========================================== */
 
+function animateHintButton(){
 
-/* ==============================
-      HISTORY CARDS
-============================== */
+    const hint=document.querySelector(".hintBtn");
 
-function initHistoryCards(){
-
-    const cards=document.querySelectorAll(".history-card");
-
-    cards.forEach((card,index)=>{
-
-        card.style.opacity="0";
-
-        card.style.transform="translateY(40px)";
-
-        setTimeout(()=>{
-
-            card.style.transition=".5s ease";
-
-            card.style.opacity="1";
-
-            card.style.transform="translateY(0px)";
-
-        },index*90);
-
-    });
-
-}
-
-
-
-/* ==============================
-        HEARTS
-============================== */
-
-function initHearts(){
-
-    const hearts=document.querySelectorAll(".heart");
-
-    hearts.forEach((heart,index)=>{
-
-        heart.animate([
-
-            {
-
-                transform:"scale(1)"
-
-            },
-
-            {
-
-                transform:"scale(1.3)"
-
-            },
-
-            {
-
-                transform:"scale(1)"
-
-            }
-
-        ],{
-
-            duration:800,
-
-            delay:index*120,
-
-            iterations:1
-
-        });
-
-    });
-
-}
-
-
-
-/* ==============================
-       HINT BUTTON
-============================== */
-
-function initHintButton(){
-
-    const hint=document.querySelector(
-
-        'button[value="hint"]'
-
-    );
-
-    if(!hint)return;
+    if(!hint) return;
 
     hint.addEventListener("mouseenter",()=>{
 
         hint.animate([
 
-            {
+            {transform:"rotate(-2deg)"},
 
-                transform:"rotate(-2deg)"
+            {transform:"rotate(2deg)"},
 
-            },
-
-            {
-
-                transform:"rotate(2deg)"
-
-            },
-
-            {
-
-                transform:"rotate(0deg)"
-
-            }
+            {transform:"rotate(0deg)"}
 
         ],{
 
-            duration:400
+            duration:350
 
         });
 
@@ -455,11 +219,249 @@ function initHintButton(){
 
 }
 
+/* ==========================================
+            HEARTS
+========================================== */
 
+function animateHearts(){
 
-/* ==============================
-      BUTTON HOVER GLOW
-============================== */
+    const hearts=document.querySelectorAll(".hearts span");
+
+    hearts.forEach((heart,index)=>{
+
+        if(heart.classList.contains("dead")) return;
+
+        setTimeout(()=>{
+
+            heart.animate([
+
+                {transform:"scale(1)"},
+
+                {transform:"scale(1.22)"},
+
+                {transform:"scale(1)"}
+
+            ],{
+
+                duration:800,
+
+                iterations:Infinity
+
+            });
+
+        },index*120);
+
+    });
+
+}
+
+/* ==========================================
+        HISTORY REVEAL
+========================================== */
+
+function revealHistory(){
+
+    const cards=document.querySelectorAll(".historyItem");
+
+    cards.forEach((card,index)=>{
+
+        card.style.opacity="0";
+
+        card.style.transform="translateY(30px)";
+
+        setTimeout(()=>{
+
+            card.style.transition=".45s ease";
+
+            card.style.opacity="1";
+
+            card.style.transform="translateY(0px)";
+
+        },index*80);
+
+    });
+
+}
+
+/* ==========================================
+        RIPPLE EFFECT
+========================================== */
+
+document.querySelectorAll("button").forEach(btn=>{
+
+    btn.addEventListener("click",(e)=>{
+
+        const ripple=document.createElement("span");
+
+        ripple.className="ripple";
+
+        ripple.style.left=e.offsetX+"px";
+
+        ripple.style.top=e.offsetY+"px";
+
+        btn.appendChild(ripple);
+
+        setTimeout(()=>{
+
+            ripple.remove();
+
+        },700);
+
+    });
+
+});
+
+/* ==========================================
+                PART 3
+========================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    resultAnimation();
+
+    pageIntro();
+
+    keyboardShortcut();
+
+});
+
+/* ==========================================
+        RESULT POPUP
+========================================== */
+
+function resultAnimation(){
+
+    const popup=document.querySelector(".resultCard");
+
+    if(!popup) return;
+
+    popup.animate([
+
+        {
+
+            opacity:0,
+
+            transform:"scale(.7) rotate(-5deg)"
+
+        },
+
+        {
+
+            opacity:1,
+
+            transform:"scale(1.05) rotate(2deg)"
+
+        },
+
+        {
+
+            opacity:1,
+
+            transform:"scale(1)"
+
+        }
+
+    ],{
+
+        duration:550,
+
+        easing:"ease-out"
+
+    });
+
+}
+
+/* ==========================================
+            PAGE INTRO
+========================================== */
+
+function pageIntro(){
+
+    const page=document.querySelector(".page");
+
+    if(!page) return;
+
+    page.animate([
+
+        {
+
+            opacity:0,
+
+            transform:"translateY(40px)"
+
+        },
+
+        {
+
+            opacity:1,
+
+            transform:"translateY(0)"
+
+        }
+
+    ],{
+
+        duration:600,
+
+        easing:"ease"
+
+    });
+
+}
+
+/* ==========================================
+        ENTER TO SUBMIT
+========================================== */
+
+function keyboardShortcut(){
+
+    const input=document.querySelector("input[name='guess']");
+
+    const form=document.querySelector(".guessForm");
+
+    if(!input||!form) return;
+
+    input.addEventListener("keydown",(e)=>{
+
+        if(e.key==="Enter"){
+
+            form.submit();
+
+        }
+
+    });
+
+}
+
+/* ==========================================
+        FLOATING NUMBER EFFECT
+========================================== */
+
+document.querySelectorAll(".historyGuess").forEach(el=>{
+
+    el.addEventListener("mouseenter",()=>{
+
+        el.animate([
+
+            {transform:"translateY(0px)"},
+
+            {transform:"translateY(-8px)"},
+
+            {transform:"translateY(0px)"}
+
+        ],{
+
+            duration:350
+
+        });
+
+    });
+
+});
+
+/* ==========================================
+        MAGNET BUTTON EFFECT
+========================================== */
 
 document.querySelectorAll("button").forEach(btn=>{
 
@@ -467,524 +469,54 @@ document.querySelectorAll("button").forEach(btn=>{
 
         const rect=btn.getBoundingClientRect();
 
-        btn.style.setProperty(
+        const x=e.clientX-rect.left-rect.width/2;
 
-            "--x",
+        const y=e.clientY-rect.top-rect.height/2;
 
-            `${e.clientX-rect.left}px`
+        btn.style.transform=
+            `translate(${x*0.06}px,${y*0.06}px)`;
 
-        );
+    });
 
-        btn.style.setProperty(
+    btn.addEventListener("mouseleave",()=>{
 
-            "--y",
-
-            `${e.clientY-rect.top}px`
-
-        );
+        btn.style.transform="translate(0,0)";
 
     });
 
 });
 
+/* ==========================================
+        HEART SPARKLES
+========================================== */
 
+setInterval(()=>{
 
-/* ==============================
-      SMOOTH SCROLL
-============================== */
+    document.querySelectorAll(".hearts span:not(.dead)").forEach(h=>{
 
-window.scrollTo({
+        h.animate([
 
-    top:0,
+            {filter:"drop-shadow(0 0 0px red)"},
 
-    behavior:"smooth"
+            {filter:"drop-shadow(0 0 12px red)"},
 
-});
-
-/* ===================================
-        PART 3
-=================================== */
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-    createCursorTrail();
-
-    buttonRipples();
-
-    wrongGuessShake();
-
-    floatingParticles();
-
-});
-
-
-
-/* =========================
-    CURSOR TRAIL
-========================= */
-
-function createCursorTrail(){
-
-    document.addEventListener("mousemove",(e)=>{
-
-        const dot=document.createElement("div");
-
-        dot.className="cursor-particle";
-
-        dot.style.left=e.clientX+"px";
-
-        dot.style.top=e.clientY+"px";
-
-        document.body.appendChild(dot);
-
-        setTimeout(()=>{
-
-            dot.remove();
-
-        },600);
-
-    });
-
-}
-
-
-
-/* =========================
-      BUTTON RIPPLE
-========================= */
-
-function buttonRipples(){
-
-    document.querySelectorAll("button").forEach(btn=>{
-
-        btn.addEventListener("click",(e)=>{
-
-            const ripple=document.createElement("span");
-
-            ripple.className="ripple";
-
-            ripple.style.left=e.offsetX+"px";
-
-            ripple.style.top=e.offsetY+"px";
-
-            btn.appendChild(ripple);
-
-            setTimeout(()=>{
-
-                ripple.remove();
-
-            },700);
-
-        });
-
-    });
-
-}
-
-
-
-/* =========================
-    WRONG GUESS SHAKE
-========================= */
-
-function wrongGuessShake(){
-
-    const msg=document.querySelector(".message");
-
-    if(!msg)return;
-
-    if(
-
-        msg.innerText.includes("Higher") ||
-
-        msg.innerText.includes("Lower")
-
-    ){
-
-        document.querySelector(".hero-card")?.animate([
-
-            {transform:"translateX(0px)"},
-
-            {transform:"translateX(-12px)"},
-
-            {transform:"translateX(12px)"},
-
-            {transform:"translateX(-8px)"},
-
-            {transform:"translateX(8px)"},
-
-            {transform:"translateX(0px)"}
+            {filter:"drop-shadow(0 0 0px red)"}
 
         ],{
 
-            duration:450
-
-        });
-
-    }
-
-}
-
-
-
-/* =========================
- FLOATING PARTICLES
-========================= */
-
-function floatingParticles(){
-
-    for(let i=0;i<15;i++){
-
-        const p=document.createElement("div");
-
-        p.className="bg-particle";
-
-        p.style.left=Math.random()*100+"vw";
-
-        p.style.animationDelay=Math.random()*8+"s";
-
-        p.style.animationDuration=(6+Math.random()*6)+"s";
-
-        document.body.appendChild(p);
-
-    }
-
-}
-
-/* =====================================
-        PART 4
-===================================== */
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-    electricTitle();
-
-    animateXP();
-
-    heartExplosion();
-
-    pageFlash();
-
-});
-
-
-
-/* ==========================
-   TITLE ELECTRIC EFFECT
-========================== */
-
-function electricTitle(){
-
-    const title=document.querySelector("h1");
-
-    if(!title) return;
-
-    title.animate(
-
-        [
-
-            {
-                textShadow:"0 0 10px #4ea8ff"
-            },
-
-            {
-                textShadow:"0 0 35px #9d4edd"
-            },
-
-            {
-                textShadow:"0 0 10px #4ea8ff"
-            }
-
-        ],
-
-        {
-
-            duration:2500,
-
-            iterations:Infinity
-
-        }
-
-    );
-
-}
-
-
-
-
-
-
-/* ==========================
- HEART LOSS EXPLOSION
-========================== */
-
-function heartExplosion(){
-
-    const hearts=document.querySelectorAll(".heart");
-
-    hearts.forEach(heart=>{
-
-        heart.addEventListener("animationend",()=>{
-
-            heart.animate([
-
-                {
-
-                    transform:"scale(1)"
-
-                },
-
-                {
-
-                    transform:"scale(1.6) rotate(20deg)"
-
-                },
-
-                {
-
-                    transform:"scale(.8)"
-
-                },
-
-                {
-
-                    transform:"scale(1)"
-
-                }
-
-            ],{
-
-                duration:900,
-
-            });
+            duration:900
 
         });
 
     });
 
-}
-
-
-
-/* ==========================
- PAGE FLASH
-========================== */
-
-function pageFlash(){
-
-    const msg=document.body.innerText;
-
-    if(msg.includes("Congratulations")){
-
-        flash("#00ff88");
-
-        confetti();
-
-    }
-
-    if(msg.includes("Game Over")){
-
-        flash("#ff0033");
-
-    }
-
-}
-
-
-
-function flash(color){
-
-    const div=document.createElement("div");
-
-    div.style.position="fixed";
-
-    div.style.inset="0";
-
-    div.style.background=color;
-
-    div.style.opacity=".3";
-
-    div.style.pointerEvents="none";
-
-    div.style.zIndex="999999";
-
-    document.body.appendChild(div);
-
-    div.animate([
-
-        {opacity:.35},
-
-        {opacity:0}
-
-    ],{
-
-        duration:1200,
-
-    });
-
-    setTimeout(()=>{
-
-        div.remove();
-
-    },700);
-
-}
-
-
-
-/* ==========================
- CONFETTI
-========================== */
-
-function confetti(){
-
-    for(let i=0;i<120;i++){
-
-        const c=document.createElement("div");
-
-        c.className="confetti";
-
-        c.style.left=Math.random()*100+"vw";
-
-        c.style.background=
-
-        `hsl(${Math.random()*360},100%,60%)`;
-
-        c.style.animationDelay=Math.random()+"s";
-
-        document.body.appendChild(c);
-
-        setTimeout(()=>{
-
-            c.remove();
-
-        },3000);
-
-    }
-
-}
-
-/* ===================================
-        PART 5
-=================================== */
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-    parallaxBackground();
-
-    magneticButtons();
-
-    pageTransition();
-
-});
-
-
-
-/* ======================
-    3D PARALLAX
-====================== */
-
-function parallaxBackground(){
-
-    document.addEventListener("mousemove",(e)=>{
-
-        const x=(e.clientX/window.innerWidth-.5)*20;
-
-        const y=(e.clientY/window.innerHeight-.5)*20;
-
-        const wrapper=document.querySelector(".game-wrapper");
-
-        if(wrapper){
-
-            wrapper.style.transform=
-            `rotateY(${x*.15}deg)
-             rotateX(${-y*.15}deg)`;
-
-        }
-
-    });
-
-}
-
-
-
-/* ======================
-MAGNETIC BUTTON
-====================== */
-
-function magneticButtons(){
-
-    document.querySelectorAll("button").forEach(btn=>{
-
-        btn.addEventListener("mousemove",(e)=>{
-
-            const rect=btn.getBoundingClientRect();
-
-            const x=e.clientX-rect.left-rect.width/2;
-
-            const y=e.clientY-rect.top-rect.height/2;
-
-            btn.style.transform=
-            `translate(${x*.12}px,${y*.12}px) scale(1.05)`;
-
-        });
-
-        btn.addEventListener("mouseleave",()=>{
-
-            btn.style.transform="translate(0,0) scale(1)";
-
-        });
-
-    });
-
-}
-
-
-
-/* ======================
-PAGE FADE
-====================== */
-
-function pageTransition(){
-
-    document.body.classList.add("page-show");
-
-    document.querySelectorAll("a").forEach(link=>{
-
-        link.addEventListener("click",(e)=>{
-
-            if(link.target=="_blank") return;
-
-            e.preventDefault();
-
-            document.body.classList.add("page-hide");
-
-            setTimeout(()=>{
-
-                window.location=link.href;
-
-            },350);
-
-        });
-
-    });
-
-}
-
-function showLevelUp(level){
-
-    const popup=document.createElement("div");
-
-    popup.className="level-popup";
-
-    popup.innerHTML=`🏆 LEVEL ${level}`;
-
-    document.body.appendChild(popup);
-
-    setTimeout(()=>{
-
-        popup.remove();
-
-    },2500);
-
-}}
+},1800);
+
+/* ==========================================
+        CONSOLE
+========================================== */
+
+console.log(
+"%c🎯 Guess The Number V2 Loaded",
+"color:#2EDBFF;font-size:18px;font-weight:bold;"
+);
