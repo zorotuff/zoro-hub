@@ -63,6 +63,8 @@ def chess():
         profile=profile
     )
 
+from flask import request
+
 @app.route("/space_shooter")
 def space_shooter():
 
@@ -70,6 +72,14 @@ def space_shooter():
         return redirect(url_for("index"))
 
     profile = get_profile(session["username"])
+
+    ua = request.headers.get("User-Agent", "").lower()
+
+    if "android" in ua or "iphone" in ua or "ipad" in ua:
+        return render_template(
+            "space_shooter_mobile.html",
+            profile=profile
+        )
 
     return render_template(
         "space_shooter.html",

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Neon Void - Space Shooter</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,10 +15,19 @@
             height: 100vh;
             font-family: 'Courier New', monospace;
             color: #fff;
+            /* MOBILE FIX: Prevent scrolling and zooming */
+            touch-action: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
         #gameCanvas {
             display: block;
             box-shadow: 0 0 60px rgba(0, 200, 255, 0.4), 0 0 120px rgba(100, 0, 200, 0.3);
+            /* MOBILE FIX: Ensure canvas fits screen */
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
         .ui-overlay {
             position: absolute;
@@ -48,6 +57,7 @@
             text-shadow: 0 0 30px rgba(0, 200, 255, 0.5);
             margin-bottom: 20px;
             animation: titlePulse 2s ease-in-out infinite;
+            text-align: center;
         }
         @keyframes titlePulse {
             0%, 100% { transform: scale(1); filter: brightness(1); }
@@ -59,6 +69,7 @@
             letter-spacing: 4px;
             margin-bottom: 50px;
             opacity: 0.8;
+            text-align: center;
         }
         .btn {
             padding: 15px 50px;
@@ -74,6 +85,7 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            z-index: 15;
         }
         .btn:hover {
             background: rgba(0, 255, 255, 0.2);
@@ -217,24 +229,85 @@
             transition: opacity 0.5s;
         }
 
-       /* ===== MOBILE HUD TWEAKS ===== */
-@media (max-width: 900px) {
-  body, canvas { touch-action: none; -webkit-touch-callout: none; user-select: none; -webkit-user-select: none; }
-  .hud { top: 6px; left: 8px; right: 8px; font-size: 12px; }
-  .hud-value { font-size: 15px; }
-  .health-bar { width: 100px; height: 5px; }
-  .weapon-indicator { bottom: 140px; gap: 5px; }
-  .weapon-slot { width: 30px; height: 30px; font-size: 12px; }
-  .boss-health-bar { width: 80vw; top: 40px; height: 9px; }
-  .boss-name { top: 26px; font-size: 10px; }
-  .title { font-size: 32px; letter-spacing: 4px; }
-  .subtitle { font-size: 14px; margin-bottom: 24px; }
-  .btn { padding: 10px 28px; font-size: 15px; }
-  .controls-info { display: none; }
-  .game-over-stats { margin: 16px 0; }
-  .stat-row { width: 220px; margin: 6px auto; font-size: 15px; }
-}
-
+        /* MODIFICATION: Mobile Controls CSS */
+        .mobile-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 30px;
+            z-index: 25;
+            pointer-events: none; /* Allow clicks through the container */
+        }
+        .touch-btn {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid rgba(0, 255, 255, 0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ffff;
+            font-size: 24px;
+            pointer-events: auto; /* Enable clicks on buttons */
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+            transition: background 0.1s, transform 0.1s;
+        }
+        .touch-btn:active {
+            background: rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+            transform: scale(0.95);
+        }
+        .d-pad {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .d-pad-row {
+            display: flex;
+            gap: 60px;
+        }
+        .action-btns {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 20px;
+        }
+        #btnShoot {
+            width: 110px;
+            height: 110px;
+            font-size: 40px;
+            background: rgba(255, 0, 255, 0.1);
+            border-color: rgba(255, 0, 255, 0.4);
+            color: #ff00ff;
+        }
+        #btnShoot:active {
+            background: rgba(255, 0, 255, 0.3);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.6);
+        }
+        #btnSwitch {
+            width: 65px;
+            height: 65px;
+            font-size: 24px;
+            background: rgba(255, 255, 0, 0.1);
+            border-color: rgba(255, 255, 0, 0.4);
+            color: #ffff00;
+        }
+        #btnSwitch:active {
+            background: rgba(255, 255, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.6);
+        }
+        /* Hide mobile controls by default */
+        #mobileControls {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -272,11 +345,27 @@
     <div class="wave-announce" id="waveAnnounce"></div>
     <div class="unlock-notify" id="unlockNotify"></div>
 
+    <!-- MODIFICATION: Mobile Controls HTML -->
+    <div id="mobileControls" class="mobile-controls">
+        <div class="d-pad">
+            <div class="touch-btn" id="btnUp">▲</div>
+            <div class="d-pad-row">
+                <div class="touch-btn" id="btnLeft">◀</div>
+                <div class="touch-btn" id="btnRight">▶</div>
+            </div>
+            <div class="touch-btn" id="btnDown">▼</div>
+        </div>
+        <div class="action-btns">
+            <div class="touch-btn" id="btnSwitch">♻</div>
+            <div class="touch-btn" id="btnShoot">🔥</div>
+        </div>
+    </div>
+
     <div class="ui-overlay" id="startScreen">
         <div class="title">Neon Void</div>
         <div class="subtitle">Space Shooter</div>
         <button class="btn" id="startBtn">Initialize</button>
-        <div class="controls-info">
+        <div class="controls-info" id="controlsInfo">
             <span>WASD / Arrows</span> to Move<br>
             <span>SPACE</span> to Shoot<br>
             <span>1-5</span> to Switch Weapons<br>
@@ -303,16 +392,15 @@
         <button class="btn" id="restartBtn">Reinitialize</button>
     </div>
 
-    
-
     <script>
-
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
 
         function resizeCanvas() {
-            canvas.width = Math.min(window.innerWidth, 1200);
-            canvas.height = Math.min(window.innerHeight, 900);
+            // MOBILE FIX: Improved responsiveness
+            const padding = window.innerWidth < 600 ? 10 : 40;
+            canvas.width = Math.min(window.innerWidth - padding, 1200);
+            canvas.height = Math.min(window.innerHeight - padding, 900);
         }
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
@@ -433,85 +521,82 @@
             }
 
             if (e.key.toLowerCase() === 'p' && (gameState === 'playing' || gameState === 'paused')) {
-                if (gameState === 'playing') {
-                    gameState = 'paused';
-                    document.getElementById('startScreen').classList.remove('hidden');
-                    document.querySelector('#startScreen .title').textContent = 'Paused';
-                    document.querySelector('#startScreen .subtitle').textContent = 'Press Resume to Continue';
-                    document.getElementById('startBtn').textContent = 'Resume';
-                } else {
-                    gameState = 'playing';
-                    document.getElementById('startScreen').classList.add('hidden');
-                }
+                togglePause();
             }
         });
         window.addEventListener('keyup', e => {
             keys[e.key.toLowerCase()] = false;
         });
 
-        function dist(x1, y1, x2, y2) {
-            return Math.sqrt((x2-x1)**2 + (y2-y1)**2);
+        // MODIFICATION: Toggle Pause Helper
+        function togglePause() {
+            if (gameState === 'playing') {
+                gameState = 'paused';
+                document.getElementById('startScreen').classList.remove('hidden');
+                document.querySelector('#startScreen .title').textContent = 'Paused';
+                document.querySelector('#startScreen .subtitle').textContent = 'Press Resume to Continue';
+                document.getElementById('startBtn').textContent = 'Resume';
+                // Show mobile controls even in pause if on mobile, but they won't affect game logic
+            } else if (gameState === 'paused') {
+                gameState = 'playing';
+                document.getElementById('startScreen').classList.add('hidden');
+            }
         }
 
-        function random(min, max) {
-            return Math.random() * (max - min) + min;
-        }
+        // MODIFICATION: Mobile Controls Logic
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        if (isTouchDevice) {
+            document.getElementById('mobileControls').style.display = 'flex';
+            document.getElementById('controlsInfo').innerHTML = '<span>D-PAD</span> to Move<br><span>FIRE</span> to Shoot<br><span>SWITCH</span> to Change Weapon';
+            
+            // Map touch buttons to keys
+            const touchMappings = {
+                'btnUp': ['w', 'arrowup'],
+                'btnDown': ['s', 'arrowdown'],
+                'btnLeft': ['a', 'arrowleft'],
+                'btnRight': ['d', 'arrowright'],
+                'btnShoot': [' ']
+            };
 
-        // === CRAZY NEW BACKGROUND SYSTEM ===
-        let bgPhase = 0; // 0 = normal, 1 = boss
-        let bgPhaseTransition = 0;
-        let currentBossTheme = 0;
-
-        // Aurora / energy wave system
-        const auroraWaves = [];
-        for (let i = 0; i < 6; i++) {
-            auroraWaves.push({
-                y: random(0, canvas.height),
-                amplitude: random(30, 80),
-                frequency: random(0.003, 0.008),
-                speed: random(0.5, 2),
-                phase: random(0, Math.PI * 2),
-                color: ['rgba(0, 200, 255, 0.08)', 'rgba(100, 0, 200, 0.08)', 'rgba(0, 255, 150, 0.06)', 'rgba(200, 0, 100, 0.07)', 'rgba(0, 100, 255, 0.07)', 'rgba(255, 100, 0, 0.06)'][i],
-                width: random(2, 5)
+            Object.entries(touchMappings).forEach(([btnId, keyCodes]) => {
+                const btn = document.getElementById(btnId);
+                const handleStart = (e) => {
+                    e.preventDefault();
+                    keyCodes.forEach(k => keys[k] = true);
+                };
+                const handleEnd = (e) => {
+                    e.preventDefault();
+                    keyCodes.forEach(k => keys[k] = false);
+                };
+                btn.addEventListener('touchstart', handleStart, { passive: false });
+                btn.addEventListener('touchend', handleEnd, { passive: false });
+                btn.addEventListener('touchcancel', handleEnd, { passive: false });
             });
+
+            // Weapon switch logic for mobile
+            document.getElementById('btnSwitch').addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                // Cycle through unlocked weapons
+                for (let i = 1; i <= 5; i++) {
+                    const nextIdx = (player.weapon + i) % 5;
+                    if (highestWaveReached >= weaponUnlocks[nextIdx]) {
+                        player.weapon = nextIdx;
+                        updateWeaponUI();
+                        playSound('unlock'); // Feedback for switching
+                        break;
+                    }
+                }
+            }, { passive: false });
         }
 
-        // Floating geometric shapes
-        const geoShapes = [];
-        for (let i = 0; i < 15; i++) {
-            geoShapes.push({
-                x: random(0, canvas.width),
-                y: random(0, canvas.height),
-                size: random(10, 40),
-                vx: random(-0.3, 0.3),
-                vy: random(-0.3, 0.3),
-                rotation: random(0, Math.PI * 2),
-                rotSpeed: random(-0.01, 0.01),
-                type: Math.floor(random(0, 3)), // 0=triangle, 1=square, 2=hex
-                color: ['rgba(0, 200, 255, 0.15)', 'rgba(200, 0, 255, 0.12)', 'rgba(0, 255, 150, 0.13)', 'rgba(255, 200, 0, 0.1)', 'rgba(255, 0, 100, 0.12)'][Math.floor(random(0, 5))],
-                pulsePhase: random(0, Math.PI * 2)
-            });
-        }
+        function random(min, max) { return Math.random() * (max - min) + min; }
+        function dist(x1, y1, x2, y2) { return Math.sqrt((x2-x1)**2 + (y2-y1)**2); }
 
-        // Deep space warp rings
-        const warpRings = [];
-        for (let i = 0; i < 8; i++) {
-            warpRings.push({
-                cx: canvas.width / 2,
-                cy: canvas.height / 2,
-                radius: random(50, 400),
-                speed: random(0.2, 0.8),
-                alpha: random(0.03, 0.08),
-                color: ['rgba(0, 150, 255, ', 'rgba(100, 0, 200, ', 'rgba(0, 255, 200, ', 'rgba(200, 50, 255, '][Math.floor(random(0, 4))]
-            });
-        }
-
-        // Layered parallax stars with orbital motion
+        // Background Star System
         const starLayers = [
-            { count: 200, speed: 0.3, sizeRange: [0.5, 1.5], alpha: 0.5, color: '#ffffff' },
-            { count: 120, speed: 1.0, sizeRange: [0.8, 2], alpha: 0.7, color: '#aaddff' },
-            { count: 60, speed: 2.2, sizeRange: [1.2, 2.8], alpha: 0.9, color: '#ffeedd' },
-            { count: 30, speed: 3.5, sizeRange: [1.5, 3.5], alpha: 1.0, color: '#ffffff' }
+            { count: 100, sizeRange: [0.5, 1.2], speed: 0.4, alpha: 0.3, color: '#ffffff' },
+            { count: 60, sizeRange: [1, 2], speed: 0.8, alpha: 0.5, color: '#88ccff' },
+            { count: 30, sizeRange: [1.5, 2.5], speed: 1.5, alpha: 0.7, color: '#cc88ff' }
         ];
 
         const allStars = [];
@@ -674,6 +759,8 @@
 
         // Generate boss nebulae for current wave
         let nebulaeBoss = [];
+        let bgPhase = 0; // 0: normal, 1: boss
+        let bgPhaseTransition = 0;
 
         function generateBossNebulae(waveNum) {
             const theme = bossThemes[Math.min(waveNum, 5)];
@@ -856,7 +943,6 @@
             enemies.push(boss);
             currentBoss = boss;
             bossSpawned = true;
-            currentBossTheme = Math.min(wave, 5);
             generateBossNebulae(wave);
 
             bgPhase = 1;
@@ -1001,7 +1087,7 @@
                             x: player.x, y: player.y - 20,
                             vx: Math.cos(angle) * 10,
                             vy: Math.sin(angle) * 10,
-                            damage: 30, color: '#c77dff', size: 5,
+                            damage: 28, color: '#c77dff', size: 5,
                             isNova: true
                         });
                     }
@@ -1215,17 +1301,33 @@
                     playSound('powerup');
                     if (p.type === 0) player.health = Math.min(player.maxHealth, player.health + 30);
                     else if (p.type === 1) player.weapon = Math.min(4, player.weapon + 1);
-                    else if (p.type === 2) {
-                        player.invincible = 180;
-                        createExplosion(player.x, player.y, '#00ff88', 20);
-                    }
+                    else if (p.type === 2) score += 500;
                     powerups.splice(i, 1);
-                    continue;
+                    updateWeaponUI();
+                } else if (p.life <= 0 || p.y > canvas.height + 50) {
+                    powerups.splice(i, 1);
                 }
+            }
 
-                if (p.life <= 0 || p.y > canvas.height + 50) {
-                    powerups.splice(i, 1);
-                }
+            // HUD
+            document.getElementById('scoreDisplay').textContent = score;
+            document.getElementById('waveDisplay').textContent = wave;
+            document.getElementById('healthFill').style.width = Math.max(0, player.health) + '%';
+
+            if (player.health <= 0) {
+                gameState = 'gameover';
+                document.getElementById('gameOverScreen').classList.remove('hidden');
+                document.getElementById('finalScore').textContent = score;
+                document.getElementById('finalWave').textContent = wave;
+                document.getElementById('finalKills').textContent = kills;
+                playSound('explosion');
+            }
+
+            // Wave completion
+            if (bossSpawned && !currentBoss && enemies.length === 0) {
+                wave++;
+                highestWaveReached = Math.max(highestWaveReached, wave);
+                startWave();
             }
 
             // Particles
@@ -1233,144 +1335,22 @@
                 const p = particles[i];
                 p.x += p.vx;
                 p.y += p.vy;
-                p.vx *= 0.98;
-                p.vy *= 0.98;
                 p.life -= p.decay;
-                if (p.life <= 0) {
-                    particles.splice(i, 1);
-                }
+                if (p.life <= 0) particles.splice(i, 1);
             }
-
-            // Check wave complete
-            if (bossSpawned && currentBoss === null && enemies.length === 0 && enemiesToSpawn === 0) {
-                if (wave > highestWaveReached) {
-                    highestWaveReached = wave;
-                }
-                wave++;
-                startWave();
-            }
-
-            // Check game over
-            if (player.health <= 0) {
-                gameState = 'gameover';
-                createExplosion(player.x, player.y, '#00ffff', 50);
-                document.getElementById('finalScore').textContent = score.toLocaleString();
-                document.getElementById('finalWave').textContent = wave;
-                document.getElementById('finalKills').textContent = kills;
-                document.getElementById('gameOverScreen').classList.remove('hidden');
-                document.getElementById('hud').style.display = 'none';
-                document.getElementById('weaponIndicator').style.display = 'none';
-                document.getElementById('bossHealthBar').style.display = 'none';
-                document.getElementById('bossName').style.display = 'none';
-            }
-
-            // Update HUD
-            document.getElementById('scoreDisplay').textContent = score.toLocaleString();
-            document.getElementById('waveDisplay').textContent = wave;
-            document.getElementById('healthFill').style.width = Math.max(0, player.health) + '%';
-
-            updateWeaponUI();
         }
 
         function drawBackground() {
-            const theme = bgPhase === 1 ? bossThemes[currentBossTheme] || bossThemes[5] : null;
-
-            // Base color
-            let baseR, baseG, baseB;
+            // Dark space base
+            const theme = bossThemes[Math.min(wave, 5)];
+            let baseR = 2, baseG = 2, baseB = 5;
             if (bgPhase === 1 && theme) {
-                baseR = 3 + (theme.baseColor.r - 3) * bgPhaseTransition;
-                baseG = 3 + (theme.baseColor.g - 3) * bgPhaseTransition;
-                baseB = 5 + (theme.baseColor.b - 5) * bgPhaseTransition;
-            } else {
-                baseR = 3;
-                baseG = 3;
-                baseB = 5;
+                baseR = baseR * (1 - bgPhaseTransition) + theme.baseColor.r * bgPhaseTransition;
+                baseG = baseG * (1 - bgPhaseTransition) + theme.baseColor.g * bgPhaseTransition;
+                baseB = baseB * (1 - bgPhaseTransition) + theme.baseColor.b * bgPhaseTransition;
             }
-            ctx.fillStyle = 'rgba(' + Math.floor(baseR) + ',' + Math.floor(baseG) + ',' + Math.floor(baseB) + ', 0.22)';
+            ctx.fillStyle = `rgb(${baseR}, ${baseG}, ${baseB})`;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Deep space warp rings
-            warpRings.forEach(ring => {
-                ring.radius += ring.speed;
-                if (ring.radius > Math.max(canvas.width, canvas.height) * 0.8) {
-                    ring.radius = 20;
-                }
-                const alpha = ring.alpha * (1 - ring.radius / (Math.max(canvas.width, canvas.height) * 0.8));
-                let ringColor = ring.color;
-                if (bgPhase === 1 && theme) {
-                    // Shift ring colors toward theme
-                    ringColor = theme.geoColors[Math.floor(random(0, theme.geoColors.length))].replace(/[\d.]+\)$/, '');
-                }
-                ctx.strokeStyle = ringColor + (alpha * (1 - bgPhaseTransition * 0.3)) + ')';
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.arc(canvas.width/2, canvas.height/2, ring.radius, 0, Math.PI * 2);
-                ctx.stroke();
-            });
-
-            // Aurora / energy waves
-            const auroraColors = bgPhase === 1 && theme ? theme.auroraColors : 
-                ['rgba(0, 200, 255, 0.08)', 'rgba(100, 0, 200, 0.08)', 'rgba(0, 255, 150, 0.06)', 'rgba(200, 0, 100, 0.07)', 'rgba(0, 100, 255, 0.07)', 'rgba(255, 100, 0, 0.06)'];
-
-            auroraWaves.forEach((wave, i) => {
-                wave.phase += wave.speed * 0.02;
-                const color = bgPhase === 1 && theme ? auroraColors[i % auroraColors.length] : wave.color;
-                ctx.strokeStyle = color;
-                ctx.lineWidth = wave.width;
-                ctx.beginPath();
-                for (let x = 0; x < canvas.width; x += 3) {
-                    const y = wave.y + Math.sin(x * wave.frequency + wave.phase) * wave.amplitude;
-                    if (x === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                }
-                ctx.stroke();
-
-                wave.y += 0.2;
-                if (wave.y > canvas.height + 100) wave.y = -100;
-            });
-
-            // Floating geometric shapes
-            const geoColors = bgPhase === 1 && theme ? theme.geoColors : null;
-            geoShapes.forEach(shape => {
-                shape.x += shape.vx;
-                shape.y += shape.vy;
-                shape.rotation += shape.rotSpeed;
-
-                if (shape.x < -50) shape.x = canvas.width + 50;
-                if (shape.x > canvas.width + 50) shape.x = -50;
-                if (shape.y < -50) shape.y = canvas.height + 50;
-                if (shape.y > canvas.height + 50) shape.y = -50;
-
-                const pulse = Math.sin(frameCount * 0.03 + shape.pulsePhase) * 0.2 + 0.8;
-                const color = geoColors ? geoColors[shape.type % geoColors.length] : shape.color;
-
-                ctx.save();
-                ctx.translate(shape.x, shape.y);
-                ctx.rotate(shape.rotation);
-                ctx.scale(pulse, pulse);
-                ctx.strokeStyle = color;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-
-                if (shape.type === 0) {
-                    ctx.moveTo(0, -shape.size);
-                    ctx.lineTo(-shape.size * 0.866, shape.size * 0.5);
-                    ctx.lineTo(shape.size * 0.866, shape.size * 0.5);
-                } else if (shape.type === 1) {
-                    ctx.rect(-shape.size/2, -shape.size/2, shape.size, shape.size);
-                } else {
-                    for (let i = 0; i < 6; i++) {
-                        const angle = (Math.PI / 3) * i;
-                        const px = Math.cos(angle) * shape.size;
-                        const py = Math.sin(angle) * shape.size;
-                        if (i === 0) ctx.moveTo(px, py);
-                        else ctx.lineTo(px, py);
-                    }
-                }
-                ctx.closePath();
-                ctx.stroke();
-                ctx.restore();
-            });
 
             // Nebulae
             const nebulae = bgPhaseTransition > 0.5 ? nebulaeBoss : nebulaeNormal;
@@ -1714,33 +1694,34 @@
                     ctx.fillStyle = colors[p.type];
 
                     ctx.beginPath();
-                    ctx.arc(0, 0, 12, 0, Math.PI * 2);
+                    ctx.arc(0, 0, 15, 0, Math.PI * 2);
                     ctx.fill();
 
                     ctx.fillStyle = '#000';
-                    ctx.font = 'bold 14px monospace';
+                    ctx.font = 'bold 12px Courier New';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText(symbols[p.type], 0, 1);
-
+                    ctx.fillText(symbols[p.type], 0, 0);
                     ctx.restore();
                 });
 
                 particles.forEach(p => {
                     ctx.globalAlpha = p.life;
                     ctx.fillStyle = p.color;
-                    ctx.shadowColor = p.color;
-                    ctx.shadowBlur = 5;
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                     ctx.fill();
+                    ctx.globalAlpha = 1;
                 });
-                            ctx.globalAlpha = 1;
-        }
+            }
 
-        ctx.restore();
-        drawMobileControls();
-    }
+            if (gameState === 'paused') {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
+            ctx.restore();
+        }
 
         function gameLoop() {
             update();
@@ -1754,170 +1735,38 @@
             score = 0;
             wave = 1;
             kills = 0;
-            screenShake = 0;
-            frameCount = 0;
-            highestWaveReached = 1;
-            bgPhase = 0;
-            bgPhaseTransition = 0;
-            currentBossTheme = 0;
-
-            player.x = canvas.width / 2;
-            player.y = canvas.height - 100;
             player.health = 100;
             player.weapon = 0;
-            player.invincible = 0;
-            player.trail = [];
-            player.shootTimer = 0;
-
+            player.x = canvas.width / 2;
+            player.y = canvas.height - 100;
             bullets = [];
             enemyBullets = [];
             enemies = [];
             particles = [];
             powerups = [];
-
-            currentBoss = null;
-            bossSpawned = false;
+            highestWaveReached = 1;
+            bgPhase = 0;
+            bgPhaseTransition = 0;
 
             document.getElementById('startScreen').classList.add('hidden');
             document.getElementById('gameOverScreen').classList.add('hidden');
             document.getElementById('hud').style.display = 'flex';
             document.getElementById('weaponIndicator').style.display = 'flex';
-            document.getElementById('bossHealthBar').style.display = 'none';
-            document.getElementById('bossName').style.display = 'none';
-
-            document.querySelector('#startScreen .title').textContent = 'Neon Void';
-            document.querySelector('#startScreen .subtitle').textContent = 'Space Shooter';
-            document.getElementById('startBtn').textContent = 'Initialize';
 
             startWave();
         }
 
         document.getElementById('startBtn').addEventListener('click', () => {
-            document.getElementById('startBtn').blur();
-            if (gameState === 'paused') {
-                gameState = 'playing';
-                document.getElementById('startScreen').classList.add('hidden');
-            } else {
+            if (gameState === 'menu' || gameState === 'gameover') {
                 startGame();
+            } else if (gameState === 'paused') {
+                togglePause();
             }
         });
 
-        document.getElementById('restartBtn').addEventListener('click', () => {
-            document.getElementById('restartBtn').blur();
-            startGame();
-        });
+        document.getElementById('restartBtn').addEventListener('click', startGame);
 
         gameLoop();
-
-        /* ===== CANVAS DRAWN MOBILE CONTROLS ===== */
-const activeTouches = new Map(); // touchId -> { buttonId, actionDone }
-
-function getMobileButtons() {
-  const cy = canvas.height;
-  return [
-    { id: 'up',    key: 'arrowup',    x: 110, y: cy - 155, r: 32, label: '▲', rgb: '0,255,255' },
-    { id: 'down',  key: 'arrowdown',  x: 110, y: cy - 45,  r: 32, label: '▼', rgb: '0,255,255' },
-    { id: 'left',  key: 'arrowleft',  x: 55,  y: cy - 100, r: 32, label: '◀', rgb: '0,255,255' },
-    { id: 'right', key: 'arrowright', x: 165, y: cy - 100, r: 32, label: '▶', rgb: '0,255,255' },
-    { id: 'shoot', key: ' ',          x: canvas.width - 75, y: cy - 75,  r: 42, label: '●', rgb: '255,0,80' },
-    { id: 'weapon',key: null,         x: canvas.width - 75, y: cy - 160, r: 28, label: '↻', rgb: '255,200,0', action: 'weapon' }
-  ];
-}
-
-function getButtonAt(x, y) {
-  for (const b of getMobileButtons()) {
-    const dx = x - b.x, dy = y - b.y;
-    if (dx * dx + dy * dy <= b.r * b.r) return b;
-  }
-  return null;
-}
-
-function drawMobileControls() {
-  if (canvas.width > 900) return;
-  const pressedIds = new Set([...activeTouches.values()].map(t => t.buttonId));
-
-  for (const b of getMobileButtons()) {
-    const on = pressedIds.has(b.id);
-    ctx.save();
-    ctx.fillStyle = `rgba(${b.rgb},${on ? 0.45 : 0.18})`;
-    ctx.strokeStyle = `rgba(${b.rgb},${on ? 0.95 : 0.5})`;
-    ctx.lineWidth = 2;
-    ctx.shadowColor = `rgba(${b.rgb},0.6)`;
-    ctx.shadowBlur = on ? 22 : 10;
-    ctx.beginPath();
-    ctx.arc(b.x, b.y, b.r * (on ? 0.9 : 1), 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-    ctx.fillStyle = on ? '#fff' : `rgba(${b.rgb},0.95)`;
-    ctx.font = `bold ${Math.floor(b.r * 0.65)}px monospace`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(b.label, b.x, b.y + 1);
-    ctx.restore();
-  }
-}
-
-function cycleWeapon() {
-  let next = player.weapon, guard = 0;
-  do { next = (next + 1) % 5; guard++; }
-  while (guard < 5 && highestWaveReached < weaponUnlocks[next]);
-  if (highestWaveReached >= weaponUnlocks[next]) {
-    player.weapon = next;
-    showUnlockNotification('Weapon ' + (next + 1));
-    updateWeaponUI();
-  }
-}
-
-function handleTouch(e) {
-  e.preventDefault();
-  const rect = canvas.getBoundingClientRect();
-  const sx = canvas.width / rect.width;
-  const sy = canvas.height / rect.height;
-
-  for (let i = 0; i < e.changedTouches.length; i++) {
-    const t = e.changedTouches[i];
-    const x = (t.clientX - rect.left) * sx;
-    const y = (t.clientY - rect.top) * sy;
-    const prev = activeTouches.get(t.identifier);
-    const btn = getButtonAt(x, y);
-
-    if (prev && (!btn || btn.id !== prev.buttonId)) {
-      const old = getMobileButtons().find(b => b.id === prev.buttonId);
-      if (old && old.key) keys[old.key] = false;
-    }
-    if (btn && (!prev || prev.buttonId !== btn.id)) {
-      const rec = { buttonId: btn.id, actionDone: prev ? prev.actionDone : false };
-      activeTouches.set(t.identifier, rec);
-      if (btn.key) keys[btn.key] = true;
-      if (btn.action === 'weapon' && !rec.actionDone) {
-        rec.actionDone = true;
-        cycleWeapon();
-      }
-    }
-    if (!btn) activeTouches.delete(t.identifier);
-  }
-}
-
-function handleTouchEnd(e) {
-  e.preventDefault();
-  for (let i = 0; i < e.changedTouches.length; i++) {
-    const t = e.changedTouches[i];
-    const prev = activeTouches.get(t.identifier);
-    if (prev) {
-      const old = getMobileButtons().find(b => b.id === prev.buttonId);
-      if (old && old.key) keys[old.key] = false;
-      activeTouches.delete(t.identifier);
-    }
-  }
-}
-
-canvas.addEventListener('touchstart', handleTouch, { passive: false });
-canvas.addEventListener('touchmove',  handleTouch, { passive: false });
-canvas.addEventListener('touchend',   handleTouchEnd, { passive: false });
-canvas.addEventListener('touchcancel',handleTouchEnd, { passive: false });
-document.addEventListener('contextmenu', e => e.preventDefault());
-
     </script>
 </body>
 </html>
