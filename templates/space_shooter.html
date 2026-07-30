@@ -217,50 +217,132 @@
             transition: opacity 0.5s;
         }
 
-        .mobile-controls{
-position:fixed;
-bottom:20px;
-left:0;
-width:100%;
-display:none;
-pointer-events:none;
-z-index:9999;
+        /* ===== MOBILE / LANDSCAPE FIXES ===== */
+@media (max-width: 900px), (max-height: 500px) {
+  body {
+    overflow: hidden;
+    touch-action: none;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  #gameCanvas {
+    box-shadow: none;
+  }
+  .hud {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    font-size: 14px;
+  }
+  .hud-value {
+    font-size: 16px;
+  }
+  .health-bar {
+    width: 120px;
+    height: 6px;
+  }
+  .weapon-indicator {
+    bottom: 10px;
+    gap: 6px;
+  }
+  .weapon-slot {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+  .boss-health-bar {
+    width: 60vw;
+    top: 48px;
+    height: 10px;
+  }
+  .boss-name {
+    top: 34px;
+    font-size: 11px;
+  }
+  .title {
+    font-size: 32px;
+    letter-spacing: 4px;
+  }
+  .btn {
+    padding: 12px 32px;
+    font-size: 16px;
+  }
+  .controls-info {
+    display: none;
+  }
+
+  /* Better D-pad layout */
+  .dpad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    left: 14px;
+    bottom: 14px;
+  }
+  .dpad-mid {
+    display: flex;
+    gap: 6px;
+  }
+  .actions {
+    right: 14px;
+    bottom: 14px;
+    gap: 12px;
+  }
+  .ctrl-btn {
+    width: 54px;
+    height: 54px;
+    font-size: 22px;
+    border: 1px solid rgba(0, 255, 255, 0.45);
+    background: rgba(0, 0, 0, 0.55);
+    color: #00ffff;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+  }
+  .ctrl-btn:active {
+    background: rgba(0, 255, 255, 0.25);
+    transform: scale(0.9);
+  }
+  .ctrl-fire {
+    width: 70px;
+    height: 70px;
+    font-size: 28px;
+    background: rgba(255, 0, 80, 0.35);
+    border-color: rgba(255, 0, 80, 0.6);
+    color: #ff5588;
+    box-shadow: 0 0 20px rgba(255, 0, 80, 0.35);
+  }
+  .ctrl-fire:active {
+    background: rgba(255, 0, 80, 0.55);
+  }
 }
 
-@media(max-width:900px){
-
-.mobile-controls{
-display:block;
+/* Rotate-to-landscape prompt for portrait phones */
+@media (max-width: 600px) and (orientation: portrait) {
+  body::before {
+    content: "↻ Rotate to Landscape";
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    background: #020205;
+    color: #00ffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+  }
 }
 
-.ctrl-btn{
-pointer-events:auto;
-width:70px;
-height:70px;
-border-radius:50%;
-border:none;
-background:rgba(0,0,0,.45);
-backdrop-filter:blur(12px);
-color:white;
-font-size:28px;
-box-shadow:0 0 20px cyan;
-}
-
-.dpad{
-position:absolute;
-left:20px;
-bottom:20px;
-}
-
-.actions{
-position:absolute;
-right:20px;
-bottom:20px;
-display:flex;
-flex-direction:column;
-gap:15px;
-}
-}
     </style>
 </head>
 <body>
@@ -329,20 +411,20 @@ gap:15px;
         <button class="btn" id="restartBtn">Reinitialize</button>
     </div>
 
-    <div id="mobileControls">
-
-    <div id="leftControls">
-        <button id="leftBtn">◀</button>
-        <button id="upBtn">▲</button>
-        <button id="downBtn">▼</button>
-        <button id="rightBtn">▶</button>
+    <!-- ===== MOBILE TOUCH CONTROLS ===== -->
+<div class="mobile-controls" id="mobileControls">
+  <div class="dpad">
+    <button class="ctrl-btn" id="btnUp">&#9650;</button>
+    <div class="dpad-mid">
+      <button class="ctrl-btn" id="btnLeft">&#9664;</button>
+      <button class="ctrl-btn" id="btnDown">&#9660;</button>
+      <button class="ctrl-btn" id="btnRight">&#9654;</button>
     </div>
-
-    <div id="rightControls">
-        <button id="shootBtn">🔥</button>
-        <button id="switchWeapon">🔄</button>
-    </div>
-
+  </div>
+  <div class="actions">
+    <button class="ctrl-btn ctrl-fire" id="btnShoot">&#9679;</button>
+    <button class="ctrl-btn" id="switchWeapon">&#8634;</button>
+  </div>
 </div>
 
     <script>
@@ -1848,30 +1930,75 @@ gap:15px;
 
         gameLoop();
 
-        document.getElementById("switchWeapon").addEventListener("touchstart",(e)=>{
+        // ===== MOBILE TOUCH CONTROLS =====
+(function() {
+  const touchMap = {
+    'btnUp':    'arrowup',
+    'btnDown':  'arrowdown',
+    'btnLeft':  'arrowleft',
+    'btnRight': 'arrowright',
+    'btnShoot': ' '
+  };
 
-    e.preventDefault();
+  Object.entries(touchMap).forEach(([id, key]) => {
+    const btn = document.getElementById(id);
+    if (!btn) return;
 
-    let next = player.weapon;
+    const onStart = (e) => {
+      e.preventDefault();
+      keys[key] = true;
+      btn.style.transform = 'scale(0.88)';
+    };
+    const onEnd = (e) => {
+      e.preventDefault();
+      keys[key] = false;
+      btn.style.transform = '';
+    };
 
-    do{
+    btn.addEventListener('touchstart', onStart, { passive: false });
+    btn.addEventListener('touchend',   onEnd,   { passive: false });
+    btn.addEventListener('touchcancel',onEnd,   { passive: false });
+    // Mouse fallback for desktop testing
+    btn.addEventListener('mousedown',  onStart);
+    btn.addEventListener('mouseup',    onEnd);
+    btn.addEventListener('mouseleave', onEnd);
+  });
 
-        next++;
+  // Weapon switcher (cycles only unlocked weapons)
+  const switchBtn = document.getElementById('switchWeapon');
+  if (switchBtn) {
+    const cycleWeapon = (e) => {
+      if (e) e.preventDefault();
+      let next = (player.weapon + 1) % 5;
+      let guard = 0;
+      while (highestWaveReached < weaponUnlocks[next] && guard < 5) {
+        next = (next + 1) % 5;
+        guard++;
+      }
+      if (highestWaveReached >= weaponUnlocks[next]) {
+        player.weapon = next;
+        showUnlockNotification('Weapon ' + (player.weapon + 1));
+        updateWeaponUI();
+      }
+    };
+    switchBtn.addEventListener('touchstart', cycleWeapon, { passive: false });
+    switchBtn.addEventListener('mousedown',  cycleWeapon);
+  }
 
-        if(next >= weaponUnlocks.length)
-            next = 0;
+  // Block zoom, scroll, double-tap zoom, and long-press menus
+  document.addEventListener('touchmove', (e) => {
+    if (e.scale !== 1) e.preventDefault();
+  }, { passive: false });
 
-    }while(highestWaveReached < weaponUnlocks[next]);
+  document.addEventListener('contextmenu', (e) => e.preventDefault());
 
-    player.weapon = next;
-
-    showUnlockNotification(
-    "Weapon " + (player.weapon+1)
-);
-
-    updateWeaponUI();
-
-});
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', (e) => {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) e.preventDefault();
+    lastTouchEnd = now;
+  }, false);
+})();
 
     </script>
 </body>
