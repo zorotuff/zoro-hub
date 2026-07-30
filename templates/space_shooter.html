@@ -217,130 +217,84 @@
             transition: opacity 0.5s;
         }
 
-        /* ===== MOBILE / LANDSCAPE FIXES ===== */
-@media (max-width: 900px), (max-height: 500px) {
+       /* ===== MOBILE PORTRAIT OVERRIDES ===== */
+@media (max-width: 900px) {
   body {
-    overflow: hidden;
     touch-action: none;
     -webkit-touch-callout: none;
     user-select: none;
     -webkit-user-select: none;
   }
-  #gameCanvas {
-    box-shadow: none;
-  }
   .hud {
-    top: 8px;
+    top: 6px;
     left: 8px;
     right: 8px;
-    font-size: 14px;
+    font-size: 12px;
   }
-  .hud-value {
-    font-size: 16px;
-  }
-  .health-bar {
-    width: 120px;
-    height: 6px;
-  }
-  .weapon-indicator {
-    bottom: 10px;
-    gap: 6px;
-  }
-  .weapon-slot {
-    width: 34px;
-    height: 34px;
-    font-size: 14px;
-  }
-  .boss-health-bar {
-    width: 60vw;
-    top: 48px;
-    height: 10px;
-  }
-  .boss-name {
-    top: 34px;
-    font-size: 11px;
-  }
-  .title {
-    font-size: 32px;
-    letter-spacing: 4px;
-  }
-  .btn {
-    padding: 12px 32px;
-    font-size: 16px;
-  }
-  .controls-info {
-    display: none;
-  }
+  .hud-value { font-size: 15px; }
+  .health-bar { width: 100px; height: 5px; }
+  .weapon-indicator { bottom: 140px; gap: 5px; }
+  .weapon-slot { width: 30px; height: 30px; font-size: 12px; }
+  .boss-health-bar { width: 80vw; top: 40px; height: 9px; }
+  .boss-name { top: 26px; font-size: 10px; }
+  .title { font-size: 32px; letter-spacing: 4px; }
+  .subtitle { font-size: 14px; margin-bottom: 24px; }
+  .btn { padding: 10px 28px; font-size: 15px; }
+  .controls-info { display: none; }
+  .game-over-stats { margin: 16px 0; }
+  .stat-row { width: 220px; margin: 6px auto; font-size: 15px; }
 
-  /* Better D-pad layout */
+  .mobile-controls {
+    display: flex !important;
+    height: auto;
+    padding: 0 12px 16px;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
   .dpad {
+    position: static;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    left: 14px;
-    bottom: 14px;
+    gap: 4px;
   }
-  .dpad-mid {
-    display: flex;
-    gap: 6px;
-  }
+  .dpad-mid { display: flex; gap: 4px; }
   .actions {
-    right: 14px;
-    bottom: 14px;
-    gap: 12px;
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
   .ctrl-btn {
     width: 54px;
     height: 54px;
-    font-size: 22px;
-    border: 1px solid rgba(0, 255, 255, 0.45);
-    background: rgba(0, 0, 0, 0.55);
+    font-size: 20px;
+    border: 1.5px solid rgba(0, 255, 255, 0.45);
     color: #00ffff;
-    border-radius: 50%;
-    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: auto;
+    transition: transform 0.06s, background 0.1s;
   }
   .ctrl-btn:active {
-    background: rgba(0, 255, 255, 0.25);
-    transform: scale(0.9);
+    transform: scale(0.88);
+    background: rgba(0, 255, 255, 0.3);
   }
   .ctrl-fire {
-    width: 70px;
-    height: 70px;
-    font-size: 28px;
+    width: 68px;
+    height: 68px;
+    font-size: 24px;
     background: rgba(255, 0, 80, 0.35);
-    border-color: rgba(255, 0, 80, 0.6);
-    color: #ff5588;
-    box-shadow: 0 0 20px rgba(255, 0, 80, 0.35);
+    border-color: rgba(255, 0, 80, 0.55);
+    color: #ff6699;
+    box-shadow: 0 0 18px rgba(255, 0, 80, 0.35);
   }
-  .ctrl-fire:active {
-    background: rgba(255, 0, 80, 0.55);
-  }
-}
-
-/* Rotate-to-landscape prompt for portrait phones */
-@media (max-width: 600px) and (orientation: portrait) {
-  body::before {
-    content: "↻ Rotate to Landscape";
-    position: fixed;
-    inset: 0;
-    z-index: 100000;
-    background: #020205;
-    color: #00ffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    letter-spacing: 2px;
-    font-family: 'Courier New', monospace;
-    text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-  }
+  .ctrl-fire:active { background: rgba(255, 0, 80, 0.55); }
 }
 
     </style>
@@ -411,19 +365,19 @@
         <button class="btn" id="restartBtn">Reinitialize</button>
     </div>
 
-    <!-- ===== MOBILE TOUCH CONTROLS ===== -->
+    <!-- MOBILE CONTROLS -->
 <div class="mobile-controls" id="mobileControls">
   <div class="dpad">
-    <button class="ctrl-btn" id="btnUp">&#9650;</button>
+    <button class="ctrl-btn" id="btnUp">▲</button>
     <div class="dpad-mid">
-      <button class="ctrl-btn" id="btnLeft">&#9664;</button>
-      <button class="ctrl-btn" id="btnDown">&#9660;</button>
-      <button class="ctrl-btn" id="btnRight">&#9654;</button>
+      <button class="ctrl-btn" id="btnLeft">◀</button>
+      <button class="ctrl-btn" id="btnDown">▼</button>
+      <button class="ctrl-btn" id="btnRight">▶</button>
     </div>
   </div>
   <div class="actions">
-    <button class="ctrl-btn ctrl-fire" id="btnShoot">&#9679;</button>
-    <button class="ctrl-btn" id="switchWeapon">&#8634;</button>
+    <button class="ctrl-btn ctrl-fire" id="btnShoot">●</button>
+    <button class="ctrl-btn" id="btnWeapon">↻</button>
   </div>
 </div>
 
@@ -1930,8 +1884,14 @@
 
         gameLoop();
 
-        // ===== MOBILE TOUCH CONTROLS =====
+        /* ===== MOBILE CONTROLS ===== */
 (function() {
+  // Block zoom, scroll, double-tap zoom, and long-press menus
+  document.addEventListener('touchmove', e => { e.preventDefault(); }, { passive: false });
+  document.addEventListener('gesturestart', e => { e.preventDefault(); });
+  document.addEventListener('dblclick', e => { e.preventDefault(); });
+  document.addEventListener('contextmenu', e => { e.preventDefault(); });
+
   const touchMap = {
     'btnUp':    'arrowup',
     'btnDown':  'arrowdown',
@@ -1944,60 +1904,38 @@
     const btn = document.getElementById(id);
     if (!btn) return;
 
-    const onStart = (e) => {
-      e.preventDefault();
-      keys[key] = true;
-      btn.style.transform = 'scale(0.88)';
-    };
-    const onEnd = (e) => {
-      e.preventDefault();
-      keys[key] = false;
-      btn.style.transform = '';
-    };
+    const onStart = (e) => { e.preventDefault(); keys[key] = true;  btn.style.transform = 'scale(0.88)'; };
+    const onEnd   = (e) => { e.preventDefault(); keys[key] = false; btn.style.transform = ''; };
 
     btn.addEventListener('touchstart', onStart, { passive: false });
     btn.addEventListener('touchend',   onEnd,   { passive: false });
     btn.addEventListener('touchcancel',onEnd,   { passive: false });
-    // Mouse fallback for desktop testing
+    // Mouse fallback so you can test with a mouse too
     btn.addEventListener('mousedown',  onStart);
     btn.addEventListener('mouseup',    onEnd);
     btn.addEventListener('mouseleave', onEnd);
   });
 
-  // Weapon switcher (cycles only unlocked weapons)
-  const switchBtn = document.getElementById('switchWeapon');
-  if (switchBtn) {
+  // Weapon switcher — cycles only through unlocked weapons
+  const wBtn = document.getElementById('btnWeapon');
+  if (wBtn) {
     const cycleWeapon = (e) => {
-      if (e) e.preventDefault();
-      let next = (player.weapon + 1) % 5;
+      e.preventDefault();
+      let next = player.weapon;
       let guard = 0;
-      while (highestWaveReached < weaponUnlocks[next] && guard < 5) {
+      do {
         next = (next + 1) % 5;
         guard++;
-      }
+      } while (guard < 5 && highestWaveReached < weaponUnlocks[next]);
       if (highestWaveReached >= weaponUnlocks[next]) {
         player.weapon = next;
-        showUnlockNotification('Weapon ' + (player.weapon + 1));
+        showUnlockNotification('Weapon ' + (next + 1));
         updateWeaponUI();
       }
     };
-    switchBtn.addEventListener('touchstart', cycleWeapon, { passive: false });
-    switchBtn.addEventListener('mousedown',  cycleWeapon);
+    wBtn.addEventListener('touchstart', cycleWeapon, { passive: false });
+    wBtn.addEventListener('mousedown',  cycleWeapon);
   }
-
-  // Block zoom, scroll, double-tap zoom, and long-press menus
-  document.addEventListener('touchmove', (e) => {
-    if (e.scale !== 1) e.preventDefault();
-  }, { passive: false });
-
-  document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-  let lastTouchEnd = 0;
-  document.addEventListener('touchend', (e) => {
-    const now = Date.now();
-    if (now - lastTouchEnd <= 300) e.preventDefault();
-    lastTouchEnd = now;
-  }, false);
 })();
 
     </script>
