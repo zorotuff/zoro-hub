@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0a1a">
+<meta name="mobile-web-app-capable" content="yes">
 <title>Kitty Dash</title>
 <style>
   :root {
@@ -38,9 +42,12 @@
     --speed-bar-shadow: #ff2a6d;
     --speed-label-color: #556677;
     --screen-bg: rgba(10,10,26,0.92);
+    --joy-bg: rgba(255,255,255,0.08);
+    --joy-active: rgba(5,217,232,0.25);
+    --joy-border: rgba(5,217,232,0.4);
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     background: #000;
     overflow: hidden;
@@ -48,9 +55,51 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100vw;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
   }
+
+  /* ========== PORTRAIT ROTATION WARNING ========== */
+  #rotate-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #0a0a1a;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    text-align: center;
+  }
+  #rotate-screen .rotate-icon {
+    font-size: 80px;
+    animation: rotatePhone 2s ease-in-out infinite;
+    margin-bottom: 20px;
+    color: #05d9e8;
+    text-shadow: 0 0 20px rgba(5,217,232,0.5);
+  }
+  #rotate-screen h2 {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+  }
+  #rotate-screen p {
+    font-size: 14px;
+    color: #8899aa;
+    max-width: 280px;
+    line-height: 1.5;
+  }
+  @keyframes rotatePhone {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(90deg); }
+  }
+
+  /* ========== GAME CONTAINER ========== */
   #game-container {
     position: relative;
     width: 100vw;
@@ -67,6 +116,8 @@
     width: 100%;
     height: 100%;
   }
+
+  /* ========== UI OVERLAY ========== */
   #ui {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -75,9 +126,9 @@
   }
   #score {
     position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 28px;
+    top: 12px;
+    right: 20px;
+    font-size: 22px;
     font-weight: 900;
     color: var(--score-color);
     text-shadow: 0 0 10px var(--score-shadow), 0 0 20px var(--score-shadow);
@@ -85,13 +136,42 @@
   }
   #speed-indicator {
     position: absolute;
-    top: 20px;
-    left: 30px;
-    font-size: 18px;
+    top: 12px;
+    left: 20px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--speed-color);
     text-shadow: 0 0 8px var(--speed-shadow);
   }
+  #speed-bar-container {
+    position: absolute;
+    bottom: 16px;
+    right: 20px;
+    width: 120px;
+    height: 5px;
+    background: var(--speed-bar-bg);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  #speed-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--speed-bar-gradient-start), var(--speed-bar-gradient-end));
+    border-radius: 3px;
+    transition: width 0.3s;
+    box-shadow: 0 0 10px var(--speed-bar-shadow);
+  }
+  #speed-label {
+    position: absolute;
+    bottom: 24px;
+    right: 20px;
+    font-size: 9px;
+    color: var(--speed-label-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ========== SCREENS ========== */
   #start-screen, #game-over-screen, #pause-screen {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -110,14 +190,14 @@
   #pause-screen { opacity: 0; pointer-events: none; }
   #pause-screen.active { opacity: 1; pointer-events: all; }
   h1 {
-    font-size: 64px;
+    font-size: 48px;
     background: linear-gradient(90deg, var(--title-gradient-start), var(--title-gradient-mid), var(--title-gradient-end));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: none;
     filter: drop-shadow(0 0 15px rgba(255,42,109,0.5));
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     animation: titlePulse 2s ease-in-out infinite;
   }
   @keyframes titlePulse {
@@ -126,14 +206,14 @@
   }
   .subtitle {
     color: var(--subtitle-color);
-    font-size: 16px;
-    margin-bottom: 40px;
+    font-size: 14px;
+    margin-bottom: 30px;
     letter-spacing: 3px;
     text-transform: uppercase;
   }
   .btn {
-    padding: 16px 48px;
-    font-size: 22px;
+    padding: 14px 40px;
+    font-size: 18px;
     font-weight: 800;
     border: 2px solid var(--btn-border);
     background: transparent;
@@ -145,31 +225,32 @@
     transition: all 0.2s;
     box-shadow: 0 0 15px var(--btn-shadow);
     pointer-events: all;
+    -webkit-tap-highlight-color: transparent;
   }
-  .btn:hover {
+  .btn:active {
     background: var(--btn-hover-bg);
     color: var(--btn-hover-color);
     box-shadow: 0 0 30px var(--btn-hover-shadow);
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(0.97);
   }
   .final-score {
-    font-size: 48px;
+    font-size: 36px;
     color: var(--final-score-color);
     text-shadow: 0 0 20px var(--final-score-shadow);
-    margin: 20px 0;
+    margin: 15px 0;
   }
   .high-score {
-    font-size: 18px;
+    font-size: 16px;
     color: var(--high-score-color);
-    margin-bottom: 30px;
+    margin-bottom: 25px;
   }
   .controls-hint {
     position: absolute;
-    bottom: 30px;
+    bottom: 25px;
     width: 100%;
     text-align: center;
     color: var(--controls-color);
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: 1px;
   }
   .controls-hint span {
@@ -180,53 +261,26 @@
     margin: 0 4px;
     color: var(--controls-span-color);
   }
-  #speed-bar-container {
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
-    width: 150px;
-    height: 6px;
-    background: var(--speed-bar-bg);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  #speed-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, var(--speed-bar-gradient-start), var(--speed-bar-gradient-end));
-    border-radius: 3px;
-    transition: width 0.3s;
-    box-shadow: 0 0 10px var(--speed-bar-shadow);
-  }
-  #speed-label {
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-    font-size: 10px;
-    color: var(--speed-label-color);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
 
-  /* Theme Switcher Styles - IMPROVED */
+  /* ========== THEME SWITCHER ========== */
   #theme-switcher {
     position: absolute;
-    top: 16px;
+    top: 12px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 30;
     display: flex;
-    gap: 10px;
+    gap: 8px;
     background: rgba(0,0,0,0.7);
-    padding: 10px 18px;
+    padding: 8px 14px;
     border-radius: 40px;
     border: 1px solid rgba(255,255,255,0.2);
     backdrop-filter: blur(12px);
     box-shadow: 0 4px 20px rgba(0,0,0,0.4);
   }
   .theme-btn {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     border: 3px solid transparent;
     cursor: pointer;
@@ -235,37 +289,34 @@
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
-  .theme-btn:hover {
-    transform: scale(1.2) translateY(-2px);
+  .theme-btn:active {
+    transform: scale(1.15);
     border-color: rgba(255,255,255,0.6);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
   }
   .theme-btn.active {
     border-color: #fff;
     box-shadow: 0 0 16px rgba(255,255,255,0.5), 0 0 32px rgba(255,255,255,0.2);
-    transform: scale(1.15);
+    transform: scale(1.1);
   }
   .theme-btn::after {
     content: attr(data-label);
     position: absolute;
-    bottom: -24px;
+    bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 10px;
+    font-size: 9px;
     color: #fff;
     white-space: nowrap;
     opacity: 0;
-    transition: opacity 0.25s, transform 0.25s;
+    transition: opacity 0.25s;
     pointer-events: none;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     font-weight: 700;
     text-shadow: 0 1px 4px rgba(0,0,0,0.8);
   }
-  .theme-btn:hover::after,
   .theme-btn.active::after {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
   }
   .theme-neon { background: linear-gradient(135deg, #ff2a6d 0%, #05d9e8 50%, #d300c5 100%); }
   .theme-volcano { background: linear-gradient(135deg, #ff4500 0%, #ff8c00 40%, #8b0000 100%); }
@@ -273,25 +324,307 @@
   .theme-ocean { background: linear-gradient(135deg, #00bfff 0%, #1e90ff 50%, #00008b 100%); }
   .theme-cyber { background: linear-gradient(135deg, #d300c5 0%, #7a40ff 50%, #05d9e8 100%); }
 
-  /* Pause hint */
-  #pause-hint {
+  /* ========== MUTE BUTTON ========== */
+  #mute-btn {
     position: absolute;
-    top: 70px;
+    bottom: 16px;
+    left: 20px;
+    z-index: 25;
+    cursor: pointer;
+    font-size: 18px;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+    user-select: none;
+    pointer-events: all;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #mute-btn:active { opacity: 1; }
+
+  /* ========== MOBILE CONTROLS ========== */
+  #mobile-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 15;
+    display: none;
+  }
+  #mobile-controls.active {
+    display: block;
+  }
+
+  /* Jump Button - Right side */
+  .control-btn {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--joy-bg);
+    border: 2px solid var(--joy-border);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: all;
+    cursor: pointer;
+    transition: all 0.1s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .control-btn:active, .control-btn.pressed {
+    background: var(--joy-active);
+    border-color: var(--border-color);
+    box-shadow: 0 0 20px var(--shadow-color);
+    transform: scale(0.92);
+  }
+  .control-btn .icon {
+    font-size: 28px;
+    color: var(--btn-color);
+    text-shadow: 0 0 10px var(--shadow-color);
+    pointer-events: none;
+  }
+
+  /* Jump Button */
+  #btn-jump {
+    width: 80px;
+    height: 80px;
+    bottom: 20px;
+    right: 20px;
+  }
+  #btn-jump .icon { font-size: 32px; }
+
+  /* Duck Button */
+  #btn-duck {
+    width: 70px;
+    height: 70px;
+    bottom: 25px;
+    right: 115px;
+  }
+  #btn-duck .icon { font-size: 24px; }
+
+  /* Pause Button */
+  #btn-pause {
+    width: 50px;
+    height: 50px;
+    top: 12px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 15;
-    font-size: 11px;
-    color: rgba(255,255,255,0.3);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    pointer-events: none;
-    transition: opacity 0.3s;
+    margin-left: 140px;
+    border-radius: 12px;
   }
-  #pause-hint.hidden { opacity: 0; }
+  #btn-pause .icon { font-size: 20px; }
+
+  /* D-Pad - Left side */
+  #dpad {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 120px;
+    height: 120px;
+    pointer-events: all;
+  }
+  .dpad-btn {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--joy-bg);
+    border: 2px solid var(--joy-border);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: all;
+    cursor: pointer;
+    transition: all 0.1s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .dpad-btn:active, .dpad-btn.pressed {
+    background: var(--joy-active);
+    border-color: var(--border-color);
+    box-shadow: 0 0 15px var(--shadow-color);
+    transform: scale(0.92);
+  }
+  .dpad-btn .icon {
+    font-size: 20px;
+    color: var(--btn-color);
+    text-shadow: 0 0 8px var(--shadow-color);
+    pointer-events: none;
+  }
+  #dpad-up { top: 0; left: 36px; }
+  #dpad-down { bottom: 0; left: 36px; }
+  #dpad-left { top: 36px; left: 0; }
+  #dpad-right { top: 36px; right: 0; }
+
+  /* Virtual Joystick */
+  #joystick-zone {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    width: 130px;
+    height: 130px;
+    pointer-events: all;
+    touch-action: none;
+    display: none;
+  }
+  #joystick-base {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--joy-bg);
+    border: 2px solid var(--joy-border);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(4px);
+  }
+  #joystick-stick {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(5,217,232,0.3);
+    border: 2px solid var(--border-color);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 15px var(--shadow-color);
+    transition: none;
+  }
+  #joystick-stick.active {
+    background: rgba(5,217,232,0.5);
+    box-shadow: 0 0 25px var(--shadow-color);
+  }
+
+  /* Control mode toggle */
+  #control-mode-toggle {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 25;
+    font-size: 11px;
+    color: var(--controls-color);
+    background: rgba(0,0,0,0.5);
+    padding: 4px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--controls-span-border);
+    cursor: pointer;
+    pointer-events: all;
+    -webkit-tap-highlight-color: transparent;
+    display: none;
+  }
+  #control-mode-toggle.active { display: block; }
+
+  /* Mobile hint on start screen */
+  .mobile-hint {
+    color: var(--subtitle-color);
+    font-size: 12px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 1.6;
+  }
+  .mobile-hint .touch-icon {
+    font-size: 18px;
+    margin: 0 4px;
+    vertical-align: middle;
+  }
+
+  /* Fullscreen button */
+  #fullscreen-btn {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: -140px;
+    z-index: 25;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--joy-bg);
+    border: 2px solid var(--joy-border);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    pointer-events: all;
+    -webkit-tap-highlight-color: transparent;
+    font-size: 18px;
+    color: var(--btn-color);
+    text-shadow: 0 0 8px var(--shadow-color);
+  }
+  #fullscreen-btn:active {
+    background: var(--joy-active);
+    border-color: var(--border-color);
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-height: 400px) {
+    h1 { font-size: 36px; }
+    .subtitle { font-size: 12px; margin-bottom: 20px; }
+    .btn { padding: 10px 30px; font-size: 16px; }
+    .final-score { font-size: 28px; }
+    #btn-jump { width: 65px; height: 65px; bottom: 12px; right: 12px; }
+    #btn-jump .icon { font-size: 26px; }
+    #btn-duck { width: 55px; height: 55px; bottom: 16px; right: 88px; }
+    #btn-duck .icon { font-size: 20px; }
+    #dpad { width: 100px; height: 100px; bottom: 12px; left: 12px; }
+    .dpad-btn { width: 38px; height: 38px; }
+    #dpad-up { top: 0; left: 31px; }
+    #dpad-down { bottom: 0; left: 31px; }
+    #dpad-left { top: 31px; left: 0; }
+    #dpad-right { top: 31px; right: 0; }
+    #joystick-zone { width: 110px; height: 110px; bottom: 10px; left: 10px; }
+    #joystick-base { width: 80px; height: 80px; }
+    #joystick-stick { width: 36px; height: 36px; }
+    #theme-switcher { padding: 6px 10px; gap: 6px; }
+    .theme-btn { width: 26px; height: 26px; }
+    #score { font-size: 18px; top: 8px; right: 14px; }
+    #speed-indicator { font-size: 12px; top: 8px; left: 14px; }
+    #speed-bar-container { width: 90px; bottom: 12px; right: 14px; }
+    #speed-label { font-size: 8px; bottom: 20px; right: 14px; }
+    #mute-btn { font-size: 16px; bottom: 12px; left: 14px; }
+    #fullscreen-btn { width: 36px; height: 36px; }
+    #btn-pause { width: 40px; height: 40px; margin-left: 110px; }
+    #btn-pause .icon { font-size: 16px; }
+  }
+
+  @media (min-width: 768px) {
+    #btn-jump { width: 90px; height: 90px; }
+    #btn-jump .icon { font-size: 36px; }
+    #btn-duck { width: 80px; height: 80px; }
+    #btn-duck .icon { font-size: 28px; }
+    #dpad { width: 140px; height: 140px; }
+    .dpad-btn { width: 56px; height: 56px; }
+    #dpad-up { top: 0; left: 42px; }
+    #dpad-down { bottom: 0; left: 42px; }
+    #dpad-left { top: 42px; left: 0; }
+    #dpad-right { top: 42px; right: 0; }
+    .dpad-btn .icon { font-size: 24px; }
+  }
+
+  /* ========== PORTRAIT DETECTION ========== */
+  @media screen and (orientation: portrait) {
+    #rotate-screen { display: flex !important; }
+    #game-container { display: none !important; }
+    #theme-switcher { display: none !important; }
+  }
 </style>
 </head>
 <body>
 
+<!-- Portrait Rotation Warning -->
+<div id="rotate-screen">
+  <div class="rotate-icon">📱</div>
+  <h2>Rotate Your Device</h2>
+  <p>Kitty Dash is designed for landscape mode. Please rotate your phone to play!</p>
+</div>
+
+<!-- Theme Switcher -->
 <div id="theme-switcher">
   <div class="theme-btn theme-neon active" data-theme="neon" data-label="Neon" title="Neon City"></div>
   <div class="theme-btn theme-volcano" data-theme="volcano" data-label="Volcano" title="Volcano"></div>
@@ -300,51 +633,88 @@
   <div class="theme-btn theme-cyber" data-theme="cyber" data-label="Cyber" title="Cyber Grid"></div>
 </div>
 
-<div id="pause-hint">Press P to Pause</div>
+<!-- Fullscreen Button -->
+<div id="fullscreen-btn" title="Toggle Fullscreen">⛶</div>
 
+<!-- Game Container -->
 <div id="game-container">
   <canvas id="gameCanvas"></canvas>
+
+  <!-- UI Overlay -->
   <div id="ui">
     <div id="score">0</div>
     <div id="speed-indicator">SPEED: 1.0x</div>
     <div id="speed-label">Velocity</div>
     <div id="speed-bar-container"><div id="speed-bar"></div></div>
-      <div id="mute-btn" style="position:absolute;bottom:20px;left:30px;z-index:25;cursor:pointer;font-size:20px;opacity:0.5;transition:opacity 0.3s;user-select:none;">🔊</div>
-</div>
+    <div id="mute-btn">🔊</div>
+  </div>
 
+  <!-- Mobile Controls -->
+  <div id="mobile-controls">
+    <!-- D-Pad (default control mode) -->
+    <div id="dpad">
+      <div class="dpad-btn" id="dpad-up" data-action="jump"><span class="icon">▲</span></div>
+      <div class="dpad-btn" id="dpad-down" data-action="duck"><span class="icon">▼</span></div>
+      <div class="dpad-btn" id="dpad-left" data-action="left"><span class="icon">◀</span></div>
+      <div class="dpad-btn" id="dpad-right" data-action="right"><span class="icon">▶</span></div>
+    </div>
+
+    <!-- Virtual Joystick (alternative control mode) -->
+    <div id="joystick-zone">
+      <div id="joystick-base"></div>
+      <div id="joystick-stick"></div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="control-btn" id="btn-jump" data-action="jump"><span class="icon">⬆</span></div>
+    <div class="control-btn" id="btn-duck" data-action="duck"><span class="icon">⬇</span></div>
+
+    <!-- Pause Button -->
+    <div class="control-btn" id="btn-pause" data-action="pause"><span class="icon">⏸</span></div>
+  </div>
+
+  <!-- Control Mode Toggle -->
+  <div id="control-mode-toggle">Controls: D-Pad</div>
+
+  <!-- Start Screen -->
   <div id="start-screen">
     <h1>KITTY DASH</h1>
     <div class="subtitle" id="startSubtitle">Neon Runner</div>
     <button class="btn" id="startBtn">START RUN</button>
-    <div class="controls-hint">
-      <span>SPACE</span> or <span>UP</span> or <span>TAP</span> to Jump &nbsp;|&nbsp; <span>DOWN</span> to Duck &nbsp;|&nbsp; <span>P</span> to Pause
+    <div class="mobile-hint">
+      <span class="touch-icon">👆</span> Tap buttons to play
+      <br>
+      <span class="touch-icon">⬆</span> Jump &nbsp;|&nbsp; <span class="touch-icon">⬇</span> Duck
     </div>
   </div>
 
+  <!-- Game Over Screen -->
   <div id="game-over-screen">
     <h1>CRASHED!</h1>
     <div class="final-score" id="finalScore">0</div>
     <div class="high-score" id="highScore">Best: 0</div>
     <button class="btn" id="restartBtn">RUN AGAIN</button>
     <div class="controls-hint">
-      <span>SPACE</span> or <span>TAP</span> to Restart &nbsp;|&nbsp; <span>P</span> to Pause
+      <span>⬆</span> to Restart &nbsp;|&nbsp; <span>⏸</span> to Pause
     </div>
   </div>
 
+  <!-- Pause Screen -->
   <div id="pause-screen">
     <h1>PAUSED</h1>
     <div class="subtitle" id="pauseSubtitle">Neon Runner</div>
     <div class="final-score" id="pauseScore">0</div>
     <button class="btn" id="resumeBtn">RESUME</button>
     <div class="controls-hint">
-      <span>P</span> or <span>ESC</span> or <span>CLICK</span> to Resume
+      <span>⏸</span> or <span>CLICK</span> to Resume
     </div>
   </div>
 </div>
 
 <script>
+
 // ============================================
-// KITTY DASH - Complete Game Engine
+// KITTY DASH - Mobile Version
 // ============================================
 
 var canvas = document.getElementById('gameCanvas');
@@ -360,20 +730,19 @@ var highScoreEl = document.getElementById('highScore');
 var startBtn = document.getElementById('startBtn');
 var restartBtn = document.getElementById('restartBtn');
 
-// Resize canvas
-function resize() {
-  canvas.width = container.clientWidth;
-  canvas.height = container.clientHeight;
-  groundY = canvas.height - 80;
-}
-resize();
-window.addEventListener('resize', resize);
+// Mobile elements
+var mobileControls = document.getElementById('mobile-controls');
+var controlModeToggle = document.getElementById('control-mode-toggle');
+var dpad = document.getElementById('dpad');
+var joystickZone = document.getElementById('joystick-zone');
+var joystickBase = document.getElementById('joystick-base');
+var joystickStick = document.getElementById('joystick-stick');
+var fullscreenBtn = document.getElementById('fullscreen-btn');
 
 var pauseScreen = document.getElementById('pause-screen');
 var pauseScore = document.getElementById('pauseScore');
 var pauseSubtitle = document.getElementById('pauseSubtitle');
 var startSubtitle = document.getElementById('startSubtitle');
-var pauseHint = document.getElementById('pause-hint');
 var resumeBtn = document.getElementById('resumeBtn');
 
 // Game state
@@ -387,6 +756,16 @@ var baseSpeed = 7;
 var speedMultiplier = 1;
 var frameCount = 0;
 var groundY = canvas.height - 80;
+
+// Mobile state
+var isMobile = false;
+var controlMode = 'dpad';
+var joystickActive = false;
+var joystickCenterX = 0;
+var joystickCenterY = 0;
+var joystickMaxDist = 35;
+var joystickCurrentX = 0;
+var joystickCurrentY = 0;
 
 // Kitty character
 var kitty = {
@@ -422,6 +801,52 @@ var gridLines = [];
 var OBSTACLE_TYPES = ['cactus', 'spike', 'block', 'flying', 'laser'];
 
 // ============================================
+// MOBILE DETECTION
+// ============================================
+function detectMobile() {
+  var hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  var isSmall = window.innerWidth < 1024;
+  isMobile = hasTouch && isSmall;
+  return isMobile;
+}
+
+// ============================================
+// FULLSCREEN
+// ============================================
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) {
+      document.documentElement.msRequestFullscreen();
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  }
+}
+
+fullscreenBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  toggleFullscreen();
+});
+
+// Lock orientation to landscape
+function lockOrientation() {
+  if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock('landscape').catch(function(e) {
+      console.log('Orientation lock not supported');
+    });
+  }
+}
+
 // ============================================
 // THEME SYSTEM
 // ============================================
@@ -442,7 +867,8 @@ var themes = {
       '--high-score-color': '#8899aa', '--controls-color': '#556677', '--controls-span-border': '#334455',
       '--controls-span-color': '#8899aa', '--speed-bar-bg': 'rgba(255,255,255,0.1)',
       '--speed-bar-gradient-start': '#05d9e8', '--speed-bar-gradient-end': '#ff2a6d', '--speed-bar-shadow': '#ff2a6d',
-      '--speed-label-color': '#556677', '--screen-bg': 'rgba(10,10,26,0.92)'
+      '--speed-label-color': '#556677', '--screen-bg': 'rgba(10,10,26,0.92)',
+      '--joy-bg': 'rgba(255,255,255,0.08)', '--joy-active': 'rgba(5,217,232,0.25)', '--joy-border': 'rgba(5,217,232,0.4)'
     },
     bgType: 'neon',
     starColors: ['#ffffff', '#05d9e8', '#ff2a6d', '#d300c5'],
@@ -474,7 +900,8 @@ var themes = {
       '--high-score-color': '#cc8866', '--controls-color': '#886655', '--controls-span-border': '#553322',
       '--controls-span-color': '#cc8866', '--speed-bar-bg': 'rgba(255,255,255,0.1)',
       '--speed-bar-gradient-start': '#ff8c00', '--speed-bar-gradient-end': '#ff4500', '--speed-bar-shadow': '#ff4500',
-      '--speed-label-color': '#886655', '--screen-bg': 'rgba(26,5,5,0.92)'
+      '--speed-label-color': '#886655', '--screen-bg': 'rgba(26,5,5,0.92)',
+      '--joy-bg': 'rgba(255,255,255,0.08)', '--joy-active': 'rgba(255,69,0,0.25)', '--joy-border': 'rgba(255,69,0,0.4)'
     },
     bgType: 'volcano',
     starColors: ['#ffffff', '#ff8c00', '#ff4500', '#ffcc00'],
@@ -506,7 +933,8 @@ var themes = {
       '--high-score-color': '#88aa88', '--controls-color': '#557755', '--controls-span-border': '#334433',
       '--controls-span-color': '#88aa88', '--speed-bar-bg': 'rgba(255,255,255,0.1)',
       '--speed-bar-gradient-start': '#00ff88', '--speed-bar-gradient-end': '#7fff00', '--speed-bar-shadow': '#7fff00',
-      '--speed-label-color': '#557755', '--screen-bg': 'rgba(5,26,10,0.92)'
+      '--speed-label-color': '#557755', '--screen-bg': 'rgba(5,26,10,0.92)',
+      '--joy-bg': 'rgba(255,255,255,0.08)', '--joy-active': 'rgba(0,255,136,0.25)', '--joy-border': 'rgba(0,255,136,0.4)'
     },
     bgType: 'forest',
     starColors: ['#ffffff', '#7fff00', '#00ff88', '#adff2f'],
@@ -538,7 +966,8 @@ var themes = {
       '--high-score-color': '#88aacc', '--controls-color': '#557788', '--controls-span-border': '#334455',
       '--controls-span-color': '#88aacc', '--speed-bar-bg': 'rgba(255,255,255,0.1)',
       '--speed-bar-gradient-start': '#00bfff', '--speed-bar-gradient-end': '#1e90ff', '--speed-bar-shadow': '#1e90ff',
-      '--speed-label-color': '#557788', '--screen-bg': 'rgba(0,8,26,0.92)'
+      '--speed-label-color': '#557788', '--screen-bg': 'rgba(0,8,26,0.92)',
+      '--joy-bg': 'rgba(255,255,255,0.08)', '--joy-active': 'rgba(0,191,255,0.25)', '--joy-border': 'rgba(0,191,255,0.4)'
     },
     bgType: 'ocean',
     starColors: ['#ffffff', '#00bfff', '#1e90ff', '#87ceeb'],
@@ -570,7 +999,8 @@ var themes = {
       '--high-score-color': '#aa88cc', '--controls-color': '#776688', '--controls-span-border': '#443355',
       '--controls-span-color': '#aa88cc', '--speed-bar-bg': 'rgba(255,255,255,0.1)',
       '--speed-bar-gradient-start': '#d300c5', '--speed-bar-gradient-end': '#7a40ff', '--speed-bar-shadow': '#7a40ff',
-      '--speed-label-color': '#776688', '--screen-bg': 'rgba(10,0,26,0.92)'
+      '--speed-label-color': '#776688', '--screen-bg': 'rgba(10,0,26,0.92)',
+      '--joy-bg': 'rgba(255,255,255,0.08)', '--joy-active': 'rgba(211,0,197,0.25)', '--joy-border': 'rgba(211,0,197,0.4)'
     },
     bgType: 'cyber',
     starColors: ['#ffffff', '#d300c5', '#7a40ff', '#05d9e8'],
@@ -630,7 +1060,7 @@ function initThemeBgElements() {
 }
 
 // ============================================
-// AUDIO SYSTEM (Web Audio API - Self-Contained)
+// AUDIO SYSTEM
 // ============================================
 
 var audioCtx = null;
@@ -653,13 +1083,11 @@ function initAudio() {
   }
 }
 
-// Soft pleasant ambient background music
 function startBGM() {
   if (!audioCtx || isBgmPlaying) return;
   initAudio();
   isBgmPlaying = true;
 
-  // Create a lush ambient pad using multiple oscillators
   bgmGain = audioCtx.createGain();
   bgmGain.gain.value = 0;
   bgmGain.connect(masterGain);
@@ -670,18 +1098,16 @@ function startBGM() {
   bgmFilter.Q.value = 1;
   bgmFilter.connect(bgmGain);
 
-  // Ambient chord progression
   var chords = [
-    [261.63, 329.63, 392.00], // C major
-    [220.00, 277.18, 329.63], // A minor
-    [174.61, 220.00, 261.63], // F major
-    [196.00, 246.94, 293.66]  // G major
+    [261.63, 329.63, 392.00],
+    [220.00, 277.18, 329.63],
+    [174.61, 220.00, 261.63],
+    [196.00, 246.94, 293.66]
   ];
   var chordIdx = 0;
 
   function playChord() {
     if (!isBgmPlaying) return;
-    // Fade out old oscillators
     bgmOscillators.forEach(function(osc) {
       var g = osc.gain;
       g.gain.setTargetAtTime(0, audioCtx.currentTime, 0.5);
@@ -709,7 +1135,6 @@ function startBGM() {
   playChord();
   bgmInterval = setInterval(playChord, 4000);
 
-  // Gentle filter sweep
   function sweepFilter() {
     if (!isBgmPlaying) return;
     var now = audioCtx.currentTime;
@@ -720,7 +1145,6 @@ function startBGM() {
   }
   sweepFilter();
 
-  // Fade in overall
   bgmGain.gain.setTargetAtTime(1, audioCtx.currentTime, 2);
 }
 
@@ -736,7 +1160,6 @@ function stopBGM() {
   }
 }
 
-// Sound effect: Jump (soft bubbly pop)
 function sfxJump() {
   if (!audioCtx) return;
   var osc = audioCtx.createOscillator();
@@ -756,7 +1179,6 @@ function sfxJump() {
   osc.stop(audioCtx.currentTime + 0.2);
 }
 
-// Sound effect: Duck (soft whoosh)
 function sfxDuck() {
   if (!audioCtx) return;
   var osc = audioCtx.createOscillator();
@@ -776,7 +1198,6 @@ function sfxDuck() {
   osc.stop(audioCtx.currentTime + 0.16);
 }
 
-// Sound effect: Crash / Game Over (soft descending tone)
 function sfxCrash() {
   if (!audioCtx) return;
   var osc = audioCtx.createOscillator();
@@ -791,7 +1212,6 @@ function sfxCrash() {
   osc.start();
   osc.stop(audioCtx.currentTime + 0.65);
 
-  // Add a soft noise burst
   var bufferSize = audioCtx.sampleRate * 0.3;
   var buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
   var data = buffer.getChannelData(0);
@@ -807,7 +1227,6 @@ function sfxCrash() {
   noise.start();
 }
 
-// Sound effect: Score tick (soft blip)
 function sfxScore() {
   if (!audioCtx) return;
   var osc = audioCtx.createOscillator();
@@ -822,7 +1241,6 @@ function sfxScore() {
   osc.stop(audioCtx.currentTime + 0.06);
 }
 
-// Sound effect: Theme switch (soft chime)
 function sfxThemeSwitch() {
   if (!audioCtx) return;
   [523.25, 659.25, 783.99].forEach(function(freq, i) {
@@ -840,7 +1258,6 @@ function sfxThemeSwitch() {
   });
 }
 
-// Sound effect: Pause (soft ping)
 function sfxPause() {
   if (!audioCtx) return;
   var osc = audioCtx.createOscillator();
@@ -855,7 +1272,6 @@ function sfxPause() {
   osc.stop(audioCtx.currentTime + 0.22);
 }
 
-// Sound effect: Resume (soft rising ping)
 function sfxResume() {
   if (!audioCtx) return;
   var osc = audioCtx.createOscillator();
@@ -871,7 +1287,6 @@ function sfxResume() {
   osc.stop(audioCtx.currentTime + 0.22);
 }
 
-// Sound effect: Start game (pleasant ascending arpeggio)
 function sfxStart() {
   if (!audioCtx) return;
   [440, 554, 659, 880].forEach(function(freq, i) {
@@ -889,7 +1304,6 @@ function sfxStart() {
   });
 }
 
-// Sound effect: High speed whoosh
 function sfxSpeedUp() {
   if (!audioCtx) return;
   var osc = audioCtx.createOscillator();
@@ -905,7 +1319,6 @@ function sfxSpeedUp() {
   osc.stop(audioCtx.currentTime + 0.4);
 }
 
-// Sound effect: Laser warning beep
 function sfxLaserWarn() {
   if (!audioCtx) return;
   var osc = audioCtx.createOscillator();
@@ -921,7 +1334,8 @@ function sfxLaserWarn() {
 }
 
 // ============================================
-// Mute toggle
+// MUTE TOGGLE
+// ============================================
 var isMuted = false;
 var muteBtn = null;
 
@@ -933,7 +1347,6 @@ function toggleMute() {
   if (muteBtn) muteBtn.textContent = isMuted ? '🔇' : '🔊';
 }
 
-// Init mute button after DOM ready
 setTimeout(function() {
   muteBtn = document.getElementById('mute-btn');
   if (muteBtn) {
@@ -945,8 +1358,18 @@ setTimeout(function() {
   }
 }, 100);
 
+
+// ============================================
 // INITIALIZATION
 // ============================================
+
+function resize() {
+  canvas.width = container.clientWidth;
+  canvas.height = container.clientHeight;
+  groundY = canvas.height - 80;
+}
+resize();
+window.addEventListener('resize', resize);
 
 function initStars() {
   stars = [];
@@ -1063,7 +1486,214 @@ function initGridLines() {
   }
 }
 
+// ============================================
+// MOBILE CONTROLS SETUP
+// ============================================
 
+function setupMobileControls() {
+  detectMobile();
+
+  if (isMobile) {
+    mobileControls.classList.add('active');
+    controlModeToggle.classList.add('active');
+    lockOrientation();
+
+    // Set initial control mode
+    setControlMode('dpad');
+  }
+}
+
+function setControlMode(mode) {
+  controlMode = mode;
+  if (mode === 'dpad') {
+    dpad.style.display = 'block';
+    joystickZone.style.display = 'none';
+    controlModeToggle.textContent = 'Controls: D-Pad';
+  } else {
+    dpad.style.display = 'none';
+    joystickZone.style.display = 'block';
+    controlModeToggle.textContent = 'Controls: Joystick';
+  }
+}
+
+// Toggle control mode
+controlModeToggle.addEventListener('click', function(e) {
+  e.stopPropagation();
+  setControlMode(controlMode === 'dpad' ? 'joystick' : 'dpad');
+});
+
+// D-Pad touch handlers
+var dpadBtns = document.querySelectorAll('.dpad-btn');
+dpadBtns.forEach(function(btn) {
+  btn.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.classList.add('pressed');
+    var action = this.dataset.action;
+    handleControlAction(action, true);
+  }, { passive: false });
+
+  btn.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.classList.remove('pressed');
+    var action = this.dataset.action;
+    handleControlAction(action, false);
+  }, { passive: false });
+
+  btn.addEventListener('touchcancel', function(e) {
+    e.preventDefault();
+    this.classList.remove('pressed');
+    var action = this.dataset.action;
+    handleControlAction(action, false);
+  });
+});
+
+// Action buttons (Jump, Duck, Pause)
+var actionBtns = document.querySelectorAll('.control-btn');
+actionBtns.forEach(function(btn) {
+  btn.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.classList.add('pressed');
+    var action = this.dataset.action;
+    handleControlAction(action, true);
+  }, { passive: false });
+
+  btn.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.classList.remove('pressed');
+    var action = this.dataset.action;
+    if (action === 'duck') {
+      handleControlAction(action, false);
+    }
+  }, { passive: false });
+
+  btn.addEventListener('touchcancel', function(e) {
+    e.preventDefault();
+    this.classList.remove('pressed');
+    var action = this.dataset.action;
+    if (action === 'duck') {
+      handleControlAction(action, false);
+    }
+  });
+});
+
+// Joystick handlers
+joystickZone.addEventListener('touchstart', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  var touch = e.touches[0];
+  var rect = joystickZone.getBoundingClientRect();
+  joystickCenterX = rect.left + rect.width / 2;
+  joystickCenterY = rect.top + rect.height / 2;
+  joystickActive = true;
+  joystickStick.classList.add('active');
+  updateJoystick(touch.clientX, touch.clientY);
+}, { passive: false });
+
+joystickZone.addEventListener('touchmove', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  if (!joystickActive) return;
+  var touch = e.touches[0];
+  updateJoystick(touch.clientX, touch.clientY);
+}, { passive: false });
+
+joystickZone.addEventListener('touchend', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  joystickActive = false;
+  joystickStick.classList.remove('active');
+  joystickStick.style.transform = 'translate(-50%, -50%)';
+  // Release duck if it was active
+  if (kitty.ducking) {
+    duck(false);
+  }
+}, { passive: false });
+
+joystickZone.addEventListener('touchcancel', function(e) {
+  e.preventDefault();
+  joystickActive = false;
+  joystickStick.classList.remove('active');
+  joystickStick.style.transform = 'translate(-50%, -50%)';
+  if (kitty.ducking) {
+    duck(false);
+  }
+});
+
+function updateJoystick(clientX, clientY) {
+  var dx = clientX - joystickCenterX;
+  var dy = clientY - joystickCenterY;
+  var dist = Math.sqrt(dx * dx + dy * dy);
+
+  if (dist > joystickMaxDist) {
+    dx = (dx / dist) * joystickMaxDist;
+    dy = (dy / dist) * joystickMaxDist;
+  }
+
+  joystickStick.style.transform = 'translate(calc(-50% + ' + dx + 'px), calc(-50% + ' + dy + 'px))';
+
+  // Determine action based on joystick direction
+  var angle = Math.atan2(dy, dx);
+  var deg = angle * 180 / Math.PI;
+
+  // Up direction (jump) - between -135 and -45 degrees
+  if (deg >= -135 && deg <= -45 && dist > 10) {
+    if (!joystickJumpTriggered) {
+      joystickJumpTriggered = true;
+      jump();
+    }
+  } else {
+    joystickJumpTriggered = false;
+  }
+
+  // Down direction (duck) - between 45 and 135 degrees
+  if (deg >= 45 && deg <= 135 && dist > 10) {
+    if (!kitty.ducking) {
+      duck(true);
+    }
+  } else if (kitty.ducking && dist > 10) {
+    duck(false);
+  }
+}
+
+var joystickJumpTriggered = false;
+
+function handleControlAction(action, isPressed) {
+  initAudio();
+
+  switch(action) {
+    case 'jump':
+      if (isPressed) {
+        if (gamePaused) {
+          resumeGame();
+        } else if (!gameRunning && gameOverScreen.classList.contains('active')) {
+          sfxStart();
+          startGame();
+          startBGM();
+        } else {
+          jump();
+        }
+      }
+      break;
+    case 'duck':
+      duck(isPressed);
+      break;
+    case 'left':
+      // Reserved for future use (e.g., slow down)
+      break;
+    case 'right':
+      // Reserved for future use (e.g., speed boost)
+      break;
+    case 'pause':
+      if (gameRunning) {
+        togglePause();
+      }
+      break;
+  }
+}
 
 // ============================================
 // PARTICLES
@@ -1141,6 +1771,7 @@ function updateTrail() {
     kitty.trail[i].alpha -= 0.05;
   }
 }
+
 
 // ============================================
 // DRAW KITTY
@@ -1541,16 +2172,12 @@ function drawShootingStars() {
   }
 }
 
-// ============================================
-// DRAW BACKGROUND
-// ============================================
 
 // ============================================
 // THEME-SPECIFIC BACKGROUND DRAWERS
 // ============================================
 
 function drawVolcanoBg() {
-  // Volcanic smoke/ash particles
   for (var i = 0; i < embers.length; i++) {
     var e = embers[i];
     e.y -= e.speed * speedMultiplier * 0.5;
@@ -1572,7 +2199,6 @@ function drawVolcanoBg() {
   ctx.globalAlpha = 1;
   ctx.shadowBlur = 0;
 
-  // Lava glow at bottom
   var lavaGrad = ctx.createLinearGradient(0, canvas.height - 100, 0, canvas.height);
   lavaGrad.addColorStop(0, 'rgba(255,69,0,0)');
   lavaGrad.addColorStop(0.5, 'rgba(255,69,0,0.15)');
@@ -1582,7 +2208,6 @@ function drawVolcanoBg() {
 }
 
 function drawForestBg() {
-  // Fireflies
   for (var i = 0; i < fireflies.length; i++) {
     var f = fireflies[i];
     f.x += f.speedX * speedMultiplier;
@@ -1604,7 +2229,6 @@ function drawForestBg() {
   ctx.globalAlpha = 1;
   ctx.shadowBlur = 0;
 
-  // Tree silhouettes in background
   ctx.fillStyle = '#0a1a0a';
   for (var i = 0; i < 8; i++) {
     var tx = ((frameCount * 0.3 + i * 180) % (canvas.width + 200)) - 100;
@@ -1622,7 +2246,6 @@ function drawForestBg() {
 }
 
 function drawOceanBg() {
-  // Bubbles rising
   for (var i = 0; i < bubbles.length; i++) {
     var b = bubbles[i];
     b.y -= b.speed * speedMultiplier;
@@ -1639,7 +2262,6 @@ function drawOceanBg() {
     ctx.beginPath();
     ctx.arc(b.x, b.y, b.r, 0, Math.PI*2);
     ctx.stroke();
-    // Bubble shine
     ctx.fillStyle = 'rgba(255,255,255,' + (b.alpha * 0.3) + ')';
     ctx.beginPath();
     ctx.arc(b.x - b.r*0.3, b.y - b.r*0.3, b.r*0.3, 0, Math.PI*2);
@@ -1648,7 +2270,6 @@ function drawOceanBg() {
   ctx.globalAlpha = 1;
   ctx.shadowBlur = 0;
 
-  // Light rays from top
   var rayGrad = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.6);
   rayGrad.addColorStop(0, 'rgba(0,191,255,0.08)');
   rayGrad.addColorStop(0.5, 'rgba(0,191,255,0.02)');
@@ -1666,7 +2287,6 @@ function drawOceanBg() {
 }
 
 function drawCyberBg() {
-  // Grid lines moving down
   for (var i = 0; i < gridLines.length; i++) {
     var g = gridLines[i];
     g.y += g.speed * speedMultiplier;
@@ -1687,13 +2307,11 @@ function drawCyberBg() {
   ctx.globalAlpha = 1;
   ctx.shadowBlur = 0;
 
-  // Horizontal scanlines
   ctx.fillStyle = 'rgba(5,217,232,0.03)';
   for (var y = (frameCount * 2) % 20; y < canvas.height; y += 20) {
     ctx.fillRect(0, y, canvas.width, 1);
   }
 
-  // Digital noise particles
   ctx.fillStyle = 'rgba(5,217,232,0.4)';
   for (var i = 0; i < 20; i++) {
     var nx = Math.random() * canvas.width;
@@ -1709,11 +2327,9 @@ function drawCyberBg() {
 function drawBackground() {
   var bgType = T('bgType');
 
-  // Draw moon and nebulae for all themes (they adapt colors)
   drawMoon();
   drawNebulae();
 
-  // Theme-specific background layers
   if (bgType === 'volcano') {
     drawVolcanoBg();
   } else if (bgType === 'forest') {
@@ -1761,7 +2377,6 @@ function drawBackground() {
       ctx.closePath();
       ctx.fill();
 
-      // Neon ridge
       ctx.strokeStyle = T('ridgeColors')[li];
       ctx.lineWidth = 1;
       ctx.globalAlpha = 0.3 - li * 0.08;
@@ -1776,7 +2391,6 @@ function drawBackground() {
 }
 
 function drawGround() {
-  // Ground gradient
   var grad = ctx.createLinearGradient(0, groundY, 0, canvas.height);
   grad.addColorStop(0, T('groundTop'));
   grad.addColorStop(0.3, T('groundMid'));
@@ -1784,7 +2398,6 @@ function drawGround() {
   ctx.fillStyle = grad;
   ctx.fillRect(0, groundY, canvas.width, canvas.height - groundY);
 
-  // Ground line
   ctx.shadowBlur = 15;
   ctx.shadowColor = T('groundLine');
   ctx.strokeStyle = T('groundLine');
@@ -1795,7 +2408,6 @@ function drawGround() {
   ctx.stroke();
   ctx.shadowBlur = 0;
 
-  // Grid lines on ground
   ctx.strokeStyle = T('groundGrid');
   ctx.lineWidth = 1;
   var gridOffset = (frameCount * gameSpeed) % 60;
@@ -1806,7 +2418,6 @@ function drawGround() {
     ctx.stroke();
   }
 
-  // Moving ground particles
   ctx.fillStyle = T('groundParticles');
   for (var i = 0; i < 5; i++) {
     var gx = ((frameCount * gameSpeed + i * 150) % (canvas.width + 100)) - 50;
@@ -1887,6 +2498,7 @@ function checkCollision(obs) {
   return kx < ox + ow && kx + kw > ox && ky < oy + oh && ky + kh > oy;
 }
 
+
 // ============================================
 // GAME LOOP - UPDATE
 // ============================================
@@ -1896,23 +2508,18 @@ function update() {
 
   frameCount++;
 
-  // Track speed tier for milestone sounds
   var prevSpeedTier = Math.floor((speedMultiplier - 1) * 10);
 
-  // Speed progression (ramps a bit faster now, caps at 4.0x for a tougher run)
   speedMultiplier = 1 + Math.min(frameCount / 800, 3.0);
   gameSpeed = baseSpeed * speedMultiplier;
 
-  // Speed milestone sound
   var currSpeedTier = Math.floor((speedMultiplier - 1) * 10);
   if (currSpeedTier > prevSpeedTier && currSpeedTier % 5 === 0) sfxSpeedUp();
 
-  // Update UI
   scoreEl.textContent = Math.floor(score);
   speedEl.textContent = 'SPEED: ' + speedMultiplier.toFixed(1) + 'x';
   speedBar.style.width = Math.min((speedMultiplier - 1) / 3.0 * 100, 100) + '%';
 
-  // Score
   var prevScore = Math.floor(score);
   score += gameSpeed * 0.01;
   var currScore = Math.floor(score);
@@ -1943,7 +2550,7 @@ function update() {
 
   updateTrail();
 
-  // Spawn obstacles (denser and less forgiving as speed climbs)
+  // Spawn obstacles
   var spawnRate = Math.max(30, 100 - speedMultiplier * 18);
   if (frameCount % Math.floor(spawnRate) === 0 && Math.random() > Math.max(0.08, 0.3 - speedMultiplier * 0.06)) {
     spawnObstacle();
@@ -1954,13 +2561,11 @@ function update() {
     var obs = obstacles[i];
     obs.x -= gameSpeed;
 
-    // Collision
     if (checkCollision(obs)) {
       gameOver();
       return;
     }
 
-    // Remove off-screen
     if (obs.x + obs.width < -50) {
       obstacles.splice(i, 1);
     }
@@ -1990,21 +2595,14 @@ function draw() {
   drawBackground();
   drawGround();
 
-  // Draw obstacles
   for (var i = 0; i < obstacles.length; i++) {
     drawObstacle(obstacles[i]);
   }
 
-  // Draw kitty
   drawKitty();
-
-  // Draw particles
   drawParticles();
-
-  // Speed lines
   drawSpeedLines();
 
-  // Vignette
   var vig = ctx.createRadialGradient(canvas.width/2, canvas.height/2, canvas.height*0.4, canvas.width/2, canvas.height/2, canvas.height*0.8);
   vig.addColorStop(0, 'rgba(0,0,0,0)');
   vig.addColorStop(1, T('vignette'));
@@ -2022,7 +2620,6 @@ function loop() {
   requestAnimationFrame(loop);
 }
 
-
 // ============================================
 // PAUSE SYSTEM
 // ============================================
@@ -2034,11 +2631,9 @@ function togglePause() {
     sfxPause();
     pauseScore.textContent = Math.floor(score);
     pauseScreen.classList.add('active');
-    if (pauseHint) pauseHint.classList.add('hidden');
   } else {
     sfxResume();
     pauseScreen.classList.remove('active');
-    if (pauseHint) pauseHint.classList.remove('hidden');
   }
 }
 
@@ -2047,7 +2642,6 @@ function resumeGame() {
     gamePaused = false;
     sfxResume();
     pauseScreen.classList.remove('active');
-    if (pauseHint) pauseHint.classList.remove('hidden');
   }
 }
 
@@ -2107,13 +2701,11 @@ function gameOver() {
   stopBGM();
   sfxCrash();
 
-  // Explosion particles
   var crashCols = T('crashParticles');
   spawnParticles(kitty.x + kitty.width/2, kitty.y + kitty.height/2, crashCols[0], 30, 10);
   spawnParticles(kitty.x + kitty.width/2, kitty.y + kitty.height/2, crashCols[1], 20, 8);
   spawnParticles(kitty.x + kitty.width/2, kitty.y + kitty.height/2, crashCols[2], 15, 6);
 
-  // Update high score
   var finalScore = Math.floor(score);
   if (finalScore > highScore) {
     highScore = finalScore;
@@ -2134,6 +2726,7 @@ startBtn.addEventListener('click', function() {
   sfxStart();
   startGame();
   startBGM();
+  setupMobileControls();
 });
 
 restartBtn.addEventListener('click', function() {
@@ -2142,11 +2735,12 @@ restartBtn.addEventListener('click', function() {
   startGame();
   startBGM();
 });
+
 resumeBtn.addEventListener('click', function() {
   resumeGame();
 });
 
-
+// Keyboard support (for testing on desktop)
 window.addEventListener('keydown', function(e) {
   if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'KeyW') {
     e.preventDefault();
@@ -2175,33 +2769,7 @@ window.addEventListener('keyup', function(e) {
   }
 });
 
-// Touch controls
-container.addEventListener('touchstart', function(e) {
-  e.preventDefault();
-  initAudio();
-  var touch = e.touches[0];
-  var rect = container.getBoundingClientRect();
-  var y = touch.clientY - rect.top;
-
-  if (!gameRunning && gameOverScreen.classList.contains('active')) {
-    sfxStart();
-    startGame();
-    startBGM();
-    return;
-  }
-
-  if (y > rect.height * 0.7) {
-    duck(true);
-  } else {
-    jump();
-  }
-}, { passive: false });
-
-container.addEventListener('touchend', function(e) {
-  e.preventDefault();
-  duck(false);
-}, { passive: false });
-
+// Mouse support for desktop testing
 container.addEventListener('mousedown', function(e) {
   initAudio();
   if (!gameRunning && gameOverScreen.classList.contains('active')) {
@@ -2212,7 +2780,6 @@ container.addEventListener('mousedown', function(e) {
   }
   jump();
 });
-
 
 // ============================================
 // THEME SWITCHER EVENTS
@@ -2226,7 +2793,6 @@ for (var i = 0; i < themeBtns.length; i++) {
   });
 }
 
-// Set active button on load
 var btns = document.querySelectorAll('.theme-btn');
 for (var i = 0; i < btns.length; i++) {
   btns[i].classList.toggle('active', btns[i].dataset.theme === currentTheme);
@@ -2249,8 +2815,25 @@ initStars();
 initBgLayers();
 initNebulae();
 initMoon();
+initThemeBgElements();
 
-initThemeBgElements();loop();
+// Detect mobile on load and setup controls
+detectMobile();
+if (isMobile) {
+  setupMobileControls();
+}
+
+// Listen for orientation changes
+window.addEventListener('orientationchange', function() {
+  setTimeout(function() {
+    resize();
+    if (isMobile) {
+      lockOrientation();
+    }
+  }, 300);
+});
+
+loop();
 
 </script>
 </body>

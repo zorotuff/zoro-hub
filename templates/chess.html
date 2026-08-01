@@ -93,6 +93,129 @@
         .bB { background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/98/Chess_bdt45.svg'); }
         .bQ { background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/47/Chess_qdt45.svg'); }
         .bK { background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f0/Chess_kdt45.svg'); }
+
+        /* =====================================================
+   ZORO CHESS PREMIUM ANIMATIONS
+   ===================================================== */
+
+.piece{
+    cursor:pointer;
+    user-select:none;
+    transition:
+        transform .18s cubic-bezier(.22,1,.36,1),
+        filter .18s ease,
+        opacity .18s ease;
+    animation:pieceFloat 3s ease-in-out infinite;
+    will-change:transform;
+}
+
+@keyframes pieceFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-2px);
+    }
+}
+
+.piece:hover{
+    transform:scale(1.08) translateY(-2px);
+    filter:drop-shadow(0 0 10px cyan);
+}
+
+.piece.selected{
+    animation:selectedPulse .8s infinite alternate;
+}
+
+@keyframes selectedPulse{
+    from{
+        transform:scale(1);
+        filter:drop-shadow(0 0 8px cyan);
+    }
+    to{
+        transform:scale(1.12);
+        filter:
+        drop-shadow(0 0 18px cyan)
+        drop-shadow(0 0 28px #00ffff);
+    }
+}
+
+.move-dot{
+    animation:movePulse 1s infinite;
+}
+
+@keyframes movePulse{
+    0%,100%{
+        transform:scale(.8);
+        opacity:.45;
+    }
+    50%{
+        transform:scale(1.2);
+        opacity:1;
+    }
+}
+
+.capture{
+    animation:capturePulse .5s infinite alternate;
+}
+
+@keyframes capturePulse{
+    from{
+        filter:drop-shadow(0 0 6px red);
+    }
+    to{
+        filter:
+        drop-shadow(0 0 18px crimson)
+        drop-shadow(0 0 26px red);
+    }
+}
+
+.inCheck{
+    animation:kingDanger .8s infinite;
+}
+
+@keyframes kingDanger{
+    0%,100%{
+        filter:drop-shadow(0 0 8px red);
+    }
+    50%{
+        filter:
+        drop-shadow(0 0 20px crimson)
+        drop-shadow(0 0 35px red);
+    }
+}
+
+.captured{
+    animation:captureDisappear .25s forwards;
+}
+
+@keyframes captureDisappear{
+    from{
+        transform:scale(1);
+        opacity:1;
+    }
+    to{
+        transform:scale(1.6);
+        opacity:0;
+    }
+}
+
+.checkmate{
+    animation:kingDeath .7s forwards;
+}
+
+@keyframes kingDeath{
+    0%{
+        transform:scale(1);
+    }
+    40%{
+        transform:scale(1.2);
+    }
+    100%{
+        transform:scale(.2);
+        opacity:0;
+    }
+}
     </style>
 </head>
 <body class="theme-green">

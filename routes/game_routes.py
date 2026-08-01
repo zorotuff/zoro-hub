@@ -37,6 +37,8 @@ def tic_tac_toe():
     )
 
 
+from flask import render_template, redirect, url_for, session, request
+
 @app.route("/kitty_dash")
 def kitty_dash():
 
@@ -44,6 +46,14 @@ def kitty_dash():
         return redirect(url_for("index"))
 
     profile = get_profile(session["username"])
+
+    user_agent = request.user_agent.string.lower()
+
+    if "android" in user_agent or "iphone" in user_agent:
+        return render_template(
+            "kitty_dash_mobile.html",
+            profile=profile
+        )
 
     return render_template(
         "kitty_dash.html",
@@ -62,7 +72,7 @@ def chess():
         "chess.html",
         profile=profile
     )
-    
+
 from flask import request
 
 @app.route("/space_shooter")
