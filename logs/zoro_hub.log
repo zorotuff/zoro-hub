@@ -1,0 +1,1163 @@
+2026-09-01 17:41:05,092 [INFO] zoro_hub: Zoro Hub ready. Blueprints: ['zoro_shop']
+2026-09-01 17:41:05,158 [INFO] zoro_hub: Zoro Hub ready. Blueprints: ['zoro_shop']
+2026-09-01 17:41:05,269 [INFO] werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-09-01 17:41:05,271 [INFO] werkzeug: [33mPress CTRL+C to quit[0m
+2026-09-01 17:41:14,818 [INFO] zoro_hub: GET /hub user=anonymous
+2026-09-01 17:41:14,837 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:14] "[32mGET /hub HTTP/1.1[0m" 302 -
+2026-09-01 17:41:14,922 [INFO] zoro_hub: GET / user=anonymous
+2026-09-01 17:41:14,962 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:14] "GET / HTTP/1.1" 200 -
+2026-09-01 17:41:15,145 [INFO] zoro_hub: GET /static/css/auth.css user=anonymous
+2026-09-01 17:41:15,147 [INFO] zoro_hub: GET /static/js/auth.js user=anonymous
+2026-09-01 17:41:15,538 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:15] "GET /static/js/auth.js HTTP/1.1" 200 -
+2026-09-01 17:41:15,588 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:15] "GET /static/css/auth.css HTTP/1.1" 200 -
+2026-09-01 17:41:18,217 [INFO] zoro_hub: POST / user=anonymous
+2026-09-01 17:41:19,504 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:19] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-09-01 17:41:19,597 [INFO] zoro_hub: GET /hub user=zoro
+2026-09-01 17:41:19,661 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:19] "GET /hub HTTP/1.1" 200 -
+2026-09-01 17:41:19,806 [INFO] zoro_hub: GET /static/css/shop_themes.css user=zoro
+2026-09-01 17:41:19,816 [INFO] zoro_hub: GET /static/css/hub_v6.css user=zoro
+2026-09-01 17:41:19,819 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:19] "GET /static/css/shop_themes.css HTTP/1.1" 200 -
+2026-09-01 17:41:19,822 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:19] "GET /static/css/hub_v6.css HTTP/1.1" 200 -
+2026-09-01 17:41:19,855 [INFO] zoro_hub: GET /static/js/zoro_games.js user=zoro
+2026-09-01 17:41:19,862 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:19] "GET /static/js/zoro_games.js HTTP/1.1" 200 -
+2026-09-01 17:41:19,864 [INFO] zoro_hub: GET /static/js/hub_v6.js user=zoro
+2026-09-01 17:41:19,889 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:19] "GET /static/js/hub_v6.js HTTP/1.1" 200 -
+2026-09-01 17:41:19,904 [INFO] zoro_hub: GET /static/img/avatars/avatar1.png.png user=zoro
+2026-09-01 17:41:19,914 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:19] "[33mGET /static/img/avatars/avatar1.png.png HTTP/1.1[0m" 404 -
+2026-09-01 17:41:26,369 [INFO] zoro_hub: GET /admin user=zoro
+2026-09-01 17:41:26,400 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:26] "GET /admin HTTP/1.1" 200 -
+2026-09-01 17:41:26,611 [INFO] zoro_hub: GET /static/css/admin.css user=zoro
+2026-09-01 17:41:26,613 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:26] "GET /static/css/admin.css HTTP/1.1" 200 -
+2026-09-01 17:41:26,680 [INFO] zoro_hub: GET /static/js/admin.js user=zoro
+2026-09-01 17:41:26,697 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:26] "GET /static/js/admin.js HTTP/1.1" 200 -
+2026-09-01 17:41:26,871 [INFO] zoro_hub: GET /admin/api/stats user=zoro
+2026-09-01 17:41:26,922 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:26] "GET /admin/api/stats HTTP/1.1" 200 -
+2026-09-01 17:41:37,765 [INFO] zoro_hub: GET /admin/api/users user=zoro
+2026-09-01 17:41:37,783 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:37] "GET /admin/api/users HTTP/1.1" 200 -
+2026-09-01 17:41:42,548 [INFO] zoro_hub: GET /admin/api/users/chillzoro user=zoro
+2026-09-01 17:41:42,576 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:42] "GET /admin/api/users/chillzoro HTTP/1.1" 200 -
+2026-09-01 17:41:58,128 [INFO] zoro_hub: GET /admin/api/users/zoro user=zoro
+2026-09-01 17:41:58,142 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:41:58] "GET /admin/api/users/zoro HTTP/1.1" 200 -
+2026-09-01 17:42:37,860 [INFO] zoro_hub: POST /admin/api/users/zoro/coins user=zoro
+2026-09-01 17:42:38,008 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:38] "POST /admin/api/users/zoro/coins HTTP/1.1" 200 -
+2026-09-01 17:42:38,053 [INFO] zoro_hub: GET /admin/api/users/zoro user=zoro
+2026-09-01 17:42:38,080 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:38] "GET /admin/api/users/zoro HTTP/1.1" 200 -
+2026-09-01 17:42:38,088 [INFO] zoro_hub: GET /admin/api/users user=zoro
+2026-09-01 17:42:38,121 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:38] "GET /admin/api/users HTTP/1.1" 200 -
+2026-09-01 17:42:45,091 [INFO] zoro_hub: GET /hub user=zoro
+2026-09-01 17:42:45,102 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:45] "GET /hub HTTP/1.1" 200 -
+2026-09-01 17:42:45,186 [INFO] zoro_hub: GET /static/css/shop_themes.css user=zoro
+2026-09-01 17:42:45,189 [INFO] zoro_hub: GET /static/css/hub_v6.css user=zoro
+2026-09-01 17:42:45,191 [INFO] zoro_hub: GET /static/js/zoro_games.js user=zoro
+2026-09-01 17:42:45,193 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:45] "[36mGET /static/css/shop_themes.css HTTP/1.1[0m" 304 -
+2026-09-01 17:42:45,197 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:45] "[36mGET /static/css/hub_v6.css HTTP/1.1[0m" 304 -
+2026-09-01 17:42:45,200 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:45] "[36mGET /static/js/zoro_games.js HTTP/1.1[0m" 304 -
+2026-09-01 17:42:45,215 [INFO] zoro_hub: GET /static/js/hub_v6.js user=zoro
+2026-09-01 17:42:45,245 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:45] "[36mGET /static/js/hub_v6.js HTTP/1.1[0m" 304 -
+2026-09-01 17:42:45,267 [INFO] zoro_hub: GET /static/img/avatars/avatar1.png.png user=zoro
+2026-09-01 17:42:45,305 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:45] "[33mGET /static/img/avatars/avatar1.png.png HTTP/1.1[0m" 404 -
+2026-09-01 17:42:49,718 [INFO] zoro_hub: GET /shop/ user=zoro
+2026-09-01 17:42:49,758 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:49] "GET /shop/ HTTP/1.1" 200 -
+2026-09-01 17:42:49,890 [INFO] zoro_hub: GET /static/css/shop_themes.css user=zoro
+2026-09-01 17:42:49,892 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:49] "[36mGET /static/css/shop_themes.css HTTP/1.1[0m" 304 -
+2026-09-01 17:42:49,898 [INFO] zoro_hub: GET /static/css/shop.css user=zoro
+2026-09-01 17:42:49,917 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:49] "GET /static/css/shop.css HTTP/1.1" 200 -
+2026-09-01 17:42:50,099 [INFO] zoro_hub: GET /shop/api/items user=zoro
+2026-09-01 17:42:50,125 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:50] "GET /shop/api/items HTTP/1.1" 200 -
+2026-09-01 17:42:50,274 [INFO] zoro_hub: GET /static/avatars/avatar_zoro.svg user=zoro
+2026-09-01 17:42:50,279 [INFO] zoro_hub: GET /static/avatars/avatar_shadow.svg user=zoro
+2026-09-01 17:42:50,290 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:50] "GET /static/avatars/avatar_zoro.svg HTTP/1.1" 200 -
+2026-09-01 17:42:50,292 [INFO] zoro_hub: GET /static/avatars/avatar_samurai.svg user=zoro
+2026-09-01 17:42:50,298 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:50] "GET /static/avatars/avatar_shadow.svg HTTP/1.1" 200 -
+2026-09-01 17:42:50,313 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:50] "GET /static/avatars/avatar_samurai.svg HTTP/1.1" 200 -
+2026-09-01 17:42:50,349 [INFO] zoro_hub: GET /static/banners/banner_sunset.svg user=zoro
+2026-09-01 17:42:50,381 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:50] "GET /static/banners/banner_sunset.svg HTTP/1.1" 200 -
+2026-09-01 17:42:50,385 [INFO] zoro_hub: GET /static/banners/banner_void.svg user=zoro
+2026-09-01 17:42:50,397 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:50] "GET /static/banners/banner_void.svg HTTP/1.1" 200 -
+2026-09-01 17:42:50,406 [INFO] zoro_hub: GET /static/banners/banner_legend.svg user=zoro
+2026-09-01 17:42:50,425 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:42:50] "GET /static/banners/banner_legend.svg HTTP/1.1" 200 -
+2026-09-01 17:43:09,039 [INFO] zoro_hub: POST /shop/api/purchase user=zoro
+2026-09-01 17:43:09,290 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:09] "POST /shop/api/purchase HTTP/1.1" 200 -
+2026-09-01 17:43:09,301 [INFO] zoro_hub: POST /shop/api/equip user=zoro
+2026-09-01 17:43:09,392 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:09] "POST /shop/api/equip HTTP/1.1" 200 -
+2026-09-01 17:43:11,844 [INFO] zoro_hub: POST /shop/api/purchase user=zoro
+2026-09-01 17:43:12,022 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:12] "POST /shop/api/purchase HTTP/1.1" 200 -
+2026-09-01 17:43:12,051 [INFO] zoro_hub: POST /shop/api/equip user=zoro
+2026-09-01 17:43:12,179 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:12] "POST /shop/api/equip HTTP/1.1" 200 -
+2026-09-01 17:43:16,212 [INFO] zoro_hub: POST /shop/api/equip user=zoro
+2026-09-01 17:43:16,556 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:16] "POST /shop/api/equip HTTP/1.1" 200 -
+2026-09-01 17:43:18,073 [INFO] zoro_hub: POST /shop/api/equip user=zoro
+2026-09-01 17:43:18,206 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:18] "POST /shop/api/equip HTTP/1.1" 200 -
+2026-09-01 17:43:20,494 [INFO] zoro_hub: POST /shop/api/purchase user=zoro
+2026-09-01 17:43:20,974 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:20] "POST /shop/api/purchase HTTP/1.1" 200 -
+2026-09-01 17:43:21,006 [INFO] zoro_hub: POST /shop/api/equip user=zoro
+2026-09-01 17:43:21,202 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:21] "POST /shop/api/equip HTTP/1.1" 200 -
+2026-09-01 17:43:25,356 [INFO] zoro_hub: GET / user=zoro
+2026-09-01 17:43:25,361 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:25] "GET / HTTP/1.1" 200 -
+2026-09-01 17:43:25,441 [INFO] zoro_hub: GET /static/css/auth.css user=zoro
+2026-09-01 17:43:25,450 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:25] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-09-01 17:43:25,452 [INFO] zoro_hub: GET /static/js/auth.js user=zoro
+2026-09-01 17:43:25,461 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:25] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2026-09-01 17:43:26,672 [INFO] zoro_hub: POST / user=zoro
+2026-09-01 17:43:27,269 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:27] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-09-01 17:43:27,297 [INFO] zoro_hub: GET /hub user=zoro
+2026-09-01 17:43:27,313 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:27] "GET /hub HTTP/1.1" 200 -
+2026-09-01 17:43:27,440 [INFO] zoro_hub: GET /static/css/shop_themes.css user=zoro
+2026-09-01 17:43:27,444 [INFO] zoro_hub: GET /static/css/hub_v6.css user=zoro
+2026-09-01 17:43:27,445 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:27] "[36mGET /static/css/shop_themes.css HTTP/1.1[0m" 304 -
+2026-09-01 17:43:27,448 [INFO] zoro_hub: GET /static/js/zoro_games.js user=zoro
+2026-09-01 17:43:27,450 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:27] "[36mGET /static/css/hub_v6.css HTTP/1.1[0m" 304 -
+2026-09-01 17:43:27,460 [INFO] zoro_hub: GET /static/js/hub_v6.js user=zoro
+2026-09-01 17:43:27,463 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:27] "[36mGET /static/js/zoro_games.js HTTP/1.1[0m" 304 -
+2026-09-01 17:43:27,470 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:27] "[36mGET /static/js/hub_v6.js HTTP/1.1[0m" 304 -
+2026-09-01 17:43:27,471 [INFO] zoro_hub: GET /static/img/avatars/avatar1.png.png user=zoro
+2026-09-01 17:43:27,522 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:27] "[33mGET /static/img/avatars/avatar1.png.png HTTP/1.1[0m" 404 -
+2026-09-01 17:43:34,423 [INFO] zoro_hub: GET /shop/ user=zoro
+2026-09-01 17:43:34,446 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:34] "GET /shop/ HTTP/1.1" 200 -
+2026-09-01 17:43:34,636 [INFO] zoro_hub: GET /static/css/shop.css user=zoro
+2026-09-01 17:43:34,638 [INFO] zoro_hub: GET /static/css/shop_themes.css user=zoro
+2026-09-01 17:43:34,640 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:34] "[36mGET /static/css/shop.css HTTP/1.1[0m" 304 -
+2026-09-01 17:43:34,641 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:34] "[36mGET /static/css/shop_themes.css HTTP/1.1[0m" 304 -
+2026-09-01 17:43:34,686 [INFO] zoro_hub: GET /shop/api/items user=zoro
+2026-09-01 17:43:34,714 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:34] "GET /shop/api/items HTTP/1.1" 200 -
+2026-09-01 17:43:34,759 [INFO] zoro_hub: GET /static/avatars/avatar_zoro.svg user=zoro
+2026-09-01 17:43:34,767 [INFO] zoro_hub: GET /static/avatars/avatar_shadow.svg user=zoro
+2026-09-01 17:43:34,769 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:34] "[36mGET /static/avatars/avatar_zoro.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:43:34,771 [INFO] zoro_hub: GET /static/avatars/avatar_samurai.svg user=zoro
+2026-09-01 17:43:34,772 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:34] "[36mGET /static/avatars/avatar_shadow.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:43:34,777 [INFO] zoro_hub: GET /static/banners/banner_sunset.svg user=zoro
+2026-09-01 17:43:34,784 [INFO] zoro_hub: GET /static/banners/banner_void.svg user=zoro
+2026-09-01 17:43:34,785 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:34] "[36mGET /static/avatars/avatar_samurai.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:43:34,789 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:34] "[36mGET /static/banners/banner_void.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:43:34,791 [INFO] zoro_hub: GET /static/banners/banner_legend.svg user=zoro
+2026-09-01 17:43:34,797 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:34] "[36mGET /static/banners/banner_sunset.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:43:34,810 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:34] "[36mGET /static/banners/banner_legend.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:43:49,752 [INFO] zoro_hub: GET /admin user=zoro
+2026-09-01 17:43:49,765 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:49] "GET /admin HTTP/1.1" 200 -
+2026-09-01 17:43:49,872 [INFO] zoro_hub: GET /static/css/admin.css user=zoro
+2026-09-01 17:43:49,883 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:49] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+2026-09-01 17:43:49,886 [INFO] zoro_hub: GET /static/js/admin.js user=zoro
+2026-09-01 17:43:49,902 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:49] "[36mGET /static/js/admin.js HTTP/1.1[0m" 304 -
+2026-09-01 17:43:49,934 [INFO] zoro_hub: GET /admin/api/stats user=zoro
+2026-09-01 17:43:49,980 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:49] "GET /admin/api/stats HTTP/1.1" 200 -
+2026-09-01 17:43:55,967 [INFO] zoro_hub: GET /admin/api/users user=zoro
+2026-09-01 17:43:55,979 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:43:55] "GET /admin/api/users HTTP/1.1" 200 -
+2026-09-01 17:44:08,677 [INFO] zoro_hub: GET /admin/api/audit-log user=zoro
+2026-09-01 17:44:08,695 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:08] "GET /admin/api/audit-log?limit=100 HTTP/1.1" 200 -
+2026-09-01 17:44:22,664 [INFO] zoro_hub: GET /admin/api/users/zoro user=zoro
+2026-09-01 17:44:22,678 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:22] "GET /admin/api/users/zoro HTTP/1.1" 200 -
+2026-09-01 17:44:38,214 [INFO] zoro_hub: POST /admin/api/users/zoro/coins user=zoro
+2026-09-01 17:44:40,213 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:40] "POST /admin/api/users/zoro/coins HTTP/1.1" 200 -
+2026-09-01 17:44:40,228 [INFO] zoro_hub: GET /admin/api/users/zoro user=zoro
+2026-09-01 17:44:40,238 [INFO] zoro_hub: GET /admin/api/users user=zoro
+2026-09-01 17:44:40,245 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:40] "GET /admin/api/users/zoro HTTP/1.1" 200 -
+2026-09-01 17:44:40,264 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:40] "GET /admin/api/users HTTP/1.1" 200 -
+2026-09-01 17:44:45,186 [INFO] zoro_hub: GET /hub user=zoro
+2026-09-01 17:44:45,197 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:45] "GET /hub HTTP/1.1" 200 -
+2026-09-01 17:44:45,292 [INFO] zoro_hub: GET /static/css/hub_v6.css user=zoro
+2026-09-01 17:44:45,294 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:45] "[36mGET /static/css/hub_v6.css HTTP/1.1[0m" 304 -
+2026-09-01 17:44:45,296 [INFO] zoro_hub: GET /static/css/shop_themes.css user=zoro
+2026-09-01 17:44:45,298 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:45] "[36mGET /static/css/shop_themes.css HTTP/1.1[0m" 304 -
+2026-09-01 17:44:45,302 [INFO] zoro_hub: GET /static/js/zoro_games.js user=zoro
+2026-09-01 17:44:45,315 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:45] "[36mGET /static/js/zoro_games.js HTTP/1.1[0m" 304 -
+2026-09-01 17:44:45,317 [INFO] zoro_hub: GET /static/img/avatars/avatar1.png.png user=zoro
+2026-09-01 17:44:45,324 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:45] "[33mGET /static/img/avatars/avatar1.png.png HTTP/1.1[0m" 404 -
+2026-09-01 17:44:45,332 [INFO] zoro_hub: GET /static/js/hub_v6.js user=zoro
+2026-09-01 17:44:45,335 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:45] "[36mGET /static/js/hub_v6.js HTTP/1.1[0m" 304 -
+2026-09-01 17:44:50,220 [INFO] zoro_hub: GET /shop/ user=zoro
+2026-09-01 17:44:50,239 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:50] "GET /shop/ HTTP/1.1" 200 -
+2026-09-01 17:44:50,342 [INFO] zoro_hub: GET /static/css/shop.css user=zoro
+2026-09-01 17:44:50,349 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:50] "[36mGET /static/css/shop.css HTTP/1.1[0m" 304 -
+2026-09-01 17:44:50,351 [INFO] zoro_hub: GET /static/css/shop_themes.css user=zoro
+2026-09-01 17:44:50,360 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:50] "[36mGET /static/css/shop_themes.css HTTP/1.1[0m" 304 -
+2026-09-01 17:44:50,401 [INFO] zoro_hub: GET /shop/api/items user=zoro
+2026-09-01 17:44:50,414 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:50] "GET /shop/api/items HTTP/1.1" 200 -
+2026-09-01 17:44:50,450 [INFO] zoro_hub: GET /static/avatars/avatar_zoro.svg user=zoro
+2026-09-01 17:44:50,453 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:50] "[36mGET /static/avatars/avatar_zoro.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:44:50,461 [INFO] zoro_hub: GET /static/avatars/avatar_shadow.svg user=zoro
+2026-09-01 17:44:50,466 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:50] "[36mGET /static/avatars/avatar_shadow.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:44:50,467 [INFO] zoro_hub: GET /static/avatars/avatar_samurai.svg user=zoro
+2026-09-01 17:44:50,479 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:50] "[36mGET /static/avatars/avatar_samurai.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:44:50,481 [INFO] zoro_hub: GET /static/banners/banner_sunset.svg user=zoro
+2026-09-01 17:44:50,493 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:50] "[36mGET /static/banners/banner_sunset.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:44:50,505 [INFO] zoro_hub: GET /static/banners/banner_void.svg user=zoro
+2026-09-01 17:44:50,514 [INFO] zoro_hub: GET /static/banners/banner_legend.svg user=zoro
+2026-09-01 17:44:50,515 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:50] "[36mGET /static/banners/banner_void.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:44:50,518 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:50] "[36mGET /static/banners/banner_legend.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:44:57,420 [INFO] zoro_hub: POST /shop/api/purchase user=zoro
+2026-09-01 17:44:58,926 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:58] "POST /shop/api/purchase HTTP/1.1" 200 -
+2026-09-01 17:44:58,942 [INFO] zoro_hub: POST /shop/api/equip user=zoro
+2026-09-01 17:44:59,017 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:44:59] "POST /shop/api/equip HTTP/1.1" 200 -
+2026-09-01 17:45:02,469 [INFO] zoro_hub: GET / user=zoro
+2026-09-01 17:45:02,476 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:02] "GET / HTTP/1.1" 200 -
+2026-09-01 17:45:02,647 [INFO] zoro_hub: GET /static/css/auth.css user=zoro
+2026-09-01 17:45:02,665 [INFO] zoro_hub: GET /static/js/auth.js user=zoro
+2026-09-01 17:45:02,667 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:02] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-09-01 17:45:02,669 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:02] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2026-09-01 17:45:03,850 [INFO] zoro_hub: POST / user=zoro
+2026-09-01 17:45:04,258 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:04] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-09-01 17:45:04,280 [INFO] zoro_hub: GET /hub user=zoro
+2026-09-01 17:45:04,293 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:04] "GET /hub HTTP/1.1" 200 -
+2026-09-01 17:45:04,365 [INFO] zoro_hub: GET /static/css/shop_themes.css user=zoro
+2026-09-01 17:45:04,366 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:04] "[36mGET /static/css/shop_themes.css HTTP/1.1[0m" 304 -
+2026-09-01 17:45:04,368 [INFO] zoro_hub: GET /static/css/hub_v6.css user=zoro
+2026-09-01 17:45:04,372 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:04] "[36mGET /static/css/hub_v6.css HTTP/1.1[0m" 304 -
+2026-09-01 17:45:04,377 [INFO] zoro_hub: GET /static/js/zoro_games.js user=zoro
+2026-09-01 17:45:04,383 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:04] "[36mGET /static/js/zoro_games.js HTTP/1.1[0m" 304 -
+2026-09-01 17:45:04,384 [INFO] zoro_hub: GET /static/js/hub_v6.js user=zoro
+2026-09-01 17:45:04,394 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:04] "[36mGET /static/js/hub_v6.js HTTP/1.1[0m" 304 -
+2026-09-01 17:45:04,398 [INFO] zoro_hub: GET /static/img/avatars/avatar1.png.png user=zoro
+2026-09-01 17:45:04,402 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:04] "[33mGET /static/img/avatars/avatar1.png.png HTTP/1.1[0m" 404 -
+2026-09-01 17:45:17,844 [INFO] zoro_hub: GET /shop/ user=zoro
+2026-09-01 17:45:17,873 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:17] "GET /shop/ HTTP/1.1" 200 -
+2026-09-01 17:45:18,119 [INFO] zoro_hub: GET /static/css/shop.css user=zoro
+2026-09-01 17:45:18,137 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:18] "[36mGET /static/css/shop.css HTTP/1.1[0m" 304 -
+2026-09-01 17:45:18,141 [INFO] zoro_hub: GET /static/css/shop_themes.css user=zoro
+2026-09-01 17:45:18,159 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:18] "[36mGET /static/css/shop_themes.css HTTP/1.1[0m" 304 -
+2026-09-01 17:45:18,363 [INFO] zoro_hub: GET /shop/api/items user=zoro
+2026-09-01 17:45:18,407 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:18] "GET /shop/api/items HTTP/1.1" 200 -
+2026-09-01 17:45:18,482 [INFO] zoro_hub: GET /static/avatars/avatar_zoro.svg user=zoro
+2026-09-01 17:45:18,532 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:18] "[36mGET /static/avatars/avatar_zoro.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:45:18,539 [INFO] zoro_hub: GET /static/avatars/avatar_shadow.svg user=zoro
+2026-09-01 17:45:18,603 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:18] "[36mGET /static/avatars/avatar_shadow.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:45:18,649 [INFO] zoro_hub: GET /static/avatars/avatar_samurai.svg user=zoro
+2026-09-01 17:45:18,735 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:18] "[36mGET /static/avatars/avatar_samurai.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:45:18,751 [INFO] zoro_hub: GET /static/banners/banner_sunset.svg user=zoro
+2026-09-01 17:45:18,825 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:18] "[36mGET /static/banners/banner_sunset.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:45:18,851 [INFO] zoro_hub: GET /static/banners/banner_void.svg user=zoro
+2026-09-01 17:45:18,918 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:18] "[36mGET /static/banners/banner_void.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:45:18,922 [INFO] zoro_hub: GET /static/banners/banner_legend.svg user=zoro
+2026-09-01 17:45:19,021 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:19] "[36mGET /static/banners/banner_legend.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:45:35,240 [INFO] zoro_hub: POST /shop/api/purchase user=zoro
+2026-09-01 17:45:40,231 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:40] "POST /shop/api/purchase HTTP/1.1" 200 -
+2026-09-01 17:45:40,275 [INFO] zoro_hub: POST /shop/api/equip user=zoro
+2026-09-01 17:45:40,421 [INFO] zoro_hub: POST /shop/api/purchase user=zoro
+2026-09-01 17:45:40,533 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:40] "POST /shop/api/equip HTTP/1.1" 200 -
+2026-09-01 17:45:40,548 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:40] "[31m[1mPOST /shop/api/purchase HTTP/1.1[0m" 409 -
+2026-09-01 17:45:50,275 [INFO] zoro_hub: GET / user=zoro
+2026-09-01 17:45:50,279 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:50] "GET / HTTP/1.1" 200 -
+2026-09-01 17:45:50,344 [INFO] zoro_hub: GET /static/js/auth.js user=zoro
+2026-09-01 17:45:50,349 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:50] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2026-09-01 17:45:50,357 [INFO] zoro_hub: GET /static/css/auth.css user=zoro
+2026-09-01 17:45:50,361 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:50] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-09-01 17:45:51,641 [INFO] zoro_hub: POST / user=zoro
+2026-09-01 17:45:52,212 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:52] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-09-01 17:45:52,254 [INFO] zoro_hub: GET /hub user=zoro
+2026-09-01 17:45:52,281 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:52] "GET /hub HTTP/1.1" 200 -
+2026-09-01 17:45:52,378 [INFO] zoro_hub: GET /static/css/shop_themes.css user=zoro
+2026-09-01 17:45:52,381 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:52] "[36mGET /static/css/shop_themes.css HTTP/1.1[0m" 304 -
+2026-09-01 17:45:52,382 [INFO] zoro_hub: GET /static/css/hub_v6.css user=zoro
+2026-09-01 17:45:52,391 [INFO] zoro_hub: GET /static/js/zoro_games.js user=zoro
+2026-09-01 17:45:52,395 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:52] "[36mGET /static/css/hub_v6.css HTTP/1.1[0m" 304 -
+2026-09-01 17:45:52,398 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:52] "[36mGET /static/js/zoro_games.js HTTP/1.1[0m" 304 -
+2026-09-01 17:45:52,400 [INFO] zoro_hub: GET /static/js/hub_v6.js user=zoro
+2026-09-01 17:45:52,416 [INFO] zoro_hub: GET /static/img/avatars/avatar1.png.png user=zoro
+2026-09-01 17:45:52,426 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:52] "[36mGET /static/js/hub_v6.js HTTP/1.1[0m" 304 -
+2026-09-01 17:45:52,428 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:52] "[33mGET /static/img/avatars/avatar1.png.png HTTP/1.1[0m" 404 -
+2026-09-01 17:45:58,144 [INFO] zoro_hub: GET /profile user=zoro
+2026-09-01 17:45:58,477 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:58] "GET /profile HTTP/1.1" 200 -
+2026-09-01 17:45:58,707 [INFO] zoro_hub: GET /static/img/avatars/avatar1.png.png user=zoro
+2026-09-01 17:45:58,795 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:58] "[33mGET /static/img/avatars/avatar1.png.png HTTP/1.1[0m" 404 -
+2026-09-01 17:45:58,863 [INFO] zoro_hub: GET /static/banners/banner_sunset.svg user=zoro
+2026-09-01 17:45:58,910 [INFO] zoro_hub: GET /static/css/profile.css user=zoro
+2026-09-01 17:45:58,912 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:58] "[36mGET /static/banners/banner_sunset.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:45:58,962 [INFO] zoro_hub: GET /static/js/profile.js user=zoro
+2026-09-01 17:45:58,974 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:58] "GET /static/css/profile.css HTTP/1.1" 200 -
+2026-09-01 17:45:59,027 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:45:59] "GET /static/js/profile.js HTTP/1.1" 200 -
+2026-09-01 17:46:07,192 [INFO] zoro_hub: GET /hub user=zoro
+2026-09-01 17:46:07,202 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:07] "GET /hub HTTP/1.1" 200 -
+2026-09-01 17:46:07,287 [INFO] zoro_hub: GET /static/css/shop_themes.css user=zoro
+2026-09-01 17:46:07,290 [INFO] zoro_hub: GET /static/css/hub_v6.css user=zoro
+2026-09-01 17:46:07,293 [INFO] zoro_hub: GET /static/js/zoro_games.js user=zoro
+2026-09-01 17:46:07,291 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:07] "[36mGET /static/css/shop_themes.css HTTP/1.1[0m" 304 -
+2026-09-01 17:46:07,294 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:07] "[36mGET /static/css/hub_v6.css HTTP/1.1[0m" 304 -
+2026-09-01 17:46:07,296 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:07] "[36mGET /static/js/zoro_games.js HTTP/1.1[0m" 304 -
+2026-09-01 17:46:07,306 [INFO] zoro_hub: GET /static/js/hub_v6.js user=zoro
+2026-09-01 17:46:07,311 [INFO] zoro_hub: GET /static/img/avatars/avatar1.png.png user=zoro
+2026-09-01 17:46:07,322 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:07] "[36mGET /static/js/hub_v6.js HTTP/1.1[0m" 304 -
+2026-09-01 17:46:07,325 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:07] "[33mGET /static/img/avatars/avatar1.png.png HTTP/1.1[0m" 404 -
+2026-09-01 17:46:09,056 [INFO] zoro_hub: GET /shop/ user=zoro
+2026-09-01 17:46:09,096 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:09] "GET /shop/ HTTP/1.1" 200 -
+2026-09-01 17:46:09,509 [INFO] zoro_hub: GET /static/css/shop.css user=zoro
+2026-09-01 17:46:09,557 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:09] "[36mGET /static/css/shop.css HTTP/1.1[0m" 304 -
+2026-09-01 17:46:09,559 [INFO] zoro_hub: GET /static/css/shop_themes.css user=zoro
+2026-09-01 17:46:09,631 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:09] "[36mGET /static/css/shop_themes.css HTTP/1.1[0m" 304 -
+2026-09-01 17:46:09,894 [INFO] zoro_hub: GET /shop/api/items user=zoro
+2026-09-01 17:46:09,920 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:09] "GET /shop/api/items HTTP/1.1" 200 -
+2026-09-01 17:46:10,006 [INFO] zoro_hub: GET /static/avatars/avatar_zoro.svg user=zoro
+2026-09-01 17:46:10,032 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:10] "[36mGET /static/avatars/avatar_zoro.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:46:10,074 [INFO] zoro_hub: GET /static/avatars/avatar_shadow.svg user=zoro
+2026-09-01 17:46:10,182 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:10] "[36mGET /static/avatars/avatar_shadow.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:46:10,201 [INFO] zoro_hub: GET /static/avatars/avatar_samurai.svg user=zoro
+2026-09-01 17:46:10,281 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:10] "[36mGET /static/avatars/avatar_samurai.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:46:10,328 [INFO] zoro_hub: GET /static/banners/banner_sunset.svg user=zoro
+2026-09-01 17:46:10,503 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:10] "[36mGET /static/banners/banner_sunset.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:46:10,522 [INFO] zoro_hub: GET /static/banners/banner_void.svg user=zoro
+2026-09-01 17:46:10,657 [INFO] zoro_hub: GET /static/banners/banner_legend.svg user=zoro
+2026-09-01 17:46:10,660 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:10] "[36mGET /static/banners/banner_void.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:46:10,847 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:10] "[36mGET /static/banners/banner_legend.svg HTTP/1.1[0m" 304 -
+2026-09-01 17:46:11,349 [INFO] zoro_hub: GET / user=zoro
+2026-09-01 17:46:11,401 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:11] "GET / HTTP/1.1" 200 -
+2026-09-01 17:46:11,529 [INFO] zoro_hub: GET /static/css/auth.css user=zoro
+2026-09-01 17:46:11,532 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:11] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-09-01 17:46:11,534 [INFO] zoro_hub: GET /static/js/auth.js user=zoro
+2026-09-01 17:46:11,547 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:11] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2026-09-01 17:46:13,212 [INFO] zoro_hub: POST / user=zoro
+2026-09-01 17:46:14,078 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:14] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-09-01 17:46:14,164 [INFO] zoro_hub: GET /hub user=zoro
+2026-09-01 17:46:14,181 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:14] "GET /hub HTTP/1.1" 200 -
+2026-09-01 17:46:14,355 [INFO] zoro_hub: GET /static/css/shop_themes.css user=zoro
+2026-09-01 17:46:14,360 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:14] "[36mGET /static/css/shop_themes.css HTTP/1.1[0m" 304 -
+2026-09-01 17:46:14,361 [INFO] zoro_hub: GET /static/css/hub_v6.css user=zoro
+2026-09-01 17:46:14,375 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:14] "[36mGET /static/css/hub_v6.css HTTP/1.1[0m" 304 -
+2026-09-01 17:46:14,389 [INFO] zoro_hub: GET /static/js/zoro_games.js user=zoro
+2026-09-01 17:46:14,415 [INFO] zoro_hub: GET /static/js/hub_v6.js user=zoro
+2026-09-01 17:46:14,421 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:14] "[36mGET /static/js/zoro_games.js HTTP/1.1[0m" 304 -
+2026-09-01 17:46:14,431 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:14] "[36mGET /static/js/hub_v6.js HTTP/1.1[0m" 304 -
+2026-09-01 17:46:14,447 [INFO] zoro_hub: GET /static/img/avatars/avatar1.png.png user=zoro
+2026-09-01 17:46:14,459 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:14] "[33mGET /static/img/avatars/avatar1.png.png HTTP/1.1[0m" 404 -
+2026-09-01 17:46:24,359 [INFO] zoro_hub: GET /multiplayer user=zoro
+2026-09-01 17:46:24,456 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:24] "GET /multiplayer HTTP/1.1" 200 -
+2026-09-01 17:46:24,598 [INFO] zoro_hub: GET /static/css/multiplayer.css user=zoro
+2026-09-01 17:46:24,662 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:24] "GET /static/css/multiplayer.css HTTP/1.1" 200 -
+2026-09-01 17:46:29,798 [INFO] zoro_hub: GET /multiplayer/tic-tac-toe user=zoro
+2026-09-01 17:46:30,964 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:30] "GET /multiplayer/tic-tac-toe HTTP/1.1" 200 -
+2026-09-01 17:46:31,013 [INFO] zoro_hub: GET /static/css/multiplayer.css user=zoro
+2026-09-01 17:46:31,015 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:31] "[36mGET /static/css/multiplayer.css HTTP/1.1[0m" 304 -
+2026-09-01 17:46:31,019 [INFO] zoro_hub: GET /static/js/multiplayer_ttt.js user=zoro
+2026-09-01 17:46:31,588 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:31] "GET /static/js/multiplayer_ttt.js HTTP/1.1" 200 -
+2026-09-01 17:46:34,774 [INFO] zoro_hub: POST /api/multiplayer/create user=zoro
+2026-09-01 17:46:34,828 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:34] "POST /api/multiplayer/create HTTP/1.1" 200 -
+2026-09-01 17:46:34,838 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:34,845 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:34] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:36,062 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:36,071 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:36] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:37,273 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:37,281 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:37] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:38,483 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:38,490 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:38] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:39,772 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:39,779 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:39] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:41,029 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:41,038 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:41] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:41,576 [INFO] zoro_hub: POST /api/multiplayer/ready user=zoro
+2026-09-01 17:46:41,624 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:41] "POST /api/multiplayer/ready HTTP/1.1" 200 -
+2026-09-01 17:46:42,230 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:42,241 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:42] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:43,442 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:43,450 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:43] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:44,685 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:44,693 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:44] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:45,895 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:45,905 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:45] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:47,103 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:47,110 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:47] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:48,440 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:48,447 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:48] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:49,778 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:49,786 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:49] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:50,988 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:50,995 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:50] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:52,191 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:52,197 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:52] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:53,537 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:53,543 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:53] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:54,752 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:54,757 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:54] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:55,966 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:55,973 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:55] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:57,167 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:57,173 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:57] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:58,371 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:58,378 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:58] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:46:59,573 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:46:59,582 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:46:59] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:00,782 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:00,789 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:00] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:02,276 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:02,285 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:02] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:03,497 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:03,507 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:03] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:04,705 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:04,711 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:04] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:05,908 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:05,916 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:05] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:07,114 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:07,121 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:07] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:08,329 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:08,335 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:08] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:09,543 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:09,552 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:09] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:10,743 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:10,752 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:10] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:11,959 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:11,967 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:11] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:13,160 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:13,168 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:13] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:14,363 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:14,370 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:14] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:15,571 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:15,577 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:15] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:16,771 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:16,777 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:16] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:18,089 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:18,103 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:18] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:19,300 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:19,311 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:19] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:20,502 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:20,508 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:20] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:21,721 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:21,737 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:21] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:22,914 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:22,923 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:22] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:24,121 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:24,127 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:24] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:25,332 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:25,339 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:25] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:26,537 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:26,543 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:26] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:27,738 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:27,745 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:27] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:28,946 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:28,953 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:28] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:30,154 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:30,160 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:30] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:31,365 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:31,372 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:31] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:32,572 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:32,579 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:32] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:33,781 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:33,786 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:33] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:34,983 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:34,988 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:34] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:36,193 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:36,201 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:36] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:37,401 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:37,406 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:37] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:38,607 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:38,615 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:38] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:39,807 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:39,815 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:39] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:41,018 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:41,025 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:41] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:42,222 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:42,229 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:42] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:43,435 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:43,441 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:43] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:44,641 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:44,649 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:44] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:45,854 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:45,861 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:45] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:47,061 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:47,069 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:47] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:48,276 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:48,284 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:48] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:49,483 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:49,490 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:49] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:50,690 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:50,698 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:50] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:51,931 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:51,938 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:51] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:53,134 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:53,141 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:53] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:54,343 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:54,352 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:54] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:55,555 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:55,562 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:55] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:56,756 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:56,764 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:56] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:57,965 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:57,972 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:57] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:47:59,169 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:47:59,176 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:47:59] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:00,385 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:00,392 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:00] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:01,601 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:01,608 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:01] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:02,804 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:02,811 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:02] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:04,014 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:04,021 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:04] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:05,242 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:05,253 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:05] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:06,458 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:06,467 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:06] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:07,667 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:07,675 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:07] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:08,883 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:08,889 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:08] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:10,095 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:10,105 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:10] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:11,295 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:11,302 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:11] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:12,496 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:12,503 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:12] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:13,706 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:13,713 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:13] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:14,910 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:14,916 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:14] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:16,115 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:16,121 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:16] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:17,331 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:17,341 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:17] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:18,525 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:18,534 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:18] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:19,731 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:19,738 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:19] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:20,942 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:20,950 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:20] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:22,153 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:22,163 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:22] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:23,367 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:23,375 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:23] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:24,666 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:24,673 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:24] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:25,880 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:25,887 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:25] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:27,082 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:27,089 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:27] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:28,296 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:28,304 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:28] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:29,507 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:29,515 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:29] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:30,714 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:30,722 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:30] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:31,927 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:31,938 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:31] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:33,136 [INFO] zoro_hub: GET /api/multiplayer/room/QIKM8 user=zoro
+2026-09-01 17:48:33,146 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:33] "GET /api/multiplayer/room/QIKM8 HTTP/1.1" 200 -
+2026-09-01 17:48:33,905 [INFO] zoro_hub: GET /multiplayer/tic-tac-toe user=zoro
+2026-09-01 17:48:33,912 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:33] "GET /multiplayer/tic-tac-toe HTTP/1.1" 200 -
+2026-09-01 17:48:33,950 [INFO] zoro_hub: GET /static/css/multiplayer.css user=zoro
+2026-09-01 17:48:33,951 [INFO] zoro_hub: GET /static/js/multiplayer_ttt.js user=zoro
+2026-09-01 17:48:33,953 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:33] "[36mGET /static/css/multiplayer.css HTTP/1.1[0m" 304 -
+2026-09-01 17:48:33,954 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:33] "[36mGET /static/js/multiplayer_ttt.js HTTP/1.1[0m" 304 -
+2026-09-01 17:48:36,079 [INFO] zoro_hub: POST /api/multiplayer/create user=zoro
+2026-09-01 17:48:36,172 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:36] "POST /api/multiplayer/create HTTP/1.1" 200 -
+2026-09-01 17:48:36,182 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:36,187 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:36] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:37,497 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:37,505 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:37] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:38,742 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:38,751 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:38] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:40,004 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:40,014 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:40] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:41,204 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:41,213 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:41] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:42,416 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:42,423 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:42] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:44,146 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:44,153 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:44] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:45,347 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:45,355 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:45] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:46,553 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:46,562 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:46] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:47,758 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:47,766 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:47] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:48,969 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:48,974 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:48] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:54,431 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:54,435 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:54] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:55,618 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:55,621 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:55] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:56,829 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:56,833 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:56] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:58,037 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:58,041 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:58] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:48:59,245 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:48:59,248 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:48:59] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:00,455 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:00,461 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:00] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:01,657 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:01,661 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:01] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:02,862 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:02,865 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:02] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:04,078 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:04,081 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:04] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:05,416 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:05,419 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:05] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:06,631 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:06,636 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:06] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:07,877 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:07,881 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:07] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:09,085 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:09,093 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:09] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:14,554 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:14,561 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:14] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:16,426 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:16,432 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:16] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:17,683 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:17,688 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:17] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:18,888 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:18,894 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:18] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:20,104 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:20,108 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:20] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:21,313 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:21,316 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:21] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:23,026 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:23,120 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:23] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:24,246 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:24,249 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:24] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:25,468 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:25,475 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:25] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:26,786 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:26,794 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:26] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:28,010 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:28,015 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:28] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:29,254 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:29,259 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:29] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:30,461 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:30,465 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:30] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:31,661 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:31,665 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:31] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:32,879 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:32,888 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:32] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:34,131 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:34,136 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:34] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:35,325 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:35,331 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:35] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:36,524 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:36,528 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:36] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:37,736 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:37,739 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:37] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:38,942 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:38,945 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:38] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:40,145 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:40,148 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:40] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:41,356 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:41,359 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:41] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:43,845 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:43,850 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:43] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:44,315 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:44,319 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:44] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:45,588 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:45,593 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:45] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:46,798 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:46,802 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:46] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:48,056 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:48,061 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:48] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:51,812 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:51,821 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:51] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:53,966 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:53,971 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:53] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:55,253 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:55,263 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:55] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:56,460 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:56,470 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:56] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:57,793 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:57,801 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:57] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:49:59,009 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:49:59,016 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:49:59] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:00,221 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:00,227 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:00] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:01,818 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:01,826 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:01] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:03,030 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:03,035 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:03] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:04,252 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:04,258 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:04] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:05,458 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:05,464 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:05] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:06,660 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:06,664 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:06] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:07,868 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:07,873 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:07] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:09,073 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:09,077 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:09] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:10,314 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:10,364 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:10] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:11,476 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:11,481 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:11] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:12,690 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:12,694 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:12] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:13,896 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:13,903 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:13] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:15,101 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:15,105 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:15] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:16,408 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:16,414 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:16] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:17,615 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:17,619 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:17] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:18,820 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:18,829 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:18] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:20,385 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:20,392 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:20] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:21,594 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:21,600 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:21] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:22,830 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:22,841 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:22] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:24,679 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:24,687 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:24] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:25,835 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:25,842 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:25] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:27,042 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:27,047 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:27] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:28,246 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:28,250 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:28] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:29,447 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:29,451 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:29] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:30,660 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:30,665 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:30] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:31,861 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:31,867 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:31] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:33,067 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:33,073 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:33] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:34,272 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:34,277 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:34] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:35,474 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:35,480 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:35] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:36,711 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:36,717 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:36] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:37,908 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:37,913 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:37] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:39,112 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:39,117 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:39] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:40,318 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:40,324 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:40] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:41,522 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:41,529 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:41] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:42,735 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:42,741 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:42] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:43,950 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:43,955 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:43] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:45,151 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:45,156 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:45] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:46,367 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:46,374 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:46] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:47,584 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:47,589 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:47] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:48,784 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:48,790 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:48] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:49,995 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:50,000 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:50] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:51,199 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:51,208 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:51] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:52,411 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:52,416 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:52] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:53,626 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:53,631 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:53] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:54,830 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:54,834 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:54] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:56,044 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:56,050 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:56] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:57,323 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:57,334 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:57] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:58,616 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:58,626 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:58] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:50:59,796 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:50:59,801 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:50:59] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:00,998 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:01,004 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:01] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:02,199 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:02,206 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:02] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:03,404 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:03,410 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:03] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:04,617 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:04,624 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:04] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:05,826 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:05,831 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:05] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:07,031 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:07,035 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:07] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:08,233 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:08,238 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:08] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:09,450 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:09,457 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:09] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:10,663 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:10,669 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:10] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:11,863 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:11,867 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:11] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:13,067 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:13,073 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:13] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:14,323 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:14,344 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:14] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:15,521 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:15,530 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:15] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:16,726 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:16,732 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:16] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:17,931 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:17,937 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:17] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:19,143 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:19,149 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:19] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:20,355 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:20,361 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:20] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:21,559 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:21,564 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:21] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:22,761 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:22,768 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:22] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:23,964 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:23,970 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:23] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:25,167 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:25,172 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:25] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:26,377 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:26,383 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:26] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:27,578 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:27,582 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:27] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:28,789 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:28,794 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:28] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:29,991 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:29,996 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:29] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:31,193 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:31,197 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:31] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:32,408 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:32,414 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:32] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:33,612 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:33,617 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:33] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:34,827 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:34,833 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:34] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:36,036 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:36,041 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:36] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:37,238 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:37,245 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:37] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:38,448 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:38,454 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:38] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:39,662 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:39,666 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:39] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:40,873 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:40,877 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:40] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:42,081 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:42,092 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:42] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:43,291 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:43,298 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:43] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:44,506 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:44,514 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:44] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:45,845 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:45,852 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:45] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:47,050 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:47,062 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:47] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:48,264 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:48,274 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:48] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:49,478 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:49,484 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:49] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:50,677 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:50,682 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:50] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:51,887 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:51,892 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:51] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:53,094 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:53,098 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:53] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:54,306 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:54,311 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:54] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:55,512 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:55,516 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:55] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:56,714 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:56,720 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:56] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:57,921 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:57,926 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:57] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:51:59,134 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:51:59,140 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:51:59] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:00,344 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:00,350 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:00] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:01,559 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:01,563 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:01] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:02,905 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:02,910 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:02] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:04,120 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:04,125 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:04] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:05,322 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:05,327 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:05] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:06,539 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:06,544 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:06] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:07,752 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:07,757 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:07] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:08,955 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:08,962 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:08] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:10,236 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:10,244 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:10] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:11,440 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:11,446 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:11] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:12,653 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:12,658 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:12] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:13,880 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:13,886 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:13] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:15,148 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:15,170 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:15] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:16,355 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:16,364 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:16] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:17,553 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:17,559 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:17] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:18,754 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:18,758 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:18] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:19,968 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:19,973 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:19] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:21,179 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:21,184 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:21] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:22,389 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:22,394 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:22] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:23,599 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:23,605 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:23] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:24,807 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:24,812 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:24] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:26,020 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:26,024 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:26] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:27,225 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:27,229 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:27] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:28,438 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:28,443 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:28] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:29,642 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:29,648 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:29] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:30,851 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:30,857 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:30] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:32,061 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:32,067 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:32] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:33,269 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:33,274 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:33] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:34,471 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:34,475 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:34] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:35,671 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:35,676 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:35] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:36,886 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:36,891 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:36] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:38,101 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:38,106 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:38] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:39,304 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:39,309 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:39] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:40,513 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:40,518 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:40] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:41,715 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:41,720 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:41] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:42,926 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:42,931 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:42] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:44,127 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:44,134 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:44] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:45,328 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:45,333 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:45] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:46,539 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:46,544 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:46] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:47,752 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:47,757 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:47] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:48,965 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:48,971 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:48] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:50,176 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:50,182 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:50] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:51,412 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:51,420 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:51] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:52,621 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:52,627 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:52] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:53,920 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:53,926 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:53] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:55,133 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:55,139 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:55] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:56,349 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:56,355 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:56] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:57,573 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:57,583 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:57] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:52:58,817 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:52:58,823 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:52:58] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:00,542 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:00,550 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:00] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:01,783 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:01,790 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:01] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:03,171 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:03,180 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:03] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:04,436 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:04,445 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:04] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:05,705 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:05,711 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:05] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:06,950 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:06,958 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:06] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:08,165 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:08,173 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:08] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:09,390 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:09,396 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:09] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:10,591 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:10,597 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:10] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:11,794 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:11,799 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:11] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:13,001 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:13,007 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:13] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:14,208 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:14,214 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:14] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:15,421 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:15,427 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:15] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:16,638 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:16,644 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:16] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:17,860 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:17,866 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:17] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:19,075 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:19,081 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:19] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:20,286 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:20,291 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:20] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:21,488 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:21,493 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:21] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:22,699 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:22,703 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:22] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:23,905 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:23,911 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:23] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:25,114 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:25,118 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:25] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:26,319 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:26,324 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:26] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:27,613 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:27,618 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:27] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:28,818 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:28,822 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:28] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:30,020 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:30,025 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:30] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:31,273 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:31,282 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:31] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:32,496 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:32,503 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:32] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:33,709 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:33,716 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:33] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:34,972 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:34,981 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:34] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:36,205 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:36,211 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:36] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:37,395 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:37,402 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:37] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:38,711 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:38,718 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:38] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:39,917 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:39,923 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:39] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:41,132 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:41,138 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:41] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:42,387 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:42,392 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:42] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:43,613 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:43,620 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:43] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:44,857 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:44,865 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:44] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:46,077 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:46,084 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:46] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:47,319 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:47,325 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:47] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:48,615 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:48,621 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:48] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:49,844 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:49,851 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:49] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:51,177 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:51,184 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:51] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:52,449 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:52,457 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:52] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:53,658 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:53,669 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:53] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:54,919 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:54,926 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:54] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:56,169 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:56,177 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:56] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:57,446 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:57,456 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:57] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:58,679 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:58,687 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:58] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:53:59,924 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:53:59,934 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:53:59] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:01,137 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:01,149 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:01] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:02,363 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:02,372 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:02] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:03,595 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:03,602 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:03] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:04,803 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:04,815 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:04] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:06,016 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:06,027 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:06] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:07,227 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:07,231 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:07] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:08,442 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:08,447 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:08] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:09,654 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:09,662 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:09] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:10,866 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:10,873 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:10] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:12,089 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:12,099 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:12] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:13,307 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:13,316 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:13] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:14,519 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:14,525 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:14] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:15,731 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:15,737 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:15] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:16,947 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:16,954 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:16] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:19,232 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:19,243 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:19] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:28,296 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:28,324 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:28] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:29,883 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:29,891 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:29] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:37,982 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:38,015 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:38] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:38,046 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:38,060 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:38] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:39,153 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:39,292 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:39] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:40,435 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:40,493 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:40] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:41,658 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:41,816 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:41] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:42,835 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:42,900 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:42] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:44,024 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:44,044 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:44] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:45,217 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:45,233 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:45] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:46,403 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:46,412 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:46] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:47,612 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:47,616 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:47] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:48,828 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:48,834 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:48] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:50,053 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:50,065 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:50] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:51,247 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:51,251 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:51] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:52,448 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:52,452 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:52] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:53,661 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:53,668 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:53] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:54,863 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:54,871 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:54] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:56,066 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:56,079 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:56] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:57,329 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:57,333 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:57] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:58,513 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:58,517 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:58] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:54:59,763 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:54:59,771 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:54:59] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:00,969 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:00,974 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:00] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:02,184 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:02,190 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:02] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:03,404 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:03,419 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:03] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:04,608 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:04,624 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:04] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:05,842 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:05,875 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:05] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:07,490 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:07,522 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:07] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:24,932 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:24,937 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:24] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:26,137 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:26,141 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:26] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:27,341 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:27,345 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:27] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:28,552 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:28,559 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:28] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:29,871 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:29,886 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:29] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:31,070 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:31,074 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:31] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:32,283 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:32,287 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:32] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:33,495 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:33,499 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:33] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:34,708 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:34,713 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:34] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:35,910 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:35,915 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:35] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:37,116 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:37,122 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:37] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:38,326 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:38,331 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:38] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:39,532 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:39,537 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:39] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:40,743 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:40,748 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:40] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:41,961 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:41,970 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:41] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:43,306 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:43,315 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:43] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
+2026-09-01 17:55:44,646 [INFO] zoro_hub: GET /api/multiplayer/room/UCRVU user=zoro
+2026-09-01 17:55:44,658 [INFO] werkzeug: 127.0.0.1 - - [01/Sep/2026 17:55:44] "GET /api/multiplayer/room/UCRVU HTTP/1.1" 200 -
