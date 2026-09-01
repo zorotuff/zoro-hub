@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Zoro Hub — Marketplace</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/shop.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/shop_themes.css') }}"
+    >
+</head>
+
+<body>
+
+<div class="shop-page">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="shop-header">
+
+    <div class="shop-header-left">
+
+        <a href="/" class="return-hub">
+            <span class="arrow">←</span>
+            <span class="return-text">RETURN TO HUB</span>
+        </a>
+
+        <a href="/" class="brand">
+            ZORO<span>HUB</span>
+        </a>
+
+    </div>
+
+    <div class="header-right">
+
+        <div class="coin-display">
+            <span>🪙</span>
+            <strong id="coin-balance">{{ "{:,}".format(initial_coins) }}</strong>
+            <small>COINS</small>
+        </div>
+
+        <a href="{{ url_for('profile') }}" class="profile-button">
+
+            PROFILE
+        </a>
+
+    </div>
+
+</header>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="marketplace-hero">
+
+        <div class="hero-content">
+
+            <span class="eyebrow">
+                ZORO HUB • MARKETPLACE
+            </span>
+
+            <h1>
+                MARKETPLACE
+            </h1>
+
+            <p>
+                Customize your Zoro Hub profile with
+                unique avatars, banners and themes.
+            </p>
+
+        </div>
+
+        <div class="hero-glow"></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTROLS
+    ====================================================== -->
+
+    <section class="shop-controls">
+
+        <div class="category-tabs">
+
+            <button
+                type="button"
+                class="category-tab active"
+                data-category="all"
+            >
+                ALL
+            </button>
+
+            <button
+                type="button"
+                class="category-tab"
+                data-category="avatars"
+            >
+                AVATARS
+            </button>
+
+            <button
+                type="button"
+                class="category-tab"
+                data-category="banners"
+            >
+                BANNERS
+            </button>
+
+            <button
+                type="button"
+                class="category-tab"
+                data-category="themes"
+            >
+                THEMES
+            </button>
+
+        </div>
+
+
+        <div class="shop-search">
+
+            <input
+                type="text"
+                id="shop-search"
+                placeholder="Search marketplace..."
+                autocomplete="off"
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STATUS
+    ====================================================== -->
+
+    <div
+        id="shop-status"
+        class="shop-status"
+    >
+        Loading marketplace...
+    </div>
+
+
+    <!-- =====================================================
+         SHOP GRID
+    ====================================================== -->
+
+    <main
+        id="shop-grid"
+        class="shop-grid"
+    ></main>
+
+
+    <!-- =====================================================
+         EMPTY STATE
+    ====================================================== -->
+
+    <section
+        id="empty-state"
+        class="empty-state hidden"
+    >
+
+        <div class="empty-icon">
+            ◇
+        </div>
+
+        <h2>
+            NOTHING FOUND
+        </h2>
+
+        <p>
+            No marketplace items match your search.
+        </p>
+
+    </section>
+
+</div>
+
+
+<!-- =========================================================
+     ITEM MODAL
+========================================================= -->
+
+<div
+    id="item-modal"
+    class="item-modal hidden"
+>
+
+    <div class="modal-backdrop"></div>
+
+    <div class="modal-card">
+
+        <button
+            type="button"
+            id="modal-close"
+            class="modal-close"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+
+        <div
+            id="modal-image"
+            class="modal-image"
+        ></div>
+
+
+        <div class="modal-info">
+
+            <span
+                id="modal-rarity"
+                class="modal-rarity"
+            >
+                COMMON
+            </span>
+
+            <h2 id="modal-name">
+                Item
+            </h2>
+
+            <p id="modal-description">
+                Description
+            </p>
+
+
+            <div class="modal-price">
+
+                <span>
+                    PRICE
+                </span>
+
+                <strong id="modal-price-value">
+                    FREE
+                </strong>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="modal-action"
+                class="modal-action"
+            >
+                GET ITEM
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     PURCHASE CONFIRMATION
+========================================================= -->
+
+<div
+    id="confirm-modal"
+    class="item-modal hidden"
+>
+
+    <div class="modal-backdrop"></div>
+
+    <div class="modal-card confirm-card">
+
+        <button
+            type="button"
+            id="confirm-close"
+            class="modal-close"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+        <p class="confirm-eyebrow">Purchase Cosmetic</p>
+
+        <div id="confirm-preview" class="confirm-preview"></div>
+
+        <h2 id="confirm-name">Item</h2>
+        <span id="confirm-rarity" class="modal-rarity">COMMON</span>
+
+        <div class="confirm-rows">
+            <div class="confirm-row">
+                <span>Price</span>
+                <strong id="confirm-price">0 Coins</strong>
+            </div>
+            <div class="confirm-row">
+                <span>Your balance</span>
+                <strong id="confirm-balance">0 Coins</strong>
+            </div>
+            <div class="confirm-row confirm-row-after">
+                <span>Balance after</span>
+                <strong id="confirm-balance-after">0 Coins</strong>
+            </div>
+        </div>
+
+        <div class="confirm-actions">
+            <button type="button" id="confirm-cancel" class="confirm-btn confirm-cancel">CANCEL</button>
+            <button type="button" id="confirm-purchase" class="confirm-btn confirm-purchase">PURCHASE</button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     SHOP JAVASCRIPT
+========================================================= -->
+
+<script>
+
+window.ZORO_INITIAL_OWNED = {{ initial_owned | tojson }};
+window.ZORO_INITIAL_EQUIPPED = {{ initial_equipped | tojson }};
+window.ZORO_INITIAL_COINS = {{ initial_coins | tojson }};
+
+const state = {
+
+    items: [],
+
+    category: "all",
+
+    search: "",
+
+    selectedItem: null,
+
+    // Real ownership/equip state, loaded from the server below --
+    // no localStorage in the loop anymore.
+    owned: window.ZORO_INITIAL_OWNED || [],
+
+    equipped: window.ZORO_INITIAL_EQUIPPED || {},
+
+    coins: window.ZORO_INITIAL_COINS || 0
+
+};
+
+
+// ==========================================================
+// THEME CLASS LIST
+// ==========================================================
+
+const THEME_CLASSES = [
+
+    "theme-common",
+    "theme-uncommon",
+    "theme-rare",
+    "theme-epic",
+    "theme-legendary",
+    "theme-mythic",
+
+    "theme-slate",
+    "theme-ash",
+    "theme-dusk",
+
+    "theme-forest",
+    "theme-ocean",
+    "theme-ember",
+
+    "theme-midnight",
+    "theme-ivory",
+    "theme-crimson",
+
+    "theme-royal",
+    "theme-obsidian",
+    "theme-aurora",
+
+    "theme-imperial",
+
+    "theme-eclipse"
+
+];
+
+
+// ==========================================================
+// LOAD SHOP
+// ==========================================================
+
+async function loadShop() {
+
+    const status =
+        document.getElementById("shop-status");
+
+
+    try {
+
+        const response =
+            await fetch("/shop/api/items");
+
+
+        if (!response.ok) {
+            throw new Error(
+                `HTTP ${response.status}`
+            );
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+            throw new Error(
+                "Shop API returned an error"
+            );
+        }
+
+
+        state.items =
+            Array.isArray(data.items)
+                ? data.items
+                : [];
+
+
+        status.textContent =
+            `${state.items.length} ITEMS AVAILABLE`;
+
+
+        renderShop();
+
+
+    } catch (error) {
+
+        console.error(
+            "Shop loading error:",
+            error
+        );
+
+
+        status.textContent =
+            "MARKETPLACE UNAVAILABLE";
+
+    }
+
+}
+
+
+// ==========================================================
+// GENERATE VISUAL
+// ==========================================================
+
+function createItemVisual(item) {
+
+    const name =
+        escapeHtml(
+            item.name || "Item"
+        );
+
+
+    const category =
+        (
+            item.category || ""
+        ).toLowerCase();
+
+
+    const rarity =
+        (
+            item.rarity || "common"
+        ).toLowerCase();
+
+
+    const themeClass =
+        item.theme_class || "";
+
+
+    // ======================================================
+    // THEMES
+    // ======================================================
+
+    if (category === "themes") {
+
+        return `
+            <div class="
+                theme-card
+                theme-${escapeHtml(rarity)}
+                ${themeClass}
+            ">
+
+                <div class="theme-card-preview">
+
+                    <div class="theme-mini-header">
+
+                        <span
+                            class="theme-mini-dot">
+                        </span>
+
+                        <span
+                            class="theme-mini-line">
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="theme-mini-panel">
+                    </div>
+
+
+                    <div
+                        style="
+                            position:absolute;
+                            left:20px;
+                            bottom:16px;
+                            z-index:3;
+                        "
+                    >
+
+                        <div
+                            class="theme-card-title"
+                        >
+                            ${name}
+                        </div>
+
+
+                        <div
+                            class="theme-card-rarity"
+                        >
+                            ${rarity}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+    }
+
+
+    // ======================================================
+    // AVATARS
+    // ======================================================
+
+    if (category === "avatars") {
+
+        return `
+            <div class="profile-card-mock">
+                <div class="pcm-avatar-wrap ${escapeHtml(rarity)}">
+                    <img
+                        class="pcm-avatar-img"
+                        src="/static/avatars/${escapeHtml(item.id)}.svg"
+                        alt="${name}"
+                        onerror="this.parentElement.classList.add('pcm-fallback')"
+                    >
+                </div>
+                <div class="pcm-identity">
+                    <span class="pcm-username">YourName</span>
+                    <span class="pcm-level">Lv. 24</span>
+                </div>
+                <span class="pcm-caption">On your profile</span>
+            </div>
+        `;
+    }
+
+
+    // ======================================================
+    // BANNERS
+    // ======================================================
+
+    if (category === "banners") {
+
+        return `
+            <div class="profile-header-mock">
+                <img
+                    class="phm-banner-img"
+                    src="/static/banners/${escapeHtml(item.id)}.svg"
+                    alt="${name}"
+                    onerror="this.style.display='none'; this.parentElement.classList.add('phm-fallback')"
+                >
+                <div class="phm-overlay ${escapeHtml(rarity)}"></div>
+                <div class="phm-identity">
+                    <div class="phm-avatar-dot"></div>
+                    <div>
+                        <span class="phm-username">YourName</span>
+                        <span class="phm-level">Level 24</span>
+                    </div>
+                </div>
+                <span class="phm-caption">Your profile header</span>
+            </div>
+        `;
+    }
+
+
+    // ======================================================
+    // FALLBACK
+    // ======================================================
+
+    return `
+        <div
+            class="
+                generated-theme
+                ${rarity}
+            "
+        >
+
+            <div
+                class="theme-window"
+            >
+
+                <div
+                    class="theme-top"
+                ></div>
+
+
+                <div
+                    class="theme-lines"
+                ></div>
+
+
+                <strong>
+                    ${name}
+                </strong>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+// ==========================================================
+// RENDER SHOP
+// ==========================================================
+
+function renderShop() {
+
+    const grid =
+        document.getElementById(
+            "shop-grid"
+        );
+
+
+    const empty =
+        document.getElementById(
+            "empty-state"
+        );
+
+
+    const filteredItems =
+        state.items.filter(item => {
+
+            const categoryMatch =
+                state.category === "all" ||
+                item.category === state.category;
+
+
+            const searchMatch =
+                !state.search ||
+                (
+                    item.name || ""
+                )
+                .toLowerCase()
+                .includes(
+                    state.search
+                );
+
+
+            return (
+                categoryMatch &&
+                searchMatch
+            );
+
+        });
+
+
+    grid.innerHTML = "";
+
+
+    if (
+        filteredItems.length === 0
+    ) {
+
+        empty.classList.remove(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    empty.classList.add(
+        "hidden"
+    );
+
+
+    filteredItems.forEach(
+        item => {
+
+            grid.appendChild(
+                createItemCard(item)
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================================
+// CREATE ITEM CARD
+// ==========================================================
+
+function createItemCard(item) {
+
+    const card =
+        document.createElement(
+            "article"
+        );
+
+
+    card.className =
+        "shop-card";
+
+
+    const owned =
+        state.owned.includes(
+            item.id
+        );
+
+
+    const equipped =
+        isItemEquipped(item);
+
+
+    const rarity =
+        item.rarity || "common";
+
+
+    const visual =
+        createItemVisual(item);
+
+
+    let actionText =
+        "GET";
+
+
+    if (equipped) {
+
+        actionText =
+            "EQUIPPED";
+
+    }
+
+    else if (owned) {
+
+        actionText =
+            "EQUIP";
+
+    }
+
+
+    card.innerHTML = `
+
+        <div class="card-visual">
+
+            <span
+                class="
+                    rarity-tag
+                    ${escapeHtml(rarity)}
+                "
+            >
+                ${escapeHtml(rarity)}
+            </span>
+
+
+            ${visual}
+
+
+            <button
+                type="button"
+                class="preview-button"
+            >
+                VIEW
+            </button>
+
+        </div>
+
+
+        <div class="card-body">
+
+            <span
+                class="card-category"
+            >
+                ${escapeHtml(
+                    item.category || ""
+                )}
+            </span>
+
+
+            <h2>
+                ${escapeHtml(
+                    item.name || "Item"
+                )}
+            </h2>
+
+
+            <p>
+                ${escapeHtml(
+                    item.description || ""
+                )}
+            </p>
+
+
+            <div class="card-footer">
+
+                <div class="card-price">
+
+                    <span>
+                        PRICE
+                    </span>
+
+                    <strong>
+                        ${owned ? "OWNED" : formatCoins(item.price)}
+                    </strong>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    ${equipped ? "disabled" : ""}
+                    class="
+                        get-button
+                        ${
+                            equipped
+                                ? "equipped"
+                                : owned
+                                    ? "owned"
+                                    : ""
+                        }
+                    "
+                >
+                    ${actionText}
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+
+    const previewButton =
+        card.querySelector(
+            ".preview-button"
+        );
+
+
+    previewButton.addEventListener(
+        "click",
+        () => {
+
+            openModal(item);
+
+        }
+    );
+
+
+    const getButton =
+        card.querySelector(
+            ".get-button"
+        );
+
+
+    getButton.addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+            handleItemAction(item);
+
+        }
+    );
+
+
+    return card;
+}
+
+
+// ==========================================================
+// CHECK EQUIPPED
+// ==========================================================
+
+function isItemEquipped(item) {
+
+    if (
+        item.category === "themes"
+    ) {
+
+        return (
+            state.equipped.theme ===
+            item.id
+        );
+
+    }
+
+
+    return (
+        state.equipped[
+            item.category
+        ] === item.id
+    );
+
+}
+
+
+function formatCoins(amount) {
+    return Number(amount || 0).toLocaleString() + " Coins";
+}
+
+
+// ==========================================================
+// SHOP TOAST (purchase / equip feedback)
+// ==========================================================
+
+function showShopMessage(text, kind) {
+    let toast = document.getElementById("shop-toast");
+    if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "shop-toast";
+        toast.className = "shop-toast";
+        document.body.appendChild(toast);
+    }
+    toast.textContent = text;
+    toast.className = "shop-toast " + (kind || "info") + " visible";
+    clearTimeout(toast._hideTimer);
+    toast._hideTimer = setTimeout(() => {
+        toast.classList.remove("visible");
+    }, 3200);
+}
+
+
+function updateCoinsDisplay() {
+    const el = document.getElementById("coin-balance");
+    if (el) el.textContent = Number(state.coins || 0).toLocaleString();
+}
+
+
+// ==========================================================
+// ITEM ACTION -- real purchase / equip against the real backend
+// ==========================================================
+
+async function handleItemAction(item) {
+
+    const alreadyOwned = state.owned.includes(item.id);
+
+    if (!alreadyOwned) {
+        openConfirmModal(item);
+        return; // the confirm modal's own PURCHASE button continues the flow
+    }
+
+    await equipOwnedItem(item);
+}
+
+
+function openConfirmModal(item) {
+    document.getElementById("confirm-rarity").textContent = (item.rarity || "common").toUpperCase();
+    document.getElementById("confirm-rarity").className = "modal-rarity " + (item.rarity || "common").toLowerCase();
+    document.getElementById("confirm-name").textContent = item.name;
+    document.getElementById("confirm-preview").innerHTML = createItemVisual(item);
+    document.getElementById("confirm-price").textContent = formatCoins(item.price);
+    document.getElementById("confirm-balance").textContent = formatCoins(state.coins);
+    const after = state.coins - item.price;
+    const afterEl = document.getElementById("confirm-balance-after");
+    afterEl.textContent = formatCoins(Math.max(0, after));
+    afterEl.parentElement.classList.toggle("confirm-row-insufficient", after < 0);
+    document.getElementById("confirm-purchase").disabled = after < 0;
+    document.getElementById("confirm-purchase").textContent = after < 0 ? "NOT ENOUGH COINS" : "PURCHASE";
+
+    state.pendingPurchase = item;
+    document.getElementById("confirm-modal").classList.remove("hidden");
+}
+
+
+function closeConfirmModal() {
+    document.getElementById("confirm-modal").classList.add("hidden");
+    state.pendingPurchase = null;
+}
+
+
+async function confirmPurchase() {
+    const item = state.pendingPurchase;
+    if (!item) return;
+    closeConfirmModal();
+
+    const res = await fetch("/shop/api/purchase", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ item_id: item.id })
+    });
+    const data = await res.json();
+
+    if (!res.ok || !data.success) {
+        if (res.status === 402) {
+            showShopMessage(`Not enough Coins -- need ${formatCoins(item.price)}.`, "error");
+        } else if (res.status === 409) {
+            showShopMessage("You already own this item.", "error");
+            state.owned.push(item.id);
+        } else {
+            showShopMessage((data && data.detail) || "Purchase failed.", "error");
+        }
+        renderShop();
+        return;
+    }
+
+    state.owned.push(item.id);
+    state.coins = data.new_balance;
+    updateCoinsDisplay();
+    showShopMessage(`Purchased ${item.name} for ${formatCoins(item.price)}.`, "success");
+
+    await equipOwnedItem(item);
+}
+
+
+async function equipOwnedItem(item) {
+    const equipRes = await fetch("/shop/api/equip", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ item_id: item.id })
+    });
+    const equipData = await equipRes.json();
+
+    if (!equipRes.ok || !equipData.success) {
+        showShopMessage((equipData && equipData.detail) || "Couldn't equip that item.", "error");
+        renderShop();
+        return;
+    }
+
+    if (item.category === "themes") {
+        state.equipped.theme = item.id;
+        state.equipped.themeClass = `theme-${item.rarity.toLowerCase()} ${item.theme_class}`;
+        applyShopTheme();
+    } else {
+        state.equipped[item.category] = item.id;
+    }
+
+    showShopMessage(`Equipped ${item.name}.`, "success");
+    renderShop();
+    if (state.selectedItem && state.selectedItem.id === item.id) {
+        updateModalAction(item);
+    }
+}
+
+
+// ==========================================================
+// APPLY SELECTED THEME
+// ==========================================================
+
+function applyShopTheme() {
+
+    THEME_CLASSES.forEach(
+        className => {
+
+            document.body.classList.remove(
+                className
+            );
+
+        }
+    );
+
+
+    const themeClass =
+        state.equipped.themeClass;
+
+
+    if (themeClass) {
+
+        themeClass.split(" ").filter(Boolean).forEach(
+            className => document.body.classList.add(className)
+        );
+
+    }
+
+}
+
+
+// ==========================================================
+// OPEN MODAL
+// ==========================================================
+
+function openModal(item) {
+
+    state.selectedItem =
+        item;
+
+
+    const modal =
+        document.getElementById(
+            "item-modal"
+        );
+
+
+    const image =
+        document.getElementById(
+            "modal-image"
+        );
+
+
+    const rarity =
+        document.getElementById(
+            "modal-rarity"
+        );
+
+
+    const name =
+        document.getElementById(
+            "modal-name"
+        );
+
+
+    const description =
+        document.getElementById(
+            "modal-description"
+        );
+
+
+    const action =
+        document.getElementById(
+            "modal-action"
+        );
+
+
+    image.innerHTML =
+        createItemVisual(item);
+
+
+    const itemRarity =
+        (
+            item.rarity ||
+            "common"
+        ).toLowerCase();
+
+
+    rarity.textContent =
+        itemRarity.toUpperCase();
+
+
+    rarity.className =
+        `modal-rarity ${itemRarity}`;
+
+
+    name.textContent =
+        item.name || "Item";
+
+
+    description.textContent =
+        item.description || "";
+
+
+    const priceValue =
+        document.getElementById(
+            "modal-price-value"
+        );
+
+    const alreadyOwned =
+        state.owned.includes(item.id);
+
+    priceValue.textContent =
+        alreadyOwned ? "OWNED" : formatCoins(item.price);
+
+
+    updateModalAction(
+        item
+    );
+
+
+    modal.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+// ==========================================================
+// UPDATE MODAL BUTTON
+// ==========================================================
+
+function updateModalAction(item) {
+
+    const action =
+        document.getElementById(
+            "modal-action"
+        );
+
+
+    if (
+        isItemEquipped(item)
+    ) {
+
+        action.textContent =
+            "EQUIPPED";
+
+    }
+
+    else if (
+        state.owned.includes(
+            item.id
+        )
+    ) {
+
+        action.textContent =
+            "EQUIP";
+
+    }
+
+    else {
+
+        action.textContent =
+            "GET ITEM";
+
+    }
+
+}
+
+
+// ==========================================================
+// CLOSE MODAL
+// ==========================================================
+
+function closeModal() {
+
+    const modal =
+        document.getElementById(
+            "item-modal"
+        );
+
+
+    modal.classList.add(
+        "hidden"
+    );
+
+
+    state.selectedItem =
+        null;
+
+}
+
+
+// ==========================================================
+// MODAL CLOSE
+// ==========================================================
+
+document
+    .getElementById(
+        "modal-close"
+    )
+    .addEventListener(
+        "click",
+        closeModal
+    );
+
+
+// ==========================================================
+// BACKDROP CLOSE
+// ==========================================================
+
+document
+    .querySelector(
+        ".modal-backdrop"
+    )
+    .addEventListener(
+        "click",
+        closeModal
+    );
+
+
+// ==========================================================
+// MODAL ACTION
+// ==========================================================
+
+document
+    .getElementById(
+        "modal-action"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            if (
+                !state.selectedItem
+            ) {
+
+                return;
+
+            }
+
+
+            handleItemAction(
+                state.selectedItem
+            );
+
+
+            updateModalAction(
+                state.selectedItem
+            );
+
+        }
+    );
+
+
+// ==========================================================
+// CATEGORY BUTTONS
+// ==========================================================
+
+document
+    .querySelectorAll(
+        ".category-tab"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    document
+                        .querySelectorAll(
+                            ".category-tab"
+                        )
+                        .forEach(
+                            otherButton => {
+
+                                otherButton
+                                    .classList
+                                    .remove(
+                                        "active"
+                                    );
+
+                            }
+                        );
+
+
+                    button
+                        .classList
+                        .add(
+                            "active"
+                        );
+
+
+                    state.category =
+                        button.dataset.category;
+
+
+                    renderShop();
+
+                }
+            );
+
+        }
+    );
+
+
+// ==========================================================
+// SEARCH
+// ==========================================================
+
+document
+    .getElementById(
+        "shop-search"
+    )
+    .addEventListener(
+        "input",
+        event => {
+
+            state.search =
+                event.target.value
+                    .trim()
+                    .toLowerCase();
+
+
+            renderShop();
+
+        }
+    );
+
+
+// ==========================================================
+// ESCAPE KEY
+// ==========================================================
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+// ==========================================================
+// HTML ESCAPE
+// ==========================================================
+
+function escapeHtml(value) {
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+// ==========================================================
+// START
+// ==========================================================
+
+document.getElementById("modal-action").addEventListener("click", () => {
+    if (state.selectedItem) {
+        handleItemAction(state.selectedItem);
+    }
+});
+
+document.getElementById("confirm-close").addEventListener("click", closeConfirmModal);
+document.getElementById("confirm-cancel").addEventListener("click", closeConfirmModal);
+document.getElementById("confirm-purchase").addEventListener("click", confirmPurchase);
+document.querySelector("#confirm-modal .modal-backdrop").addEventListener("click", closeConfirmModal);
+
+updateCoinsDisplay();
+applyShopTheme();
+
+loadShop();
+
+</script>
+
+</body>
+
+</html>

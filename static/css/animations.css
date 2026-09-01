@@ -1,0 +1,214 @@
+/* =========================================
+        LAUNCHER ANIMATIONS
+========================================= */
+
+.game-card{
+
+transition:
+transform .55s cubic-bezier(.22,1,.36,1),
+opacity .45s ease,
+filter .45s ease,
+box-shadow .45s ease,
+border-color .35s ease;
+
+}
+
+.game-card.active{
+
+animation:cardPop .45s ease;
+
+}
+
+@keyframes cardPop{
+
+0%{
+
+transform:
+translate(-50%,-50%)
+scale(.92);
+
+}
+
+60%{
+
+transform:
+translate(-50%,-50%)
+scale(1.04);
+
+}
+
+100%{
+
+transform:
+translate(-50%,-50%)
+scale(1);
+
+}
+
+}
+
+.game-card button{
+
+transition:
+transform .25s,
+box-shadow .25s;
+
+}
+
+.game-card button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 10px 25px rgba(79,140,255,.4);
+
+}
+
+.launcher-arrow{
+
+position:absolute;
+
+top:50%;
+
+transform:translateY(-50%);
+
+width:82px;
+
+height:82px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border:none;
+
+border-radius:24px;
+
+background:rgba(18,25,40,.92);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.08);
+
+color:white;
+
+cursor:pointer;
+
+z-index:100;
+
+box-shadow:
+
+0 18px 40px rgba(0,0,0,.35);
+
+transition:
+
+all .28s ease;
+
+}
+
+.launcher-arrow.left{
+
+left:18px;
+
+}
+
+.launcher-arrow.right{
+
+right:18px;
+
+}
+
+.launcher-arrow svg{
+
+width:34px;
+
+height:34px;
+
+transition:transform .25s ease;
+
+}
+
+.launcher-arrow:hover{
+
+background:
+
+linear-gradient(
+135deg,
+#4f8cff,
+#6d5cff
+);
+
+transform:
+
+translateY(-50%)
+scale(1.08);
+
+box-shadow:
+
+0 0 40px rgba(79,140,255,.45);
+
+}
+
+.launcher-arrow:hover svg{
+
+transform:scale(1.15);
+
+}
+
+.launcher-arrow:active{
+
+transform:
+
+translateY(-50%)
+scale(.95);
+
+}
+
+.launcher-arrow:hover{
+
+transform:
+translateY(-50%)
+scale(1.12);
+
+}
+
+.game-card{
+
+transform-style:preserve-3d;
+
+will-change:transform;
+
+}
+
+.game-card::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+border-radius:28px;
+
+background:
+
+radial-gradient(
+circle at var(--mx,50%) var(--my,50%),
+rgba(255,255,255,.18),
+transparent 55%
+);
+
+opacity:0;
+
+transition:.25s;
+
+pointer-events:none;
+
+}
+
+.game-card:hover::before{
+
+opacity:1;
+
+}

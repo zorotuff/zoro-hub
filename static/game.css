@@ -1,0 +1,1131 @@
+/* ==========================================================
+                    ZORO HUB GAME V2
+========================================================== */
+
+:root{
+
+--bg:#070B12;
+--bg2:#0C1420;
+
+--card:rgba(18,28,42,.88);
+
+--cyan:#2EDBFF;
+--cyan2:#71F2FF;
+
+--gold:#FFD75F;
+
+--text:#F5F8FC;
+--muted:#9EB0C6;
+
+--border:rgba(255,255,255,.08);
+
+--radius:24px;
+
+}
+
+/* ========================================================== */
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
+}
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+body{
+
+font-family:"Inter",sans-serif;
+
+background:var(--bg);
+
+color:var(--text);
+
+overflow-x:hidden;
+
+min-height:100vh;
+
+position:relative;
+
+}
+
+/* ==========================================================
+                    BACKGROUND
+========================================================== */
+
+.background{
+
+position:fixed;
+
+inset:0;
+
+z-index:-100;
+
+background:
+
+radial-gradient(circle at 15% 20%,rgba(46,219,255,.15),transparent 35%),
+
+radial-gradient(circle at 80% 70%,rgba(255,215,95,.12),transparent 30%),
+
+linear-gradient(180deg,#05080D,#08111A,#0B1520);
+
+overflow:hidden;
+
+}
+
+/* floating blobs */
+
+.background::before{
+
+content:"";
+
+position:absolute;
+
+width:500px;
+
+height:500px;
+
+border-radius:50%;
+
+background:var(--cyan);
+
+filter:blur(120px);
+
+opacity:.18;
+
+animation:blob1 16s ease-in-out infinite;
+
+}
+
+.background::after{
+
+content:"";
+
+position:absolute;
+
+right:-120px;
+
+bottom:-120px;
+
+width:420px;
+
+height:420px;
+
+border-radius:50%;
+
+background:var(--gold);
+
+filter:blur(120px);
+
+opacity:.15;
+
+animation:blob2 18s ease-in-out infinite;
+
+}
+
+@keyframes blob1{
+
+0%,100%{
+
+transform:translate(-100px,-80px);
+
+}
+
+50%{
+
+transform:translate(50px,20px);
+
+}
+
+}
+
+@keyframes blob2{
+
+0%,100%{
+
+transform:translate(0,0);
+
+}
+
+50%{
+
+transform:translate(-80px,-60px);
+
+}
+
+}
+
+/* ==========================================================
+                    MOUSE GLOW
+========================================================== */
+
+.mouseGlow{
+
+position:fixed;
+
+width:320px;
+
+height:320px;
+
+border-radius:50%;
+
+pointer-events:none;
+
+background:
+
+radial-gradient(circle,
+
+rgba(46,219,255,.18),
+
+transparent 70%);
+
+transform:translate(-50%,-50%);
+
+mix-blend-mode:screen;
+
+z-index:-50;
+
+transition:
+
+left .08s linear,
+
+top .08s linear;
+
+}
+
+/* ==========================================================
+                    PAGE
+========================================================== */
+
+.page{
+
+width:min(1200px,100%);
+
+margin:auto;
+
+padding:28px;
+
+}
+
+/* ==========================================================
+                    HEADER
+========================================================== */
+
+.topbar{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:30px;
+
+}
+
+.topbar h1{
+
+font-family:"Orbitron",sans-serif;
+
+font-size:clamp(1.6rem,4vw,2.7rem);
+
+letter-spacing:1px;
+
+}
+
+.backBtn{
+
+padding:12px 18px;
+
+border-radius:16px;
+
+background:rgba(255,255,255,.04);
+
+border:1px solid var(--border);
+
+transition:.3s;
+
+font-weight:700;
+
+}
+
+.backBtn:hover{
+
+background:rgba(46,219,255,.12);
+
+border-color:rgba(46,219,255,.25);
+
+transform:translateY(-2px);
+
+}
+
+/* ==========================================================
+                    TOP GRID
+========================================================== */
+
+.topGrid{
+
+display:grid;
+
+grid-template-columns:1fr;
+
+gap:24px;
+
+margin-bottom:28px;
+
+}
+
+@media(min-width:850px){
+
+.topGrid{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+}
+
+/* ==========================================================
+                    GLASS CARD
+========================================================== */
+
+.difficultyCard,
+.attemptCard,
+.mainCard,
+.historyCard{
+
+background:var(--card);
+
+backdrop-filter:blur(18px);
+
+border:1px solid var(--border);
+
+border-radius:26px;
+
+padding:26px;
+
+box-shadow:
+
+0 20px 45px rgba(0,0,0,.35);
+
+transition:.35s;
+
+}
+
+.difficultyCard:hover,
+.attemptCard:hover,
+.mainCard:hover,
+.historyCard:hover{
+
+transform:translateY(-4px);
+
+border-color:rgba(46,219,255,.2);
+
+}
+
+/* ==========================================================
+                    TITLES
+========================================================== */
+
+h2{
+
+font-size:1.3rem;
+
+font-weight:800;
+
+margin-bottom:18px;
+
+}
+
+/* ==========================================================
+                    DIFFICULTY BUTTONS
+========================================================== */
+
+.difficultyButtons{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:14px;
+
+}
+
+.diffBtn{
+
+padding:14px;
+
+text-align:center;
+
+border-radius:16px;
+
+font-weight:800;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid var(--border);
+
+transition:.3s;
+
+}
+
+.diffBtn:hover{
+
+transform:translateY(-2px);
+
+background:rgba(46,219,255,.12);
+
+}
+
+.diffBtn.active{
+
+background:linear-gradient(
+
+135deg,
+
+var(--cyan),
+
+var(--cyan2)
+
+);
+
+color:#04121A;
+
+box-shadow:
+
+0 0 18px rgba(46,219,255,.35);
+
+}
+
+/* ==========================================================
+                    ATTEMPTS
+========================================================== */
+
+.progress{
+
+width:100%;
+
+height:14px;
+
+background:rgba(255,255,255,.05);
+
+border-radius:999px;
+
+overflow:hidden;
+
+margin-bottom:20px;
+
+}
+
+.progressFill{
+
+height:100%;
+
+border-radius:999px;
+
+background:linear-gradient(
+
+90deg,
+
+var(--cyan),
+
+var(--cyan2)
+
+);
+
+box-shadow:
+
+0 0 20px rgba(46,219,255,.45);
+
+transition:width .45s ease;
+
+}
+
+/* ==========================================================
+                    HEARTS
+========================================================== */
+
+.hearts{
+
+display:flex;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.hearts span{
+
+font-size:30px;
+
+animation:heartBeat 1.5s infinite;
+
+filter:drop-shadow(0 0 10px rgba(255,80,80,.35));
+
+}
+
+.hearts .dead{
+
+opacity:.28;
+
+filter:none;
+
+animation:none;
+
+}
+
+@keyframes heartBeat{
+
+0%,100%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.18);
+
+}
+
+}
+
+/* ==========================================================
+                    MAIN CARD
+========================================================== */
+
+.mainCard{
+
+text-align:center;
+
+margin-bottom:26px;
+
+}
+
+.mainCard h2{
+
+font-size:2rem;
+
+margin-bottom:12px;
+
+}
+
+.subtitle{
+
+color:var(--muted);
+
+margin-bottom:24px;
+
+font-size:15px;
+
+}
+
+.cyan{
+
+color:var(--cyan);
+
+}
+
+/* ==========================================================
+                    GUESS FORM
+========================================================== */
+
+.guessForm{
+
+display:flex;
+
+gap:16px;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+margin-bottom:24px;
+
+}
+
+.guessForm input{
+
+width:220px;
+
+padding:16px;
+
+border:none;
+
+outline:none;
+
+border-radius:16px;
+
+background:#0F1924;
+
+color:white;
+
+font-size:18px;
+
+text-align:center;
+
+border:1px solid rgba(255,255,255,.08);
+
+transition:.3s;
+
+}
+
+.guessForm input:focus{
+
+border-color:var(--cyan);
+
+box-shadow:
+
+0 0 18px rgba(46,219,255,.25);
+
+}
+
+/* ==========================================================
+                    GUESS BUTTON
+========================================================== */
+
+.guessForm button{
+
+padding:16px 32px;
+
+border:none;
+
+cursor:pointer;
+
+border-radius:16px;
+
+font-size:17px;
+
+font-weight:900;
+
+background:linear-gradient(
+
+135deg,
+
+var(--cyan),
+
+var(--cyan2)
+
+);
+
+color:#05131B;
+
+transition:.28s;
+
+box-shadow:
+
+0 10px 30px rgba(46,219,255,.25);
+
+}
+
+.guessForm button:hover{
+
+transform:translateY(-4px);
+
+box-shadow:
+
+0 20px 40px rgba(46,219,255,.45);
+
+}
+
+/* ==========================================================
+                    HINT BUTTON
+========================================================== */
+
+.hintArea{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.hintBtn{
+
+padding:14px 28px;
+
+border:none;
+
+border-radius:15px;
+
+font-size:16px;
+
+font-weight:800;
+
+cursor:pointer;
+
+background:linear-gradient(
+
+135deg,
+
+var(--gold),
+
+#FFE79A
+
+);
+
+color:#202020;
+
+transition:.3s;
+
+box-shadow:
+
+0 0 22px rgba(255,215,95,.28);
+
+}
+
+.hintBtn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+
+0 0 35px rgba(255,215,95,.5);
+
+}
+
+.hintBtn:disabled{
+
+opacity:.45;
+
+cursor:not-allowed;
+
+transform:none;
+
+}
+
+.hintMessage{
+
+padding:14px 18px;
+
+border-radius:16px;
+
+background:rgba(46,219,255,.08);
+
+border:1px solid rgba(46,219,255,.18);
+
+color:var(--cyan2);
+
+font-weight:700;
+
+animation:fadeHint .35s ease;
+
+}
+
+@keyframes fadeHint{
+
+from{
+
+opacity:0;
+
+transform:translateY(10px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+}
+
+/* ==========================================================
+                    HISTORY
+========================================================== */
+
+.historyGrid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+gap:18px;
+
+margin-top:20px;
+
+}
+
+.historyItem{
+
+background:rgba(255,255,255,.04);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:18px;
+
+padding:18px;
+
+transition:.3s;
+
+text-align:center;
+
+}
+
+.historyItem:hover{
+
+transform:translateY(-5px);
+
+border-color:rgba(46,219,255,.25);
+
+box-shadow:0 12px 28px rgba(0,0,0,.35);
+
+}
+
+.historyGuess{
+
+font-size:30px;
+
+font-weight:900;
+
+margin-bottom:8px;
+
+color:var(--cyan);
+
+}
+
+.historyResult{
+
+font-weight:700;
+
+margin-bottom:8px;
+
+}
+
+.historyHint{
+
+font-size:14px;
+
+color:var(--muted);
+
+}
+
+.empty{
+
+padding:30px;
+
+opacity:.6;
+
+text-align:center;
+
+}
+
+/* ==========================================================
+                    RESULT POPUP
+========================================================== */
+
+.resultOverlay{
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.72);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+backdrop-filter:blur(10px);
+
+z-index:999;
+
+animation:fadeOverlay .35s ease;
+
+}
+
+.resultCard{
+
+width:min(420px,90%);
+
+background:#111C29;
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:24px;
+
+padding:35px;
+
+text-align:center;
+
+animation:popup .35s ease;
+
+}
+
+.win{
+
+font-size:42px;
+
+color:#53FF95;
+
+margin-bottom:12px;
+
+}
+
+.lose{
+
+font-size:42px;
+
+color:#FF5A5A;
+
+margin-bottom:12px;
+
+}
+
+.resultButtons{
+
+display:flex;
+
+gap:15px;
+
+justify-content:center;
+
+margin-top:25px;
+
+flex-wrap:wrap;
+
+}
+
+.playAgain,
+
+.hubBtn{
+
+padding:14px 24px;
+
+border-radius:16px;
+
+font-weight:800;
+
+text-decoration:none;
+
+transition:.3s;
+
+}
+
+.playAgain{
+
+background:linear-gradient(135deg,var(--cyan),var(--cyan2));
+
+color:#08131A;
+
+}
+
+.hubBtn{
+
+background:#1A2736;
+
+color:white;
+
+}
+
+.playAgain:hover,
+
+.hubBtn:hover{
+
+transform:translateY(-4px);
+
+}
+
+/* ==========================================================
+                    ANIMATIONS
+========================================================== */
+
+@keyframes popup{
+
+from{
+
+opacity:0;
+
+transform:scale(.85);
+
+}
+
+to{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
+}
+
+@keyframes fadeOverlay{
+
+from{
+
+opacity:0;
+
+}
+
+to{
+
+opacity:1;
+
+}
+
+}
+
+/* ==========================================================
+                    MOBILE
+========================================================== */
+
+@media(max-width:700px){
+
+.page{
+
+padding:18px;
+
+}
+
+.topbar{
+
+flex-direction:column;
+
+gap:18px;
+
+}
+
+.guessForm{
+
+flex-direction:column;
+
+align-items:center;
+
+}
+
+.guessForm input{
+
+width:100%;
+
+}
+
+.guessForm button{
+
+width:100%;
+
+}
+
+.resultButtons{
+
+flex-direction:column;
+
+}
+
+.playAgain,
+
+.hubBtn{
+
+width:100%;
+
+text-align:center;
+
+}
+
+}
+
+/* ==========================================================
+                    LINKS
+========================================================== */
+
+a{
+
+color:inherit;
+
+text-decoration:none;
+
+}
+
+/* ==========================================================
+                    SELECTION
+========================================================== */
+
+::selection{
+
+background:var(--cyan);
+
+color:#06121A;
+
+}
+
+.bgParticle{
+position:absolute;
+width:6px;
+height:6px;
+border-radius:50%;
+background:#2EDBFF;
+animation:floatParticle linear infinite;
+}
+
+@keyframes floatParticle{
+0%{
+transform:translateY(0);
+opacity:0;
+}
+20%{
+opacity:.6;
+}
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+.cursorDot{
+position:fixed;
+width:8px;
+height:8px;
+background:#2EDBFF;
+border-radius:50%;
+pointer-events:none;
+transform:translate(-50%,-50%);
+animation:cursorFade .5s linear forwards;
+z-index:9999;
+}
+
+@keyframes cursorFade{
+to{
+opacity:0;
+transform:translate(-50%,-50%) scale(3);
+}
+}
+
+button{
+position:relative;
+overflow:hidden;
+}
+
+.ripple{
+position:absolute;
+width:10px;
+height:10px;
+border-radius:50%;
+background:rgba(255,255,255,.45);
+transform:translate(-50%,-50%);
+animation:ripple .7s ease-out forwards;
+pointer-events:none;
+}
+
+@keyframes ripple{
+to{
+width:300px;
+height:300px;
+opacity:0;
+}
+}

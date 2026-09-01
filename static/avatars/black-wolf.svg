@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#94a3b8" stop-opacity=".34"/>
+      <stop offset="48%" stop-color="#050505"/>
+      <stop offset="100%" stop-color="#02030a"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="256" height="256" rx="128" fill="url(#g)"/>
+  <circle cx="128" cy="128" r="104" fill="none" stroke="#94a3b8" stroke-opacity=".42" stroke-width="4"/>
+  <path d="M76 82h104l-22 26H98z" fill="#94a3b8" opacity=".88"/>
+  <path d="M96 110h64l20 38-52 38-52-38z" fill="#050712" stroke="#94a3b8" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M98 145h60M112 124h32M86 92l-26 62M170 92l26 62" stroke="#94a3b8" stroke-width="7" stroke-linecap="round" opacity=".72"/>
+  <text x="128" y="154" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="#fff" filter="url(#glow)">BW</text>
+</svg>

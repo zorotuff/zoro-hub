@@ -1,0 +1,139 @@
+:root{
+    --mp-bg: var(--theme-bg, #0f0f0f);
+    --mp-surface: var(--theme-surface, #191919);
+    --mp-surface-2: var(--theme-surface-2, #212121);
+    --mp-border: var(--theme-border, #333333);
+    --mp-text: var(--theme-text, #ffffff);
+    --mp-muted: var(--theme-muted, #a3a3a3);
+    --mp-accent: var(--theme-accent, #c7ccd4);
+}
+
+*{ box-sizing: border-box; margin: 0; padding: 0; }
+
+body{
+    background: var(--mp-bg);
+    color: var(--mp-text);
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+}
+
+.mp-back{
+    position: fixed; top: 18px; left: 18px; z-index: 10;
+    color: var(--mp-muted); text-decoration: none;
+    font-size: 13px; font-weight: 700;
+    background: rgba(0,0,0,0.4); padding: 8px 14px; border-radius: 999px;
+}
+.mp-back:hover{ color: var(--mp-text); }
+
+.mp-page{ max-width: 900px; margin: 0 auto; padding: 80px 24px 60px; }
+.mp-narrow{ max-width: 480px; text-align: center; }
+
+.mp-page h1{ font-size: 30px; font-weight: 900; margin-bottom: 4px; }
+.mp-sub{ color: var(--mp-muted); font-size: 14px; margin-bottom: 30px; }
+
+.mp-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+}
+.mp-card{
+    display: block;
+    background: var(--mp-surface);
+    border: 1px solid var(--mp-border);
+    border-radius: 16px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--mp-text);
+    position: relative;
+    transition: border-color .15s;
+}
+.mp-card:not(.disabled):hover{ border-color: var(--mp-accent); }
+.mp-card.disabled{ opacity: 0.5; }
+.mp-card-art{ font-size: 30px; margin-bottom: 10px; }
+.mp-card h3{ font-size: 16px; margin-bottom: 4px; }
+.mp-card p{ font-size: 12px; color: var(--mp-muted); }
+.mp-status{
+    display: inline-block; margin-top: 10px;
+    font-size: 9px; font-weight: 800; letter-spacing: 0.06em;
+    padding: 3px 9px; border-radius: 999px;
+    background: rgba(255,255,255,0.06); color: var(--mp-muted);
+}
+.mp-status.live{ background: rgba(143,208,160,0.15); color: #8fd0a0; }
+
+.mp-panel-block{
+    background: var(--mp-surface);
+    border: 1px solid var(--mp-border);
+    border-radius: 20px;
+    padding: 32px 24px;
+}
+.hidden{ display: none !important; }
+
+.mp-lobby-actions{ display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+.mp-join-row{ display: flex; gap: 8px; }
+.mp-input{
+    flex: 1;
+    background: var(--mp-surface-2);
+    border: 1px solid var(--mp-border);
+    color: var(--mp-text);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.mp-btn{
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 1px solid var(--mp-border);
+    background: var(--mp-surface-2);
+    color: var(--mp-text);
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+}
+.mp-btn.primary{ background: var(--mp-accent); color: #0c0c0c; border: none; }
+.mp-btn.danger{ border-color: rgba(217,122,122,0.4); color: #d97a7a; background: transparent; margin-top: 10px; }
+
+.mp-hint{ color: var(--mp-muted); font-size: 12px; margin: 8px 0 20px; }
+.mp-players{ display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+.mp-player-row{
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--mp-surface-2); border-radius: 10px; padding: 10px 14px; font-size: 13px;
+}
+.mp-player-ready{ color: #8fd0a0; font-size: 11px; font-weight: 800; }
+.mp-player-waiting{ color: var(--mp-muted); font-size: 11px; }
+
+.mp-turn-banner{
+    font-size: 13px; font-weight: 800; color: var(--mp-accent);
+    margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em;
+}
+
+.mp-board{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-width: 300px;
+    margin: 0 auto 20px;
+}
+.mp-cell{
+    aspect-ratio: 1;
+    background: var(--mp-surface-2);
+    border: 1px solid var(--mp-border);
+    border-radius: 12px;
+    font-size: 36px;
+    font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    color: var(--mp-accent);
+}
+.mp-cell:disabled, .mp-cell.filled{ cursor: not-allowed; }
+.mp-cell:not(.filled):not(:disabled):hover{ border-color: var(--mp-accent); }
+
+#resultReward{ color: #ffd15a; font-weight: 700; margin: 10px 0 20px; }
+
+@media (max-width: 480px){
+    .mp-page{ padding: 70px 16px 40px; }
+    .mp-panel-block{ padding: 24px 18px; }
+}

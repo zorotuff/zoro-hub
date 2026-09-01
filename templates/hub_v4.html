@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Zoro Hub</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/base.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/layout.css') }}">
+
+<link rel="stylesheet" 
+href="{{ url_for('static', filename='css/navbar.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/hero.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/launcher.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/background.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/themes.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/settings.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/animations.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/responsive.css') }}">
+
+</head>
+
+<body>
+
+<!-- ===========================
+        BACKGROUND ENGINE
+=========================== -->
+
+<canvas id="bgCanvas"></canvas>
+
+<div id="aurora"></div>
+
+<div id="noise"></div>
+
+<div id="shootingStars"></div>
+
+<div id="orbs">
+
+<div class="orb orb1"></div>
+
+<div class="orb orb2"></div>
+
+<div class="orb orb3"></div>
+
+<div class="orb orb4"></div>
+
+</div>
+
+<div id="mouseGlow"></div>
+
+<!-- ===========================
+          MAIN APP
+=========================== -->
+
+<div id="app">
+
+    <!-- Sidebar -->
+    <aside id="sidebar">
+
+<div class="sidebar-logo">
+
+<div class="logo-circle">
+
+Z
+
+</div>
+
+<div>
+
+<h2>Zoro Hub</h2>
+
+<span>FINAL</span>
+
+</div>
+
+</div>
+
+<nav class="sidebar-nav">
+
+<a class="sidebar-link active">
+
+<span class="nav-icon">🏠</span>
+
+<span>Home</span>
+
+</a>
+
+<a class="sidebar-link">
+
+<span class="nav-icon">🎮</span>
+
+<span>Games</span>
+
+</a>
+
+<a class="sidebar-link">
+
+<span class="nav-icon">👤</span>
+
+<span>Profile</span>
+
+</a>
+
+<a class="sidebar-link">
+
+<span class="nav-icon">🏆</span>
+
+<span>Leaderboard</span>
+
+</a>
+
+<a class="sidebar-link" id="settingsBtn">
+
+<span class="nav-icon">⚙</span>
+
+<span>Settings</span>
+
+</a>
+
+</nav>
+
+<div class="sidebar-bottom">
+
+<div class="profile-avatar">
+
+{{ profile.username[0] }}
+
+</div>
+
+<div class="profile-info">
+
+<h4>{{ profile.username }}</h4>
+
+<p>Level 1 Explorer</p>
+
+</div>
+
+</div>
+
+</aside>
+
+    <!-- Main Content -->
+    <main id="content">
+
+        <!-- Hero -->
+        <section id="hero">
+
+<div class="hero-card">
+
+<div class="hero-tag" id="greeting">
+
+WELCOME BACK
+
+</div>
+<h1 class="hero-title">
+
+{{ profile.username }}
+
+</h1>
+
+<p class="hero-desc">
+
+Welcome back to Zoro Hub.
+
+Play games.
+
+Earn coins.
+
+Unlock achievements.
+
+Beat your high scores.
+
+Everything starts here.
+
+</p>
+
+<div class="hero-buttons">
+
+<a href="#" class="hero-btn">
+
+Continue
+
+</a>
+
+<a href="#" class="hero-btn secondary">
+
+Profile
+
+</a>
+
+</div>
+
+</div>
+
+<div class="hero-stats">
+
+<div class="stat-box">
+
+<h1>
+
+{{ profile.games_won }}
+
+</h1>
+
+<p>
+
+Games Won
+
+</p>
+
+</div>
+
+<div class="stat-box">
+
+<h1>
+
+{{ profile.current_streak }}
+
+</h1>
+
+<p>
+
+Current Streak
+
+</p>
+
+</div>
+
+<div class="stat-box">
+
+<h1>
+
+{{ profile.coins }}
+
+</h1>
+
+<p>
+
+Coins
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+        <!-- Launcher -->
+        <section id="launcher">
+
+<div class="launcher-header">
+
+<div>
+
+<h1>Your Library</h1>
+
+<p>Choose your next adventure.</p>
+
+</div>
+
+<div class="launcher-counter">
+
+<span id="currentGame">1</span>
+
+/
+
+<span id="totalGames">4</span>
+
+</div>
+
+</div>
+
+<div class="launcher-wrapper">
+
+<button class="launcher-arrow left">
+
+<svg viewBox="0 0 24 24" width="30" height="30">
+
+<path
+d="M15 6L9 12L15 18"
+stroke="currentColor"
+stroke-width="2.8"
+fill="none"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+
+</svg>
+
+</button>
+
+<div class="launcher-stage">
+
+<div id="launcherTrack">
+
+<div class="game-card active">
+
+<div class="game-icon">🎯</div>
+
+<h2>Guess The Number</h2>
+
+<p>Beat Asian Difficulty</p>
+
+<a href="/game" class="play-btn">Play</a>
+
+</div>
+
+<div class="game-card">
+
+<div class="game-icon">❌</div>
+
+<h2>Tic Tac Toe</h2>
+
+<p>Challenge the AI</p>
+
+<a href="/tictactoe" class="play-btn">Play</a>
+
+</div>
+
+<div class="game-card">
+
+<div class="game-icon">🐱</div>
+
+<h2>Kitty Dash</h2>
+
+<p>Endless runner adventure</p>
+
+<a href="/kittydash" class="play-btn">Play</a>
+
+</div>
+
+<div class="game-card">
+
+<div class="game-icon">⭐</div>
+
+<h2>More Games</h2>
+
+<p>Stay Tuned</p>
+
+<button disabled>Locked</button>
+
+</div>
+
+</div>
+
+</div>
+
+<button class="launcher-arrow right">
+
+<svg viewBox="0 0 24 24" width="30" height="30">
+
+<path
+d="M9 6L15 12L9 18"
+stroke="currentColor"
+stroke-width="2.8"
+fill="none"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+
+</svg>
+
+</button>
+
+</div>
+
+</section>
+
+    </main>
+
+</div>
+
+<!-- Settings -->
+<div id="settingsModal"></div>
+
+<button id="switchToV5" class="switch-btn">
+    🚀 Switch to Modern Hub
+</button>
+
+<!-- Notifications -->
+<div id="notificationContainer"></div>
+
+<!-- ===========================
+          JAVASCRIPT
+=========================== -->
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/particles.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/cursor.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/launcher.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/themes.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/sounds.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/hub_v4.js') }}"></script>
+
+<body>
+
+<nav id="navbar">
+
+<div class="nav-left">
+
+<div class="nav-logo">
+
+Zoro <span>Hub</span>
+
+</div>
+
+</div>
+
+<div class="nav-right">
+
+<div class="nav-btn">🔍</div>
+
+<div class="nav-btn">🔔</div>
+
+<div class="nav-btn">⚙</div>
+
+</div>
+
+</nav>
+
+</html>

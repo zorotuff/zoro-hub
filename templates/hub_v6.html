@@ -1,0 +1,2401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Zoro Hub</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/shop_themes.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/hub_v6.css') }}">
+
+</head>
+
+
+<body class="{{ theme_classes }}">
+
+
+<!-- =========================================================
+                        BACKGROUND
+========================================================= -->
+
+<div class="background">
+
+    <div class="gradient gradient-gold"></div>
+
+    <div class="gradient gradient-cool"></div>
+
+    <div class="noise"></div>
+
+    <div class="vignette"></div>
+
+</div>
+
+
+
+<!-- =========================================================
+                    FIRST VISIT DISCLAIMER
+========================================================= -->
+
+<div
+    id="welcomeOverlay"
+    class="welcome-overlay"
+    hidden>
+
+    <div class="welcome-modal">
+
+        <div class="welcome-mark">
+            ✦
+        </div>
+
+        <span class="welcome-kicker">
+            WELCOME TO ZORO HUB
+        </span>
+
+        <h1>
+            Your games.<br>
+            <span>Your hub.</span>
+        </h1>
+
+        <p>
+            Zoro Hub brings all of our games and projects
+            together in one place. Some are playable now,
+            while others are still being built.
+        </p>
+
+        <div class="welcome-items">
+
+            <div class="welcome-item">
+
+                <div class="welcome-item-icon">
+                    🎮
+                </div>
+
+                <div>
+                    <strong>
+                        Playable Games
+                    </strong>
+
+                    <span>
+                        Launch the games that are currently finished.
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="welcome-item">
+
+                <div class="welcome-item-icon">
+                    🚧
+                </div>
+
+                <div>
+                    <strong>
+                        Coming Soon
+                    </strong>
+
+                    <span>
+                        Larger projects are shown as previews while
+                        development continues.
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="welcome-item">
+
+                <div class="welcome-item-icon">
+                    ✦
+                </div>
+
+                <div>
+                    <strong>
+                        The Hub Will Grow
+                    </strong>
+
+                    <span>
+                        Rewards, profiles, progression and more systems
+                        will be connected later.
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            id="enterHub"
+            class="welcome-button"
+            type="button">
+
+            ENTER ZORO HUB
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+                        NAVBAR
+========================================================= -->
+
+<header class="navbar">
+
+    <div class="navbar-inner">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="{{ url_for('hub') }}"
+            class="brand">
+
+            <span class="brand-symbol">
+                ✦
+            </span>
+
+            <span class="brand-name">
+                ZORO HUB
+            </span>
+
+        </a>
+
+
+
+        <!-- NAV -->
+
+        <nav
+            class="nav-links"
+            id="navLinks">
+
+            <a
+                href="{{ url_for('hub') }}"
+                class="active">
+
+                Home
+
+            </a>
+
+
+            <a href="#arcade">
+
+                Arcade
+
+            </a>
+
+
+            <a href="{{ url_for('zoro_shop.shop') }}">
+
+                Shop
+
+            </a>
+
+
+            <a href="{{ url_for('multiplayer_hub') }}">
+
+                Multiplayer
+
+            </a>
+
+
+            <a href="{{ url_for('leaderboard') }}">
+
+                Leaderboard
+
+            </a>
+
+
+            <a href="{{ url_for('settings') }}">
+
+                Support
+
+            </a>
+
+        </nav>
+
+
+
+        <!-- ACCOUNT -->
+
+        <div class="nav-account">
+
+            <a
+                href="{{ url_for('profile') }}"
+                class="nav-profile">
+
+                <img
+                    src="{{ avatar_src }}"
+                    alt="{{ profile.username|default('Player', true) }}">
+
+                <span>
+                    {{ profile.username|default('Player', true) }}
+                </span>
+
+            </a>
+
+        </div>
+
+
+
+        <!-- MOBILE -->
+
+        <button
+            id="menuToggle"
+            class="menu-toggle"
+            type="button"
+            aria-label="Open navigation">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+                            PAGE
+========================================================= -->
+
+<main class="page">
+
+
+
+<!-- =========================================================
+                    FEATURED HERO
+========================================================= -->
+
+<section class="hero-section">
+
+
+    <div class="hero-header">
+
+        <div>
+
+            <span class="section-kicker">
+                ZORO HUB
+            </span>
+
+            <h1>
+                Your games,
+                <span>all in one place.</span>
+            </h1>
+
+            <p>
+                Jump into the arcade, discover new projects,
+                and see what's being built next.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div
+        class="hero-slider"
+        id="heroSlider">
+
+
+        <!-- =====================================================
+                        01 TTT
+        ====================================================== -->
+
+        <article class="hero-slide active">
+
+            <div class="hero-content">
+
+                <div class="hero-meta">
+
+                    <span class="rarity uncommon">
+                        UNCOMMON
+                    </span>
+
+                    <span>
+                        PLAYABLE
+                    </span>
+
+                </div>
+
+
+                <span class="hero-index">
+                    01 / 08
+                </span>
+
+
+                <h2>
+                    Tic Tac Toe
+                </h2>
+
+
+                <h3>
+                    Every square matters.
+                </h3>
+
+
+                <p>
+                    A clean strategy classic where the smallest
+                    mistake can change the entire board.
+                </p>
+
+
+                <div class="hero-tags">
+
+                    <span>
+                        STRATEGY
+                    </span>
+
+                    <span>
+                        CLASSIC
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="{{ url_for('tic_tac_toe') }}"
+                    class="hero-button">
+
+                    PLAY NOW
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <div class="hero-art art-ttt">
+
+                <div class="ttt-board">
+
+                    <span>×</span>
+                    <span>○</span>
+                    <span></span>
+
+                    <span></span>
+                    <span>×</span>
+                    <span>○</span>
+
+                    <span>○</span>
+                    <span></span>
+                    <span>×</span>
+
+                </div>
+
+                <span class="art-caption">
+                    TIC TAC TOE
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =====================================================
+                        02 KITTY
+        ====================================================== -->
+
+        <article class="hero-slide">
+
+            <div class="hero-content">
+
+                <div class="hero-meta">
+
+                    <span class="rarity rare">
+                        RARE
+                    </span>
+
+                    <span>
+                        PLAYABLE
+                    </span>
+
+                </div>
+
+
+                <span class="hero-index">
+                    02 / 08
+                </span>
+
+
+                <h2>
+                    Kitty Dash
+                </h2>
+
+
+                <h3>
+                    Run. Dodge. Keep going.
+                </h3>
+
+
+                <p>
+                    A fast arcade runner built around reaction,
+                    movement and pushing your run farther.
+                </p>
+
+
+                <div class="hero-tags">
+
+                    <span>
+                        RUNNER
+                    </span>
+
+                    <span>
+                        ARCADE
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="{{ url_for('kitty_dash') }}"
+                    class="hero-button">
+
+                    PLAY NOW
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <div class="hero-art art-kitty">
+
+                <div class="kitty-character">
+                    🐱
+                </div>
+
+                <div class="kitty-ground"></div>
+
+                <span class="art-caption">
+                    KITTY DASH
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =====================================================
+                        03 CHESS
+        ====================================================== -->
+
+        <article class="hero-slide">
+
+            <div class="hero-content">
+
+                <div class="hero-meta">
+
+                    <span class="rarity rare">
+                        RARE
+                    </span>
+
+                    <span>
+                        PLAYABLE
+                    </span>
+
+                </div>
+
+
+                <span class="hero-index">
+                    03 / 08
+                </span>
+
+
+                <h2>
+                    Chess Master
+                </h2>
+
+
+                <h3>
+                    Think beyond the next move.
+                </h3>
+
+
+                <p>
+                    Sharpen your tactics and take control
+                    of the board.
+                </p>
+
+
+                <div class="hero-tags">
+
+                    <span>
+                        STRATEGY
+                    </span>
+
+                    <span>
+                        BOARD
+                    </span>
+
+                    <span>
+                        AI
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="{{ url_for('chess') }}"
+                    class="hero-button">
+
+                    PLAY NOW
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <div class="hero-art art-chess">
+
+                <div class="chess-piece">
+                    ♞
+                </div>
+
+                <div class="chess-floor"></div>
+
+                <span class="art-caption">
+                    CHESS MASTER
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =====================================================
+                    04 SPACE SHOOTER
+        ====================================================== -->
+
+        <article class="hero-slide">
+
+            <div class="hero-content">
+
+                <div class="hero-meta">
+
+                    <span class="rarity epic">
+                        EPIC
+                    </span>
+
+                    <span>
+                        PLAYABLE
+                    </span>
+
+                </div>
+
+
+                <span class="hero-index">
+                    04 / 08
+                </span>
+
+
+                <h2>
+                    Space Shooter
+                </h2>
+
+
+                <h3>
+                    Survive the endless waves.
+                </h3>
+
+
+                <p>
+                    Take control, dodge enemy fire and see
+                    how far you can survive.
+                </p>
+
+
+                <div class="hero-tags">
+
+                    <span>
+                        ACTION
+                    </span>
+
+                    <span>
+                        SPACE
+                    </span>
+
+                    <span>
+                        SURVIVAL
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="{{ url_for('space_shooter') }}"
+                    class="hero-button">
+
+                    PLAY NOW
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <div class="hero-art art-space">
+
+                <div class="space-stars"></div>
+
+                <div class="space-planet"></div>
+
+                <div class="space-ship">
+                    ▲
+                </div>
+
+                <span class="art-caption">
+                    SPACE SHOOTER
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =====================================================
+                        05 NIGHTLINE
+        ====================================================== -->
+
+        <article class="hero-slide">
+
+            <div class="hero-content">
+
+                <div class="hero-meta">
+
+                    <span class="rarity legendary">
+                        LEGENDARY
+                    </span>
+
+                    <span>
+                        COMING SOON
+                    </span>
+
+                </div>
+
+
+                <span class="hero-index">
+                    05 / 08
+                </span>
+
+
+                <h2>
+                    NIGHTLINE
+                </h2>
+
+
+                <h3>
+                    Own the road after dark.
+                </h3>
+
+
+                <p>
+                    A cinematic traffic-racing game focused on
+                    speed, atmosphere and dangerous city roads.
+                </p>
+
+
+                <div class="hero-tags">
+
+                    <span>
+                        RACING
+                    </span>
+
+                    <span>
+                        TRAFFIC
+                    </span>
+
+                    <span>
+                        3D
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="hero-button disabled"
+                    type="button"
+                    disabled>
+
+                    COMING SOON
+
+                </button>
+
+            </div>
+
+
+            <div class="hero-art art-nightline">
+
+                <div class="city-silhouette"></div>
+
+                <div class="road-perspective"></div>
+
+                <div class="bike">
+                    🏍
+                </div>
+
+                <span class="art-caption">
+                    NIGHTLINE
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =====================================================
+                    06 WHISPERWOOD
+        ====================================================== -->
+
+        <article class="hero-slide">
+
+            <div class="hero-content">
+
+                <div class="hero-meta">
+
+                    <span class="rarity legendary">
+                        LEGENDARY
+                    </span>
+
+                    <span>
+                        COMING SOON
+                    </span>
+
+                </div>
+
+
+                <span class="hero-index">
+                    06 / 08
+                </span>
+
+
+                <h2>
+                    WHISPERWOOD
+                </h2>
+
+
+                <h3>
+                    The forest isn't empty.
+                </h3>
+
+
+                <p>
+                    A creepypasta-inspired horror exploration game
+                    hidden deep inside a quiet and unsettling forest.
+                </p>
+
+
+                <div class="hero-tags">
+
+                    <span>
+                        HORROR
+                    </span>
+
+                    <span>
+                        MYSTERY
+                    </span>
+
+                    <span>
+                        EXPLORATION
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="hero-button disabled"
+                    type="button"
+                    disabled>
+
+                    COMING SOON
+
+                </button>
+
+            </div>
+
+
+            <div class="hero-art art-whisperwood">
+
+                <div class="forest-moon"></div>
+
+                <div class="forest-tree tree-a"></div>
+                <div class="forest-tree tree-b"></div>
+                <div class="forest-tree tree-c"></div>
+
+                <div class="forest-eye"></div>
+
+                <span class="art-caption">
+                    WHISPERWOOD
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =====================================================
+                    07 VANGUARD-1
+        ====================================================== -->
+
+        <article class="hero-slide">
+
+            <div class="hero-content">
+
+                <div class="hero-meta">
+
+                    <span class="rarity legendary">
+                        LEGENDARY
+                    </span>
+
+                    <span>
+                        IN DEVELOPMENT
+                    </span>
+
+                </div>
+
+
+                <span class="hero-index">
+                    07 / 08
+                </span>
+
+
+                <h2>
+                    VANGUARD-1 ODYSSEY
+                </h2>
+
+
+                <h3>
+                    Your ship. Your home. Your journey.
+                </h3>
+
+
+                <p>
+                    A cozy space exploration game centered around
+                    living inside your ship and watching it evolve.
+                </p>
+
+
+                <div class="hero-tags">
+
+                    <span>
+                        COZY
+                    </span>
+
+                    <span>
+                        SPACE
+                    </span>
+
+                    <span>
+                        EXPLORATION
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="hero-button disabled"
+                    type="button"
+                    disabled>
+
+                    IN DEVELOPMENT
+
+                </button>
+
+            </div>
+
+
+            <div class="hero-art art-vanguard">
+
+                <div class="vanguard-stars"></div>
+
+                <div class="vanguard-planet"></div>
+
+                <div class="vanguard-ship"></div>
+
+                <span class="art-caption">
+                    VANGUARD-1
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =====================================================
+                        08 OMNIVERA
+        ====================================================== -->
+
+        <article class="hero-slide omnivera-slide">
+
+            <div class="hero-content">
+
+                <div class="hero-meta">
+
+                    <span class="rarity mythic">
+                        MYTHIC
+                    </span>
+
+                    <span>
+                        FLAGSHIP PROJECT
+                    </span>
+
+                </div>
+
+
+                <span class="hero-index">
+                    08 / 08
+                </span>
+
+
+                <h2>
+                    OMNIVERA
+                </h2>
+
+
+                <h3>
+                    Beyond the boundaries of a single universe.
+                </h3>
+
+
+                <p>
+                    The biggest Zoro project yet — an ambitious
+                    open-world experience built around exploration
+                    on a multiverse scale.
+                </p>
+
+
+                <div class="hero-tags">
+
+                    <span>
+                        OPEN WORLD
+                    </span>
+
+                    <span>
+                        3D
+                    </span>
+
+                    <span>
+                        MULTIVERSE
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="hero-button disabled"
+                    type="button"
+                    disabled>
+
+                    COMING SOON
+
+                </button>
+
+            </div>
+
+
+            <div class="hero-art art-omnivera">
+
+                <div class="universe-core"></div>
+
+                <div class="universe-ring ring-one"></div>
+                <div class="universe-ring ring-two"></div>
+                <div class="universe-ring ring-three"></div>
+
+                <div class="tiny-world world-one"></div>
+                <div class="tiny-world world-two"></div>
+                <div class="tiny-world world-three"></div>
+
+                <span class="art-caption">
+                    OMNIVERA
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =====================================================
+                        SLIDER CONTROLS
+        ====================================================== -->
+
+        <button
+            id="heroPrev"
+            class="hero-arrow hero-arrow-left"
+            type="button">
+
+            ←
+
+        </button>
+
+
+        <button
+            id="heroNext"
+            class="hero-arrow hero-arrow-right"
+            type="button">
+
+            →
+
+        </button>
+
+
+        <div
+            id="heroDots"
+            class="hero-dots">
+
+            <button class="active" data-slide="0"></button>
+            <button data-slide="1"></button>
+            <button data-slide="2"></button>
+            <button data-slide="3"></button>
+            <button data-slide="4"></button>
+            <button data-slide="5"></button>
+            <button data-slide="6"></button>
+            <button data-slide="7"></button>
+            <button data-slide="8"></button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+                        ARCADE
+========================================================= -->
+
+<section
+    class="arcade-section"
+    id="arcade">
+
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-eyebrow">
+                PLAY
+            </span>
+
+            <h2>
+                Our Arcade
+            </h2>
+
+            <p>
+                The games actually available in Zoro Hub.
+            </p>
+
+        </div>
+
+
+        <span class="section-count">
+            4 GAMES
+        </span>
+
+    </div>
+
+
+
+    <div class="arcade-layout">
+
+
+        <!-- =================================================
+                        GAMES
+        ================================================== -->
+
+        <div class="game-grid">
+
+
+            <!-- TTT -->
+
+            <article class="game-card">
+
+                <div class="game-art art-small-ttt">
+
+                    <span>
+                        ×○
+                    </span>
+
+                </div>
+
+
+                <div class="game-body">
+
+                    <div class="game-heading">
+
+                        <div>
+
+                            <span class="game-category">
+                                STRATEGY
+                            </span>
+
+                            <h3>
+                                Tic Tac Toe
+                            </h3>
+
+                        </div>
+
+                        <span class="rarity-card uncommon">
+                            UNCOMMON
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Classic strategy with every move mattering.
+                    </p>
+
+
+                    <div class="game-tags">
+
+                        <span>
+                            STRATEGY
+                        </span>
+
+                        <span>
+                            AI
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="{{ url_for('tic_tac_toe') }}"
+                        class="game-button">
+
+                        PLAY
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- KITTY -->
+
+            <article class="game-card">
+
+                <div class="game-art art-small-kitty">
+
+                    <span>
+                        🐱
+                    </span>
+
+                </div>
+
+
+                <div class="game-body">
+
+                    <div class="game-heading">
+
+                        <div>
+
+                            <span class="game-category">
+                                RUNNER
+                            </span>
+
+                            <h3>
+                                Kitty Dash
+                            </h3>
+
+                        </div>
+
+                        <span class="rarity-card rare">
+                            RARE
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Run, dodge and push your score further.
+                    </p>
+
+
+                    <div class="game-tags">
+
+                        <span>
+                            ARCADE
+                        </span>
+
+                        <span>
+                            ENDLESS
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="{{ url_for('kitty_dash') }}"
+                        class="game-button">
+
+                        PLAY
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- CHESS -->
+
+            <article class="game-card">
+
+                <div class="game-art art-small-chess">
+
+                    <span>
+                        ♞
+                    </span>
+
+                </div>
+
+
+                <div class="game-body">
+
+                    <div class="game-heading">
+
+                        <div>
+
+                            <span class="game-category">
+                                STRATEGY
+                            </span>
+
+                            <h3>
+                                Chess Master
+                            </h3>
+
+                        </div>
+
+                        <span class="rarity-card rare">
+                            RARE
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Sharpen your tactics and control the board.
+                    </p>
+
+
+                    <div class="game-tags">
+
+                        <span>
+                            CHESS
+                        </span>
+
+                        <span>
+                            AI
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="{{ url_for('chess') }}"
+                        class="game-button">
+
+                        PLAY
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- SPACE -->
+
+            <article class="game-card">
+
+                <div class="game-art art-small-space">
+
+                    <div class="small-space-stars"></div>
+
+                    <div class="small-space-planet"></div>
+
+                    <span>
+                        ▲
+                    </span>
+
+                </div>
+
+
+                <div class="game-body">
+
+                    <div class="game-heading">
+
+                        <div>
+
+                            <span class="game-category">
+                                ACTION
+                            </span>
+
+                            <h3>
+                                Space Shooter
+                            </h3>
+
+                        </div>
+
+                        <span class="rarity-card epic">
+                            EPIC
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Survive enemy waves and push your distance.
+                    </p>
+
+
+                    <div class="game-tags">
+
+                        <span>
+                            SPACE
+                        </span>
+
+                        <span>
+                            SURVIVAL
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="{{ url_for('space_shooter') }}"
+                        class="game-button">
+
+                        PLAY
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+                        LEADERBOARD
+        ================================================== -->
+
+        <aside class="leaderboard-card">
+
+
+            <div class="leaderboard-top">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        COMPETE
+                    </span>
+
+                    <h2>
+                        Leaderboard
+                    </h2>
+
+                </div>
+
+                <span class="leaderboard-dot"></span>
+
+            </div>
+
+
+            <div class="leaderboard-list">
+
+
+                <div class="leader-row">
+
+                    <span class="leader-rank first">
+                        1
+                    </span>
+
+                    <div class="leader-avatar">
+                        Z
+                    </div>
+
+                    <div class="leader-player">
+
+                        <strong>
+                            Zoro
+                        </strong>
+
+                        <span>
+                            Top player
+                        </span>
+
+                    </div>
+
+                    <b>
+                        —
+                    </b>
+
+                </div>
+
+
+                <div class="leader-row">
+
+                    <span class="leader-rank">
+                        2
+                    </span>
+
+                    <div class="leader-avatar">
+                        P
+                    </div>
+
+                    <div class="leader-player">
+
+                        <strong>
+                            Player
+                        </strong>
+
+                        <span>
+                            Rank #2
+                        </span>
+
+                    </div>
+
+                    <b>
+                        —
+                    </b>
+
+                </div>
+
+
+                <div class="leader-row">
+
+                    <span class="leader-rank">
+                        3
+                    </span>
+
+                    <div class="leader-avatar">
+                        A
+                    </div>
+
+                    <div class="leader-player">
+
+                        <strong>
+                            Player
+                        </strong>
+
+                        <span>
+                            Rank #3
+                        </span>
+
+                    </div>
+
+                    <b>
+                        —
+                    </b>
+
+                </div>
+
+
+                <div class="leader-row">
+
+                    <span class="leader-rank">
+                        4
+                    </span>
+
+                    <div class="leader-avatar">
+                        M
+                    </div>
+
+                    <div class="leader-player">
+
+                        <strong>
+                            Player
+                        </strong>
+
+                        <span>
+                            Rank #4
+                        </span>
+
+                    </div>
+
+                    <b>
+                        —
+                    </b>
+
+                </div>
+
+
+                <div class="leader-row">
+
+                    <span class="leader-rank">
+                        5
+                    </span>
+
+                    <div class="leader-avatar">
+                        K
+                    </div>
+
+                    <div class="leader-player">
+
+                        <strong>
+                            Player
+                        </strong>
+
+                        <span>
+                            Rank #5
+                        </span>
+
+                    </div>
+
+                    <b>
+                        —
+                    </b>
+
+                </div>
+
+
+            </div>
+
+
+            <a
+                href="{{ url_for('leaderboard') }}"
+                class="leaderboard-button">
+
+                VIEW FULL LEADERBOARD
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+        </aside>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+                    COMING SOON
+========================================================= -->
+
+<section class="coming-section">
+
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-eyebrow">
+                NEXT
+            </span>
+
+            <h2>
+                Coming Soon
+            </h2>
+
+            <p>
+                The projects we're building next.
+            </p>
+
+        </div>
+
+
+        <span class="section-count">
+            4 PROJECTS
+        </span>
+
+    </div>
+
+
+
+    <div class="coming-grid">
+
+
+        <!-- NIGHTLINE -->
+
+        <article class="coming-card">
+
+            <div class="coming-art coming-nightline">
+
+                <div class="coming-city"></div>
+
+                <div class="coming-road"></div>
+
+                <div class="coming-bike">
+                    🏍
+                </div>
+
+                <span>
+                    NIGHTLINE
+                </span>
+
+            </div>
+
+
+            <div class="coming-body">
+
+                <div class="coming-heading">
+
+                    <div>
+
+                        <span class="game-category">
+                            RACING
+                        </span>
+
+                        <h3>
+                            NIGHTLINE
+                        </h3>
+
+                    </div>
+
+                    <span class="rarity-card legendary">
+                        LEGENDARY
+                    </span>
+
+                </div>
+
+
+                <p>
+                    High-speed night driving through city traffic.
+                </p>
+
+
+                <div class="game-tags">
+
+                    <span>
+                        3D
+                    </span>
+
+                    <span>
+                        TRAFFIC
+                    </span>
+
+                    <span>
+                        SPEED
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="coming-button"
+                    disabled>
+
+                    COMING SOON
+
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- WHISPERWOOD -->
+
+        <article class="coming-card">
+
+            <div class="coming-art coming-whisperwood">
+
+                <div class="coming-moon"></div>
+
+                <div class="coming-tree tree-one"></div>
+                <div class="coming-tree tree-two"></div>
+                <div class="coming-tree tree-three"></div>
+
+                <div class="coming-eye"></div>
+
+                <span>
+                    WHISPERWOOD
+                </span>
+
+            </div>
+
+
+            <div class="coming-body">
+
+                <div class="coming-heading">
+
+                    <div>
+
+                        <span class="game-category">
+                            HORROR
+                        </span>
+
+                        <h3>
+                            WHISPERWOOD
+                        </h3>
+
+                    </div>
+
+                    <span class="rarity-card legendary">
+                        LEGENDARY
+                    </span>
+
+                </div>
+
+
+                <p>
+                    Something is watching deep inside the forest.
+                </p>
+
+
+                <div class="game-tags">
+
+                    <span>
+                        HORROR
+                    </span>
+
+                    <span>
+                        MYSTERY
+                    </span>
+
+                    <span>
+                        EXPLORATION
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="coming-button"
+                    disabled>
+
+                    COMING SOON
+
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- VANGUARD -->
+
+        <article class="coming-card">
+
+            <div class="coming-art coming-vanguard">
+
+                <div class="vanguard-stars-small"></div>
+
+                <div class="vanguard-planet-small"></div>
+
+                <div class="vanguard-ship-small"></div>
+
+                <span>
+                    VANGUARD-1
+                </span>
+
+            </div>
+
+
+            <div class="coming-body">
+
+                <div class="coming-heading">
+
+                    <div>
+
+                        <span class="game-category">
+                            EXPLORATION
+                        </span>
+
+                        <h3>
+                            VANGUARD-1 ODYSSEY
+                        </h3>
+
+                    </div>
+
+                    <span class="rarity-card legendary">
+                        LEGENDARY
+                    </span>
+
+                </div>
+
+
+                <p>
+                    A cozy life aboard a deep-space exploration ship.
+                </p>
+
+
+                <div class="game-tags">
+
+                    <span>
+                        COZY
+                    </span>
+
+                    <span>
+                        SPACE
+                    </span>
+
+                    <span>
+                        EXPLORATION
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="coming-button"
+                    disabled>
+
+                    IN DEVELOPMENT
+
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- OMNIVERA -->
+
+        <article
+            class="coming-card omnivera-coming">
+
+            <div class="coming-art coming-omnivera">
+
+                <div class="omni-core"></div>
+
+                <div class="omni-ring omni-a"></div>
+                <div class="omni-ring omni-b"></div>
+                <div class="omni-ring omni-c"></div>
+
+                <span>
+                    OMNIVERA
+                </span>
+
+            </div>
+
+
+            <div class="coming-body">
+
+                <div class="coming-heading">
+
+                    <div>
+
+                        <span class="game-category">
+                            OPEN WORLD
+                        </span>
+
+                        <h3>
+                            OMNIVERA
+                        </h3>
+
+                    </div>
+
+                    <span class="rarity-card mythic">
+                        MYTHIC
+                    </span>
+
+                </div>
+
+
+                <p>
+                    A massive open-world project built around
+                    exploration beyond a single universe.
+                </p>
+
+
+                <div class="game-tags">
+
+                    <span>
+                        3D
+                    </span>
+
+                    <span>
+                        OPEN WORLD
+                    </span>
+
+                    <span>
+                        MULTIVERSE
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="coming-button"
+                    disabled>
+
+                    COMING SOON
+
+                </button>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+                         FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    <div>
+
+        <strong>
+            ZORO HUB
+        </strong>
+
+        <p>
+            Built around the games we're making.
+        </p>
+
+    </div>
+
+
+    <div class="footer-links">
+
+        <a href="{{ url_for('hub') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('zoro_shop.shop') }}">
+            Shop
+        </a>
+
+        <a href="{{ url_for('leaderboard') }}">
+            Leaderboard
+        </a>
+
+        <a href="{{ url_for('profile') }}">
+            Profile
+        </a>
+
+    </div>
+
+</footer>
+
+
+</main>
+
+
+
+<!-- =========================================================
+                         JAVASCRIPT
+========================================================= -->
+
+<script src="{{ url_for('static', filename='js/zoro_games.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/hub_v6.js') }}"></script>
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* ==================================================
+                        FIRST VISIT
+        ================================================== */
+
+        const overlay =
+            document.getElementById(
+                "welcomeOverlay"
+            );
+
+        const enter =
+            document.getElementById(
+                "enterHub"
+            );
+
+
+        let seen = false;
+
+
+        try {
+
+            seen =
+                localStorage.getItem(
+                    "zoroHubWelcomeSeen"
+                ) === "true";
+
+        }
+
+        catch (error) {
+
+            seen = false;
+
+        }
+
+
+        if (!seen && overlay) {
+
+            overlay.hidden = false;
+
+        }
+
+
+        if (enter && overlay) {
+
+            enter.addEventListener(
+                "click",
+                function () {
+
+                    try {
+
+                        localStorage.setItem(
+                            "zoroHubWelcomeSeen",
+                            "true"
+                        );
+
+                    }
+
+                    catch (error) {}
+
+                    overlay.hidden = true;
+
+                }
+            );
+
+        }
+
+
+
+        /* ==================================================
+                        MOBILE MENU
+        ================================================== */
+
+        const menu =
+            document.getElementById(
+                "menuToggle"
+            );
+
+        const nav =
+            document.getElementById(
+                "navLinks"
+            );
+
+
+        if (menu && nav) {
+
+            menu.addEventListener(
+                "click",
+                function () {
+
+                    nav.classList.toggle(
+                        "open"
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* ==================================================
+                        FEATURED SLIDER
+        ================================================== */
+
+        const slides =
+            Array.from(
+                document.querySelectorAll(
+                    ".hero-slide"
+                )
+            );
+
+        const dots =
+            Array.from(
+                document.querySelectorAll(
+                    "#heroDots button"
+                )
+            );
+
+        const next =
+            document.getElementById(
+                "heroNext"
+            );
+
+        const previous =
+            document.getElementById(
+                "heroPrev"
+            );
+
+        const slider =
+            document.getElementById(
+                "heroSlider"
+            );
+
+
+        let current = 0;
+
+        let timer = null;
+
+        const delay = 6500;
+
+
+        function show(index) {
+
+            if (!slides.length) {
+                return;
+            }
+
+
+            if (index < 0) {
+                index = slides.length - 1;
+            }
+
+
+            if (index >= slides.length) {
+                index = 0;
+            }
+
+
+            current = index;
+
+
+            slides.forEach(
+                function (slide, i) {
+
+                    slide.classList.toggle(
+                        "active",
+                        i === current
+                    );
+
+                }
+            );
+
+
+            dots.forEach(
+                function (dot, i) {
+
+                    dot.classList.toggle(
+                        "active",
+                        i === current
+                    );
+
+                }
+            );
+
+        }
+
+
+        function nextSlide() {
+
+            show(
+                current + 1
+            );
+
+        }
+
+
+        function previousSlide() {
+
+            show(
+                current - 1
+            );
+
+        }
+
+
+        function start() {
+
+            if (timer) {
+                clearInterval(timer);
+            }
+
+            timer =
+                setInterval(
+                    nextSlide,
+                    delay
+                );
+
+        }
+
+
+        function stop() {
+
+            if (timer) {
+
+                clearInterval(timer);
+
+                timer = null;
+
+            }
+
+        }
+
+
+        if (next) {
+
+            next.addEventListener(
+                "click",
+                function () {
+
+                    nextSlide();
+
+                    start();
+
+                }
+            );
+
+        }
+
+
+        if (previous) {
+
+            previous.addEventListener(
+                "click",
+                function () {
+
+                    previousSlide();
+
+                    start();
+
+                }
+            );
+
+        }
+
+
+        dots.forEach(
+            function (dot, index) {
+
+                dot.addEventListener(
+                    "click",
+                    function () {
+
+                        show(index);
+
+                        start();
+
+                    }
+                );
+
+            }
+        );
+
+
+        if (slider) {
+
+            slider.addEventListener(
+                "mouseenter",
+                stop
+            );
+
+
+            slider.addEventListener(
+                "mouseleave",
+                start
+            );
+
+        }
+
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key ===
+                    "ArrowRight"
+                ) {
+
+                    nextSlide();
+
+                    start();
+
+                }
+
+
+                if (
+                    event.key ===
+                    "ArrowLeft"
+                ) {
+
+                    previousSlide();
+
+                    start();
+
+                }
+
+            }
+        );
+
+
+        show(0);
+
+        start();
+
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>

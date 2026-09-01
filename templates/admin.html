@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin — Zoro Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+
+<header class="adm-header">
+    <div class="adm-brand">
+        <div class="adm-brand-mark">Z</div>
+        <div class="adm-brand-text">
+            <span class="adm-brand-title">Zoro Hub Admin</span>
+            <span class="adm-brand-sub">Command Panel</span>
+        </div>
+    </div>
+    <div style="display:flex; align-items:center; gap:14px;">
+        <span class="adm-role-badge {{ role }}">{{ role }}</span>
+        <a href="{{ url_for('hub') }}" class="adm-back">← Back to Hub</a>
+    </div>
+</header>
+
+<div class="adm-page">
+
+    <div class="adm-tabs">
+        <button class="adm-tab active" data-tab="overview">Overview</button>
+        <button class="adm-tab" data-tab="users">Users</button>
+        <button class="adm-tab" data-tab="created">Accounts Created</button>
+        <button class="adm-tab" data-tab="log">Audit Log</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="adm-panel active" id="panel-overview">
+        <div class="adm-stats-grid" id="stats-grid">
+            <div class="adm-stat-card"><div class="adm-stat-value">—</div><div class="adm-stat-label">Total Users</div></div>
+        </div>
+        <div class="adm-card">
+            <h3>Welcome, {{ role }}</h3>
+            <p style="color:var(--adm-muted); font-size:13px; line-height:1.6;">
+                {% if role == 'owner' %}
+                You have full access: user moderation, role changes, and direct coin/XP adjustments.
+                Every action you take here is written to the audit log.
+                {% else %}
+                You have moderator access: you can search and view users, suspend or restore ordinary
+                accounts, and hide accounts from the leaderboard. Coin/XP adjustments and role changes
+                are owner-only.
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <!-- USERS -->
+    <div class="adm-panel" id="panel-users">
+        <div class="adm-card">
+            <h3>Search Users</h3>
+            <div class="adm-row">
+                <input class="adm-input" id="user-search" placeholder="username or UID..." style="flex:1; min-width:200px;">
+                <button class="adm-btn primary" id="user-search-btn">Search</button>
+            </div>
+            <div style="overflow-x:auto;">
+                <table class="adm-table">
+                    <thead>
+                        <tr><th>Username</th><th>Role</th><th>Level</th><th>Coins</th><th>Joined</th><th>Status</th><th></th></tr>
+                    </thead>
+                    <tbody id="users-tbody">
+                        <tr><td colspan="7" style="color:var(--adm-muted);">Loading…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACCOUNTS CREATED -->
+    <div class="adm-panel" id="panel-created">
+        <div class="adm-card">
+            <h3>Accounts Created Between Dates</h3>
+            <div class="adm-row">
+                <input class="adm-input" type="date" id="created-from">
+                <input class="adm-input" type="date" id="created-to">
+                <button class="adm-btn primary" id="created-search-btn">Search</button>
+            </div>
+            <p id="created-summary" class="adm-hint"></p>
+            <table class="adm-table">
+                <thead><tr><th>Username</th><th>UID</th><th>Role</th><th>Created</th></tr></thead>
+                <tbody id="created-tbody">
+                    <tr><td colspan="4" style="color:var(--adm-muted);">Pick a date range and search.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- AUDIT LOG -->
+    <div class="adm-panel" id="panel-log">
+        <div class="adm-card">
+            <h3>{% if role == 'owner' %}Full Audit Log{% else %}Your Actions{% endif %}</h3>
+            <div id="log-list"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- USER DETAIL DRAWER -->
+<div class="adm-drawer-backdrop hidden" id="drawer-backdrop"></div>
+<div class="adm-drawer hidden" id="user-drawer">
+    <button class="adm-drawer-close" id="drawer-close">×</button>
+    <div id="drawer-content">Loading…</div>
+</div>
+
+<script>
+window.ZORO_ADMIN_ROLE = {{ role | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+</body>
+</html>

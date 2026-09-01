@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome — Zoro Hub</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+  .username-gate-body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: #06060e;
+    font-family: system-ui, sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+  .username-gate-screen {
+    width: min(420px, 92vw);
+    padding: clamp(28px, 5vw, 40px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(18, 18, 28, 0.85);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    text-align: center;
+    z-index: 10;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .username-gate-logo {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, #a855f7, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .username-gate-title {
+    color: #fff;
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  .username-gate-sub {
+    color: #94a3b8;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+  .username-gate-error {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    animation: gateShake 0.4s ease-in-out;
+  }
+  .username-gate-input {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.25s ease;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .username-gate-input:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+    background: rgba(0,0,0,0.5);
+  }
+  .username-gate-submit {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .username-gate-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+  }
+  .username-gate-hint {
+    color: #64748b;
+    font-size: 12px;
+    margin-top: 16px;
+  }
+  @keyframes gateShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+</style>
+</head>
+<body class="username-gate-body">
+
+  <div class="username-gate-screen" id="gateCard">
+    <p class="username-gate-logo">ZORO HUB</p>
+    <h1 class="username-gate-title">Establish Your Identity</h1>
+    <p class="username-gate-sub">Enter a unique username to generate your persistent cross-platform operative player profile status.</p>
+
+    <div id="errorBox" class="username-gate-error" style="display: none;"></div>
+    {% if error %}
+    <div class="username-gate-error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" class="username-gate-form" id="usernameForm">
+      <input
+        type="text"
+        name="username"
+        id="usernameInput"
+        class="username-gate-input"
+        maxlength="20"
+        placeholder="e.g. NeonRider"
+        value="{{ prefill or '' }}"
+        required
+        autofocus
+        autocomplete="off">
+      <button type="submit" class="username-gate-submit">Enter Zoro Hub</button>
+    </form>
+    <p class="username-gate-hint">Usernames must be unique alphanumeric expressions up to 20 characters.</p>
+  </div>
+
+  <script>
+    (function () {
+      try {
+        var savedTheme = window.localStorage.getItem('zoro-theme') || 'obsidian';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {}
+    })();
+
+    const form = document.getElementById('usernameForm');
+    const input = document.getElementById('usernameInput');
+    const errorBox = document.getElementById('errorBox');
+    const card = document.getElementById('gateCard');
+
+    input.addEventListener('input', async () => {
+      const val = input.value.trim();
+      if(val.length > 0) {
+        const res = await fetch(`/check_username?username=${encodeURIComponent(val)}`);
+        const data = await res.json();
+        if(data.status === 'taken') {
+          errorBox.textContent = "Username already taken";
+          errorBox.style.display = "block";
+          card.style.animation = "none";
+          setTimeout(() => { card.style.animation = "gateShake 0.4s ease-in-out"; }, 10);
+        } else {
+          errorBox.style.display = "none";
+        }
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      const val = input.value.trim();
+      if(!val) {
+        e.preventDefault();
+        return;
+      }
+      const res = await fetch(`/check_username?username=${encodeURIComponent(val)}`);
+      const data = await res.json();
+      if(data.status === 'taken') {
+        e.preventDefault();
+        errorBox.textContent = "Username already taken";
+        errorBox.style.display = "block";
+        card.style.animation = "none";
+        setTimeout(() => { card.style.animation = "gateShake 0.4s ease-in-out"; }, 10);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>High Score</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🏆 High Score</h1>
+
+    <div class="highscore-card">
+
+        <h2>Current Record</h2>
+
+        <div class="highscore-number">
+
+            {{ high_score }}
+
+        </div>
+
+        <p>
+            Beat this score to become the new champion!
+        </p>
+
+    </div>
+
+    <div class="menu-buttons">
+
+        <a class="menu-btn" href="{{ url_for('menu') }}">
+            🎮 Main Menu
+        </a>
+
+        <a class="menu-btn" href="{{ url_for('stats') }}">
+            📊 View Statistics
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

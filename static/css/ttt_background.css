@@ -1,0 +1,32 @@
+/* ============================================================
+   ZORO HUB — TIC TAC TOE BACKGROUND CANVAS STYLES
+   ============================================================ */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0a0a12;
+  overflow-x: hidden;
+}
+
+#tttBackgroundCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  display: block;
+  background: radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.10), transparent 55%),
+              radial-gradient(ellipse at 80% 75%, rgba(168, 85, 247, 0.10), transparent 55%),
+              #0a0a12;
+}
+
+#confettiCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 200;
+  pointer-events: none;
+  display: block;
+}

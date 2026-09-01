@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="gm" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#a06fe0" stop-opacity=".34"/>
+      <stop offset="48%" stop-color="#0d0a14"/>
+      <stop offset="100%" stop-color="#040308"/>
+    </radialGradient>
+    <filter id="glowm"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="256" height="256" rx="128" fill="url(#gm)"/>
+  <circle cx="128" cy="128" r="104" fill="none" stroke="#a06fe0" stroke-opacity=".44" stroke-width="4"/>
+  <path d="M70 138c0-40 26-64 58-64s58 24 58 64c0 6-1 12-3 18H73c-2-6-3-12-3-18z" fill="#0b0812" stroke="#a06fe0" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M100 74l28-22 28 22" fill="none" stroke="#a06fe0" stroke-width="6" stroke-linecap="round"/>
+  <path d="M96 156h64" stroke="#a06fe0" stroke-width="6" stroke-linecap="round" opacity=".85"/>
+  <text x="128" y="212" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="800" letter-spacing="2" fill="#a06fe0" filter="url(#glowm)">SAMURAI</text>
+</svg>

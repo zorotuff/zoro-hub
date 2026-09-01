@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>{{ profile.username }} — Zoro Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+</head>
+<body class="{{ theme_classes }}">
+
+<a href="{{ url_for('hub') }}" class="pf-back">← Hub</a>
+
+<div class="pf-page">
+
+    <!-- ===================== HEADER: BANNER + AVATAR + IDENTITY ===================== -->
+    <div class="pf-header">
+
+        <div class="pf-banner">
+            <img src="{{ banner_src }}" alt="" class="pf-banner-img">
+            <div class="pf-banner-fade"></div>
+        </div>
+
+        <div class="pf-identity">
+            <div class="pf-avatar-wrap">
+                <img src="{{ avatar_src }}" alt="" class="pf-avatar-img">
+            </div>
+
+            <div class="pf-identity-text">
+                <h1 class="pf-display-name">{{ profile.username }}</h1>
+                <div class="pf-identity-meta">
+                    <span class="pf-level-pill">Level {{ profile.level }}</span>
+                    <span class="pf-rank">Rank #{{ rank }}</span>
+                    {% if profile.admin %}<span class="pf-owner-pill">Owner</span>{% endif %}
+                </div>
+                <div class="pf-xp-bar">
+                    <div class="pf-xp-fill" style="width:{{ xp_percent }}%"></div>
+                </div>
+                <span class="pf-xp-label">{{ profile.xp }} / {{ profile.level * 100 }} XP</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===================== BIO ===================== -->
+    <div class="pf-card pf-bio-card">
+        {% if is_own_profile %}
+        <textarea id="bioInput" class="pf-bio-input" maxlength="300">{{ profile.biography }}</textarea>
+        <div class="pf-bio-row">
+            <span class="pf-bio-count"><span id="bioCount">0</span>/300</span>
+            <button id="saveBioBtn" class="pf-btn primary">Save Bio</button>
+        </div>
+        {% else %}
+        <p class="pf-bio-readonly">{{ profile.biography }}</p>
+        {% endif %}
+    </div>
+
+    <!-- ===================== TABS ===================== -->
+    <div class="pf-tabs">
+        <button class="pf-tab active" data-tab="overview">Overview</button>
+        <button class="pf-tab" data-tab="achievements">Achievements</button>
+        {% if is_own_profile %}<button class="pf-tab" data-tab="cosmetics">Cosmetics</button>{% endif %}
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="pf-panel active" id="tab-overview">
+        <div class="pf-stats-grid">
+            <div class="pf-stat"><span class="pf-stat-value">{{ profile.games_played }}</span><span class="pf-stat-label">Games Played</span></div>
+            <div class="pf-stat"><span class="pf-stat-value">{{ profile.games_won }}</span><span class="pf-stat-label">Wins</span></div>
+            <div class="pf-stat"><span class="pf-stat-value">{{ profile.games_lost }}</span><span class="pf-stat-label">Losses</span></div>
+            <div class="pf-stat"><span class="pf-stat-value">{{ "%.1f"|format((profile.games_won / profile.games_played * 100) if profile.games_played else 0) }}%</span><span class="pf-stat-label">Win Rate</span></div>
+            <div class="pf-stat"><span class="pf-stat-value">{{ "{:,}".format(profile.coins) }}</span><span class="pf-stat-label">Coins</span></div>
+            <div class="pf-stat"><span class="pf-stat-value">#{{ rank }}</span><span class="pf-stat-label">Leaderboard Rank</span></div>
+            <div class="pf-stat"><span class="pf-stat-value">{{ profile.best_streak }}</span><span class="pf-stat-label">Best Streak</span></div>
+            <div class="pf-stat"><span class="pf-stat-value">{{ profile.joined_date }}</span><span class="pf-stat-label">Joined</span></div>
+        </div>
+    </div>
+
+    <!-- ACHIEVEMENTS -->
+    <div class="pf-panel" id="tab-achievements">
+        {% if profile.achievements %}
+        <div class="pf-achv-grid">
+            {% for a in profile.achievements %}
+            <div class="pf-achv">
+                <span class="pf-achv-icon">🏆</span>
+                <span class="pf-achv-name">{{ a }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="pf-empty">No achievements unlocked yet.</p>
+        {% endif %}
+
+        <h3 class="pf-subheading">Badges</h3>
+        {% if profile.badges %}
+        <div class="pf-badge-row">
+            {% for b in profile.badges %}
+            <span class="pf-badge">{{ b }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="pf-empty">No badges yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- COSMETICS (own profile only) -->
+    {% if is_own_profile %}
+    <div class="pf-panel" id="tab-cosmetics">
+        {% for category, label in [("avatars","Avatars"), ("banners","Banners"), ("themes","Themes")] %}
+        <h3 class="pf-subheading">{{ label }}</h3>
+        {% if inventory[category] %}
+        <div class="pf-cosmetic-grid">
+            {% for item in inventory[category] %}
+            <div class="pf-cosmetic-item {{ 'equipped' if item.equipped else '' }}">
+                <div class="pf-cosmetic-swatch rarity-{{ item.rarity }}"></div>
+                <span class="pf-cosmetic-name">{{ item.name }}</span>
+                <button
+                    class="pf-btn small equip-btn {{ 'equipped' if item.equipped else '' }}"
+                    data-item-id="{{ item.id }}"
+                    {{ "disabled" if item.equipped else "" }}
+                >
+                    {{ "EQUIPPED" if item.equipped else "EQUIP" }}
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="pf-empty">No {{ label|lower }} owned yet — check the <a href="{{ url_for('zoro_shop.shop') }}">shop</a>.</p>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</div>
+
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+
+</body>
+</html>

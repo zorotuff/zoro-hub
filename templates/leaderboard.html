@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Leaderboard — Zoro Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/leaderboard.css') }}">
+</head>
+<body>
+
+<div class="page">
+
+  <div class="lb-header">
+    <a href="{{ url_for('hub') }}" class="back-link">← Hub</a>
+    <h1>Leaderboard</h1>
+    <p class="lb-subtitle">Ranked by Level, then total XP.</p>
+  </div>
+
+  {% if entries %}
+  <div class="lb-list">
+    {% for entry in entries %}
+    <div class="lb-row {% if entry.username == current_user %}lb-row-you{% endif %} {% if entry.rank <= 3 %}lb-row-top{% endif %}">
+
+      <div class="lb-rank rank-{{ entry.rank if entry.rank <= 3 else 'other' }}">
+        {% if entry.rank == 1 %}🥇{% elif entry.rank == 2 %}🥈{% elif entry.rank == 3 %}🥉{% else %}{{ entry.rank }}{% endif %}
+      </div>
+
+      <img class="lb-avatar" src="{{ entry.avatar_src }}" alt="">
+
+      <div class="lb-identity">
+        <span class="lb-username">{{ entry.username }}{% if entry.username == current_user %} <span class="you-tag">you</span>{% endif %}</span>
+        <span class="lb-meta">{{ entry.games_won }} wins · {{ entry.games_played }} played</span>
+      </div>
+
+      <div class="lb-stats">
+        <span class="lb-level">Lv. {{ entry.level }}</span>
+        <span class="lb-xp">{{ entry.xp }} XP</span>
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="lb-empty">
+    <p>No players yet.</p>
+  </div>
+  {% endif %}
+
+</div>
+
+</body>
+</html>

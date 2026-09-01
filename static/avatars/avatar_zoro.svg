@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="gz" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#8b99ab" stop-opacity=".30"/>
+      <stop offset="48%" stop-color="#0e1116"/>
+      <stop offset="100%" stop-color="#030405"/>
+    </radialGradient>
+    <filter id="glowz"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="256" height="256" rx="128" fill="url(#gz)"/>
+  <circle cx="128" cy="128" r="104" fill="none" stroke="#8b99ab" stroke-opacity=".40" stroke-width="4"/>
+  <path d="M80 88h96l-58 74h58v14H78v-14l58-74H80z" fill="#c7d0da" opacity=".92"/>
+  <text x="128" y="216" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="2" fill="#8b99ab" filter="url(#glowz)">ZORO</text>
+</svg>

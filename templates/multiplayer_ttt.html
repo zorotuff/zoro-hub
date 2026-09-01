@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Multiplayer Tic-Tac-Toe — Zoro Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/multiplayer.css') }}">
+</head>
+<body class="{{ theme_classes }}">
+<a href="{{ url_for('multiplayer_hub') }}" class="mp-back">← Multiplayer</a>
+
+<div class="mp-page mp-narrow">
+
+    <!-- LOBBY (create or join) -->
+    <div id="lobby" class="mp-panel-block">
+        <h1>Tic-Tac-Toe</h1>
+        <div class="mp-lobby-actions">
+            <button id="createBtn" class="mp-btn primary">Create Room</button>
+            <div class="mp-join-row">
+                <input id="joinCode" class="mp-input" placeholder="ROOM CODE" maxlength="5">
+                <button id="joinBtn" class="mp-btn">Join</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WAITING ROOM -->
+    <div id="waiting" class="mp-panel-block hidden">
+        <h2>Room <span id="waitingCode"></span></h2>
+        <p class="mp-hint">Share this code with a friend.</p>
+        <div id="waitingPlayers" class="mp-players"></div>
+        <button id="readyBtn" class="mp-btn primary">Ready</button>
+        <button id="leaveBtnWaiting" class="mp-btn danger">Leave</button>
+    </div>
+
+    <!-- GAME BOARD -->
+    <div id="gameArea" class="mp-panel-block hidden">
+        <div class="mp-turn-banner" id="turnBanner">—</div>
+        <div class="mp-board" id="board"></div>
+        <button id="leaveBtnGame" class="mp-btn danger">Leave Match</button>
+    </div>
+
+    <!-- RESULT -->
+    <div id="resultArea" class="mp-panel-block hidden">
+        <h2 id="resultTitle">—</h2>
+        <p id="resultReward"></p>
+        <button id="rematchBtn" class="mp-btn primary">Back to Lobby</button>
+    </div>
+
+</div>
+
+<script>
+window.ZORO_USERNAME = {{ username | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/multiplayer_ttt.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Multiplayer — Zoro Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/multiplayer.css') }}">
+</head>
+<body class="{{ theme_classes }}">
+<a href="{{ url_for('hub') }}" class="mp-back">← Hub</a>
+<div class="mp-page">
+    <h1>Multiplayer</h1>
+    <p class="mp-sub">Real rooms, real opponents, real rewards.</p>
+
+    <div class="mp-grid">
+        <a href="{{ url_for('multiplayer_ttt_page') }}" class="mp-card">
+            <div class="mp-card-art ttt">✕ ⭘</div>
+            <h3>Tic-Tac-Toe</h3>
+            <p>Classic 3x3, first to three in a row.</p>
+            <span class="mp-status live">LIVE</span>
+        </a>
+
+        <div class="mp-card disabled">
+            <div class="mp-card-art">✎</div>
+            <h3>Scribble</h3>
+            <p>Draw and guess.</p>
+            <span class="mp-status">COMING SOON</span>
+        </div>
+
+        <div class="mp-card disabled">
+            <div class="mp-card-art">🐍</div>
+            <h3>Snake Arena</h3>
+            <p>Last snake standing.</p>
+            <span class="mp-status">COMING SOON</span>
+        </div>
+
+        <div class="mp-card disabled">
+            <div class="mp-card-art">🔴</div>
+            <h3>Connect Four</h3>
+            <p>Four in a row wins.</p>
+            <span class="mp-status">COMING SOON</span>
+        </div>
+
+        <div class="mp-card disabled">
+            <div class="mp-card-art">⚡</div>
+            <h3>Reaction Battle</h3>
+            <p>Fastest reflexes win.</p>
+            <span class="mp-status">COMING SOON</span>
+        </div>
+
+        <div class="mp-card disabled">
+            <div class="mp-card-art">🏁</div>
+            <h3>Mini Race</h3>
+            <p>First across the line.</p>
+            <span class="mp-status">COMING SOON</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
